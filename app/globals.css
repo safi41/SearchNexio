@@ -25,6 +25,8 @@
   --animate-radar-sweep: radar-sweep 22s linear infinite;
   --animate-blip: blip 7s ease-out infinite;
   --animate-marquee: marquee 32s linear infinite;
+  --animate-globe-spin: globe-spin 26s linear infinite;
+  --animate-globe-halo: globe-halo 9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 
   @keyframes caret {
     0%, 100% { opacity: 1; }
@@ -51,6 +53,21 @@
 
   @keyframes marquee {
     to { transform: translateX(-50%); }
+  }
+
+  /* The web/globe wordlike motif spins continuously on its vertical axis: the
+     meridians sweep the front face by scaling their x-radius, so the wireframe
+     reads as a rotating sphere rather than a flat spinner. */
+  @keyframes globe-spin {
+    to { transform: rotateY(360deg); }
+  }
+
+  /* Faint halo rings breathe outward, echoing the radar's old pulse so the
+     globe keeps the same ambient presence behind the hero. */
+  @keyframes globe-halo {
+    0% { transform: scale(0.55); opacity: 0.5; }
+    70% { opacity: 0.12; }
+    100% { transform: scale(1); opacity: 0; }
   }
 }
 

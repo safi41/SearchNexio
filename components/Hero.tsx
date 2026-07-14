@@ -134,7 +134,7 @@ export default function Hero() {
       <noscript>
         <style>{`[data-hero-hidden]{opacity:1 !important;visibility:visible !important}`}</style>
       </noscript>
-      <Radar />
+      <Globe />
 
       {/* the hero owns the first screen: content centers in the free space,
           the surface strip anchors to the bottom edge of the viewport */}
@@ -270,45 +270,80 @@ function FoundWord() {
   );
 }
 
+/* Latitude/longitude ellipse radii (as a fraction of the sphere radius),
+   drawn from the equator outward so the wireframe reads as a real globe. */
+const PARALLELS = [0.34, 0.64, 0.87, 0.985];
+/* Static meridians that fill the front face while the spinning group turns
+   behind/through them, so the sphere never looks empty edge-on. */
+const MERIDIANS = [0.28, 0.6, 0.86];
+/* Contact blips ride the surface, echoing the radar's "found" pulses. */
 const BLIPS = [
-  { left: "30%", top: "24%", delay: 1.5 },
-  { left: "66%", top: "38%", delay: 3.4 },
-  { left: "42%", top: "62%", delay: 5.2 },
-  { left: "72%", top: "70%", delay: 7.1 },
-  { left: "24%", top: "48%", delay: 8.6 },
+  { left: "38%", top: "30%", delay: 1.5 },
+  { left: "64%", top: "44%", delay: 4.2 },
+  { left: "48%", top: "66%", delay: 7.1 },
 ];
 
-/* Ambient radar with contact blips; data-speed lets ScrollSmoother parallax
-   the outer shell while the inner wrapper plays the load-time bloom. */
-function Radar() {
+/* Spinning wireframe web/globe. Keeps the radar's role exactly: data-speed
+   lets ScrollSmoother parallax the outer shell, data-radar-inner plays the
+   load-time bloom, and data-radar-seed is the center dot the timeline
+   counter-scales. Only the dial itself changed from radar to globe. */
+function Globe() {
   return (
     <div
       aria-hidden
       data-speed="0.85"
-      className="pointer-events-none absolute -right-48 top-1/2 -mt-[22rem] hidden h-[44rem] w-[44rem] lg:block"
+      className="pointer-events-none absolute -right-2 top-1/2 -mt-[23rem] hidden h-[30rem] w-[30rem] lg:block"
     >
       <div data-radar-inner data-hero-hidden className="absolute inset-0 opacity-0">
-        {/* each pulse ring carries its own dark tone: teal, ink, deep copper */}
+        {/* halo rings breathe outward where the radar pulses used to */}
         {[
           { delay: 0, color: "border-teal" },
-          { delay: 3, color: "border-ink" },
-          { delay: 6, color: "border-copper-deep" },
+          { delay: 4.5, color: "border-copper-deep" },
         ].map(({ delay, color }) => (
           <span
             key={delay}
-            className={`motion-ambient absolute inset-0 animate-radar-ring rounded-full border-[1.5px] ${color}`}
+            className={`motion-ambient absolute inset-0 animate-globe-halo rounded-full border ${color}`}
             style={{ animationDelay: `${delay}s`, opacity: 0 }}
           />
         ))}
-        <span
-          className="motion-ambient absolute inset-0 animate-radar-sweep rounded-full"
-          style={{
-            background:
-              "conic-gradient(from 0deg, transparent 0deg, transparent 310deg, rgba(14,90,90,0.18) 352deg, transparent 360deg)",
-            maskImage: "radial-gradient(circle, black 0%, transparent 76%)",
-            WebkitMaskImage: "radial-gradient(circle, black 0%, transparent 76%)",
-          }}
-        />
+
+        {/* the sphere: perspective wrapper so the spinning meridian cage reads
+            as depth rather than a flat rotation */}
+        <div className="absolute inset-[6%]" style={{ perspective: "1400px" }}>
+          {/* sphere outline + static latitude lines: these never spin */}
+          <svg viewBox="-100 -100 200 200" className="absolute inset-0 h-full w-full">
+            <circle cx="0" cy="0" r="99" fill="none" stroke="rgba(14,90,90,0.35)" strokeWidth="0.6" />
+            {PARALLELS.map((r) => (
+              <g key={r}>
+                <ellipse cx="0" cy={-r * 99} rx={Math.sqrt(1 - r * r) * 99} ry={Math.sqrt(1 - r * r) * 12} fill="none" stroke="rgba(14,90,90,0.22)" strokeWidth="0.5" />
+                <ellipse cx="0" cy={r * 99} rx={Math.sqrt(1 - r * r) * 99} ry={Math.sqrt(1 - r * r) * 12} fill="none" stroke="rgba(14,90,90,0.22)" strokeWidth="0.5" />
+              </g>
+            ))}
+            <line x1="0" y1="-99" x2="0" y2="99" stroke="rgba(14,90,90,0.22)" strokeWidth="0.5" />
+          </svg>
+
+          {/* the spinning meridian cage: rotates on the vertical axis forever */}
+          <div
+            className="motion-ambient absolute inset-0 animate-globe-spin"
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            {[0, 45, 90, 135].map((deg) => (
+              <span
+                key={deg}
+                className="absolute inset-0 rounded-full border border-teal/40"
+                style={{ transform: `rotateY(${deg}deg)` }}
+              />
+            ))}
+          </div>
+
+          {/* a few flat front-face meridians keep the globe legible edge-on */}
+          <svg viewBox="-100 -100 200 200" className="absolute inset-0 h-full w-full">
+            {MERIDIANS.map((rx) => (
+              <ellipse key={rx} cx="0" cy="0" rx={rx * 99} ry="99" fill="none" stroke="rgba(14,90,90,0.12)" strokeWidth="0.5" />
+            ))}
+          </svg>
+        </div>
+
         {BLIPS.map((blip) => (
           <span
             key={blip.delay}
