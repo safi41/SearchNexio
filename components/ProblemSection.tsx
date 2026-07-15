@@ -15,9 +15,7 @@ const PARAGRAPHS = [
 const OLD_JOURNEY = ["Google query", "10 blue links", "Click to your site"];
 const NEW_JOURNEY = ["Google", "Maps", "AI Overviews", "ChatGPT", "Decision"];
 
-/* Palette tokens as literals: GSAP color tweens need concrete values.
-   ink #12262b, sage #6e8b6a. */
-const INK = "#12262b";
+/* Palette token as a literal: SVG strokes need a concrete value. sage #6e8b6a. */
 const SAGE = "#6e8b6a";
 
 export default function ProblemSection() {
@@ -31,17 +29,15 @@ export default function ProblemSection() {
     () => {
       const mm = gsap.matchMedia();
 
-      /* the journeys, pinned side by side. a left accent bar glides down each
-         column, lighting one block at a time. the old column (3 blocks) steps
-         first and its shorter slice finishes early; then it dims to a done
-         state and the new column (5 blocks) takes over. the pin holds until
-         both have arrived, then the section below scrolls in. */
+      /* the journeys, pinned side by side as a route map. the old world is a
+         single subway line: one stroke drawing down through three stations.
+         the new world is a web: four surface branches drawing across to
+         converge on one Decision node — the shape itself tells the story.
+         old draws first, dims, then the web grows; the pin holds until the
+         decision lands, then the section below scrolls in. */
       mm.add(`${MOTION_OK} and (min-width: 768px)`, () => {
         const wrap = ref.current!.querySelector<HTMLElement>("[data-journeys]");
         if (!wrap) return;
-        const cols = gsap.utils.toArray<HTMLElement>("[data-jcol]", wrap);
-        /* order the sequence old-then-live regardless of DOM order */
-        cols.sort((a) => (a.dataset.jcol === "muted" ? -1 : 1));
 
         gsap.from(wrap.querySelectorAll("[data-jlabel], [data-jnote]"), {
           autoAlpha: 0,
@@ -56,18 +52,28 @@ export default function ProblemSection() {
           },
         });
 
-        /* one scroll-step per block across both columns, plus a hold at the
-           end so the finished state is readable before the pin releases */
-        const totalBlocks = cols.reduce(
-          (n, col) => n + col.querySelectorAll("[data-jblock]").length,
-          0
-        );
+        const oldCol = wrap.querySelector<HTMLElement>("[data-old-col]");
+        const oldFill = wrap.querySelector<HTMLElement>("[data-old-fill]");
+        const oldNodes = gsap.utils.toArray<HTMLElement>("[data-old-node]", wrap);
+        const oldLabels = gsap.utils.toArray<HTMLElement>("[data-old-node-label]", wrap);
+        const webPaths = gsap.utils.toArray<SVGPathElement>("[data-web-path]", wrap);
+        const webNodes = gsap.utils.toArray<HTMLElement>("[data-web-node]", wrap);
+        const webLabels = gsap.utils.toArray<HTMLElement>("[data-web-node-label]", wrap);
+        const webFinal = wrap.querySelector<HTMLElement>("[data-web-final]");
+        const webFinalLabel = wrap.querySelector<HTMLElement>("[data-web-final-label]");
+
+        /* everything ships visible (no-JS and reduced-motion see the finished
+           map); only here, where the timeline will redraw it, do we reset */
+        gsap.set(oldFill, { scaleY: 0 });
+        gsap.set([...oldNodes, ...webNodes, webFinal], { scale: 0 });
+        gsap.set([...oldLabels, ...webLabels, webFinalLabel], { autoAlpha: 0 });
+        gsap.set(webPaths, { strokeDashoffset: 1 });
 
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: wrap,
             start: "top 12%",
-            end: () => `+=${totalBlocks * window.innerHeight * 0.5}`,
+            end: () => `+=${8 * window.innerHeight * 0.45}`,
             scrub: 0.8,
             pin: true,
             anticipatePin: 1,
@@ -75,53 +81,37 @@ export default function ProblemSection() {
           },
         });
 
-        cols.forEach((col) => {
-          const live = col.dataset.jcol === "live";
-          const blocks = gsap.utils.toArray<HTMLElement>("[data-jblock]", col);
-
-          blocks.forEach((block, i) => {
-            const border = block.querySelector<SVGRectElement>("[data-jborder]");
-            const fill = block.querySelector<HTMLElement>("[data-jfill]");
-
-            /* the border draws around all four sides as this block's step
-               arrives (stroke offset 1 -> 0), and the fill floods the whole
-               rectangle in sync */
-            tl.fromTo(
-              border,
-              { strokeDashoffset: 1 },
-              { strokeDashoffset: 0, ease: "none", duration: 0.6 }
-            );
-            tl.to(block, { color: "#faf7f2", duration: 0.6 }, "<");
-            tl.to(fill, { opacity: 1, duration: 0.6 }, "<");
-
-            /* the last live block lands solid sage as the arrival state */
-            if (block.dataset.jfinal) {
-              tl.to(
-                block,
-                { backgroundColor: SAGE, color: INK, borderColor: SAGE, duration: 0.4 },
-                "<0.2"
-              );
-            }
-
-            /* as focus moves to the next block, drop this one's fill back so
-               only the active block reads as fully lit (drawn border stays) */
-            if (i < blocks.length - 1) {
-              tl.to(fill, { opacity: 0.35, duration: 0.4 }, ">");
-            }
-          });
-
-          /* once the old column finishes, dim it whole so attention moves to
-             the new column's sequence */
-          if (!live) {
-            tl.to(col, { opacity: 0.4, duration: 0.5 }, ">0.1");
-          }
+        /* act one — the old line draws top to bottom, stations popping as the
+           stroke passes them (3 timeline units) */
+        tl.to(oldFill, { scaleY: 1, ease: "none", duration: 3 }, 0);
+        oldNodes.forEach((node, i) => {
+          const at = 0.15 + i * 1.25;
+          tl.to(node, { scale: 1, ease: "back.out(2.5)", duration: 0.4 }, at);
+          tl.to(oldLabels[i], { autoAlpha: 1, duration: 0.4 }, at + 0.1);
         });
 
-        /* a beat of hold on the finished layout before the pin releases */
+        /* the old world completes and recedes */
+        tl.to(oldCol, { opacity: 0.45, duration: 0.5 }, 3.1);
+
+        /* act two — the web: surfaces pop in, their branches draw across and
+           converge, and the decision node lands last (5 units) */
+        webNodes.forEach((node, i) => {
+          const at = 3.2 + i * 0.5;
+          tl.to(node, { scale: 1, ease: "back.out(2.5)", duration: 0.4 }, at);
+          tl.to(webLabels[i], { autoAlpha: 1, duration: 0.4 }, at + 0.1);
+          tl.to(
+            webPaths[i],
+            { strokeDashoffset: 0, ease: "none", duration: 1.8 },
+            at + 0.25
+          );
+        });
+        tl.to(webFinal, { scale: 1, ease: "back.out(2)", duration: 0.5 }, 7.2);
+        tl.to(webFinalLabel, { autoAlpha: 1, duration: 0.4 }, 7.4);
+
+        /* a beat of hold on the finished map before the pin releases */
         tl.to({}, { duration: 0.8 });
 
-        /* the center divider fills top->bottom across the whole sequence, so
-           it tracks the scroll from the first block to the last */
+        /* the center divider fills top->bottom across the whole sequence */
         const divider = wrap.querySelector<HTMLElement>("[data-jdivider]");
         if (divider) {
           tl.fromTo(
@@ -134,53 +124,41 @@ export default function ProblemSection() {
       });
 
       mm.add(`${MOTION_OK} and (max-width: 767px)`, () => {
-        /* no pin/scrub on mobile: blocks step in on scroll, their borders draw
-           and fills flood in sequence, old column first then the new one */
+        /* no pin/scrub on mobile: the old line draws, stations pop, then the
+           web branches draw — all on entering the panel, reversing on exit */
         const trigger = {
           trigger: "[data-journeys]",
-          start: "top 80%",
+          start: "top 75%",
           toggleActions: "play none none reverse" as const,
         };
-        const blocks = gsap.utils.toArray<HTMLElement>("[data-jblock]");
-        gsap.from(blocks, {
-          autoAlpha: 0,
-          y: 20,
-          duration: 0.8,
-          ease: EASE,
-          stagger: 0.08,
-          scrollTrigger: trigger,
-        });
-        gsap.fromTo(
-          "[data-jborder]",
-          { strokeDashoffset: 1 },
-          {
-            strokeDashoffset: 0,
-            duration: 0.6,
-            ease: EASE,
-            stagger: 0.08,
-            scrollTrigger: trigger,
-          }
-        );
-        gsap.to("[data-jfill]", {
-          opacity: 1,
-          duration: 0.5,
-          stagger: 0.08,
-          scrollTrigger: trigger,
-        });
+        const tl = gsap.timeline({ scrollTrigger: trigger, defaults: { ease: EASE } });
+        tl.from("[data-old-fill]", { scaleY: 0, duration: 0.9, ease: "power2.out" }, 0)
+          .from(
+            "[data-old-node]",
+            { scale: 0, duration: 0.45, ease: "back.out(2.5)", stagger: 0.18 },
+            0.1
+          )
+          .from("[data-old-node-label]", { autoAlpha: 0, duration: 0.4, stagger: 0.18 }, 0.2)
+          .from(
+            "[data-web-node]",
+            { scale: 0, duration: 0.45, ease: "back.out(2.5)", stagger: 0.14 },
+            0.7
+          )
+          .from("[data-web-node-label]", { autoAlpha: 0, duration: 0.4, stagger: 0.14 }, 0.8)
+          .fromTo(
+            "[data-web-path]",
+            { strokeDashoffset: 1 },
+            { strokeDashoffset: 0, duration: 1.1, ease: "power1.inOut", stagger: 0.14 },
+            0.85
+          )
+          .from("[data-web-final]", { scale: 0, duration: 0.5, ease: "back.out(2)" }, 2.1)
+          .from("[data-web-final-label]", { autoAlpha: 0, duration: 0.4 }, 2.25);
       });
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        /* no motion: present the journeys already resolved to their lit state
-           so reduced-motion users don't see blank, unlit blocks */
-        gsap.set("[data-jborder]", { strokeDashoffset: 0 });
-        gsap.set("[data-jfill]", { opacity: 1 });
+        /* no motion: the route map ships fully drawn in the markup; only the
+           divider (CSS-collapsed) needs presenting */
         gsap.set("[data-jdivider]", { scaleY: 1 });
-        gsap.set("[data-jblock] > span:last-child", { color: "#faf7f2" });
-        gsap.set("[data-jblock][data-jfinal]", {
-          backgroundColor: SAGE,
-          color: INK,
-          borderColor: SAGE,
-        });
         /* no count-up: show each stat at its final value, no scatter */
         gsap.utils.toArray<HTMLElement>("[data-count]").forEach((el) => {
           el.textContent = el.dataset.count ?? el.textContent;
@@ -329,9 +307,9 @@ export default function ProblemSection() {
 
       </div>
 
-      {/* Dark act: the two journeys, pinned. A left accent bar glides down
-          each column's blocks; the short old route resolves first, then the
-          new route takes over, then the pin releases. */}
+      {/* Dark act: the two journeys as a route map, pinned. The old world's
+          single line draws first and recedes; then the new world's web of
+          branches draws across to the Decision node, then the pin releases. */}
       <div data-journeys-panel className="relative bg-ink text-paper">
         <div
           aria-hidden
@@ -342,13 +320,8 @@ export default function ProblemSection() {
           }}
         />
         <div data-journeys className="relative mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <div className="grid gap-12 md:grid-cols-[1fr_auto_1fr] md:gap-10">
-            <JourneyColumn
-              label="How search used to work"
-              nodes={OLD_JOURNEY}
-              note="One surface. One path. Rankings were the whole game."
-              muted
-            />
+          <div className="grid gap-14 md:grid-cols-[1fr_auto_1fr] md:gap-10">
+            <OldRoute />
             <span aria-hidden className="relative hidden w-px self-stretch bg-paper/15 md:block">
               {/* sage fill rides down the divider in sync with the scroll */}
               <span
@@ -357,11 +330,7 @@ export default function ProblemSection() {
                 style={{ boxShadow: "0 0 10px 1px rgba(110,139,106,0.5)" }}
               />
             </span>
-            <JourneyColumn
-              label="How buyers search now"
-              nodes={NEW_JOURNEY}
-              note="Many surfaces. Answers before clicks. Visibility is the whole game."
-            />
+            <NewWeb />
           </div>
         </div>
       </div>
@@ -415,72 +384,130 @@ export default function ProblemSection() {
   );
 }
 
-/* One journey as a vertical column: label, then a rail carrying the
-   traveling dot and its trail, with the route's stops as stacked blocks. */
-function JourneyColumn({
-  label,
-  nodes,
-  note,
-  muted = false,
-}: {
-  label: string;
-  nodes: string[];
-  note: string;
-  muted?: boolean;
-}) {
+/* Station y-positions (percent of rail height) for the old line's 3 stops. */
+const OLD_STOPS = [4, 50, 96];
+/* Surface y-positions for the web's 4 branches; all converge on Decision. */
+const WEB_STOPS = [8, 36, 64, 92];
+
+/* The old world: one subway line. A single stroke draws down through three
+   stations — one surface, one path. */
+function OldRoute() {
   return (
-    <div data-jcol={muted ? "muted" : "live"}>
+    <div data-old-col>
       <p data-jlabel className="font-display text-lg italic text-paper/70">
-        {label}
+        How search used to work
       </p>
-      <div data-jrail-area className="relative mt-6 grid gap-5">
-        {nodes.map((node, i) => (
-          <div
-            key={node}
-            data-jblock
-            data-jfinal={!muted && i === nodes.length - 1 ? "true" : undefined}
-            className="relative border border-paper/15 px-6 py-5 font-mono text-[11px] uppercase tracking-[0.15em] text-paper/70"
+      <div className="relative ml-1.5 mt-8 h-72" aria-label={OLD_JOURNEY.join(", ")}>
+        {/* the line: faint base, drawn-over by the fill as the scroll passes */}
+        <span aria-hidden className="absolute left-0 top-0 h-full w-px bg-paper/15" />
+        <span
+          data-old-fill
+          aria-hidden
+          className="absolute left-0 top-0 h-full w-px origin-top bg-paper/50"
+        />
+        {OLD_JOURNEY.map((stop, i) => (
+          <span
+            key={stop}
+            className="absolute left-0"
+            style={{ top: `${OLD_STOPS[i]}%` }}
           >
-            {/* the border draws around all four sides as the timeline reaches
-                this block: an SVG rect stroke drawn from a full dash offset */}
-            <svg
-              data-jborder-svg
-              aria-hidden
-              className="pointer-events-none absolute inset-0 h-full w-full"
-              preserveAspectRatio="none"
-            >
-              <rect
-                data-jborder
-                x="1"
-                y="1"
-                width="98%"
-                height="98%"
-                fill="none"
-                stroke={muted ? "rgba(250,247,242,0.55)" : SAGE}
-                strokeWidth="2"
-                pathLength={1}
-                strokeDasharray={1}
-                strokeDashoffset={1}
-                style={muted ? undefined : { filter: "drop-shadow(0 0 4px rgba(110,139,106,0.5))" }}
-              />
-            </svg>
-            {/* whole-block fill that floods in as the border completes */}
             <span
-              data-jfill
-              aria-hidden
-              className={`absolute inset-0 opacity-0 ${
-                muted ? "bg-paper/5" : "bg-sage/10"
-              }`}
+              data-old-node
+              className="absolute -ml-1.5 -mt-1.5 block h-3 w-3 rounded-full border-2 border-paper/60 bg-ink"
             />
-            <span className="relative">{node}</span>
-          </div>
+            <span
+              data-old-node-label
+              className="absolute left-5 -mt-2 whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.15em] text-paper/70"
+            >
+              {stop}
+            </span>
+          </span>
         ))}
       </div>
-      <p
-        data-jnote
-        className={`mt-5 text-sm ${muted ? "text-paper/40" : "text-paper/65"}`}
-      >
-        {note}
+      <p data-jnote className="mt-8 text-sm text-paper/40">
+        One surface. One path. Rankings were the whole game.
+      </p>
+    </div>
+  );
+}
+
+/* The new world: a web. Four surface branches draw across the panel and
+   converge on a single solid-sage Decision node. */
+function NewWeb() {
+  const surfaces = NEW_JOURNEY.slice(0, 4);
+  return (
+    <div>
+      <p data-jlabel className="font-display text-lg italic text-paper/70">
+        How buyers search now
+      </p>
+      <div className="relative mt-8 h-72" aria-label={NEW_JOURNEY.join(", ")}>
+        {/* the branches: faint base curves, drawn over in sage */}
+        <svg
+          aria-hidden
+          className="pointer-events-none absolute inset-0 h-full w-full"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
+          {WEB_STOPS.map((y) => (
+            <path
+              key={`base-${y}`}
+              d={`M 7 ${y} C 40 ${y}, 58 50, 91 50`}
+              fill="none"
+              stroke="rgba(250,247,242,0.12)"
+              strokeWidth="1.5"
+              vectorEffect="non-scaling-stroke"
+            />
+          ))}
+          {WEB_STOPS.map((y) => (
+            <path
+              key={`draw-${y}`}
+              data-web-path
+              d={`M 7 ${y} C 40 ${y}, 58 50, 91 50`}
+              fill="none"
+              stroke={SAGE}
+              strokeWidth="1.5"
+              pathLength={1}
+              strokeDasharray={1}
+              vectorEffect="non-scaling-stroke"
+              style={{ filter: "drop-shadow(0 0 4px rgba(110,139,106,0.5))" }}
+            />
+          ))}
+        </svg>
+        {surfaces.map((surface, i) => (
+          <span
+            key={surface}
+            className="absolute"
+            style={{ left: "7%", top: `${WEB_STOPS[i]}%` }}
+          >
+            <span
+              data-web-node
+              className="absolute -ml-1.5 -mt-1.5 block h-3 w-3 rounded-full border-2 border-sage bg-ink"
+            />
+            <span
+              data-web-node-label
+              className="absolute -left-1.5 -mt-7 whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.15em] text-paper/70"
+            >
+              {surface}
+            </span>
+          </span>
+        ))}
+        {/* the convergence: where every branch lands */}
+        <span className="absolute" style={{ left: "91%", top: "50%" }}>
+          <span
+            data-web-final
+            className="absolute -ml-2 -mt-2 block h-4 w-4 rounded-full bg-sage"
+            style={{ boxShadow: "0 0 14px 3px rgba(110,139,106,0.55)" }}
+          />
+          <span
+            data-web-final-label
+            className="absolute -ml-8 mt-4 whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.15em] text-sage"
+          >
+            {NEW_JOURNEY[4]}
+          </span>
+        </span>
+      </div>
+      <p data-jnote className="mt-8 text-sm text-paper/65">
+        Many surfaces. Answers before clicks. Visibility is the whole game.
       </p>
     </div>
   );

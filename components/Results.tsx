@@ -23,23 +23,30 @@ export default function Results() {
       const mm = gsap.matchMedia();
 
       mm.add(`${MOTION_OK} and (min-width: 900px)`, () => {
+        const intro = ref.current!.querySelector<HTMLElement>("[data-results-intro]");
         const track = ref.current!.querySelector<HTMLElement>("[data-results-track]");
         const progress = ref.current!.querySelector<HTMLElement>("[data-results-progress]");
-        if (!track) return;
+        if (!intro || !track) return;
+        const cards = gsap.utils.toArray<HTMLElement>("[data-results-card]", track);
 
         /* JS is driving the track now: switch it from a native horizontal
            scroller (the touch/no-JS fallback) to a GSAP-translated one */
         gsap.set(track, { overflow: "visible" });
+        /* later cards stay hidden until the horizontal act reveals them */
+        gsap.set(cards.slice(1), { autoAlpha: 0, y: 40 });
 
-        /* distance the track must travel left so its right edge reaches the
-           viewport's right edge */
-        const travel = () => Math.max(0, track.scrollWidth - window.innerWidth);
+        const travel = () => Math.max(0, track.scrollWidth - track.clientWidth);
+        /* scroll length: a push-in beat up front (intro leaves, card one
+           arrives), the horizontal travel, then a curtain beat that hands
+           off horizontally to the Methodology section */
+        const PUSH = () => window.innerHeight * 0.9;
+        const CURTAIN = () => window.innerHeight * 0.8;
 
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: ref.current,
             start: "top top",
-            end: () => `+=${travel()}`,
+            end: () => `+=${PUSH() + travel() + CURTAIN()}`,
             scrub: 0.8,
             pin: true,
             anticipatePin: 1,
@@ -47,36 +54,80 @@ export default function Results() {
           },
         });
 
-        tl.to(track, { x: () => -travel(), ease: "none" }, 0);
-        if (progress) {
-          tl.fromTo(progress, { scaleX: 0 }, { scaleX: 1, ease: "none" }, 0);
-        }
+        const total = PUSH() + travel() + CURTAIN();
+        const push = PUSH() / total;
+        const trav = travel() / total;
+        const curt = CURTAIN() / total;
 
-        /* each card lifts slightly as it enters the frame, reversing on the
-           way out, so the track reads as a sequence rather than one slab */
-        gsap.utils.toArray<HTMLElement>("[data-results-card]", track).forEach((card) => {
-          gsap.fromTo(
+        /* act one — the intro owns the whole screen. as you scroll, card one
+           flies in from the bottom-right and pushes the intro up and out. */
+        tl.fromTo(
+          cards[0],
+          { xPercent: 70, yPercent: 85, autoAlpha: 0 },
+          { xPercent: 0, yPercent: 0, autoAlpha: 1, ease: "power2.out", duration: push },
+          0
+        );
+        tl.to(
+          intro,
+          { yPercent: -55, autoAlpha: 0, ease: "power2.in", duration: push * 0.85 },
+          push * 0.05
+        );
+
+        /* act two — card one holds the screen and the track slides left, each
+           later card lifting in as the travel brings it into the frame.
+           reveals are sequenced on the main timeline (not containerAnimation
+           triggers) so the wide cards can't pre-pass their thresholds and
+           show up during the full-screen intro. */
+        tl.to(track, { x: () => -travel(), ease: "none", duration: trav }, push);
+        cards.slice(1).forEach((card, i) => {
+          tl.fromTo(
             card,
-            { autoAlpha: 0.55, y: 24 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              ease: "none",
-              scrollTrigger: {
-                trigger: card,
-                containerAnimation: tl,
-                start: "left 85%",
-                end: "left 45%",
-                scrub: true,
-              },
-            }
+            { autoAlpha: 0, y: 40 },
+            { autoAlpha: 1, y: 0, ease: "power2.out", duration: trav * 0.3 },
+            push + trav * (0.02 + i * 0.4)
           );
         });
 
+        /* the progress rail tracks the card journey only; it is full by the
+           time the curtain starts */
+        if (progress) {
+          tl.fromTo(
+            progress,
+            { scaleX: 0 },
+            { scaleX: 1, ease: "none", duration: push + trav },
+            0
+          );
+        }
+
+        /* act three — the handoff: paper curtain slats sweep in from the
+           right (rightmost leading), covering the dark act in the Methodology
+           section's own background; its name fades up on the curtain, then
+           the pin releases onto matching paper below — an invisible seam */
+        const slats = gsap.utils.toArray<HTMLElement>("[data-curtain-slat]", ref.current!);
+        tl.to(
+          slats,
+          {
+            scaleX: 1,
+            ease: "none",
+            duration: curt * 0.6,
+            stagger: { each: curt * 0.07, from: "end" },
+          },
+          push + trav
+        );
+        tl.fromTo(
+          "[data-curtain-label]",
+          { autoAlpha: 0, x: 32 },
+          { autoAlpha: 1, x: 0, ease: "power2.out", duration: curt * 0.3 },
+          push + trav + curt * 0.6
+        );
+
         /* leaving this breakpoint (e.g. resize to mobile): hand the track back
-           to native scrolling and clear the transform */
+           to native scrolling and clear the transforms */
         return () => {
           gsap.set(track, { overflow: "", x: 0 });
+          gsap.set([intro, ...cards], { clearProps: "transform,opacity,visibility" });
+          gsap.set(slats, { clearProps: "transform" });
+          gsap.set("[data-curtain-label]", { clearProps: "transform,opacity,visibility" });
         };
       });
     },
@@ -110,18 +161,47 @@ export default function Results() {
         />
       </span>
 
-      {/* the track: on desktop it's translated by GSAP; on touch it scrolls
-          natively (overflow-x + snap); reduced-motion wraps to a stack */}
+      {/* the handoff curtain: paper slats that sweep in from the right after
+          the last card, carrying the next act's name. slats ship scaled to
+          zero so they never cover the section without the timeline. */}
       <div
-        data-results-track
-        className="flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 py-24 md:min-h-svh md:flex-nowrap md:items-center md:gap-8 md:px-[8vw] md:py-0"
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-20 hidden md:block"
       >
-        {/* intro panel */}
-        <div className="w-[82vw] shrink-0 snap-start md:w-[34vw]">
+        <div className="absolute inset-0 flex">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <span
+              key={i}
+              data-curtain-slat
+              className="h-full flex-1 origin-right border-l border-line bg-paper"
+              style={{ transform: "scaleX(0)" }}
+            />
+          ))}
+        </div>
+        <div
+          data-curtain-label
+          className="absolute inset-0 flex items-center px-[8vw] opacity-0"
+        >
+          <p className="font-mono text-xs uppercase tracking-[0.35em] text-teal">
+            <span className="mr-3 text-copper">+</span>Our Methodology
+          </p>
+        </div>
+      </div>
+
+      {/* desktop: two full-screen layers inside the pinned viewport. the intro
+          owns the screen first; card one flies in from the bottom-right and
+          pushes it up and out; the remaining cards then ride the horizontal
+          track. on touch/reduced-motion the layers stack in normal flow. */}
+      <div className="relative md:h-svh">
+        {/* act one — the intro covers the whole screen */}
+        <div
+          data-results-intro
+          className="px-6 pt-24 pb-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:px-[8vw] md:py-0"
+        >
           <p className="font-mono text-xs uppercase tracking-[0.35em] text-sage">
             Results
           </p>
-          <h2 className="mt-8 font-display text-4xl font-medium leading-[1.05] tracking-[-0.01em] md:text-6xl">
+          <h2 className="mt-6 font-display text-4xl font-medium leading-[1.05] tracking-[-0.01em] md:text-7xl">
             Results
           </h2>
           <p className="mt-6 max-w-md leading-relaxed text-paper/65">
@@ -129,7 +209,7 @@ export default function Results() {
             Every case study shows exactly what we did, how we did it, and how
             long the process took.
           </p>
-          <p className="mt-8 text-paper/55">
+          <p className="mt-6 max-w-md text-paper/55">
             More case studies, including the ones where results took longer than
             expected.
           </p>
@@ -140,15 +220,22 @@ export default function Results() {
           </div>
           <p
             aria-hidden
-            className="mt-10 hidden font-mono text-[10px] uppercase tracking-[0.2em] text-paper/35 md:block"
+            className="mt-8 hidden font-mono text-[10px] uppercase tracking-[0.2em] text-paper/35 md:block"
           >
             Scroll to explore &rarr;
           </p>
         </div>
 
-        {TILES.map((study) => (
-          <ResultCard key={study.client} study={study} />
-        ))}
+        {/* act two — the card track fills the same screen; card one pushes the
+            intro away, the rest scroll horizontally. touch scrolls natively. */}
+        <div
+          data-results-track
+          className="flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-24 md:absolute md:inset-0 md:items-center md:gap-8 md:overflow-visible md:px-[8vw] md:pb-0"
+        >
+          {TILES.map((study) => (
+            <ResultCard key={study.client} study={study} />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -159,7 +246,7 @@ function ResultCard({ study }: { study: CaseStudy }) {
     <Link
       href="/case-studies"
       data-results-card
-      className="group flex w-[82vw] shrink-0 snap-start flex-col gap-4 border border-paper/15 bg-paper/3 p-8 transition-colors duration-500 hover:border-sage/50 md:h-[62vh] md:w-[40vw]"
+      className="group flex w-[82vw] shrink-0 snap-start flex-col gap-3 border border-paper/15 bg-paper/3 p-7 transition-colors duration-500 hover:border-sage/50 md:h-[64vh] md:w-[52vw] md:gap-4 md:p-10"
     >
       <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-sage">
         {study.client} &middot; {study.industry}
