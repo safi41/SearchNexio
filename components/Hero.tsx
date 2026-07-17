@@ -34,8 +34,21 @@ function HeroDecor() {
       <span className="absolute right-[19%] top-[14%] size-1 rounded-full bg-indigo/40" />
       <span className="absolute left-[21%] top-[36%] font-heading text-[17px] font-light text-indigo/50">+</span>
       <span className="absolute right-[22%] top-[40%] font-heading text-[13px] font-light text-indigo/40">+</span>
-      <span className="absolute -left-28 top-[10%] size-72 rounded-full border border-ink/5" />
-      <span className="absolute -right-32 top-[26%] size-80 rounded-full border border-indigo/10" />
+      {/* the arcs carry orbiting dots, like the reference site: a dot pinned
+          to the rim of a slowly rotating wrapper travels the circle */}
+      <span className="absolute -left-28 top-[10%] size-72 rounded-full border border-ink/10">
+        <span className="animate-orbit absolute inset-0">
+          <span className="absolute left-1/2 top-0 -ml-1 -mt-1 size-2 rounded-full bg-ink/60" />
+        </span>
+      </span>
+      <span className="absolute -right-32 top-[26%] size-80 rounded-full border border-indigo/15">
+        <span className="animate-orbit-slow absolute inset-0">
+          <span className="absolute left-1/2 top-0 -ml-1 -mt-1 size-2 rounded-full bg-indigo/70" />
+        </span>
+        <span className="animate-orbit absolute inset-0 [animation-delay:-11s]">
+          <span className="absolute left-1/2 top-0 -ml-[3px] -mt-[3px] size-1.5 rounded-full bg-ink/40" />
+        </span>
+      </span>
     </div>
   );
 }
@@ -44,7 +57,8 @@ function HeroDecor() {
 function FloatChips() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 hidden md:block">
-      <div className="absolute -top-5 right-6 flex rotate-2 items-center gap-2 rounded-full border border-line bg-surface py-2 pl-2.5 pr-4 shadow-[0_10px_30px_rgba(11,13,18,0.14)]">
+      <div className="animate-bob absolute -top-5 right-6">
+        <div className="flex rotate-2 items-center gap-2 rounded-full border border-line bg-surface py-2 pl-2.5 pr-4 shadow-[0_10px_30px_rgba(11,13,18,0.14)]">
         <span className="grid size-6 place-items-center rounded-full bg-lilac text-indigo">
           <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
             <path
@@ -57,10 +71,13 @@ function FloatChips() {
           </svg>
         </span>
         <span className="text-[12px] font-semibold text-ink">+64% organic leads</span>
+        </div>
       </div>
-      <div className="absolute -left-4 bottom-10 flex -rotate-2 items-center gap-2 rounded-full border border-line bg-surface py-2 pl-3 pr-4 shadow-[0_10px_30px_rgba(11,13,18,0.14)]">
-        <span className="size-2 rounded-full bg-warn" />
-        <span className="text-[12px] font-semibold text-ink">2 AI surfaces need attention</span>
+      <div className="animate-bob absolute -left-4 bottom-10 [animation-delay:1.4s]">
+        <div className="flex -rotate-2 items-center gap-2 rounded-full border border-line bg-surface py-2 pl-3 pr-4 shadow-[0_10px_30px_rgba(11,13,18,0.14)]">
+          <span className="size-2 rounded-full bg-warn" />
+          <span className="text-[12px] font-semibold text-ink">2 AI surfaces need attention</span>
+        </div>
       </div>
     </div>
   );

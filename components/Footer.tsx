@@ -53,10 +53,14 @@ export default function Footer() {
         </p>
       </div>
 
-      {/* citron glow rising behind the bottom bar */}
+      {/* brand glow rising behind the watermark and bottom bar */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-40 [background:radial-gradient(50%_100%_at_50%_100%,rgba(99,91,255,0.28),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-72 [background:radial-gradient(55%_110%_at_50%_100%,rgba(99,91,255,0.45),rgba(236,234,255,0.55)_45%,transparent_75%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-40 [background:radial-gradient(40%_100%_at_0%_0%,rgba(236,234,255,0.8),transparent_70%),radial-gradient(40%_100%_at_100%_0%,rgba(236,234,255,0.6),transparent_70%)]"
       />
 
       <div className="relative border-t border-line">

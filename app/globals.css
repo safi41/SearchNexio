@@ -23,9 +23,22 @@
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
   --animate-marquee: marquee 36s linear infinite;
+  --animate-orbit: orbit 22s linear infinite;
+  --animate-orbit-slow: orbit 34s linear infinite reverse;
+  --animate-bob: bob 5s ease-in-out infinite;
 
   @keyframes marquee {
     to { transform: translateX(-50%); }
+  }
+
+  /* a dot pinned to the rim of a rotating wrapper travels the circle */
+  @keyframes orbit {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-9px); }
   }
 }
 
@@ -65,8 +78,9 @@ body {
    soft background per the brand spec; citron stays CTA-only). */
 .wash-lilac {
   background:
-    radial-gradient(60rem 26rem at 8% 0%, rgba(99, 91, 255, 0.13), transparent 60%),
-    radial-gradient(60rem 26rem at 92% 0%, rgba(236, 234, 255, 0.9), transparent 60%);
+    radial-gradient(46rem 30rem at 0% 8%, rgba(99, 91, 255, 0.28), transparent 62%),
+    radial-gradient(46rem 30rem at 100% 12%, rgba(99, 91, 255, 0.22), transparent 62%),
+    radial-gradient(70rem 32rem at 50% 0%, rgba(236, 234, 255, 0.95), transparent 70%);
 }
 .wash-lilac-full {
   background: linear-gradient(
@@ -85,5 +99,10 @@ body {
     animation: none !important;
     flex-wrap: wrap;
     justify-content: center;
+  }
+  .animate-orbit,
+  .animate-orbit-slow,
+  .animate-bob {
+    animation: none !important;
   }
 }
