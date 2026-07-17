@@ -42,12 +42,12 @@ export default function SiteNav() {
 
         <span
           aria-disabled="true"
-          className="group inline-flex cursor-default items-center gap-2 rounded-full bg-citron py-2 pl-5 pr-2 text-[14px] font-semibold text-ink"
+          className="group inline-flex cursor-default items-center gap-2 rounded-full bg-citron py-2 pl-5 pr-2 text-[14px] font-semibold text-ink-solid"
         >
           Request a review
           <span
             aria-hidden
-            className="grid size-6 place-items-center rounded-full bg-ink text-citron"
+            className="grid size-6 place-items-center rounded-full bg-ink-solid text-citron"
           >
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
               <path

@@ -139,7 +139,7 @@ function Dashboard() {
             <span
               key={item}
               className={`rounded-lg px-3 py-2 text-[12.5px] font-medium ${
-                i === 1 ? "bg-ink text-white" : "text-graphite"
+                i === 1 ? "bg-ink text-ivory" : "text-graphite"
               }`}
             >
               {item}
@@ -224,7 +224,7 @@ function Dashboard() {
               >
                 <path
                   d="M0,84 C30,80 55,74 85,66 C120,57 150,52 185,40 C220,28 260,20 300,10 L300,100 L0,100 Z"
-                  fill="#ECEAFF"
+                  className="fill-lilac"
                   opacity="0.55"
                 />
                 <path

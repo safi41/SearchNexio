@@ -75,7 +75,7 @@ export function ServiceTile({
               fill="none"
               aria-hidden
             >
-              <circle cx="7" cy="7" r="6.4" fill="#ECEAFF" />
+              <circle cx="7" cy="7" r="6.4" className="fill-lilac" />
               <path
                 d="m4.4 7.2 1.8 1.8 3.4-3.6"
                 stroke="#635BFF"

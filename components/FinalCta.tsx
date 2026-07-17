@@ -14,13 +14,13 @@ export default function FinalCta() {
             className="absolute inset-0 opacity-25 [background-image:radial-gradient(rgba(11,13,18,0.5)_1px,transparent_1px)] [background-size:14px_14px] [mask-image:radial-gradient(ellipse_60%_80%_at_50%_50%,#000,transparent_80%)]"
           />
           <div className="relative">
-            <span className="inline-block rounded-full bg-surface px-4 py-1.5 text-[13px] font-medium text-ink">
+            <span className="inline-block rounded-full bg-white px-4 py-1.5 text-[13px] font-medium text-ink-solid">
               The Visibility Review
             </span>
-            <h2 className="mx-auto mt-6 max-w-3xl font-heading text-[clamp(2rem,4.4vw,3.25rem)] font-bold leading-[1.1] tracking-[-0.02em] text-ink">
+            <h2 className="mx-auto mt-6 max-w-3xl font-heading text-[clamp(2rem,4.4vw,3.25rem)] font-bold leading-[1.1] tracking-[-0.02em] text-ink-solid">
               Find out where you are invisible.
             </h2>
-            <p className="mx-auto mt-6 max-w-3xl text-[14.5px] leading-relaxed text-ink/75">
+            <p className="mx-auto mt-6 max-w-3xl text-[14.5px] leading-relaxed text-ink-solid/75">
               This is a manual, analyst-led review conducted by our senior
               team, not a generic software report. It takes us a few business
               days to compile. You get a surface-by-surface map showing exactly

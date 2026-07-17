@@ -29,8 +29,8 @@ export function Eyebrow({
 /* The circle-arrow chip inside every Sasico button. */
 function ArrowChip({ tone = "ink" }: { tone?: "ink" | "citron" | "indigo" }) {
   const tones = {
-    ink: "bg-ink text-citron",
-    citron: "bg-citron text-ink",
+    ink: "bg-ink-solid text-citron",
+    citron: "bg-citron text-ink-solid",
     indigo: "bg-indigo text-white",
   };
   return (
@@ -67,10 +67,10 @@ export function CtaLink({
     "group inline-flex items-center gap-2.5 rounded-full py-2.5 pl-6 pr-2.5 text-[14.5px] font-semibold transition-colors duration-200";
   const styles =
     variant === "dark"
-      ? `${base} bg-ink text-white hover:bg-ink/85`
+      ? `${base} bg-ink-solid text-white hover:bg-ink-solid/85`
       : variant === "ghost"
         ? `${base} border border-line bg-surface text-ink hover:border-ink/30`
-        : `${base} bg-citron text-ink hover:bg-citron-deep`;
+        : `${base} bg-citron text-ink-solid hover:bg-citron-deep`;
   const chip = (
     <ArrowChip
       tone={variant === "dark" ? "citron" : variant === "ghost" ? "indigo" : "ink"}

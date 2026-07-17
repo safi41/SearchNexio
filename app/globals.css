@@ -1,18 +1,66 @@
 @import "tailwindcss";
 
-/* Sasico-style system in the client's exact brand palette. Do not
-   approximate these values. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Sasico-style system in the client's exact brand palette. Light values are
+   the brief verbatim; dark values are derived night equivalents. Citron and
+   indigo stay constant across modes. */
+:root {
+  color-scheme: light;
+  --c-page: #f7f5ef;
+  --c-surface: #ffffff;
+  --c-line: #e4e2dc;
+  --c-ink: #0b0d12;
+  --c-graphite: #5d6270;
+  --c-lilac: #eceaff;
+  --grid-line: rgba(11, 13, 18, 0.05);
+  --wm-stroke: rgba(11, 13, 18, 0.1);
+  --wash-strong: rgba(99, 91, 255, 0.28);
+  --wash-mid: rgba(99, 91, 255, 0.22);
+  --wash-soft: rgba(236, 234, 255, 0.95);
+  --wash-band: rgba(236, 234, 255, 0.85);
+  --wash-band-lo: rgba(236, 234, 255, 0.35);
+  --glow-bottom-a: rgba(99, 91, 255, 0.45);
+  --glow-bottom-b: rgba(236, 234, 255, 0.55);
+  --glow-top-a: rgba(236, 234, 255, 0.8);
+  --glow-top-b: rgba(236, 234, 255, 0.6);
+}
+
+.dark {
+  color-scheme: dark;
+  --c-page: #0b0d12;
+  --c-surface: #151821;
+  --c-line: #262b36;
+  --c-ink: #f2f1ec;
+  --c-graphite: #9aa0ad;
+  --c-lilac: #262347;
+  --grid-line: rgba(242, 241, 236, 0.06);
+  --wm-stroke: rgba(242, 241, 236, 0.12);
+  --wash-strong: rgba(99, 91, 255, 0.2);
+  --wash-mid: rgba(99, 91, 255, 0.14);
+  --wash-soft: rgba(99, 91, 255, 0.1);
+  --wash-band: rgba(99, 91, 255, 0.13);
+  --wash-band-lo: rgba(99, 91, 255, 0.05);
+  --glow-bottom-a: rgba(99, 91, 255, 0.35);
+  --glow-bottom-b: rgba(99, 91, 255, 0.14);
+  --glow-top-a: rgba(99, 91, 255, 0.16);
+  --glow-top-b: rgba(99, 91, 255, 0.1);
+}
+
 @theme inline {
-  --color-ivory: #f7f5ef;
-  --color-surface: #ffffff;
-  --color-line: #e4e2dc;
-  --color-ink: #0b0d12;
+  --color-ivory: var(--c-page);
+  --color-surface: var(--c-surface);
+  --color-line: var(--c-line);
+  --color-ink: var(--c-ink);
+  --color-graphite: var(--c-graphite);
+  --color-lilac: var(--c-lilac);
+
+  /* constants across both modes */
+  --color-ink-solid: #0b0d12;
   --color-indigo: #635bff;
   --color-indigo-deep: #4a43d9;
   --color-citron: #dfff52;
   --color-citron-deep: #c9e63e;
-  --color-lilac: #eceaff;
-  --color-graphite: #5d6270;
   --color-warn: #c2410c;
 
   --font-sans: var(--font-inter);
@@ -42,25 +90,6 @@
   }
 }
 
-.marquee:hover .animate-marquee {
-  animation-play-state: paused;
-}
-
-/* Text stagger inside a Reveal wrapper: children tagged .reveal-item start
-   hidden while the wrapper is [data-reveal="hidden"], then transition in
-   on their own transition-delay once the wrapper flips to "shown". */
-@media (prefers-reduced-motion: no-preference) {
-  .reveal-item {
-    transition:
-      opacity 0.7s var(--ease-soft),
-      transform 0.7s var(--ease-soft);
-  }
-  [data-reveal="hidden"] .reveal-item {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -84,26 +113,59 @@ body {
 
 /* Faint square grid, the Sasico backdrop for heroes and section heads. */
 .grid-pattern {
-  background-image: linear-gradient(rgba(11, 13, 18, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(11, 13, 18, 0.05) 1px, transparent 1px);
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 68px 68px;
 }
 
-/* Soft lilac radial washes that tint section corners (Lilac Mist is the
-   soft background per the brand spec; citron stays CTA-only). */
+/* Soft brand washes that tint section corners and bands. */
 .wash-lilac {
   background:
-    radial-gradient(46rem 30rem at 0% 8%, rgba(99, 91, 255, 0.28), transparent 62%),
-    radial-gradient(46rem 30rem at 100% 12%, rgba(99, 91, 255, 0.22), transparent 62%),
-    radial-gradient(70rem 32rem at 50% 0%, rgba(236, 234, 255, 0.95), transparent 70%);
+    radial-gradient(46rem 30rem at 0% 8%, var(--wash-strong), transparent 62%),
+    radial-gradient(46rem 30rem at 100% 12%, var(--wash-mid), transparent 62%),
+    radial-gradient(70rem 32rem at 50% 0%, var(--wash-soft), transparent 70%);
 }
 .wash-lilac-full {
   background: linear-gradient(
     180deg,
-    rgba(236, 234, 255, 0.85) 0%,
-    rgba(236, 234, 255, 0.35) 55%,
+    var(--wash-band) 0%,
+    var(--wash-band-lo) 55%,
     transparent 100%
   );
+}
+
+/* Footer glow layers (theme-aware). */
+.footer-glow-bottom {
+  background: radial-gradient(
+    55% 110% at 50% 100%,
+    var(--glow-bottom-a),
+    var(--glow-bottom-b) 45%,
+    transparent 75%
+  );
+}
+.footer-glow-top {
+  background:
+    radial-gradient(40% 100% at 0% 0%, var(--glow-top-a), transparent 70%),
+    radial-gradient(40% 100% at 100% 0%, var(--glow-top-b), transparent 70%);
+}
+
+.marquee:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Text stagger inside a Reveal wrapper: children tagged .reveal-item start
+   hidden while the wrapper is [data-reveal="hidden"], then transition in
+   on their own transition-delay once the wrapper flips to "shown". */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-item {
+    transition:
+      opacity 0.7s var(--ease-soft),
+      transform 0.7s var(--ease-soft);
+  }
+  [data-reveal="hidden"] .reveal-item {
+    opacity: 0;
+    transform: translateY(12px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
