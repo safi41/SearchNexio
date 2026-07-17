@@ -18,7 +18,7 @@ const faqSchema = {
 
 export default function Faq() {
   return (
-    <section className="mx-auto max-w-4xl px-6 py-16 md:py-20">
+    <section className="mx-auto max-w-4xl overflow-x-clip px-6 py-16 md:py-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -30,13 +30,18 @@ export default function Faq() {
         </p>
       </Reveal>
 
-      <Reveal delay={100}>
-        <div className="mt-10 grid gap-3">
-          {FAQS.map((faq) => (
-            <FaqRow key={faq.q} q={faq.q} lead={faq.lead} rest={faq.rest} />
-          ))}
-        </div>
-      </Reveal>
+      {/* rows alternate in from left and right, converging down the list */}
+      <div className="mt-10 grid gap-3">
+        {FAQS.map((faq, i) => (
+          <Reveal
+            key={faq.q}
+            variant={i % 2 === 0 ? "left" : "right"}
+            delay={Math.min(i * 60, 240)}
+          >
+            <FaqRow q={faq.q} lead={faq.lead} rest={faq.rest} />
+          </Reveal>
+        ))}
+      </div>
     </section>
   );
 }
@@ -52,7 +57,7 @@ function FaqRow({ q, lead, rest }: { q: string; lead: string; rest: string }) {
         onClick={() => setOpen(!open)}
         className="flex w-full items-center justify-between gap-6 py-5 text-left font-heading text-[15.5px] font-bold text-ink"
       >
-        {q}
+        <span className="reveal-item [transition-delay:130ms]">{q}</span>
         <span
           aria-hidden
           className={`grid size-7 shrink-0 place-items-center rounded-full transition-all duration-200 ${
