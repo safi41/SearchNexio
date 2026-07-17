@@ -24,6 +24,12 @@ export default function Reveal({
       setShown(true);
       return;
     }
+    /* already on screen at mount (first paint, anchor jump, resize-to-tall
+       viewports): show immediately instead of waiting on the observer */
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.95) {
+      setShown(true);
+      return;
+    }
     const io = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {

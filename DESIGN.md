@@ -1,4 +1,10 @@
-# SearchNexio Homepage: UI Design & Motion Spec
+# SearchNexio Homepage: UI Design & Motion Spec (RETIRED)
+
+> **Superseded 2026-07-17.** The client approved the "Aurora Curtain"
+> redesign; the governing spec is now
+> `docs/superpowers/specs/2026-07-17-aurora-curtain-redesign-design.md`.
+> This document describes the retired teal/copper system and is kept for
+> history only.
 
 Design system for the FINAL v3 copy doc. Copy is locked; this spec maps every
 section of that doc to a layout and an animation treatment.

@@ -1,9 +1,10 @@
 # SearchNexio Site
 
-Next.js (App Router) + Tailwind CSS v4 + GSAP (ScrollTrigger, ScrollSmoother,
-SplitText) implementation of the FINAL v3 copy doc: the full homepage plus the
-pages the doc references. `DESIGN.md` holds the original design spec; this
-file reflects the build as it stands.
+Next.js (App Router) + Tailwind CSS v4 implementation of the FINAL v3 copy
+doc in the client-approved **Aurora Curtain** design system (Stripe-family
+enterprise). The governing design spec is
+`docs/superpowers/specs/2026-07-17-aurora-curtain-redesign-design.md`;
+`DESIGN.md` documents the retired teal/copper system and is kept for history.
 
 ## Run it
 
@@ -26,90 +27,71 @@ npm run dev
 
 ## Homepage flow
 
-1. **Hero (paper, full screen)** — radar blooms from a dot at center, travels
-   to its resting spot, then the text choreography plays: typewriter eyebrow,
-   masked headline lines, the copper scan bar revealing "Found", and the
-   surface readout strip resolving Google / Maps / AI Overviews / ChatGPT.
-   Scrolling detonates the headline: SplitText letters scatter across the
-   screen, scrubbed, and reassemble on the way back up.
-2. **Logo marquee (paper)** — infinite text-wordmark loop, paused on hover.
-3. **The dark act (ink, pinned)** — horizontal scroll: intro heading, hairline
-   divider, then three trust-statement cards that climb from below the
-   viewport on a scrubbed diagonal. The act ends with a full-screen paper
-   handoff panel carrying the "Why It Matters" opening, its ink curtain bars
-   retracting as it slides in from the right; when it owns the screen the pin
-   releases into normal vertical scroll.
-4. **Why It Matters (paper)** — body paragraphs, the two buyer journeys that
-   draw themselves stop by stop (with a traveling pulse that loops forever on
-   the living route and runs once on the dead one), count-up stats, and a
-   closing line that fills in word by word as a scroll mask.
-5. **Results / Method / Services / Industries / Why / FAQ** — tilt cards with
-   pending-metric chips, the scroll-scrubbed method rail with pinned intro,
-   service tiles, industry pills, the 2x2 why grid, and the animated FAQ
-   accordion with FAQPage schema.
-6. **Final CTA (ink)** — vertical blinds curtain in, "invisible" resolves from
-   ghost outline to solid, inverted radar, magnetic CTAs.
+1. **Hero** — the Aurora Curtain: five blurred gradient blobs (indigo,
+   violet, lilac, citron, sky) drifting inside a `skewY(-7deg)` clipped band,
+   the page's only continuous animation. Light-weight headline over the
+   gradient, citron pill CTA, and the floating Visibility Report card
+   (illustrative scores; AI surfaces red-flagged) overlapping the diagonal.
+2. **Logo strip** — static typographic wordmark row on white.
+3. **Trust bullets** — three white cards on ivory.
+4. **Problem (ink)** — dark band: paragraphs, the two journey-comparison
+   rows (muted old path vs. full-strength new surfaces with a citron
+   Decision chip), static stats, closing line + CTA.
+5. **Results / Method / Services / Industries / Why / FAQ** — metric-first
+   case cards with pending-metric chips, numbered method rows with lilac
+   index squares, white service tiles, lilac industries band with pill
+   links, 2x2 hairline why-grid, CSS accordion FAQ with FAQPage schema.
+6. **Final CTA (ink)** — dark bookend with a static indigo aurora glow,
+   citron CTA. Footer follows on ink.
 
 ## Structure
 
 ```
 app/
-  layout.tsx        fonts, SEO metadata, Organization schema, global
-                    nav / smooth-scroll shell / progress hairline
-  globals.css       exact brand tokens as Tailwind v4 @theme, ambient
-                    keyframes (radar, blips, caret, marquee), paper grain
+  layout.tsx        Inter Tight via next/font, SEO metadata, Organization
+                    schema, nav + footer shell
+  globals.css       exact brand tokens as Tailwind v4 @theme, curtain
+                    drift keyframes, reduced-motion kill for .curtain-blob
 lib/
   content.ts        every piece of copy from the doc, typed and centralized
 components/
-  Hero.tsx               radar bloom + text choreography + scatter-on-scroll
-  LogoStrip.tsx          infinite text-wordmark marquee (pause on hover)
-  TrustBullets.tsx       pinned horizontal dark act + Why It Matters handoff
-  ProblemSection.tsx     journeys with traveling pulse, count-ups, word mask
-  Results.tsx            3D-tilt case tiles, pending-metric chips
-  FullSurfaceMethod.tsx  scroll-bound progress rail, pinned intro column
-  Services.tsx           service tiles with corner-tick + cascade hovers
-  Industries.tsx         slim band, teal fill pills (blurbs on hover)
+  Hero.tsx               curtain + report card (server component, no JS)
+  LogoStrip.tsx          static wordmark row
+  TrustBullets.tsx       three proof cards
+  ProblemSection.tsx     dark band: journeys, stats, closing CTA
+  Results.tsx            metric-first case tiles (+ ResultTile for subpage)
+  FullSurfaceMethod.tsx  numbered method rows, no pinning
+  Services.tsx           white tile grid (+ ServiceTile for subpage)
+  Industries.tsx         lilac band with pill links
   WhySearchNexio.tsx     2x2 hairline grid + pending testimonial slot
-  Faq.tsx                GSAP accordion + FAQPage JSON-LD
-  FinalCta.tsx           blinds, ghost "invisible" resolve, inverted radar
-  SiteNav.tsx            fixed nav, backdrop blur after scroll
+  Faq.tsx                CSS grid-rows accordion + FAQPage JSON-LD
+  FinalCta.tsx           dark bookend with static aurora glow
+  SiteNav.tsx            transparent glass over the curtain (homepage only),
+                         solid surface elsewhere / after scroll
   Footer.tsx             dark footer with tagline + launch-pending note
   PageHeader.tsx         shared subpage masthead
   CaseStudyGrid / ServiceGrid / IndustryList / AboutContent / ContactForm
-  ui.tsx                 Eyebrow + CtaLink (copper fill-sweep hover)
-  motion/gsap.ts         plugin registration, shared eases, reduced-motion query
-  motion/SmoothScroll.tsx ScrollSmoother shell + hash links + route resets
-  motion/ScanTracker.tsx copper read-progress hairline across the top
-  motion/primitives.tsx  Reveal, Stagger, MaskedHeading, BlindsReveal
-  motion/interactive.tsx Magnetic, TiltCard (gsap quick tweens)
+  ui.tsx                 Eyebrow + CtaLink (citron pill / indigo arrow link)
+  motion/Reveal.tsx      the only entrance animation: 300ms fade + 12px
+                         rise, once, IntersectionObserver, reduced-motion safe
+  motion/primitives.tsx  compat shims (Reveal/Stagger/MaskedHeading) built
+                         on Reveal for the subpage components
 ```
 
-## Design system
+## Design system (Aurora Curtain)
 
-- **Grounds:** the palette owns exactly two grounds, paper `#FAF7F2` and ink
-  `#12262B`. Teal `#0E5A5A`, copper `#C25E2E`, and sage `#6E8B6A` are
-  instrument colors (links, CTAs, status); never use them as section fields.
-- **Type:** Bricolage Grotesque (hero hook only, mixed with Newsreader italic
-  on the voice words "Found" and "Search"), Newsreader (display), Public Sans
-  (body), IBM Plex Mono (eyebrows, readouts, stats).
-- **Radar rings** pulse in three dark tones: teal, ink, deep copper.
-
-## Motion system (GSAP)
-
-- ScrollSmoother drives page scroll; `data-speed` gives radar and watermarks
-  parallax. Fixed chrome lives outside `#smooth-wrapper`.
-- ScrollTrigger runs every reveal; scrubbed triggers bind the method rail,
-  the hero exit + shatter, the trust-card climbs, the handoff curtain, and
-  the word masks directly to scroll position, so they reverse on the way up.
-- `containerAnimation` triggers fire on horizontal position inside the pinned
-  dark act (card climbs, curtain, heading).
-- SplitText powers the typewriter eyebrow, the headline shatter, and the
-  word-by-word scroll mask on "You cannot fix what you cannot see."
-- One easing family (`power4.out` / `power4.inOut`) everywhere; ambient loops
-  carry `.motion-ambient`.
-- All entrance/scrub work registers under gsap.matchMedia's
-  prefers-reduced-motion guard: reduced-motion users get the finished layout
-  (the horizontal act folds into a vertical list, curtains removed).
+- **Colors (client's exact brief):** ink `#0B0D12`, ivory `#F7F5EF`,
+  indigo `#635BFF`, citron `#DFFF52` (primary CTA only), lilac `#ECEAFF`,
+  graphite `#5D6270`, white surfaces, `#E4E2DC` hairlines. Curtain-only
+  hues (violet `#8F7BFF`, sky `#4CC9F0`) never appear elsewhere.
+- **Type:** Inter Tight only. Display 340, H2 380, body 400, buttons 550,
+  eyebrows 650. Hierarchy by size and negative tracking, never bold display.
+- **Shape:** cards 16px, chips 10px, buttons full pill. Hairlines carry
+  structure; shadows exist only on the report card and the primary CTA.
+- **Motion policy:** the curtain is the only loop. Sections get one 300ms
+  fade-up via `Reveal`. Hovers 150-300ms. `prefers-reduced-motion` freezes
+  the curtain and renders final states.
+- One filled (citron) CTA per band; indigo owns every other accent.
 
 ## Conventions
 
