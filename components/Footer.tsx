@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
+import { Ring } from "@/components/decor";
 
 const LINKS = [
   { href: "/services", label: "Services" },
@@ -13,6 +14,62 @@ const LINKS = [
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-line bg-ivory">
+      {/* spinning ring garnish in the footer corners, echoing the hero */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 hidden md:block">
+        <span className="absolute -left-36 -bottom-28 size-[340px]">
+          <Ring
+            className="inset-0"
+            border="border-ink/10"
+            spin="animate-orbit"
+            duration="48s"
+            dots={[
+              { angle: 25, cls: "size-2 bg-ink/50" },
+              { angle: 110, cls: "size-1.5 bg-indigo/55" },
+              { angle: 205, cls: "size-1.5 bg-ink/40" },
+              { angle: 300, cls: "size-2 bg-indigo/45" },
+            ]}
+          />
+          <Ring
+            className="inset-[22%]"
+            border="border-indigo/12"
+            spin="animate-orbit-slow"
+            duration="60s"
+            dots={[
+              { angle: 60, cls: "size-1.5 bg-ink/40" },
+              { angle: 150, cls: "size-2 bg-indigo/50" },
+              { angle: 250, cls: "size-1.5 bg-ink/35" },
+              { angle: 340, cls: "size-1.5 bg-indigo/40" },
+            ]}
+          />
+        </span>
+        <span className="absolute -right-32 -top-20 size-[300px]">
+          <Ring
+            className="inset-0"
+            border="border-indigo/12"
+            spin="animate-orbit-slow"
+            duration="54s"
+            dots={[
+              { angle: 10, cls: "size-2 bg-indigo/55" },
+              { angle: 100, cls: "size-1.5 bg-ink/40" },
+              { angle: 190, cls: "size-1.5 bg-indigo/45" },
+              { angle: 285, cls: "size-2 bg-ink/45" },
+            ]}
+          />
+          <Ring
+            className="inset-[24%]"
+            border="border-ink/8"
+            spin="animate-orbit"
+            duration="42s"
+            dots={[
+              { angle: 40, cls: "size-1.5 bg-ink/40" },
+              { angle: 130, cls: "size-1.5 bg-indigo/45" },
+              { angle: 225, cls: "size-2 bg-ink/45" },
+              { angle: 315, cls: "size-1.5 bg-indigo/40" },
+            ]}
+          />
+        </span>
+      </div>
+
       <div className="relative mx-auto max-w-6xl px-6 pt-14">
         <div className="flex flex-wrap items-start justify-between gap-x-10 gap-y-8 pb-10">
           <Reveal variant="left" className="max-w-xs">
