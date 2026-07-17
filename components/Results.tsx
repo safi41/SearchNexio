@@ -1,24 +1,23 @@
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
-import { Eyebrow, CtaLink } from "@/components/ui";
+import { CtaLink, SectionHead, Badge } from "@/components/ui";
 import { CASE_STUDIES, type CaseStudy } from "@/lib/content";
 
 /* Homepage shows three tiles per the doc; Darussalam is the doc's approved
-   swap candidate and lives on /case-studies. Metric-first cards: the number
-   is the headline. Pending [[ ]] metrics keep the dashed-chip treatment so
-   nothing unverified ships as a real figure. */
+   swap candidate and lives on /case-studies. Pending [[ ]] metrics keep the
+   dashed-chip treatment so nothing unverified ships as a real figure. */
 const TILES = CASE_STUDIES.slice(0, 3);
 
 function Metric({ value }: { value: string }) {
   if (value.includes("[[")) {
     return (
-      <span className="inline-block self-start rounded-[10px] border border-dashed border-graphite/50 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.1em] text-graphite">
+      <span className="inline-block self-start rounded-full border border-dashed border-graphite/50 px-3.5 py-1.5 text-[10.5px] font-semibold uppercase tracking-[0.08em] text-graphite">
         metric pending case study
       </span>
     );
   }
   return (
-    <span className="text-[26px] font-[420] tracking-[-0.02em] tabular-nums">
+    <span className="font-heading text-[30px] font-bold tabular-nums tracking-[-0.02em]">
       {value}
     </span>
   );
@@ -26,61 +25,68 @@ function Metric({ value }: { value: string }) {
 
 export default function Results() {
   return (
-    <section id="results" className="border-t border-line bg-surface py-20 md:py-24">
+    <section id="results" className="py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <Eyebrow>Results</Eyebrow>
-          <h2 className="mt-4 max-w-2xl text-[clamp(1.8rem,3.4vw,2.75rem)] font-[380] leading-[1.1] tracking-[-0.025em]">
-            What this looks like when it works.
-          </h2>
-          <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-graphite">
-            Real engagements, real numbers. Every case study shows exactly what
-            we did, how we did it, and how long the process took.
-          </p>
+          <SectionHead
+            badge="Results"
+            title="What this looks like when it works."
+            sub="Real engagements, real numbers. Every case study shows exactly what we did, how we did it, and how long the process took."
+          />
         </Reveal>
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
           {TILES.map((study, i) => (
-            <Reveal key={study.client} delay={i * 60} className="h-full">
+            <Reveal key={study.client} delay={i * 70} className="h-full">
               <ResultTile study={study} />
             </Reveal>
           ))}
         </div>
-        <Reveal className="mt-8">
-          <p className="text-sm text-graphite">
+        <Reveal className="mt-10 text-center">
+          <p className="text-[14px] text-graphite">
             More case studies, including the ones where results took longer
             than expected.
           </p>
-          <CtaLink href="/case-studies" variant="ghost" disabled>
-            View all case studies
-          </CtaLink>
+          <div className="mt-4 flex justify-center">
+            <CtaLink href="/case-studies" variant="ghost" disabled>
+              View all case studies
+            </CtaLink>
+          </div>
         </Reveal>
       </div>
     </section>
   );
 }
 
-/* Light tile shared with the /case-studies grid. */
+/* Tile shared with the /case-studies grid. */
 export function ResultTile({ study }: { study: CaseStudy }) {
   return (
     <Link
       href="/case-studies"
-      className="group flex h-full flex-col gap-3 rounded-2xl border border-line bg-surface p-6 transition-colors duration-200 hover:border-indigo/40"
+      className="group flex h-full flex-col gap-4 rounded-3xl border border-line bg-surface p-7 transition-shadow duration-200 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]"
     >
-      <Eyebrow>{study.industry}</Eyebrow>
+      <Badge>{study.industry}</Badge>
       <Metric value={study.metric} />
-      <p className="text-[15px] font-medium tracking-[-0.01em]">
+      <p className="font-heading text-[17px] font-bold leading-snug tracking-[-0.01em]">
         {study.summary.split(".")[0]}.
       </p>
-      <p className="text-[13px] leading-relaxed text-graphite">
+      <p className="text-[13.5px] leading-relaxed text-graphite">
         {study.summary.split(".").slice(1).join(".").trim()}
       </p>
-      <span className="mt-auto pt-2 text-[13px] font-medium text-indigo">
-        Read the case study{" "}
+      <span className="mt-auto inline-flex items-center gap-2 pt-2 text-[13.5px] font-semibold text-ink">
+        Read the case study
         <span
           aria-hidden
-          className="inline-block transition-transform duration-200 group-hover:translate-x-[3px]"
+          className="grid size-5.5 place-items-center rounded-full bg-citron text-ink transition-transform duration-200 group-hover:translate-x-0.5"
         >
-          &rarr;
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+            <path
+              d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </span>
       </span>
     </Link>

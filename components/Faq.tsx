@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Reveal from "@/components/motion/Reveal";
-import { Eyebrow } from "@/components/ui";
+import { SectionHead } from "@/components/ui";
 import { FAQS } from "@/lib/content";
 
 /* FAQPage schema mirrors the visible copy exactly, per the doc's schema rule. */
@@ -18,27 +18,20 @@ const faqSchema = {
 
 export default function Faq() {
   return (
-    <section className="mx-auto max-w-6xl px-6 pb-24 pt-4 md:pb-28">
+    <section className="mx-auto max-w-4xl px-6 py-16 md:py-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <div className="flex flex-wrap items-end justify-between gap-6">
-        <Reveal>
-          <Eyebrow>FAQ</Eyebrow>
-          <h2 className="mt-4 text-[clamp(1.8rem,3.4vw,2.75rem)] font-[380] leading-[1.1] tracking-[-0.025em]">
-            Questions, answered directly
-          </h2>
-        </Reveal>
-        <Reveal delay={80}>
-          <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-graphite">
-            Last updated: July 2026
-          </p>
-        </Reveal>
-      </div>
+      <Reveal>
+        <SectionHead badge="FAQ" title="Questions, answered directly" />
+        <p className="mt-4 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-graphite">
+          Last updated: July 2026
+        </p>
+      </Reveal>
 
       <Reveal delay={100}>
-        <div className="mt-10 max-w-3xl">
+        <div className="mt-10 grid gap-3">
           {FAQS.map((faq) => (
             <FaqRow key={faq.q} q={faq.q} lead={faq.lead} rest={faq.rest} />
           ))}
@@ -52,21 +45,28 @@ function FaqRow({ q, lead, rest }: { q: string; lead: string; rest: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-t border-line last:border-b">
+    <div className="rounded-2xl border border-line bg-surface px-6">
       <button
         type="button"
         aria-expanded={open}
         onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between gap-6 py-5 text-left text-[15px] font-medium text-ink transition-colors duration-200 hover:text-indigo"
+        className="flex w-full items-center justify-between gap-6 py-5 text-left font-heading text-[15.5px] font-bold text-ink"
       >
         {q}
         <span
           aria-hidden
-          className={`shrink-0 text-lg text-indigo transition-transform duration-200 ${
-            open ? "rotate-45" : ""
+          className={`grid size-7 shrink-0 place-items-center rounded-full transition-all duration-200 ${
+            open ? "rotate-45 bg-ink text-citron" : "bg-citron text-ink"
           }`}
         >
-          +
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path
+              d="M6 1.5v9M1.5 6h9"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+            />
+          </svg>
         </span>
       </button>
       <div
@@ -77,7 +77,7 @@ function FaqRow({ q, lead, rest }: { q: string; lead: string; rest: string }) {
       >
         <div className="overflow-hidden">
           {/* First sentence bold: it answers the question directly, per the doc. */}
-          <p className="max-w-2xl pb-5 text-sm leading-relaxed text-graphite">
+          <p className="max-w-2xl pb-5 text-[13.5px] leading-relaxed text-graphite">
             <b className="font-semibold text-ink">{lead}</b> {rest}
           </p>
         </div>

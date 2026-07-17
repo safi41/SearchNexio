@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 
 const LINKS = [
   { href: "/services", label: "Services" },
@@ -11,63 +9,56 @@ const LINKS = [
   { href: "/about", label: "About" },
 ];
 
-/* Transparent glass chrome while the curtain is behind it; solid surface
-   with a hairline once the page scrolls past the hero gradient. */
+/* Sasico chrome: logo left, a floating pill bar carrying the links, and
+   pill CTAs right. Solid ivory backdrop keeps it legible on every route. */
 export default function SiteNav() {
-  const [pastHero, setPastHero] = useState(false);
-  const pathname = usePathname();
-  /* only the homepage has the curtain behind the nav; every other route
-     gets the solid chrome from the first pixel */
-  const scrolled = pathname !== "/" || pastHero;
-
-  useEffect(() => {
-    const onScroll = () => setPastHero(window.scrollY > 440);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
-        scrolled
-          ? "border-b border-line bg-surface/90 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
-      }`}
-    >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <header className="fixed inset-x-0 top-0 z-40 bg-ivory/85 backdrop-blur-md">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3.5">
         <Link
           href="/"
-          className={`text-lg font-semibold tracking-[-0.02em] ${
-            scrolled ? "text-ink" : "text-white"
-          }`}
+          className="flex items-center gap-2 font-heading text-[19px] font-bold tracking-[-0.02em]"
         >
-          SearchNexio<span className="text-citron">.</span>
+          <span aria-hidden className="flex items-center">
+            <span className="size-4.5 rounded-full bg-ink" />
+            <span className="-ml-1.5 size-4.5 rounded-full bg-citron mix-blend-multiply" />
+          </span>
+          SearchNexio
         </Link>
+
         {/* nav routing is disabled for the client-review build: the inner
             pages aren't ready, so links render inert (no hrefs, no routing) */}
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-1 rounded-full border border-line bg-surface px-2 py-1.5 shadow-[0_2px_10px_rgba(11,13,18,0.05)] md:flex">
           {LINKS.map((link) => (
             <span
               key={link.href}
               aria-disabled="true"
-              className={`cursor-default text-sm font-medium transition-colors duration-300 ${
-                scrolled ? "text-ink/70" : "text-white/90"
-              }`}
+              className="cursor-default rounded-full px-4 py-2 text-[14px] font-medium text-ink/80 transition-colors duration-200 hover:bg-ivory"
             >
               {link.label}
             </span>
           ))}
         </nav>
+
         <span
           aria-disabled="true"
-          className={`cursor-default rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300 ${
-            scrolled
-              ? "bg-citron text-ink"
-              : "border border-white/35 bg-white/15 text-white backdrop-blur-sm"
-          }`}
+          className="group inline-flex cursor-default items-center gap-2 rounded-full bg-citron py-2 pl-5 pr-2 text-[14px] font-semibold text-ink"
         >
           Request a review
+          <span
+            aria-hidden
+            className="grid size-6 place-items-center rounded-full bg-ink text-citron"
+          >
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+              <path
+                d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
         </span>
       </div>
     </header>

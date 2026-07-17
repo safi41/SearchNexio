@@ -3,24 +3,48 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-/* Aurora Curtain primitives. One filled CTA per band; indigo carries every
-   other interactive accent. Hierarchy comes from size and tracking. */
+/* Sasico-style primitives: everything is a pill, every CTA carries the
+   circle-arrow chip, every section opens with a tinted badge over a bold
+   centered Jakarta heading. */
 
+/* Tinted pill badge that sits above section headings. */
+export function Badge({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-block rounded-full bg-citron/45 px-4 py-1.5 text-[13px] font-medium text-ink">
+      {children}
+    </span>
+  );
+}
+
+/* Kept for subpage compatibility: renders as the badge. */
 export function Eyebrow({
   children,
-  tone = "light",
 }: {
   children: ReactNode;
   tone?: "light" | "dark";
 }) {
+  return <Badge>{children}</Badge>;
+}
+
+/* The circle-arrow chip inside every Sasico button. */
+function ArrowChip({ dark = true }: { dark?: boolean }) {
   return (
-    <p
-      className={`text-xs font-semibold uppercase tracking-[0.2em] ${
-        tone === "dark" ? "text-[#B9B2FF]" : "text-indigo"
-      }`}
+    <span
+      aria-hidden
+      className={`grid size-6 place-items-center rounded-full ${
+        dark ? "bg-ink text-citron" : "bg-citron text-ink"
+      } transition-transform duration-200 group-hover:translate-x-0.5`}
     >
-      {children}
-    </p>
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path
+          d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
   );
 }
 
@@ -28,52 +52,70 @@ export function CtaLink({
   href,
   children,
   variant = "solid",
-  tone = "light",
   disabled = false,
 }: {
   href: string;
   children: ReactNode;
-  variant?: "solid" | "ghost";
+  variant?: "solid" | "ghost" | "dark";
   tone?: "light" | "dark";
   disabled?: boolean;
 }) {
-  if (variant === "solid") {
-    const solid =
-      "inline-flex items-center gap-2 rounded-full bg-citron px-6 py-3.5 text-sm font-medium text-ink shadow-[0_2px_8px_rgba(11,13,18,0.14)] transition-colors duration-200";
-    if (disabled) {
-      return (
-        <span aria-disabled="true" className={`${solid} cursor-default`}>
-          {children}
-        </span>
-      );
-    }
-    return (
-      <Link href={href} className={`${solid} hover:bg-citron-deep`}>
-        {children}
-      </Link>
-    );
-  }
+  const base =
+    "group inline-flex items-center gap-2.5 rounded-full py-2.5 pl-6 pr-2.5 text-[14.5px] font-semibold transition-colors duration-200";
+  const styles =
+    variant === "dark"
+      ? `${base} bg-ink text-white hover:bg-ink/85`
+      : variant === "ghost"
+        ? `${base} border border-line bg-surface text-ink hover:border-ink/30`
+        : `${base} bg-citron text-ink hover:bg-citron-deep`;
+  const chip = <ArrowChip dark={variant !== "dark"} />;
 
-  const ghost = `group inline-flex items-center gap-2 py-3.5 text-sm font-medium ${
-    tone === "dark" ? "text-white/85 hover:text-white" : "text-indigo hover:text-indigo-deep"
-  } transition-colors duration-200`;
   if (disabled) {
     return (
-      <span aria-disabled="true" className={`${ghost} cursor-default`}>
+      <span aria-disabled="true" className={`${styles} cursor-default`}>
         <span>{children}</span>
-        <span aria-hidden>&rarr;</span>
+        {chip}
       </span>
     );
   }
   return (
-    <Link href={href} className={ghost}>
+    <Link href={href} className={styles}>
       <span>{children}</span>
-      <span
-        aria-hidden
-        className="transition-transform duration-200 group-hover:translate-x-[3px]"
-      >
-        &rarr;
-      </span>
+      {chip}
     </Link>
+  );
+}
+
+/* Centered section opener: badge, bold Jakarta H2, optional gray subtext. */
+export function SectionHead({
+  badge,
+  title,
+  sub,
+}: {
+  badge: string;
+  title: ReactNode;
+  sub?: ReactNode;
+}) {
+  return (
+    <div className="mx-auto max-w-3xl text-center">
+      <Badge>{badge}</Badge>
+      <h2 className="mt-5 font-heading text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+        {title}
+      </h2>
+      {sub && (
+        <p className="mx-auto mt-5 max-w-2xl text-[15.5px] leading-relaxed text-graphite">
+          {sub}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/* Icon tile: the rounded citron-tinted square behind feature glyphs. */
+export function IconTile({ children }: { children: ReactNode }) {
+  return (
+    <span className="grid size-13 place-items-center rounded-2xl bg-gradient-to-b from-citron to-citron/40 text-ink">
+      {children}
+    </span>
   );
 }

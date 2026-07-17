@@ -1,5 +1,5 @@
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink, Eyebrow } from "@/components/ui";
+import { CtaLink, SectionHead } from "@/components/ui";
 import { STATS } from "@/lib/content";
 
 const PARAGRAPHS = [
@@ -11,40 +11,44 @@ const PARAGRAPHS = [
 const OLD_JOURNEY = ["Google query", "10 blue links", "Click to your site"];
 const NEW_JOURNEY = ["Google", "Maps", "AI Overviews", "ChatGPT", "Decision"];
 
-/* The dark band: where you cannot be seen. Quiet card language, static
-   journey rows (the contrast between one thin path and many surfaces IS the
-   argument), static stats. */
+/* Sasico treatment: a citron-washed band with centered head, the journey
+   comparison as pill-chip cards, and the stats as big bold numbers. */
 export default function ProblemSection() {
   return (
-    <section className="bg-ink text-white">
-      <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+    <section className="wash-citron-full py-16 md:py-24">
+      <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <Eyebrow tone="dark">Why It Matters</Eyebrow>
-          <h2 className="mt-4 max-w-2xl text-[clamp(1.8rem,3.4vw,2.75rem)] font-[380] leading-[1.1] tracking-[-0.025em]">
-            Search has changed. Most SEO hasn&apos;t.
-          </h2>
+          <SectionHead
+            badge="Why it matters"
+            title={
+              <>
+                Search has changed. <br className="hidden md:block" />
+                Most SEO hasn&apos;t.
+              </>
+            }
+            sub={PARAGRAPHS[0]}
+          />
         </Reveal>
 
         <Reveal delay={80}>
-          <div className="mt-8 grid max-w-3xl gap-5">
-            {PARAGRAPHS.map((text, i) => (
-              <p key={i} className="text-[15px] leading-relaxed text-white/65">
+          <div className="mx-auto mt-8 grid max-w-3xl gap-4 text-center">
+            {PARAGRAPHS.slice(1).map((text, i) => (
+              <p key={i} className="text-[14.5px] leading-relaxed text-graphite">
                 {text}
               </p>
             ))}
           </div>
         </Reveal>
 
-        {/* the journey comparison: one thin path vs. many surfaces */}
         <Reveal delay={120}>
-          <div className="mt-14 grid gap-4">
-            <JourneyRow
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            <JourneyCard
               label="How search used to work"
               note="One surface. One path. Rankings were the whole game."
               stops={OLD_JOURNEY}
               muted
             />
-            <JourneyRow
+            <JourneyCard
               label="How buyers search now"
               note="Many surfaces. Answers before clicks. Visibility is the whole game."
               stops={NEW_JOURNEY}
@@ -52,42 +56,39 @@ export default function ProblemSection() {
           </div>
         </Reveal>
 
-        {/* reality by the numbers; static values, no count-up */}
         <Reveal delay={140}>
-          <div className="mt-16 grid gap-10 md:grid-cols-3">
+          <div className="mx-auto mt-14 grid max-w-4xl gap-8 text-center md:grid-cols-3">
             {STATS.map((stat) => (
               <div key={stat.label}>
-                <p className="text-5xl font-[420] tracking-[-0.02em] tabular-nums md:text-6xl">
+                <p className="font-heading text-[44px] font-bold tabular-nums leading-none tracking-[-0.02em]">
                   {stat.prefix && (
-                    <span className="text-2xl text-white/60 md:text-3xl">
-                      {stat.prefix}
-                    </span>
+                    <span className="text-[24px] text-graphite">{stat.prefix}</span>
                   )}
                   {stat.value}
-                  <span className="text-[#B9B2FF]">{stat.suffix}</span>
+                  <span className="text-indigo">{stat.suffix}</span>
                 </p>
-                <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/55">
+                <p className="mx-auto mt-3 max-w-[30ch] text-[13px] leading-relaxed text-graphite">
                   {stat.label}
                 </p>
               </div>
             ))}
           </div>
-          <p className="mt-6 text-[11px] font-medium uppercase tracking-[0.16em] text-white/35">
+          <p className="mt-6 text-center text-[11px] font-medium uppercase tracking-[0.14em] text-graphite/70">
             Sources verified and linked at launch
           </p>
         </Reveal>
 
         <Reveal delay={160}>
-          <div className="mt-16 max-w-2xl">
-            <p className="text-[clamp(1.4rem,2.4vw,1.9rem)] font-[380] tracking-[-0.02em]">
+          <div className="mx-auto mt-14 max-w-2xl text-center">
+            <p className="font-heading text-[24px] font-bold tracking-[-0.01em]">
               You cannot fix what you cannot see.
             </p>
-            <p className="mt-4 text-[15px] leading-relaxed text-white/65">
+            <p className="mt-3 text-[14.5px] leading-relaxed text-graphite">
               The visibility review maps all of it out for you, surface by
               surface, so you know exactly where buyers find your business and
               where they find your competitors instead.
             </p>
-            <div className="mt-8">
+            <div className="mt-7 flex justify-center">
               <CtaLink href="/#visibility-review">Request a Visibility Review</CtaLink>
             </div>
           </div>
@@ -97,7 +98,7 @@ export default function ProblemSection() {
   );
 }
 
-function JourneyRow({
+function JourneyCard({
   label,
   note,
   stops,
@@ -110,30 +111,30 @@ function JourneyRow({
 }) {
   return (
     <div
-      className={`rounded-2xl border p-6 ${
-        muted ? "border-white/10 opacity-60" : "border-white/15 bg-white/[0.04]"
+      className={`rounded-3xl border border-line bg-surface p-7 ${
+        muted ? "opacity-70" : ""
       }`}
     >
-      <p className="text-sm font-medium text-white/80">{label}</p>
+      <p className="font-heading text-[15px] font-bold">{label}</p>
       <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-3">
         {stops.map((stop, i) => (
           <span key={stop} className="flex items-center gap-2">
             <span
-              className={`rounded-full border px-4 py-2 text-[13px] font-medium ${
+              className={`rounded-full px-4 py-2 text-[12.5px] font-medium ${
                 !muted && i === stops.length - 1
-                  ? "border-citron bg-citron text-ink"
-                  : "border-white/20 text-white/85"
+                  ? "bg-ink text-citron"
+                  : "border border-line bg-ivory text-ink/80"
               }`}
             >
               {stop}
             </span>
             {i < stops.length - 1 && (
-              <span aria-hidden className="h-px w-5 bg-white/25" />
+              <span aria-hidden className="h-px w-4 bg-line" />
             )}
           </span>
         ))}
       </div>
-      <p className="mt-4 text-[13px] text-white/45">{note}</p>
+      <p className="mt-4 text-[12.5px] text-graphite">{note}</p>
     </div>
   );
 }

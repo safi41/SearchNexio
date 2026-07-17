@@ -1,25 +1,22 @@
 import Reveal from "@/components/motion/Reveal";
-import { Eyebrow } from "@/components/ui";
+import { SectionHead } from "@/components/ui";
 import { INDUSTRIES } from "@/lib/content";
 
-/* Slim lilac band. Doc rule: one sentence per industry maximum, shown on
+/* Centered pill row. Doc rule: one sentence per industry maximum, shown on
    hover here and in full on the /industries hub page. */
 export default function Industries() {
   return (
-    <section className="border-y border-line bg-lilac">
-      <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
+    <section className="py-16 md:py-20">
+      <div className="mx-auto max-w-5xl px-6">
         <Reveal>
-          <Eyebrow>Who We Serve</Eyebrow>
-          <h2 className="mt-4 text-[clamp(1.6rem,3vw,2.25rem)] font-[380] tracking-[-0.025em]">
-            Industries We Work With
-          </h2>
-          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-graphite">
-            We focus on businesses where trust decides the sale, and buyers
-            research everything before choosing.
-          </p>
+          <SectionHead
+            badge="Who We Serve"
+            title="Industries We Work With"
+            sub="We focus on businesses where trust decides the sale, and buyers research everything before choosing."
+          />
         </Reveal>
         <Reveal delay={80}>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
             {INDUSTRIES.map((industry) => (
               // client-review mode: pills keep their face and hover blurb
               // but no longer route to the industries hub
@@ -27,7 +24,7 @@ export default function Industries() {
                 key={industry.name}
                 aria-disabled="true"
                 title={industry.blurb}
-                className="inline-block cursor-default rounded-full border border-ink/20 bg-surface/60 px-5 py-2.5 text-sm font-medium text-ink transition-colors duration-200 hover:bg-ink hover:text-ivory"
+                className="inline-block cursor-default rounded-full border border-line bg-surface px-6 py-3 text-[14px] font-medium text-ink transition-colors duration-200 hover:bg-ink hover:text-citron"
               >
                 {industry.name}
               </span>
@@ -35,7 +32,7 @@ export default function Industries() {
           </div>
         </Reveal>
         <Reveal delay={140}>
-          <p className="mt-8 text-[14px] text-graphite">
+          <p className="mt-9 text-center text-[13.5px] text-graphite">
             Not sure if you fit? The visibility review will tell you honestly.
           </p>
         </Reveal>

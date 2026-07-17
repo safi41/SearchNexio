@@ -15,7 +15,7 @@ export default function AboutContent() {
           {METHOD_STEPS.map((step) => (
             <StaggerItem key={step.name}>
               <p className="text-xs font-semibold tracking-[0.2em] text-indigo">{step.index}</p>
-              <h2 className="mt-2 text-2xl font-[420] tracking-[-0.02em]">
+              <h2 className="mt-2 font-heading text-2xl font-bold tracking-[-0.01em]">
                 {step.name}
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-graphite">{step.body}</p>
@@ -49,7 +49,7 @@ export default function AboutContent() {
         <div className="grid gap-5 md:grid-cols-2">
           <Reveal>
             <div className="h-full rounded-2xl border border-dashed border-graphite/40 p-8">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-indigo">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-graphite">
                 Pending before launch
               </p>
               <p className="mt-3 text-sm text-graphite">
@@ -60,7 +60,7 @@ export default function AboutContent() {
           </Reveal>
           <Reveal delay={0.12}>
             <div className="h-full rounded-2xl border border-dashed border-graphite/40 p-8">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-indigo">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-graphite">
                 Pending before launch
               </p>
               <p className="mt-3 text-sm text-graphite">

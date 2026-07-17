@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
-/* Aurora Curtain system. Exact palette from the client brief; do not
-   approximate these values. Curtain-only hues (violet, sky) must never
-   appear outside the hero curtain and the final-CTA glow. */
+/* Sasico-style system in the client's exact brand palette. Do not
+   approximate these values. */
 @theme inline {
   --color-ivory: #f7f5ef;
   --color-surface: #ffffff;
@@ -15,34 +14,13 @@
   --color-lilac: #eceaff;
   --color-graphite: #5d6270;
   --color-warn: #c2410c;
-  --color-violet: #8f7bff;
-  --color-sky: #4cc9f0;
 
-  --font-sans: var(--font-inter-tight);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-jakarta);
 }
 
 @theme {
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
-
-  --animate-drift-a: drift-a 16s ease-in-out infinite alternate;
-  --animate-drift-b: drift-b 19s ease-in-out infinite alternate;
-  --animate-drift-c: drift-c 14s ease-in-out infinite alternate;
-
-  /* The curtain blobs are the page's only continuous animation. */
-  @keyframes drift-a {
-    from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(9%, 7%) scale(1.14); }
-  }
-
-  @keyframes drift-b {
-    from { transform: translate(0, 0) scale(1.08); }
-    to { transform: translate(-8%, 6%) scale(0.95); }
-  }
-
-  @keyframes drift-c {
-    from { transform: translate(0, 0); }
-    to { transform: translate(7%, -6%); }
-  }
 }
 
 html {
@@ -57,8 +35,8 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-indigo);
-  color: #ffffff;
+  background-color: var(--color-ink);
+  color: var(--color-citron);
 }
 
 :focus-visible {
@@ -66,11 +44,30 @@ body {
   outline-offset: 3px;
 }
 
+/* Faint square grid, the Sasico backdrop for heroes and section heads. */
+.grid-pattern {
+  background-image: linear-gradient(rgba(11, 13, 18, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 13, 18, 0.05) 1px, transparent 1px);
+  background-size: 68px 68px;
+}
+
+/* Soft citron radial washes that tint section corners. */
+.wash-citron {
+  background:
+    radial-gradient(60rem 26rem at 8% 0%, rgba(223, 255, 82, 0.35), transparent 60%),
+    radial-gradient(60rem 26rem at 92% 0%, rgba(223, 255, 82, 0.35), transparent 60%);
+}
+.wash-citron-full {
+  background: linear-gradient(
+    180deg,
+    rgba(223, 255, 82, 0.32) 0%,
+    rgba(223, 255, 82, 0.1) 55%,
+    transparent 100%
+  );
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .curtain-blob {
-    animation: none !important;
   }
 }

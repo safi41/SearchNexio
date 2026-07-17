@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
-import { Inter_Tight } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import SiteNav from "@/components/SiteNav";
 import Footer from "@/components/Footer";
 
-/* One family sitewide; hierarchy comes from size and tracking, never bold
-   display type. Variable axis gives us the 340/380 display weights. */
-const interTight = Inter_Tight({
+/* The Sasico pairing: Plus Jakarta Sans carries every heading at 700,
+   Inter carries body and UI. */
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-inter-tight",
+  variable: "--font-inter",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +36,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${interTight.variable} font-sans`}>
+      <body className={`${inter.variable} ${jakarta.variable} font-sans`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

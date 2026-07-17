@@ -20,7 +20,7 @@ export default function ContactForm() {
         <Reveal>
           {sent ? (
             <div className="rounded-2xl border border-line bg-surface p-10">
-              <p className="text-2xl font-[420] tracking-[-0.02em]">
+              <p className="font-heading text-2xl font-bold tracking-[-0.01em]">
                 Request received.
               </p>
               <p className="mt-3 text-graphite">
