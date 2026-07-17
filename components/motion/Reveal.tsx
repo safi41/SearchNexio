@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/* Entrance transitions: a 550ms fade + rise, scale-in, or slide-in from
-   either side, fired once when the element enters the viewport. Children
-   carrying the `reveal-item` class (see globals.css) stagger in after the
-   wrapper via their own transition-delay. Reduced-motion users get the
-   final state immediately. */
+/* Entrance transitions: a 700ms fade + rise, scale-in, or slide-in from
+   either side. Plays every time the element enters the viewport — scrolling
+   back up replays the transition. Children carrying the `reveal-item` class
+   (see globals.css) stagger in after the wrapper via their own
+   transition-delay. Reduced-motion users get the final state immediately. */
 export default function Reveal({
   children,
   delay = 0,
@@ -16,7 +16,7 @@ export default function Reveal({
 }: {
   children: React.ReactNode;
   delay?: number;
-  /** transition duration in ms; defaults to the 550ms house speed */
+  /** transition duration in ms; defaults to the 700ms house speed */
   duration?: number;
   className?: string;
   variant?: "up" | "scale" | "left" | "right";
@@ -31,20 +31,11 @@ export default function Reveal({
       setShown(true);
       return;
     }
-    /* already on screen at mount (first paint, anchor jump, resize-to-tall
-       viewports): reveal on the next frame so the transition still plays */
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.95) {
-      const raf = requestAnimationFrame(() => setShown(true));
-      return () => cancelAnimationFrame(raf);
-    }
+    /* no `once`: the state follows visibility, so the transition replays
+       on every scroll back into view */
     const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setShown(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "0px 0px -10% 0px" }
+      (entries) => setShown(entries[0].isIntersecting),
+      { rootMargin: "0px 0px -8% 0px" }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -63,7 +54,7 @@ export default function Reveal({
     <div
       ref={ref}
       data-reveal={shown ? "shown" : "hidden"}
-      className={`transition-all duration-550 ease-soft ${
+      className={`transition-all duration-700 ease-soft ${
         shown ? "translate-x-0 translate-y-0 scale-100 opacity-100" : hidden
       } ${className}`}
       style={
