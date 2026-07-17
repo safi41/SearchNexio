@@ -8,8 +8,12 @@ const ICONS = [MapIcon, WrenchIcon, RocketIcon, ChartIcon];
 /* Sasico's "Easy Steps" band: citron wash, centered head, step cards. */
 export default function FullSurfaceMethod() {
   return (
-    <section className="wash-lilac-full py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="relative wash-lilac-full py-16 md:py-24">
+      <div
+        aria-hidden
+        className="grid-pattern absolute left-1/2 top-8 h-64 w-[520px] -translate-x-1/2 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_40%,#000_30%,transparent_75%)]"
+      />
+      <div className="relative mx-auto max-w-6xl px-6">
         <Reveal>
           <SectionHead
             badge="Our Methodology"

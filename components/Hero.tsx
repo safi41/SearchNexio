@@ -21,6 +21,51 @@ const SURFACE_BARS = [
 
 const SIDEBAR = ["Overview", "Surfaces", "Rankings", "AI Citations", "Reports", "Settings"];
 
+/* Sasico's ambient garnish: tiny ink dots, thin arcs, and indigo plus marks
+   scattered at the hero edges. Decoration only, hidden on small screens. */
+function HeroDecor() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
+      <span className="absolute left-[7%] top-[24%] size-1.5 rounded-full bg-ink/40" />
+      <span className="absolute left-[13%] top-[48%] size-1 rounded-full bg-ink/25" />
+      <span className="absolute left-[18%] top-[16%] size-1 rounded-full bg-indigo/40" />
+      <span className="absolute right-[9%] top-[27%] size-1.5 rounded-full bg-ink/40" />
+      <span className="absolute right-[15%] top-[50%] size-1 rounded-full bg-ink/25" />
+      <span className="absolute right-[19%] top-[14%] size-1 rounded-full bg-indigo/40" />
+      <span className="absolute left-[21%] top-[36%] font-heading text-[17px] font-light text-indigo/50">+</span>
+      <span className="absolute right-[22%] top-[40%] font-heading text-[13px] font-light text-indigo/40">+</span>
+      <span className="absolute -left-28 top-[10%] size-72 rounded-full border border-ink/5" />
+      <span className="absolute -right-32 top-[26%] size-80 rounded-full border border-indigo/10" />
+    </div>
+  );
+}
+
+/* Floating proof chips that overlap the dashboard frame, Sasico-style. */
+function FloatChips() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 hidden md:block">
+      <div className="absolute -top-5 right-6 flex rotate-2 items-center gap-2 rounded-full border border-line bg-surface py-2 pl-2.5 pr-4 shadow-[0_10px_30px_rgba(11,13,18,0.14)]">
+        <span className="grid size-6 place-items-center rounded-full bg-lilac text-indigo">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+            <path
+              d="M6 10V2m0 0L2.5 5.5M6 2l3.5 3.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+        <span className="text-[12px] font-semibold text-ink">+64% organic leads</span>
+      </div>
+      <div className="absolute -left-4 bottom-10 flex -rotate-2 items-center gap-2 rounded-full border border-line bg-surface py-2 pl-3 pr-4 shadow-[0_10px_30px_rgba(11,13,18,0.14)]">
+        <span className="size-2 rounded-full bg-warn" />
+        <span className="text-[12px] font-semibold text-ink">2 AI surfaces need attention</span>
+      </div>
+    </div>
+  );
+}
+
 function Dashboard() {
   return (
     <div className="rounded-3xl border border-line bg-surface p-2 shadow-[0_30px_80px_rgba(11,13,18,0.12)]">
@@ -157,6 +202,8 @@ export default function Hero() {
         className="grid-pattern absolute left-1/2 top-16 h-[440px] w-[680px] -translate-x-1/2 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_40%,#000_35%,transparent_75%)]"
       />
 
+      <HeroDecor />
+
       <div className="relative mx-auto max-w-5xl px-6 pt-10 text-center">
         <Badge>Search Visibility Agency</Badge>
         <h1 className="mx-auto mt-6 max-w-4xl font-heading text-[clamp(2.8rem,6.4vw,5.1rem)] font-bold leading-[1.06] tracking-[-0.025em]">
@@ -181,7 +228,10 @@ export default function Hero() {
       </div>
 
       <div className="relative mx-auto mt-14 max-w-6xl px-6 pb-6">
-        <Dashboard />
+        <div className="relative">
+          <Dashboard />
+          <FloatChips />
+        </div>
       </div>
     </section>
   );

@@ -13,7 +13,7 @@ const LINKS = [
    pill CTAs right. Solid ivory backdrop keeps it legible on every route. */
 export default function SiteNav() {
   return (
-    <header className="fixed inset-x-0 top-0 z-40 bg-ivory/85 backdrop-blur-md">
+    <header id="top" className="fixed inset-x-0 top-0 z-40 bg-ivory/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3.5">
         <Link
           href="/"

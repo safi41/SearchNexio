@@ -67,6 +67,26 @@ export default function Footer() {
           <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-graphite/70">
             Business address and privacy policy live before launch
           </p>
+          <a
+            href="#top"
+            className="group inline-flex items-center gap-2 rounded-full border border-line bg-surface py-1.5 pl-4 pr-1.5 text-[12.5px] font-semibold text-ink transition-colors duration-200 hover:border-ink/30"
+          >
+            Back to top
+            <span
+              aria-hidden
+              className="grid size-5.5 place-items-center rounded-full bg-ink text-white transition-transform duration-200 group-hover:-translate-y-0.5"
+            >
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                <path
+                  d="M6 10V2m0 0L2.5 5.5M6 2l3.5 3.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
         </div>
       </div>
     </footer>
