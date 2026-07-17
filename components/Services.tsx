@@ -8,7 +8,7 @@ const ICONS = [SearchIcon, PinIcon, BotIcon, ShieldIcon];
 /* Sasico feature-card grid: white rounded cards with citron icon tiles. */
 export default function Services() {
   return (
-    <section className="py-16 md:py-20">
+    <section className="overflow-x-clip py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <SectionHead
@@ -19,7 +19,11 @@ export default function Services() {
         </Reveal>
         <div className="mt-12 grid gap-5 md:grid-cols-2">
           {SERVICES.map((service, i) => (
-            <Reveal key={service.slug} delay={i * 70} variant="scale" className="h-full">
+            <Reveal
+              key={service.slug}
+              variant={i % 2 === 0 ? "left" : "right"}
+              className="h-full"
+            >
               <ServiceTile service={service} iconIndex={i} />
             </Reveal>
           ))}
@@ -49,16 +53,18 @@ export function ServiceTile({
   const Icon = ICONS[iconIndex % ICONS.length];
   return (
     <article className="group h-full rounded-3xl border border-line bg-surface p-8 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]">
-      <IconTile>
-        <Icon />
-      </IconTile>
-      <h3 className="mt-6 font-heading text-[20px] font-bold tracking-[-0.01em]">
+      <div className="reveal-item [transition-delay:120ms]">
+        <IconTile>
+          <Icon />
+        </IconTile>
+      </div>
+      <h3 className="reveal-item mt-6 font-heading text-[20px] font-bold tracking-[-0.01em] [transition-delay:190ms]">
         {service.title}
       </h3>
-      <p className="mt-2.5 text-[13.5px] leading-relaxed text-graphite">
+      <p className="reveal-item mt-2.5 text-[13.5px] leading-relaxed text-graphite [transition-delay:260ms]">
         The pain point it solves: {service.pain}
       </p>
-      <ul className="mt-5 grid gap-3">
+      <ul className="reveal-item mt-5 grid gap-3 [transition-delay:330ms]">
         {service.items.map((item) => (
           <li key={item.lead} className="flex gap-2.5 text-[13.5px] leading-relaxed text-graphite">
             <svg

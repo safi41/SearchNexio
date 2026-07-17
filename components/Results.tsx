@@ -25,7 +25,7 @@ function Metric({ value }: { value: string }) {
 
 export default function Results() {
   return (
-    <section id="results" className="py-16 md:py-20">
+    <section id="results" className="overflow-x-clip py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <SectionHead
@@ -36,7 +36,11 @@ export default function Results() {
         </Reveal>
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {TILES.map((study, i) => (
-            <Reveal key={study.client} delay={i * 70} variant="scale" className="h-full">
+            <Reveal
+              key={study.client}
+              variant={(["left", "scale", "right"] as const)[i]}
+              className="h-full"
+            >
               <ResultTile study={study} />
             </Reveal>
           ))}
@@ -64,15 +68,19 @@ export function ResultTile({ study }: { study: CaseStudy }) {
       href="/case-studies"
       className="group flex h-full flex-col gap-4 rounded-3xl border border-line bg-surface p-7 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]"
     >
-      <Badge>{study.industry}</Badge>
-      <Metric value={study.metric} />
-      <p className="font-heading text-[17px] font-bold leading-snug tracking-[-0.01em]">
+      <span className="reveal-item self-start [transition-delay:100ms]">
+        <Badge>{study.industry}</Badge>
+      </span>
+      <span className="reveal-item self-start [transition-delay:170ms]">
+        <Metric value={study.metric} />
+      </span>
+      <p className="reveal-item font-heading text-[17px] font-bold leading-snug tracking-[-0.01em] [transition-delay:240ms]">
         {study.summary.split(".")[0]}.
       </p>
-      <p className="text-[13.5px] leading-relaxed text-graphite">
+      <p className="reveal-item text-[13.5px] leading-relaxed text-graphite [transition-delay:310ms]">
         {study.summary.split(".").slice(1).join(".").trim()}
       </p>
-      <span className="mt-auto inline-flex items-center gap-2 pt-2 text-[13.5px] font-semibold text-ink">
+      <span className="reveal-item mt-auto inline-flex items-center gap-2 pt-2 text-[13.5px] font-semibold text-ink [transition-delay:380ms]">
         Read the case study
         <span
           aria-hidden

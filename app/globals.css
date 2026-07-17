@@ -46,6 +46,21 @@
   animation-play-state: paused;
 }
 
+/* Text stagger inside a Reveal wrapper: children tagged .reveal-item start
+   hidden while the wrapper is [data-reveal="hidden"], then transition in
+   on their own transition-delay once the wrapper flips to "shown". */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-item {
+    transition:
+      opacity 0.5s var(--ease-soft),
+      transform 0.5s var(--ease-soft);
+  }
+  [data-reveal="hidden"] .reveal-item {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }

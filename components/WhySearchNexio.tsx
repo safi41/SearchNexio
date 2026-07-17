@@ -6,7 +6,7 @@ import { WHY } from "@/lib/content";
    the sourced quote lands (permission outreach). */
 export default function WhySearchNexio() {
   return (
-    <section className="wash-lilac-full py-16 md:py-24">
+    <section className="overflow-x-clip wash-lilac-full py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <SectionHead
@@ -18,12 +18,16 @@ export default function WhySearchNexio() {
 
         <div className="mt-12 grid gap-5 md:grid-cols-2">
           {WHY.map((item, i) => (
-            <Reveal key={item.title} delay={i * 60} variant="scale">
+            <Reveal
+              key={item.title}
+              variant={i % 2 === 0 ? "left" : "right"}
+              className="h-full"
+            >
               <div className="h-full rounded-3xl border border-line bg-surface p-8 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]">
-                <h3 className="font-heading text-[18px] font-bold tracking-[-0.01em]">
+                <h3 className="reveal-item font-heading text-[18px] font-bold tracking-[-0.01em] [transition-delay:140ms]">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-[14px] leading-relaxed text-graphite">
+                <p className="reveal-item mt-3 text-[14px] leading-relaxed text-graphite [transition-delay:220ms]">
                   {item.body}
                 </p>
               </div>
