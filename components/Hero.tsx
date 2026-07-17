@@ -1,3 +1,4 @@
+import Reveal from "@/components/motion/Reveal";
 import { Badge, CtaLink } from "@/components/ui";
 import { SURFACES } from "@/lib/content";
 
@@ -294,33 +295,43 @@ export default function Hero() {
       <HeroDecor />
 
       <div className="relative mx-auto max-w-5xl px-6 pt-10 text-center">
-        <Badge>Search Visibility Agency</Badge>
-        <h1 className="mx-auto mt-6 max-w-4xl font-heading text-[clamp(2.8rem,6.4vw,5.1rem)] font-bold leading-[1.06] tracking-[-0.025em]">
-          Get Found Everywhere Buyers Search
-        </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-[16.5px] leading-relaxed text-graphite">
-          Your buyers now decide on {SURFACES.slice(0, 3).join(", ")}, and{" "}
-          {SURFACES[3]} before they ever click. We make sure you show up in
-          every one of those moments, then turn that visibility into leads and
-          revenue.
-        </p>
+        <Reveal>
+          <Badge>Search Visibility Agency</Badge>
+        </Reveal>
+        <Reveal delay={90}>
+          <h1 className="mx-auto mt-6 max-w-4xl font-heading text-[clamp(2.8rem,6.4vw,5.1rem)] font-bold leading-[1.06] tracking-[-0.025em]">
+            Get Found Everywhere Buyers Search
+          </h1>
+        </Reveal>
+        <Reveal delay={180}>
+          <p className="mx-auto mt-6 max-w-2xl text-[16.5px] leading-relaxed text-graphite">
+            Your buyers now decide on {SURFACES.slice(0, 3).join(", ")}, and{" "}
+            {SURFACES[3]} before they ever click. We make sure you show up in
+            every one of those moments, then turn that visibility into leads
+            and revenue.
+          </p>
+        </Reveal>
 
-        <div className="mx-auto mt-9 flex flex-wrap items-center justify-center gap-4">
-          <CtaLink href="/#visibility-review">Request a Visibility Review</CtaLink>
-          <CtaLink href="/case-studies" variant="ghost" disabled>
-            View case studies
-          </CtaLink>
-        </div>
-        <p className="mt-6 text-[13px] text-graphite">
-          Built for healthcare, finance, SaaS, and multi-location businesses.
-        </p>
+        <Reveal delay={260}>
+          <div className="mx-auto mt-9 flex flex-wrap items-center justify-center gap-4">
+            <CtaLink href="/#visibility-review">Request a Visibility Review</CtaLink>
+            <CtaLink href="/case-studies" variant="ghost" disabled>
+              View case studies
+            </CtaLink>
+          </div>
+          <p className="mt-6 text-[13px] text-graphite">
+            Built for healthcare, finance, SaaS, and multi-location businesses.
+          </p>
+        </Reveal>
       </div>
 
       <div className="relative mx-auto mt-14 max-w-6xl px-6 pb-6">
-        <div className="relative">
-          <Dashboard />
-          <FloatChips />
-        </div>
+        <Reveal delay={340} variant="scale">
+          <div className="relative">
+            <Dashboard />
+            <FloatChips />
+          </div>
+        </Reveal>
       </div>
     </section>
   );

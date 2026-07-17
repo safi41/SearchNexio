@@ -18,8 +18,8 @@ export default function WhySearchNexio() {
 
         <div className="mt-12 grid gap-5 md:grid-cols-2">
           {WHY.map((item, i) => (
-            <Reveal key={item.title} delay={i * 60}>
-              <div className="h-full rounded-3xl border border-line bg-surface p-8">
+            <Reveal key={item.title} delay={i * 60} variant="scale">
+              <div className="h-full rounded-3xl border border-line bg-surface p-8 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]">
                 <h3 className="font-heading text-[18px] font-bold tracking-[-0.01em]">
                   {item.title}
                 </h3>

@@ -36,7 +36,7 @@ export default function Results() {
         </Reveal>
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {TILES.map((study, i) => (
-            <Reveal key={study.client} delay={i * 70} className="h-full">
+            <Reveal key={study.client} delay={i * 70} variant="scale" className="h-full">
               <ResultTile study={study} />
             </Reveal>
           ))}
@@ -62,7 +62,7 @@ export function ResultTile({ study }: { study: CaseStudy }) {
   return (
     <Link
       href="/case-studies"
-      className="group flex h-full flex-col gap-4 rounded-3xl border border-line bg-surface p-7 transition-shadow duration-200 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]"
+      className="group flex h-full flex-col gap-4 rounded-3xl border border-line bg-surface p-7 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]"
     >
       <Badge>{study.industry}</Badge>
       <Metric value={study.metric} />

@@ -19,7 +19,7 @@ export default function Services() {
         </Reveal>
         <div className="mt-12 grid gap-5 md:grid-cols-2">
           {SERVICES.map((service, i) => (
-            <Reveal key={service.slug} delay={i * 70} className="h-full">
+            <Reveal key={service.slug} delay={i * 70} variant="scale" className="h-full">
               <ServiceTile service={service} iconIndex={i} />
             </Reveal>
           ))}
@@ -48,7 +48,7 @@ export function ServiceTile({
 }) {
   const Icon = ICONS[iconIndex % ICONS.length];
   return (
-    <article className="h-full rounded-3xl border border-line bg-surface p-8 transition-shadow duration-200 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]">
+    <article className="group h-full rounded-3xl border border-line bg-surface p-8 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]">
       <IconTile>
         <Icon />
       </IconTile>

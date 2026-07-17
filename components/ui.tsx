@@ -121,7 +121,7 @@ export function SectionHead({
 /* Icon tile: the rounded lilac square behind feature glyphs. */
 export function IconTile({ children }: { children: ReactNode }) {
   return (
-    <span className="grid size-13 place-items-center rounded-2xl bg-gradient-to-b from-lilac to-lilac/40 text-indigo">
+    <span className="grid size-13 place-items-center rounded-2xl bg-gradient-to-b from-lilac to-lilac/40 text-indigo transition-transform duration-300 ease-soft group-hover:scale-110">
       {children}
     </span>
   );

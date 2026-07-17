@@ -25,8 +25,8 @@ export default function FullSurfaceMethod() {
           {METHOD_STEPS.map((step, i) => {
             const Icon = ICONS[i];
             return (
-              <Reveal key={step.name} delay={i * 70}>
-                <article className="h-full rounded-3xl border border-line bg-surface p-7 text-center">
+              <Reveal key={step.name} delay={i * 70} variant="scale">
+                <article className="group h-full rounded-3xl border border-line bg-surface p-7 text-center transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]">
                   <div className="flex justify-center">
                     <IconTile>
                       <Icon />
