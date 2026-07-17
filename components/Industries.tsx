@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { MaskedHeading, Reveal, Stagger, StaggerItem } from "@/components/motion/primitives";
 import { Eyebrow } from "@/components/ui";
 import { INDUSTRIES } from "@/lib/content";
@@ -27,14 +26,15 @@ export default function Industries() {
         <Stagger className="mt-10 flex flex-wrap gap-3">
           {INDUSTRIES.map((industry) => (
             <StaggerItem key={industry.name}>
-              <Link
-                href="/industries"
+              {/* client-review mode: pills keep their face and hover blurb
+                  but no longer route to the industries hub */}
+              <span
+                aria-disabled="true"
                 title={industry.blurb}
-                className="group relative inline-block overflow-hidden border border-teal px-5 py-3 text-sm font-medium text-teal transition-colors duration-500 hover:text-paper"
+                className="inline-block cursor-default border border-teal px-5 py-3 text-sm font-medium text-teal"
               >
-                <span className="absolute inset-0 origin-bottom scale-y-0 bg-teal transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-y-100" />
-                <span className="relative">{industry.name}</span>
-              </Link>
+                {industry.name}
+              </span>
             </StaggerItem>
           ))}
         </Stagger>

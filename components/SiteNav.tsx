@@ -45,28 +45,25 @@ export default function SiteNav() {
         <Link href="/" className="font-display text-xl tracking-tight">
           SearchNexio<span className="text-copper">.</span>
         </Link>
+        {/* nav routing is disabled for the client-review build: the inner
+            pages aren't ready, so links render inert (no hrefs, no routing) */}
         <nav className="hidden items-center gap-8 md:flex">
           {LINKS.map((link) => (
-            <Link
+            <span
               key={link.href}
-              href={link.href}
-              className="group relative text-sm font-medium text-ink/70 transition-colors duration-300 hover:text-ink"
+              aria-disabled="true"
+              className="cursor-default text-sm font-medium text-ink/70"
             >
               {link.label}
-              <span
-                aria-hidden
-                className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-copper transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:origin-left group-hover:scale-x-100"
-              />
-            </Link>
+            </span>
           ))}
         </nav>
-        <Link
-          href="/#visibility-review"
-          className="group relative overflow-hidden border border-teal px-4 py-2 text-xs font-medium uppercase tracking-[0.15em] text-teal transition-colors duration-500 hover:text-paper"
+        <span
+          aria-disabled="true"
+          className="cursor-default border border-teal px-4 py-2 text-xs font-medium uppercase tracking-[0.15em] text-teal"
         >
-          <span className="absolute inset-0 origin-bottom scale-y-0 bg-teal transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-y-100" />
-          <span className="relative">Visibility Review</span>
-        </Link>
+          Visibility Review
+        </span>
       </div>
     </header>
   );

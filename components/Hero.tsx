@@ -196,7 +196,7 @@ export default function Hero() {
             <Magnetic>
               <CtaLink href="/#visibility-review">Request a Visibility Review</CtaLink>
             </Magnetic>
-            <CtaLink href="/case-studies" variant="ghost">
+            <CtaLink href="/case-studies" variant="ghost" disabled>
               View Case Studies
             </CtaLink>
           </div>

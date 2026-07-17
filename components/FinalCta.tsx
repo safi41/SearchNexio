@@ -111,9 +111,9 @@ export default function FinalCta() {
           <Reveal delay={0.4}>
             <div className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-4">
               <Magnetic>
-                <CtaLink href="/contact">Request a Visibility Review</CtaLink>
+                <CtaLink href="/contact" disabled>Request a Visibility Review</CtaLink>
               </Magnetic>
-              <CtaLink href="/contact" variant="ghost" tone="dark">
+              <CtaLink href="/contact" variant="ghost" tone="dark" disabled>
                 Book a Call
               </CtaLink>
             </div>

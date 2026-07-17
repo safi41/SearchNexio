@@ -19,15 +19,16 @@ export default function Footer() {
             Wherever buyers search, be found.
           </p>
         </div>
+        {/* client-review mode: footer nav renders inert, no routing */}
         <nav className="flex flex-wrap gap-x-8 gap-y-3">
           {LINKS.map((link) => (
-            <Link
+            <span
               key={link.href}
-              href={link.href}
-              className="text-sm text-paper/60 transition-colors duration-300 hover:text-paper"
+              aria-disabled="true"
+              className="cursor-default text-sm text-paper/60"
             >
               {link.label}
-            </Link>
+            </span>
           ))}
         </nav>
         <div className="w-full border-t border-paper/10 pt-6">

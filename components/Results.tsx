@@ -214,7 +214,7 @@ export default function Results() {
             expected.
           </p>
           <div className="mt-3">
-            <CtaLink href="/case-studies" variant="ghost">
+            <CtaLink href="/case-studies" variant="ghost" disabled>
               View all case studies
             </CtaLink>
           </div>
@@ -242,9 +242,9 @@ export default function Results() {
 }
 
 function ResultCard({ study }: { study: CaseStudy }) {
+  /* client-review mode: the card face is kept but it no longer routes */
   return (
-    <Link
-      href="/case-studies"
+    <div
       data-results-card
       className="group flex w-[82vw] shrink-0 snap-start flex-col gap-3 border border-paper/15 bg-paper/3 p-7 transition-colors duration-500 hover:border-sage/50 md:h-[64vh] md:w-[52vw] md:gap-4 md:p-10"
     >
@@ -272,7 +272,7 @@ function ResultCard({ study }: { study: CaseStudy }) {
           &rarr;
         </span>
       </span>
-    </Link>
+    </div>
   );
 }
 

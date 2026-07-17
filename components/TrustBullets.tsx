@@ -175,7 +175,7 @@ export default function TrustBullets() {
               What we&apos;re built on
             </h2>
             <div className="mt-8">
-              <CtaLink href="/about" variant="ghost" tone="dark">
+              <CtaLink href="/about" variant="ghost" tone="dark" disabled>
                 How we work
               </CtaLink>
             </div>
