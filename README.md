@@ -1,9 +1,9 @@
 # SearchNexio Site
 
 Next.js (App Router) + Tailwind CSS v4 implementation of the FINAL v3 copy
-doc in the client-approved **Aurora Curtain** design system (Stripe-family
-enterprise). The governing design spec is
-`docs/superpowers/specs/2026-07-17-aurora-curtain-redesign-design.md`;
+doc in the **Sasico-style** system (client reference: sasico-saas.vercel.app)
+rendered in the exact brand palette. The prior Aurora Curtain build lives on
+branch `redesign/aurora-curtain`;
 `DESIGN.md` documents the retired teal/copper system and is kept for history.
 
 ## Run it
