@@ -1,32 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { gsap, useGSAP, MOTION_OK } from "@/components/motion/gsap";
+import { useEffect, useState } from "react";
 
 const LINKS = [
-  { href: "/case-studies", label: "Case Studies" },
   { href: "/services", label: "Services" },
+  { href: "/case-studies", label: "Case Studies" },
   { href: "/industries", label: "Industries" },
   { href: "/about", label: "About" },
 ];
 
+/* Transparent glass chrome while the curtain is behind it; solid surface
+   with a hairline once the page scrolls past the hero gradient. */
 export default function SiteNav() {
-  const ref = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-      mm.add(MOTION_OK, () => {
-        gsap.from(ref.current, { y: -60, autoAlpha: 0, duration: 0.8, ease: "power4.out" });
-      });
-    },
-    { scope: ref }
-  );
-
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 440);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
@@ -34,25 +24,31 @@ export default function SiteNav() {
 
   return (
     <header
-      ref={ref}
-      className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
+      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
         scrolled
-          ? "border-b border-line bg-paper/85 backdrop-blur-md"
+          ? "border-b border-line bg-surface/90 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="font-display text-xl tracking-tight">
-          SearchNexio<span className="text-copper">.</span>
+        <Link
+          href="/"
+          className={`text-lg font-semibold tracking-[-0.02em] ${
+            scrolled ? "text-ink" : "text-white"
+          }`}
+        >
+          SearchNexio<span className="text-citron">.</span>
         </Link>
         {/* nav routing is disabled for the client-review build: the inner
             pages aren't ready, so links render inert (no hrefs, no routing) */}
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-7 md:flex">
           {LINKS.map((link) => (
             <span
               key={link.href}
               aria-disabled="true"
-              className="cursor-default text-sm font-medium text-ink/70"
+              className={`cursor-default text-sm font-medium transition-colors duration-300 ${
+                scrolled ? "text-ink/70" : "text-white/90"
+              }`}
             >
               {link.label}
             </span>
@@ -60,9 +56,13 @@ export default function SiteNav() {
         </nav>
         <span
           aria-disabled="true"
-          className="cursor-default border border-teal px-4 py-2 text-xs font-medium uppercase tracking-[0.15em] text-teal"
+          className={`cursor-default rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300 ${
+            scrolled
+              ? "bg-citron text-ink"
+              : "border border-white/35 bg-white/15 text-white backdrop-blur-sm"
+          }`}
         >
-          Visibility Review
+          Request a review
         </span>
       </div>
     </header>
