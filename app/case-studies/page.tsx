@@ -21,13 +21,13 @@ export default function CaseStudiesPage() {
       <CaseStudyGrid />
       <section className="mx-auto max-w-6xl px-6 py-20 md:py-24">
         <Reveal>
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/45">
+          <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-graphite">
             Numbers publish only as figures each client would confirm if called
           </p>
         </Reveal>
         <Reveal delay={0.15}>
           <div className="mt-10 border-t border-line pt-10">
-            <p className="max-w-xl font-display text-2xl italic leading-snug text-ink/85">
+            <p className="max-w-xl text-xl leading-snug text-ink">
               Want to know what these numbers would look like for your business?
             </p>
             <div className="mt-6">

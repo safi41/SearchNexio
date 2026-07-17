@@ -12,10 +12,10 @@ export default function IndustryList() {
           key={industry.name}
           className="group grid gap-2 border-t border-line py-10 last:border-b md:grid-cols-[2fr_3fr] md:items-baseline md:gap-10"
         >
-          <h2 className="font-display text-2xl font-medium tracking-tight transition-colors duration-500 group-hover:text-teal md:text-3xl">
+          <h2 className="text-2xl font-[420] tracking-[-0.02em] transition-colors duration-200 group-hover:text-indigo md:text-3xl">
             {industry.name}
           </h2>
-          <p className="leading-relaxed text-ink/65">{industry.blurb}</p>
+          <p className="leading-relaxed text-graphite">{industry.blurb}</p>
         </StaggerItem>
       ))}
     </Stagger>

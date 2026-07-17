@@ -14,16 +14,16 @@ export default function AboutContent() {
         <Stagger className="mt-10 grid gap-8 md:grid-cols-4">
           {METHOD_STEPS.map((step) => (
             <StaggerItem key={step.name}>
-              <p className="font-mono text-xs tracking-[0.25em] text-copper">{step.index}</p>
-              <h2 className="mt-2 font-display text-2xl font-medium tracking-tight">
+              <p className="text-xs font-semibold tracking-[0.2em] text-indigo">{step.index}</p>
+              <h2 className="mt-2 text-2xl font-[420] tracking-[-0.02em]">
                 {step.name}
               </h2>
-              <p className="mt-3 text-sm leading-relaxed text-ink/65">{step.body}</p>
+              <p className="mt-3 text-sm leading-relaxed text-graphite">{step.body}</p>
             </StaggerItem>
           ))}
         </Stagger>
         <Reveal delay={0.3}>
-          <p className="mt-10 max-w-xl border-l-2 border-copper pl-5 font-display italic text-ink/85">
+          <p className="mt-10 max-w-xl rounded-2xl border border-line bg-lilac/60 p-5 text-ink">
             No long-term lock-in contracts. We keep our clients by delivering
             results, not through legal commitments.
           </p>
@@ -38,7 +38,7 @@ export default function AboutContent() {
           {WHY.map((item) => (
             <StaggerItem key={item.title}>
               <h2 className="text-base font-semibold">{item.title}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-ink/65">{item.body}</p>
+              <p className="mt-3 text-sm leading-relaxed text-graphite">{item.body}</p>
             </StaggerItem>
           ))}
         </Stagger>
@@ -48,22 +48,22 @@ export default function AboutContent() {
       <section className="border-t border-line py-16">
         <div className="grid gap-5 md:grid-cols-2">
           <Reveal>
-            <div className="h-full border border-dashed border-copper/50 p-8">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-copper">
+            <div className="h-full rounded-2xl border border-dashed border-graphite/40 p-8">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-indigo">
                 Pending before launch
               </p>
-              <p className="mt-3 text-sm text-ink/60">
+              <p className="mt-3 text-sm text-graphite">
                 Founder credentials: who runs the work, their background, and
                 why they built an AI-native search practice.
               </p>
             </div>
           </Reveal>
           <Reveal delay={0.12}>
-            <div className="h-full border border-dashed border-copper/50 p-8">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-copper">
+            <div className="h-full rounded-2xl border border-dashed border-graphite/40 p-8">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-indigo">
                 Pending before launch
               </p>
-              <p className="mt-3 text-sm text-ink/60">
+              <p className="mt-3 text-sm text-graphite">
                 Business address and privacy policy, live and linked from every
                 page footer.
               </p>

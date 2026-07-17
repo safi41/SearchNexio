@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Reveal } from "@/components/motion/primitives";
-import { Magnetic } from "@/components/motion/interactive";
 
 const FIELDS = [
   { id: "name", label: "Your name", type: "text", autoComplete: "name" },
@@ -20,11 +19,11 @@ export default function ContactForm() {
       <div className="grid gap-16 md:grid-cols-[7fr_5fr]">
         <Reveal>
           {sent ? (
-            <div className="border border-line bg-surface p-10">
-              <p className="font-display text-2xl font-medium tracking-tight">
+            <div className="rounded-2xl border border-line bg-surface p-10">
+              <p className="text-2xl font-[420] tracking-[-0.02em]">
                 Request received.
               </p>
-              <p className="mt-3 text-ink/65">
+              <p className="mt-3 text-graphite">
                 Our senior team compiles each review by hand. Expect your
                 surface-by-surface map within a few business days.
               </p>
@@ -39,7 +38,7 @@ export default function ContactForm() {
             >
               {FIELDS.map((field) => (
                 <label key={field.id} className="grid gap-2">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/60">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-graphite">
                     {field.label}
                   </span>
                   <input
@@ -48,40 +47,31 @@ export default function ContactForm() {
                     type={field.type}
                     autoComplete={field.autoComplete}
                     required
-                    className="border border-line bg-surface px-4 py-3 text-ink outline-none transition-colors duration-300 focus:border-teal"
+                    className="rounded-[10px] border border-line bg-surface px-4 py-3 text-ink outline-none transition-colors duration-200 focus:border-indigo"
                   />
                 </label>
               ))}
-              <Magnetic className="mt-2 self-start">
-                <button
-                  type="submit"
-                  className="group relative inline-flex items-center gap-3 overflow-hidden bg-copper px-7 py-4 text-sm font-medium tracking-wide text-white"
-                >
-                  <span className="absolute inset-0 translate-y-full bg-copper-deep transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0" />
-                  <span className="relative">Request a Visibility Review</span>
-                  <span
-                    aria-hidden
-                    className="relative transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1"
-                  >
-                    &rarr;
-                  </span>
-                </button>
-              </Magnetic>
+              <button
+                type="submit"
+                className="mt-2 inline-flex items-center gap-2 self-start rounded-full bg-citron px-6 py-3.5 text-sm font-medium text-ink shadow-[0_2px_8px_rgba(11,13,18,0.14)] transition-colors duration-200 hover:bg-citron-deep"
+              >
+                Request a Visibility Review
+              </button>
             </form>
           )}
         </Reveal>
         <Reveal delay={0.15}>
           <div className="border-l border-line pl-8">
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-teal">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-indigo">
               What you get
             </p>
-            <p className="mt-4 leading-relaxed text-ink/70">
+            <p className="mt-4 leading-relaxed text-graphite">
               A surface-by-surface map showing exactly where you appear across
               Google, Maps, and AI search, where your direct competitors are
               winning instead, where your current footprint is leaking revenue,
               and what we would fix first.
             </p>
-            <p className="mt-4 leading-relaxed text-ink/70">
+            <p className="mt-4 leading-relaxed text-graphite">
               Whether you choose to work with SearchNexio or fix the issues
               yourself, you will finally know exactly where your business
               stands.

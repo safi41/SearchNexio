@@ -19,7 +19,7 @@ export default function PageHeader({
       </Reveal>
       <MaskedHeading
         as="h1"
-        className="mt-8 font-display text-5xl font-medium leading-[1.02] tracking-[-0.02em] md:text-7xl"
+        className="mt-6 text-5xl font-[360] leading-[1.05] tracking-[-0.03em] md:text-6xl"
         lines={lines}
       />
       {intro && (

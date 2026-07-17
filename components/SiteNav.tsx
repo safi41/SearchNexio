@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const LINKS = [
@@ -13,10 +14,14 @@ const LINKS = [
 /* Transparent glass chrome while the curtain is behind it; solid surface
    with a hairline once the page scrolls past the hero gradient. */
 export default function SiteNav() {
-  const [scrolled, setScrolled] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
+  const pathname = usePathname();
+  /* only the homepage has the curtain behind the nav; every other route
+     gets the solid chrome from the first pixel */
+  const scrolled = pathname !== "/" || pastHero;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 440);
+    const onScroll = () => setPastHero(window.scrollY > 440);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);

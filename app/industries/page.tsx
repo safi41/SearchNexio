@@ -22,7 +22,7 @@ export default function IndustriesPage() {
       <section className="mx-auto max-w-6xl px-6 py-20 md:py-24">
         <Reveal>
           <div className="border-t border-line pt-10">
-            <p className="max-w-xl font-display text-2xl italic leading-snug text-ink/85">
+            <p className="max-w-xl text-xl leading-snug text-ink">
               Not sure if you fit? The visibility review will tell you honestly.
             </p>
             <div className="mt-6">
