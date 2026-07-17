@@ -21,7 +21,7 @@ export default function Footer() {
             >
               <span aria-hidden className="flex items-center">
                 <span className="size-4.5 rounded-full bg-ink" />
-                <span className="-ml-1.5 size-4.5 rounded-full bg-citron mix-blend-multiply" />
+                <span className="-ml-1.5 size-4.5 rounded-full bg-indigo mix-blend-multiply" />
               </span>
               SearchNexio
             </Link>
@@ -56,7 +56,7 @@ export default function Footer() {
       {/* citron glow rising behind the bottom bar */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-40 [background:radial-gradient(50%_100%_at_50%_100%,rgba(223,255,82,0.5),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-40 [background:radial-gradient(50%_100%_at_50%_100%,rgba(99,91,255,0.28),transparent_70%)]"
       />
 
       <div className="relative border-t border-line">

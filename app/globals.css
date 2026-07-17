@@ -35,8 +35,8 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-ink);
-  color: var(--color-citron);
+  background-color: var(--color-indigo);
+  color: #ffffff;
 }
 
 :focus-visible {
@@ -51,17 +51,18 @@ body {
   background-size: 68px 68px;
 }
 
-/* Soft citron radial washes that tint section corners. */
-.wash-citron {
+/* Soft lilac radial washes that tint section corners (Lilac Mist is the
+   soft background per the brand spec; citron stays CTA-only). */
+.wash-lilac {
   background:
-    radial-gradient(60rem 26rem at 8% 0%, rgba(223, 255, 82, 0.35), transparent 60%),
-    radial-gradient(60rem 26rem at 92% 0%, rgba(223, 255, 82, 0.35), transparent 60%);
+    radial-gradient(60rem 26rem at 8% 0%, rgba(99, 91, 255, 0.13), transparent 60%),
+    radial-gradient(60rem 26rem at 92% 0%, rgba(236, 234, 255, 0.9), transparent 60%);
 }
-.wash-citron-full {
+.wash-lilac-full {
   background: linear-gradient(
     180deg,
-    rgba(223, 255, 82, 0.32) 0%,
-    rgba(223, 255, 82, 0.1) 55%,
+    rgba(236, 234, 255, 0.85) 0%,
+    rgba(236, 234, 255, 0.35) 55%,
     transparent 100%
   );
 }

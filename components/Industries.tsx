@@ -24,7 +24,7 @@ export default function Industries() {
                 key={industry.name}
                 aria-disabled="true"
                 title={industry.blurb}
-                className="inline-block cursor-default rounded-full border border-line bg-surface px-6 py-3 text-[14px] font-medium text-ink transition-colors duration-200 hover:bg-ink hover:text-citron"
+                className="inline-block cursor-default rounded-full border border-line bg-surface px-6 py-3 text-[14px] font-medium text-ink transition-colors duration-200 hover:bg-indigo hover:text-white"
               >
                 {industry.name}
               </span>

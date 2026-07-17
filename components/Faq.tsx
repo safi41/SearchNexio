@@ -56,7 +56,7 @@ function FaqRow({ q, lead, rest }: { q: string; lead: string; rest: string }) {
         <span
           aria-hidden
           className={`grid size-7 shrink-0 place-items-center rounded-full transition-all duration-200 ${
-            open ? "rotate-45 bg-ink text-citron" : "bg-citron text-ink"
+            open ? "rotate-45 bg-indigo text-white" : "bg-lilac text-indigo"
           }`}
         >
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">

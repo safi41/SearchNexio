@@ -21,7 +21,7 @@ export default function SiteNav() {
         >
           <span aria-hidden className="flex items-center">
             <span className="size-4.5 rounded-full bg-ink" />
-            <span className="-ml-1.5 size-4.5 rounded-full bg-citron mix-blend-multiply" />
+            <span className="-ml-1.5 size-4.5 rounded-full bg-indigo mix-blend-multiply" />
           </span>
           SearchNexio
         </Link>

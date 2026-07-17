@@ -76,7 +76,7 @@ export function ResultTile({ study }: { study: CaseStudy }) {
         Read the case study
         <span
           aria-hidden
-          className="grid size-5.5 place-items-center rounded-full bg-citron text-ink transition-transform duration-200 group-hover:translate-x-0.5"
+          className="grid size-5.5 place-items-center rounded-full bg-indigo text-white transition-transform duration-200 group-hover:translate-x-0.5"
         >
           <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
             <path

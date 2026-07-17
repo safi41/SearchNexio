@@ -15,7 +15,7 @@ const NEW_JOURNEY = ["Google", "Maps", "AI Overviews", "ChatGPT", "Decision"];
    comparison as pill-chip cards, and the stats as big bold numbers. */
 export default function ProblemSection() {
   return (
-    <section className="wash-citron-full py-16 md:py-24">
+    <section className="wash-lilac-full py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <SectionHead
@@ -124,7 +124,7 @@ function JourneyCard({
             <span
               className={`rounded-full px-4 py-2 text-[12.5px] font-medium ${
                 !muted && i === stops.length - 1
-                  ? "bg-ink text-citron"
+                  ? "bg-indigo text-white"
                   : "border border-line bg-ivory text-ink/80"
               }`}
             >

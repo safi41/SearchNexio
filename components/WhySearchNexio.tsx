@@ -6,7 +6,7 @@ import { WHY } from "@/lib/content";
    the sourced quote lands (permission outreach). */
 export default function WhySearchNexio() {
   return (
-    <section className="wash-citron-full py-16 md:py-24">
+    <section className="wash-lilac-full py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <SectionHead

@@ -30,7 +30,7 @@ function Dashboard() {
           <p className="mb-3 flex items-center gap-2 font-heading text-[15px] font-bold">
             <span aria-hidden className="flex items-center">
               <span className="size-3.5 rounded-full bg-ink" />
-              <span className="-ml-1 size-3.5 rounded-full bg-citron mix-blend-multiply" />
+              <span className="-ml-1 size-3.5 rounded-full bg-indigo mix-blend-multiply" />
             </span>
             SearchNexio
           </p>
@@ -44,7 +44,7 @@ function Dashboard() {
               {item}
             </span>
           ))}
-          <div className="mt-4 rounded-xl bg-citron/50 p-3">
+          <div className="mt-4 rounded-xl bg-lilac p-3">
             <p className="text-[11.5px] font-semibold">Full-Surface Review</p>
             <p className="mt-1 text-[10.5px] text-graphite">
               Map every surface buyers check
@@ -69,7 +69,7 @@ function Dashboard() {
               <div
                 key={kpi.label}
                 className={`rounded-2xl p-4 ${
-                  kpi.hot ? "bg-citron" : "border border-line bg-surface"
+                  kpi.hot ? "bg-lilac" : "border border-line bg-surface"
                 }`}
               >
                 <p className="text-[11px] font-medium text-ink/60">{kpi.label}</p>
@@ -92,7 +92,7 @@ function Dashboard() {
                     <span className="h-2.5 flex-1 overflow-hidden rounded-full bg-ivory">
                       <span
                         className={`block h-full rounded-full ${
-                          row.gap ? "bg-warn/80" : "bg-ink"
+                          row.gap ? "bg-warn/80" : "bg-indigo"
                         }`}
                         style={{ width: `${row.pct}%` }}
                       />
@@ -123,13 +123,13 @@ function Dashboard() {
               >
                 <path
                   d="M0,84 C30,80 55,74 85,66 C120,57 150,52 185,40 C220,28 260,20 300,10 L300,100 L0,100 Z"
-                  fill="#DFFF52"
+                  fill="#ECEAFF"
                   opacity="0.55"
                 />
                 <path
                   d="M0,84 C30,80 55,74 85,66 C120,57 150,52 185,40 C220,28 260,20 300,10"
                   fill="none"
-                  stroke="#0B0D12"
+                  stroke="#635BFF"
                   strokeWidth="2.5"
                 />
               </svg>
@@ -151,7 +151,7 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden pt-[104px]">
       {/* backdrop: faint grid behind the headline, citron washes at corners */}
-      <div aria-hidden className="absolute inset-x-0 top-0 h-[720px] wash-citron" />
+      <div aria-hidden className="absolute inset-x-0 top-0 h-[720px] wash-lilac" />
       <div
         aria-hidden
         className="grid-pattern absolute left-1/2 top-16 h-[440px] w-[680px] -translate-x-1/2 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_40%,#000_35%,transparent_75%)]"

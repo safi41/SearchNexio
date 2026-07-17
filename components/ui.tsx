@@ -10,7 +10,7 @@ import type { ReactNode } from "react";
 /* Tinted pill badge that sits above section headings. */
 export function Badge({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-block self-start rounded-full bg-citron/45 px-4 py-1.5 text-[13px] font-medium text-ink">
+    <span className="inline-block self-start rounded-full bg-lilac px-4 py-1.5 text-[13px] font-medium text-indigo">
       {children}
     </span>
   );
@@ -27,13 +27,16 @@ export function Eyebrow({
 }
 
 /* The circle-arrow chip inside every Sasico button. */
-function ArrowChip({ dark = true }: { dark?: boolean }) {
+function ArrowChip({ tone = "ink" }: { tone?: "ink" | "citron" | "indigo" }) {
+  const tones = {
+    ink: "bg-ink text-citron",
+    citron: "bg-citron text-ink",
+    indigo: "bg-indigo text-white",
+  };
   return (
     <span
       aria-hidden
-      className={`grid size-6 place-items-center rounded-full ${
-        dark ? "bg-ink text-citron" : "bg-citron text-ink"
-      } transition-transform duration-200 group-hover:translate-x-0.5`}
+      className={`grid size-6 place-items-center rounded-full ${tones[tone]} transition-transform duration-200 group-hover:translate-x-0.5`}
     >
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
         <path
@@ -68,7 +71,11 @@ export function CtaLink({
       : variant === "ghost"
         ? `${base} border border-line bg-surface text-ink hover:border-ink/30`
         : `${base} bg-citron text-ink hover:bg-citron-deep`;
-  const chip = <ArrowChip dark={variant !== "dark"} />;
+  const chip = (
+    <ArrowChip
+      tone={variant === "dark" ? "citron" : variant === "ghost" ? "indigo" : "ink"}
+    />
+  );
 
   if (disabled) {
     return (
@@ -111,10 +118,10 @@ export function SectionHead({
   );
 }
 
-/* Icon tile: the rounded citron-tinted square behind feature glyphs. */
+/* Icon tile: the rounded lilac square behind feature glyphs. */
 export function IconTile({ children }: { children: ReactNode }) {
   return (
-    <span className="grid size-13 place-items-center rounded-2xl bg-gradient-to-b from-citron to-citron/40 text-ink">
+    <span className="grid size-13 place-items-center rounded-2xl bg-gradient-to-b from-lilac to-lilac/40 text-indigo">
       {children}
     </span>
   );
