@@ -62,7 +62,9 @@ export default function ProblemSection() {
               <div key={stat.label}>
                 <p className="font-heading text-[44px] font-bold tabular-nums leading-none tracking-[-0.02em]">
                   {stat.prefix && (
-                    <span className="text-[24px] text-graphite">{stat.prefix}</span>
+                    <span className="mr-1.5 text-[24px] text-graphite">
+                      {stat.prefix.trim()}
+                    </span>
                   )}
                   {stat.value}
                   <span className="text-indigo">{stat.suffix}</span>

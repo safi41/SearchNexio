@@ -10,7 +10,7 @@ import type { ReactNode } from "react";
 /* Tinted pill badge that sits above section headings. */
 export function Badge({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-block rounded-full bg-citron/45 px-4 py-1.5 text-[13px] font-medium text-ink">
+    <span className="inline-block self-start rounded-full bg-citron/45 px-4 py-1.5 text-[13px] font-medium text-ink">
       {children}
     </span>
   );
