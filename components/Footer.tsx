@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Reveal from "@/components/motion/Reveal";
 
 const LINKS = [
   { href: "/services", label: "Services" },
@@ -14,7 +15,7 @@ export default function Footer() {
     <footer className="relative overflow-hidden border-t border-line bg-ivory">
       <div className="relative mx-auto max-w-6xl px-6 pt-14">
         <div className="flex flex-wrap items-start justify-between gap-x-10 gap-y-8 pb-10">
-          <div className="max-w-xs">
+          <Reveal variant="left" className="max-w-xs">
             <Link
               href="/"
               className="flex items-center gap-2 font-heading text-[19px] font-bold tracking-[-0.02em]"
@@ -25,32 +26,37 @@ export default function Footer() {
               </span>
               SearchNexio
             </Link>
-            <p className="mt-3 text-[13.5px] leading-relaxed text-graphite">
+            <p className="reveal-item mt-3 text-[13.5px] leading-relaxed text-graphite [transition-delay:140ms]">
               Wherever buyers search, be found.
             </p>
-          </div>
+          </Reveal>
           {/* client-review mode: footer nav renders inert, no routing */}
-          <nav className="flex flex-wrap gap-x-8 gap-y-3">
-            {LINKS.map((link) => (
-              <span
-                key={link.href}
-                aria-disabled="true"
-                className="cursor-default text-[13.5px] font-medium text-graphite"
-              >
-                {link.label}
-              </span>
-            ))}
-          </nav>
+          <Reveal variant="right">
+            <nav className="flex flex-wrap gap-x-8 gap-y-3">
+              {LINKS.map((link, i) => (
+                <span
+                  key={link.href}
+                  aria-disabled="true"
+                  className="reveal-item cursor-default text-[13.5px] font-medium text-graphite"
+                  style={{ transitionDelay: `${120 + i * 70}ms` }}
+                >
+                  {link.label}
+                </span>
+              ))}
+            </nav>
+          </Reveal>
         </div>
 
         {/* watermark */}
-        <p
-          aria-hidden
-          className="pointer-events-none select-none text-center font-heading text-[clamp(4rem,12vw,10.5rem)] font-bold leading-[0.9] tracking-[-0.03em] text-transparent"
-          style={{ WebkitTextStroke: "1.5px rgba(11,13,18,0.10)" }}
-        >
-          SearchNexio
-        </p>
+        <Reveal delay={120} variant="scale">
+          <p
+            aria-hidden
+            className="pointer-events-none select-none text-center font-heading text-[clamp(4rem,12vw,10.5rem)] font-bold leading-[0.9] tracking-[-0.03em] text-transparent"
+            style={{ WebkitTextStroke: "1.5px rgba(11,13,18,0.10)" }}
+          >
+            SearchNexio
+          </p>
+        </Reveal>
       </div>
 
       {/* brand glow rising behind the watermark and bottom bar */}
@@ -64,7 +70,10 @@ export default function Footer() {
       />
 
       <div className="relative border-t border-line">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-6">
+        <Reveal
+          delay={80}
+          className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-6"
+        >
           <p className="text-[12.5px] text-graphite">
             SearchNexio, 2026 &copy; All rights reserved
           </p>
@@ -91,7 +100,7 @@ export default function Footer() {
               </svg>
             </span>
           </a>
-        </div>
+        </Reveal>
       </div>
     </footer>
   );

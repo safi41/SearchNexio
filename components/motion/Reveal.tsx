@@ -10,11 +10,14 @@ import { useEffect, useRef, useState } from "react";
 export default function Reveal({
   children,
   delay = 0,
+  duration,
   className = "",
   variant = "up",
 }: {
   children: React.ReactNode;
   delay?: number;
+  /** transition duration in ms; defaults to the 550ms house speed */
+  duration?: number;
   className?: string;
   variant?: "up" | "scale" | "left" | "right";
 }) {
@@ -63,7 +66,14 @@ export default function Reveal({
       className={`transition-all duration-550 ease-soft ${
         shown ? "translate-x-0 translate-y-0 scale-100 opacity-100" : hidden
       } ${className}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+      style={
+        delay || duration
+          ? {
+              ...(delay ? { transitionDelay: `${delay}ms` } : {}),
+              ...(duration ? { transitionDuration: `${duration}ms` } : {}),
+            }
+          : undefined
+      }
     >
       {children}
     </div>

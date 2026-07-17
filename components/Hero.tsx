@@ -298,12 +298,12 @@ export default function Hero() {
         <Reveal>
           <Badge>Search Visibility Agency</Badge>
         </Reveal>
-        <Reveal delay={90}>
+        <Reveal delay={60} duration={400}>
           <h1 className="mx-auto mt-6 max-w-4xl font-heading text-[clamp(2.8rem,6.4vw,5.1rem)] font-bold leading-[1.06] tracking-[-0.025em]">
             Get Found Everywhere Buyers Search
           </h1>
         </Reveal>
-        <Reveal delay={180}>
+        <Reveal delay={120} duration={400}>
           <p className="mx-auto mt-6 max-w-2xl text-[16.5px] leading-relaxed text-graphite">
             Your buyers now decide on {SURFACES.slice(0, 3).join(", ")}, and{" "}
             {SURFACES[3]} before they ever click. We make sure you show up in
@@ -312,7 +312,7 @@ export default function Hero() {
           </p>
         </Reveal>
 
-        <Reveal delay={260}>
+        <Reveal delay={180} duration={400}>
           <div className="mx-auto mt-9 flex flex-wrap items-center justify-center gap-4">
             <CtaLink href="/#visibility-review">Request a Visibility Review</CtaLink>
             <CtaLink href="/case-studies" variant="ghost" disabled>
@@ -326,7 +326,7 @@ export default function Hero() {
       </div>
 
       <div className="relative mx-auto mt-14 max-w-6xl px-6 pb-6">
-        <Reveal delay={340} variant="scale">
+        <Reveal delay={240} duration={450} variant="scale">
           <div className="relative">
             <Dashboard />
             <FloatChips />
