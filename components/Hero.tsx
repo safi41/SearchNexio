@@ -21,33 +21,105 @@ const SURFACE_BARS = [
 
 const SIDEBAR = ["Overview", "Surfaces", "Rankings", "AI Citations", "Reports", "Settings"];
 
-/* Sasico's ambient garnish: tiny ink dots, thin arcs, and indigo plus marks
-   scattered at the hero edges. Decoration only, hidden on small screens. */
+/* One decorative ring: a static circle outline whose dots all rotate
+   together as a unit, so the whole circle reads as spinning — the
+   reference site's corner animation. */
+function Ring({
+  className,
+  border,
+  spin,
+  duration,
+  dots,
+}: {
+  className: string;
+  border: string;
+  spin: "animate-orbit" | "animate-orbit-slow";
+  duration: string;
+  dots: { angle: number; cls: string }[];
+}) {
+  return (
+    <span className={`absolute rounded-full border ${border} ${className}`}>
+      <span className={`${spin} absolute inset-0`} style={{ animationDuration: duration }}>
+        {dots.map((dot) => (
+          <span
+            key={dot.angle}
+            className="absolute inset-0"
+            style={{ transform: `rotate(${dot.angle}deg)` }}
+          >
+            <span
+              className={`absolute left-1/2 top-0 -ml-1 -mt-1 rounded-full ${dot.cls}`}
+            />
+          </span>
+        ))}
+      </span>
+    </span>
+  );
+}
+
+/* Sasico's ambient garnish: two concentric spinning rings in each corner,
+   4-5 dots riding every ring, plus scattered plus marks. Decoration only,
+   hidden on small screens. */
 function HeroDecor() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
-      <span className="absolute left-[7%] top-[24%] size-1.5 rounded-full bg-ink/40" />
-      <span className="absolute left-[13%] top-[48%] size-1 rounded-full bg-ink/25" />
-      <span className="absolute left-[18%] top-[16%] size-1 rounded-full bg-indigo/40" />
-      <span className="absolute right-[9%] top-[27%] size-1.5 rounded-full bg-ink/40" />
-      <span className="absolute right-[15%] top-[50%] size-1 rounded-full bg-ink/25" />
-      <span className="absolute right-[19%] top-[14%] size-1 rounded-full bg-indigo/40" />
       <span className="absolute left-[21%] top-[36%] font-heading text-[17px] font-light text-indigo/50">+</span>
       <span className="absolute right-[22%] top-[40%] font-heading text-[13px] font-light text-indigo/40">+</span>
-      {/* the arcs carry orbiting dots, like the reference site: a dot pinned
-          to the rim of a slowly rotating wrapper travels the circle */}
-      <span className="absolute -left-28 top-[10%] size-72 rounded-full border border-ink/10">
-        <span className="animate-orbit absolute inset-0">
-          <span className="absolute left-1/2 top-0 -ml-1 -mt-1 size-2 rounded-full bg-ink/60" />
-        </span>
+
+      {/* left corner: two concentric rings, counter-rotating */}
+      <span className="absolute -left-44 -top-16 size-[400px]">
+        <Ring
+          className="inset-0"
+          border="border-ink/10"
+          spin="animate-orbit"
+          duration="52s"
+          dots={[
+            { angle: 15, cls: "size-2 bg-ink/60" },
+            { angle: 105, cls: "size-1.5 bg-ink/40" },
+            { angle: 195, cls: "size-2 bg-indigo/60" },
+            { angle: 290, cls: "size-1.5 bg-ink/45" },
+          ]}
+        />
+        <Ring
+          className="inset-[21%]"
+          border="border-ink/8"
+          spin="animate-orbit-slow"
+          duration="64s"
+          dots={[
+            { angle: 45, cls: "size-1.5 bg-ink/45" },
+            { angle: 140, cls: "size-2 bg-indigo/55" },
+            { angle: 230, cls: "size-1.5 bg-ink/35" },
+            { angle: 320, cls: "size-1.5 bg-ink/50" },
+          ]}
+        />
       </span>
-      <span className="absolute -right-32 top-[26%] size-80 rounded-full border border-indigo/15">
-        <span className="animate-orbit-slow absolute inset-0">
-          <span className="absolute left-1/2 top-0 -ml-1 -mt-1 size-2 rounded-full bg-indigo/70" />
-        </span>
-        <span className="animate-orbit absolute inset-0 [animation-delay:-11s]">
-          <span className="absolute left-1/2 top-0 -ml-[3px] -mt-[3px] size-1.5 rounded-full bg-ink/40" />
-        </span>
+
+      {/* right corner: two concentric rings, counter-rotating */}
+      <span className="absolute -right-48 top-[14%] size-[440px]">
+        <Ring
+          className="inset-0"
+          border="border-indigo/15"
+          spin="animate-orbit-slow"
+          duration="58s"
+          dots={[
+            { angle: 0, cls: "size-2 bg-indigo/70" },
+            { angle: 80, cls: "size-1.5 bg-ink/45" },
+            { angle: 160, cls: "size-2 bg-ink/55" },
+            { angle: 240, cls: "size-1.5 bg-indigo/50" },
+            { angle: 315, cls: "size-1.5 bg-ink/40" },
+          ]}
+        />
+        <Ring
+          className="inset-[22%]"
+          border="border-ink/10"
+          spin="animate-orbit"
+          duration="46s"
+          dots={[
+            { angle: 30, cls: "size-1.5 bg-ink/50" },
+            { angle: 120, cls: "size-2 bg-indigo/55" },
+            { angle: 215, cls: "size-1.5 bg-ink/40" },
+            { angle: 300, cls: "size-2 bg-ink/55" },
+          ]}
+        />
       </span>
     </div>
   );
