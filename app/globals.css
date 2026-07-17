@@ -1,73 +1,47 @@
 @import "tailwindcss";
 
-/* Exact palette from the brand spec. Do not approximate these values. */
+/* Aurora Curtain system. Exact palette from the client brief; do not
+   approximate these values. Curtain-only hues (violet, sky) must never
+   appear outside the hero curtain and the final-CTA glow. */
 @theme inline {
-  --color-paper: #faf7f2;
+  --color-ivory: #f7f5ef;
   --color-surface: #ffffff;
-  --color-line: #efeae2;
-  --color-ink: #12262b;
-  --color-teal: #0e5a5a;
-  --color-copper: #c25e2e;
-  --color-copper-deep: #9d4a20;
-  --color-sage: #6e8b6a;
+  --color-line: #e4e2dc;
+  --color-ink: #0b0d12;
+  --color-indigo: #635bff;
+  --color-indigo-deep: #4a43d9;
+  --color-citron: #dfff52;
+  --color-citron-deep: #c9e63e;
+  --color-lilac: #eceaff;
+  --color-graphite: #5d6270;
+  --color-warn: #c2410c;
+  --color-violet: #8f7bff;
+  --color-sky: #4cc9f0;
 
-  --font-display: var(--font-newsreader);
-  --font-sans: var(--font-public-sans);
-  --font-mono: var(--font-plex-mono);
-  --font-hook: var(--font-bricolage);
+  --font-sans: var(--font-inter-tight);
 }
 
 @theme {
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --animate-caret: caret 1.1s step-end infinite;
-  --animate-radar-ring: radar-ring 9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-  --animate-radar-sweep: radar-sweep 22s linear infinite;
-  --animate-blip: blip 7s ease-out infinite;
-  --animate-marquee: marquee 32s linear infinite;
-  --animate-globe-spin: globe-spin 26s linear infinite;
-  --animate-globe-halo: globe-halo 9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  --animate-drift-a: drift-a 16s ease-in-out infinite alternate;
+  --animate-drift-b: drift-b 19s ease-in-out infinite alternate;
+  --animate-drift-c: drift-c 14s ease-in-out infinite alternate;
 
-  @keyframes caret {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+  /* The curtain blobs are the page's only continuous animation. */
+  @keyframes drift-a {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(9%, 7%) scale(1.14); }
   }
 
-  @keyframes radar-ring {
-    0% { transform: scale(0.3); opacity: 0.8; }
-    70% { opacity: 0.28; }
-    100% { transform: scale(1); opacity: 0; }
+  @keyframes drift-b {
+    from { transform: translate(0, 0) scale(1.08); }
+    to { transform: translate(-8%, 6%) scale(0.95); }
   }
 
-  @keyframes radar-sweep {
-    to { transform: rotate(360deg); }
-  }
-
-  /* A contact appearing on the radar: pulse in, fade as the sweep passes. */
-  @keyframes blip {
-    0% { opacity: 0; transform: scale(0.3); }
-    8% { opacity: 0.9; transform: scale(1); }
-    45% { opacity: 0; transform: scale(1.5); }
-    100% { opacity: 0; transform: scale(1.5); }
-  }
-
-  @keyframes marquee {
-    to { transform: translateX(-50%); }
-  }
-
-  /* The web/globe wordlike motif spins continuously on its vertical axis: the
-     meridians sweep the front face by scaling their x-radius, so the wireframe
-     reads as a rotating sphere rather than a flat spinner. */
-  @keyframes globe-spin {
-    to { transform: rotateY(360deg); }
-  }
-
-  /* Faint halo rings breathe outward, echoing the radar's old pulse so the
-     globe keeps the same ambient presence behind the hero. */
-  @keyframes globe-halo {
-    0% { transform: scale(0.55); opacity: 0.5; }
-    70% { opacity: 0.12; }
-    100% { transform: scale(1); opacity: 0; }
+  @keyframes drift-c {
+    from { transform: translate(0, 0); }
+    to { transform: translate(7%, -6%); }
   }
 }
 
@@ -76,44 +50,27 @@ html {
 }
 
 body {
-  background-color: var(--color-paper);
+  background-color: var(--color-ivory);
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background-color: var(--color-teal);
-  color: var(--color-paper);
+  background-color: var(--color-indigo);
+  color: #ffffff;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-copper);
+  outline: 2px solid var(--color-indigo);
   outline-offset: 3px;
 }
 
-/* Faint paper grain over everything; non-interactive and uniform, so it can
-   sit above the chrome without affecting readability. */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  pointer-events: none;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-.marquee:hover .animate-marquee {
-  animation-play-state: paused;
-}
-
-/* Ambient loops (radar, caret, marquee, blips) are decoration only. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .motion-ambient {
+  .curtain-blob {
     animation: none !important;
   }
 }

@@ -1,32 +1,14 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, IBM_Plex_Mono, Newsreader, Public_Sans } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 import "./globals.css";
 import SiteNav from "@/components/SiteNav";
 import Footer from "@/components/Footer";
-import ScanTracker from "@/components/motion/ScanTracker";
-import SmoothScroll from "@/components/motion/SmoothScroll";
 
-const newsreader = Newsreader({
+/* One family sitewide; hierarchy comes from size and tracking, never bold
+   display type. Variable axis gives us the 340/380 display weights. */
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  style: ["normal", "italic"],
-  variable: "--font-newsreader",
-});
-
-const publicSans = Public_Sans({
-  subsets: ["latin"],
-  variable: "--font-public-sans",
-});
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-plex-mono",
-});
-
-/* display face reserved for the hero hook only */
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  variable: "--font-bricolage",
+  variable: "--font-inter-tight",
 });
 
 export const metadata: Metadata = {
@@ -49,20 +31,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body
-        className={`${newsreader.variable} ${publicSans.variable} ${plexMono.variable} ${bricolage.variable} font-sans`}
-      >
+      <body className={`${interTight.variable} font-sans`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
-        {/* Fixed chrome must stay outside the smooth-scroll transform. */}
-        <ScanTracker />
         <SiteNav />
-        <SmoothScroll>
-          {children}
-          <Footer />
-        </SmoothScroll>
+        {children}
+        <Footer />
       </body>
     </html>
   );
