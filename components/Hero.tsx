@@ -38,7 +38,7 @@ function HeroDecor() {
           className="inset-0"
           border="border-ink/10"
           spin="animate-orbit"
-          duration="52s"
+          duration="16s"
           dots={[
             { angle: 15, cls: "size-2 bg-ink/60" },
             { angle: 105, cls: "size-1.5 bg-ink/40" },
@@ -50,7 +50,7 @@ function HeroDecor() {
           className="inset-[21%]"
           border="border-ink/8"
           spin="animate-orbit-slow"
-          duration="64s"
+          duration="21s"
           dots={[
             { angle: 45, cls: "size-1.5 bg-ink/45" },
             { angle: 140, cls: "size-2 bg-indigo/55" },
@@ -66,7 +66,7 @@ function HeroDecor() {
           className="inset-0"
           border="border-indigo/15"
           spin="animate-orbit-slow"
-          duration="58s"
+          duration="19s"
           dots={[
             { angle: 0, cls: "size-2 bg-indigo/70" },
             { angle: 80, cls: "size-1.5 bg-ink/45" },
@@ -79,7 +79,7 @@ function HeroDecor() {
           className="inset-[22%]"
           border="border-ink/10"
           spin="animate-orbit"
-          duration="46s"
+          duration="14s"
           dots={[
             { angle: 30, cls: "size-1.5 bg-ink/50" },
             { angle: 120, cls: "size-2 bg-indigo/55" },

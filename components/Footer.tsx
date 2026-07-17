@@ -21,7 +21,7 @@ export default function Footer() {
             className="inset-0"
             border="border-ink/10"
             spin="animate-orbit"
-            duration="48s"
+            duration="15s"
             dots={[
               { angle: 25, cls: "size-2 bg-ink/50" },
               { angle: 110, cls: "size-1.5 bg-indigo/55" },
@@ -33,7 +33,7 @@ export default function Footer() {
             className="inset-[22%]"
             border="border-indigo/12"
             spin="animate-orbit-slow"
-            duration="60s"
+            duration="20s"
             dots={[
               { angle: 60, cls: "size-1.5 bg-ink/40" },
               { angle: 150, cls: "size-2 bg-indigo/50" },
@@ -47,7 +47,7 @@ export default function Footer() {
             className="inset-0"
             border="border-indigo/12"
             spin="animate-orbit-slow"
-            duration="54s"
+            duration="18s"
             dots={[
               { angle: 10, cls: "size-2 bg-indigo/55" },
               { angle: 100, cls: "size-1.5 bg-ink/40" },
@@ -59,7 +59,7 @@ export default function Footer() {
             className="inset-[24%]"
             border="border-ink/8"
             spin="animate-orbit"
-            duration="42s"
+            duration="13s"
             dots={[
               { angle: 40, cls: "size-1.5 bg-ink/40" },
               { angle: 130, cls: "size-1.5 bg-indigo/45" },
