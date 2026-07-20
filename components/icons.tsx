@@ -69,6 +69,24 @@ export function PinIcon() {
   );
 }
 
+export function ListIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 22 22" {...p}>
+      <path d="M8 6h10M8 11h10M8 16h10" />
+      <path d="M4 6h.01M4 11h.01M4 16h.01" strokeWidth={2.4} />
+    </svg>
+  );
+}
+
+export function CursorIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 22 22" {...p}>
+      <path d="M4 3l7 16 2.2-6.2L19.5 10 4 3Z" />
+      <path d="m13 13 5 5" />
+    </svg>
+  );
+}
+
 export function BotIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 22 22" {...p}>
