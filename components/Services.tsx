@@ -1,10 +1,55 @@
 import Reveal from "@/components/motion/Reveal";
 import { CtaLink, SectionHead } from "@/components/ui";
 import { MapsPin, SparkleAI } from "@/components/brand-icons";
+import {
+  SearchIcon,
+  PinIcon,
+  BotIcon,
+  ShieldIcon,
+  WrenchIcon,
+  ChartIcon,
+} from "@/components/icons";
 import { SERVICES, type Service } from "@/lib/content";
 
-/* Sasico feature-card grid: each service opens with a mini-UI vignette
-   acting out what the service delivers. */
+/* Reference-style feature grid: 3 columns of compact cards, each with a
+   tinted icon tile, title, and one-line description, over a faint ribbed
+   backdrop. The hovered card lifts and gets a highlighted border. */
+
+/* Six capability cards, drawn from the service copy. The first four map to
+   the real SERVICES; the last two are the cross-cutting capabilities named
+   in the service item lists. */
+const FEATURES = [
+  {
+    icon: <SearchIcon />,
+    title: "SEO built around revenue",
+    desc: "Rank for the keywords that bring real customers, not just raw impressions.",
+  },
+  {
+    icon: <PinIcon />,
+    title: "Local SEO that wins the map",
+    desc: "Own the map pack and clean, consistent listings across every location.",
+  },
+  {
+    icon: <BotIcon />,
+    title: "Visibility where buyers ask AI",
+    desc: "Get cited inside ChatGPT, AI Overviews, and answer engines, not bypassed.",
+  },
+  {
+    icon: <ShieldIcon />,
+    title: "Recover & protect traffic",
+    desc: "Diagnose drops from updates or migrations and rebuild a durable footprint.",
+  },
+  {
+    icon: <WrenchIcon />,
+    title: "Technical SEO foundation",
+    desc: "Fix speed, crawl, indexation, and structured data so everything else works.",
+  },
+  {
+    icon: <ChartIcon />,
+    title: "Conversion-focused reporting",
+    desc: "Tie every change to leads and pipeline revenue, not vanity keyword positions.",
+  },
+];
 
 function Vignette({ children }: { children: React.ReactNode }) {
   return (
@@ -133,8 +178,13 @@ const VIGNETTES = [SerpVignette, LocalVignette, AiVignette, RecoveryVignette];
 
 export default function Services() {
   return (
-    <section className="overflow-x-clip py-16 md:py-20">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="relative overflow-x-clip py-16 md:py-24">
+      {/* faint ribbed backdrop, masked to fade at the edges */}
+      <div
+        aria-hidden
+        className="rib-pattern pointer-events-none absolute inset-0 opacity-70 [mask-image:radial-gradient(ellipse_80%_70%_at_50%_45%,#000_40%,transparent_85%)]"
+      />
+      <div className="relative mx-auto max-w-6xl px-6">
         <Reveal>
           <SectionHead
             badge="What We Do"
@@ -142,18 +192,31 @@ export default function Services() {
             sub="Visibility problems are rarely isolated to one channel. A broken technical foundation ruins your AI citations. A messy site migration erases your keyword rankings. We fix all of it together because that is how your buyers experience it."
           />
         </Reveal>
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {SERVICES.map((service, i) => (
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {FEATURES.map((f, i) => (
             <Reveal
-              key={service.slug}
-              variant={i % 2 === 0 ? "left" : "right"}
+              key={f.title}
+              variant="scale"
+              delay={(i % 3) * 60}
               className="h-full"
             >
-              <ServiceTile service={service} iconIndex={i} />
+              <article className="group h-full rounded-2xl border border-line bg-surface/80 p-6 backdrop-blur-sm transition-all duration-300 ease-soft hover:-translate-y-1 hover:border-indigo/50 hover:bg-surface hover:shadow-[0_16px_44px_rgba(99,91,255,0.14)]">
+                <span className="grid size-12 place-items-center rounded-xl bg-gradient-to-b from-lilac to-lilac/40 text-indigo transition-transform duration-300 ease-soft group-hover:scale-110">
+                  {f.icon}
+                </span>
+                <h3 className="mt-5 font-heading text-[16.5px] font-bold leading-snug tracking-[-0.01em] transition-colors duration-300 group-hover:text-indigo">
+                  {f.title}
+                </h3>
+                <p className="mt-2.5 text-[13.5px] leading-relaxed text-graphite">
+                  {f.desc}
+                </p>
+              </article>
             </Reveal>
           ))}
         </div>
-        <Reveal className="mt-10 text-center">
+
+        <Reveal className="mt-12 text-center">
           <p className="text-[14px] text-graphite">
             Not sure which piece you need? That is what the visibility review
             is for.
