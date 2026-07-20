@@ -14,7 +14,7 @@ const PARAGRAPHS = [
    comparison as hub-diagram cards, and the stats as big bold numbers. */
 export default function ProblemSection() {
   return (
-    <section className="wash-lilac-full py-16 md:py-24">
+    <section className="wash-lilac-full overflow-x-clip pt-16 pb-10 md:pb-12 md:pt-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <SectionHead

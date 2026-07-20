@@ -99,6 +99,9 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  /* safety net: off-screen reveal states and decor never make the page
+     scroll sideways */
+  overflow-x: clip;
 }
 
 ::selection {

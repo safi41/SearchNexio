@@ -25,7 +25,7 @@ function Metric({ value }: { value: string }) {
 
 export default function Results() {
   return (
-    <section id="results" className="overflow-x-clip py-16 md:py-20">
+    <section id="results" className="overflow-x-clip pt-12 pb-16 md:pb-20 md:pt-14">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <SectionHead
