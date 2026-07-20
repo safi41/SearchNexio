@@ -43,16 +43,17 @@ export default function Industries() {
             centered and clipped to the section width. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-2 hidden h-[420px] w-[1000px] -translate-x-1/2 md:block"
+          className="pointer-events-none absolute left-1/2 top-6 hidden h-[460px] w-[1080px] -translate-x-1/2 md:block"
         >
-          {/* faint guide curve, drawn in the same 1000x420 space */}
+          {/* faint guide curve, drawn in the same 1080x460 space. The bottom
+              of the U is pushed down (y=440) so it clears the CTA button. */}
           <svg
             className="absolute inset-0 h-full w-full"
-            viewBox="0 0 1000 420"
+            viewBox="0 0 1080 460"
             fill="none"
           >
             <path
-              d="M20,40 C160,300 360,400 500,400 C640,400 840,300 980,40"
+              d="M30,30 C180,340 400,440 540,440 C680,440 900,340 1050,30"
               stroke="var(--c-line)"
               strokeWidth="1.5"
               className="opacity-80"
@@ -86,8 +87,9 @@ export default function Industries() {
             </p>
           </Reveal>
           <Reveal delay={100}>
-            <div className="mt-7 flex justify-center md:mb-14">
-              <span className="rounded-full bg-ivory p-1.5">
+            <div className="mt-8 flex justify-center">
+              {/* opaque halo masks any bubble drifting behind the button */}
+              <span className="rounded-full bg-ivory px-3 py-2 shadow-[0_0_0_10px_var(--c-page)]">
                 <CtaLink href="/#visibility-review">Request a Visibility Review</CtaLink>
               </span>
             </div>

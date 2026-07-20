@@ -5,8 +5,28 @@ import { CLIENTS } from "@/lib/content";
    is typographic by design. Gentle marquee, paused on hover; reduced-motion
    users get a static centered row. TODO before launch: written permission
    from each client. */
+
+/* Repeat the client list enough times that a single group is wider than any
+   viewport, then render the group twice so the -50% loop is seamless with no
+   empty gap on ultra-wide screens. */
+const GROUP = Array.from({ length: 4 }, () => CLIENTS).flat();
+
+function Group({ hidden = false }: { hidden?: boolean }) {
+  return (
+    <ul aria-hidden={hidden} className="flex shrink-0 items-baseline">
+      {GROUP.map((name, i) => (
+        <li
+          key={`${name}-${i}`}
+          className="shrink-0 pr-16 font-heading text-[17px] font-bold tracking-[-0.01em] text-ink/40"
+        >
+          {name}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function LogoStrip() {
-  const row = [...CLIENTS, ...CLIENTS];
   return (
     <section className="py-14">
       <Reveal className="mx-auto max-w-6xl px-6 text-center">
@@ -16,16 +36,9 @@ export default function LogoStrip() {
       </Reveal>
       <Reveal delay={80}>
         <div className="marquee relative mt-8 overflow-hidden">
-          <div className="animate-marquee flex w-max items-baseline">
-            {row.map((name, i) => (
-              <span
-                key={`${name}-${i}`}
-                aria-hidden={i >= CLIENTS.length}
-                className="shrink-0 pr-16 font-heading text-[17px] font-bold tracking-[-0.01em] text-ink/40"
-              >
-                {name}
-              </span>
-            ))}
+          <div className="animate-marquee flex w-max">
+            <Group />
+            <Group hidden />
           </div>
           <span
             aria-hidden

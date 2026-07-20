@@ -160,7 +160,7 @@ body {
    bubble rides the same offset-path; staggered animation-delay spreads them
    evenly across one 26s loop so the set reads like a flowing conveyor. */
 .curve-bubble {
-  offset-path: path("M20,40 C160,300 360,400 500,400 C640,400 840,300 980,40");
+  offset-path: path("M30,30 C180,340 400,440 540,440 C680,440 900,340 1050,30");
   offset-rotate: 0deg;
   offset-anchor: center;
   animation: curve-drift 26s linear infinite;
