@@ -68,7 +68,29 @@ export function ResultTile({ study }: { study: CaseStudy }) {
       href="/case-studies"
       className="group flex h-full flex-col gap-4 rounded-3xl border border-line bg-surface p-7 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]"
     >
-      <span className="reveal-item self-start [transition-delay:100ms]">
+      {/* growth sparkline header, same language as the hero dashboard */}
+      <div className="reveal-item relative -mx-1 h-14 overflow-hidden rounded-xl border border-line/70 bg-ivory/70 [transition-delay:60ms]">
+        <svg
+          className="absolute inset-x-2 bottom-1 h-10 w-[calc(100%-16px)]"
+          viewBox="0 0 200 40"
+          preserveAspectRatio="none"
+          aria-hidden
+        >
+          <path
+            d="M0,34 C25,32 45,28 70,24 C105,18 140,13 200,5 L200,40 L0,40 Z"
+            className="fill-lilac"
+            opacity="0.8"
+          />
+          <path
+            d="M0,34 C25,32 45,28 70,24 C105,18 140,13 200,5"
+            fill="none"
+            stroke="#635BFF"
+            strokeWidth="2"
+          />
+          <circle cx="200" cy="5" r="3" fill="#635BFF" />
+        </svg>
+      </div>
+      <span className="reveal-item self-start [transition-delay:120ms]">
         <Badge>{study.industry}</Badge>
       </span>
       <span className="reveal-item self-start [transition-delay:170ms]">

@@ -13,7 +13,7 @@ export default function ServiceGrid() {
           delay={(i % 2) * 0.12}
           className={service.wide ? "md:col-span-2" : ""}
         >
-          <ServiceTile service={service} />
+          <ServiceTile service={service} iconIndex={i} />
         </Reveal>
       ))}
     </div>

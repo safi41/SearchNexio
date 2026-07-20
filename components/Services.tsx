@@ -1,11 +1,136 @@
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink, IconTile, SectionHead } from "@/components/ui";
-import { SearchIcon, PinIcon, BotIcon, ShieldIcon } from "@/components/icons";
+import { CtaLink, SectionHead } from "@/components/ui";
+import { MapsPin, SparkleAI } from "@/components/brand-icons";
 import { SERVICES, type Service } from "@/lib/content";
 
-const ICONS = [SearchIcon, PinIcon, BotIcon, ShieldIcon];
+/* Sasico feature-card grid: each service opens with a mini-UI vignette
+   acting out what the service delivers. */
 
-/* Sasico feature-card grid: white rounded cards with citron icon tiles. */
+function Vignette({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="reveal-item relative mb-6 flex h-28 items-center justify-center overflow-hidden rounded-2xl border border-line/70 bg-ivory/70 [transition-delay:120ms]">
+      {children}
+    </div>
+  );
+}
+
+/* skeleton text bar */
+function Bar({ className }: { className: string }) {
+  return <span className={`block h-1.5 rounded-full bg-line ${className}`} />;
+}
+
+/* 1 — revenue SEO: a SERP with your result ranked first */
+function SerpVignette() {
+  return (
+    <Vignette>
+      <div className="grid w-56 gap-2">
+        <div className="relative rounded-xl border-2 border-indigo bg-surface p-2.5 shadow-[0_6px_16px_rgba(99,91,255,0.18)]">
+          <span className="absolute -right-2 -top-2 grid size-5 place-items-center rounded-full bg-citron text-[10px] font-bold text-ink-solid">
+            1
+          </span>
+          <div className="flex items-center gap-2">
+            <span className="grid size-5 place-items-center rounded-full bg-lilac">
+              <span className="size-2 rounded-full bg-indigo" />
+            </span>
+            <Bar className="w-24 bg-indigo/50" />
+          </div>
+          <Bar className="mt-2 w-40" />
+        </div>
+        <div className="rounded-xl border border-line bg-surface p-2.5 opacity-60">
+          <div className="flex items-center gap-2">
+            <span className="size-5 rounded-full bg-line" />
+            <Bar className="w-20" />
+          </div>
+        </div>
+      </div>
+    </Vignette>
+  );
+}
+
+/* 2 — local SEO: a map tile with pins and the map-pack chip */
+function LocalVignette() {
+  return (
+    <Vignette>
+      <div aria-hidden className="grid-pattern absolute inset-0 opacity-70 [background-size:26px_26px]" />
+      <span aria-hidden className="absolute left-[28%] top-[30%]">
+        <MapsPin size={22} />
+      </span>
+      <span aria-hidden className="absolute right-[30%] top-[52%]">
+        <MapsPin size={17} />
+      </span>
+      <span aria-hidden className="absolute left-[44%] bottom-[18%] size-2 rounded-full bg-indigo/60" />
+      <span className="absolute right-4 top-3 rounded-full border border-line bg-surface px-2.5 py-1 text-[10px] font-semibold shadow-sm">
+        Map pack <span className="text-indigo">#1</span>
+      </span>
+    </Vignette>
+  );
+}
+
+/* 3 — AI visibility: an answer bubble citing the brand */
+function AiVignette() {
+  return (
+    <Vignette>
+      <div className="grid w-56 gap-2">
+        <div className="flex justify-end">
+          <span className="rounded-2xl rounded-br-md bg-indigo px-3 py-2">
+            <Bar className="w-16 bg-white/70" />
+          </span>
+        </div>
+        <div className="flex items-start gap-2">
+          <span className="mt-1 grid size-6 place-items-center rounded-full border border-line bg-surface">
+            <SparkleAI size={13} />
+          </span>
+          <span className="flex-1 rounded-2xl rounded-tl-md border border-line bg-surface px-3 py-2">
+            <Bar className="w-32" />
+            <span className="mt-1.5 flex items-center gap-1.5">
+              <Bar className="w-10" />
+              <span className="rounded-full bg-citron px-1.5 py-0.5 text-[9px] font-bold text-ink-solid">
+                your brand
+              </span>
+              <Bar className="w-8" />
+            </span>
+          </span>
+        </div>
+      </div>
+    </Vignette>
+  );
+}
+
+/* 4 — recovery: traffic dips, then climbs back past the drop */
+function RecoveryVignette() {
+  return (
+    <Vignette>
+      <svg
+        className="absolute inset-x-3 bottom-2 h-16 w-[calc(100%-24px)]"
+        viewBox="0 0 220 64"
+        preserveAspectRatio="none"
+        aria-hidden
+      >
+        <path
+          d="M0,22 C20,24 34,30 52,42 C62,49 72,52 84,50"
+          fill="none"
+          stroke="#C2410C"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+        <path
+          d="M84,50 C110,46 140,32 170,20 C188,13 205,9 220,6"
+          fill="none"
+          stroke="#635BFF"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+        <circle cx="84" cy="50" r="3.5" fill="#635BFF" />
+      </svg>
+      <span className="absolute right-4 top-3 inline-flex items-center gap-1 rounded-full border border-line bg-surface px-2 py-0.5 text-[10px] font-semibold shadow-sm">
+        <span className="size-1.5 rounded-full bg-indigo" /> recovered
+      </span>
+    </Vignette>
+  );
+}
+
+const VIGNETTES = [SerpVignette, LocalVignette, AiVignette, RecoveryVignette];
+
 export default function Services() {
   return (
     <section className="overflow-x-clip py-16 md:py-20">
@@ -50,15 +175,11 @@ export function ServiceTile({
   service: Service;
   iconIndex?: number;
 }) {
-  const Icon = ICONS[iconIndex % ICONS.length];
+  const TileVignette = VIGNETTES[iconIndex % VIGNETTES.length];
   return (
     <article className="group h-full rounded-3xl border border-line bg-surface p-8 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]">
-      <div className="reveal-item [transition-delay:120ms]">
-        <IconTile>
-          <Icon />
-        </IconTile>
-      </div>
-      <h3 className="reveal-item mt-6 font-heading text-[20px] font-bold tracking-[-0.01em] [transition-delay:190ms]">
+      <TileVignette />
+      <h3 className="reveal-item font-heading text-[20px] font-bold tracking-[-0.01em] [transition-delay:190ms]">
         {service.title}
       </h3>
       <p className="reveal-item mt-2.5 text-[13.5px] leading-relaxed text-graphite [transition-delay:260ms]">
