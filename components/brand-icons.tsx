@@ -67,3 +67,79 @@ export function ChatGPTMark({ size = 18 }: { size?: number }) {
     </svg>
   );
 }
+
+/* Bing — four-facet "b" tile mark. */
+export function BingMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
+      <path
+        d="M8 3.2 11.2 4.4v10l4-2.3-2-.9-1-3.4 5.5 2v3.9L11.2 20 8 18.2Z"
+        fill="#0B8484"
+      />
+    </svg>
+  );
+}
+
+/* Gemini — four-point star spark. */
+export function GeminiMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
+      <defs>
+        <linearGradient id="gemini-grad" x1="2" y1="4" x2="22" y2="20">
+          <stop offset="0%" stopColor="#4285F4" />
+          <stop offset="55%" stopColor="#9B72CB" />
+          <stop offset="100%" stopColor="#D96570" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M12 2c.4 5 5 9.6 10 10-5 .4-9.6 5-10 10-.4-5-5-9.6-10-10 5-.4 9.6-5 10-10Z"
+        fill="url(#gemini-grad)"
+      />
+    </svg>
+  );
+}
+
+/* Perplexity — concentric-ring answer mark. */
+export function PerplexityMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
+      <circle cx="12" cy="12" r="11" fill="#1FB8CD" />
+      <g stroke="#ffffff" strokeWidth="1.6" fill="none" strokeLinecap="round">
+        <path d="M12 6v12" />
+        <path d="M7 8.5 12 12l5-3.5" />
+        <path d="M7 15.5 12 12l5 3.5" />
+        <path d="M7 8.5v7M17 8.5v7" />
+      </g>
+    </svg>
+  );
+}
+
+/* Reddit — snoo head silhouette. */
+export function RedditMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
+      <circle cx="12" cy="12" r="11" fill="#FF4500" />
+      <circle cx="8.6" cy="12.4" r="1.3" fill="#fff" />
+      <circle cx="15.4" cy="12.4" r="1.3" fill="#fff" />
+      <path
+        d="M8.4 15c1 .9 2.3 1.3 3.6 1.3s2.6-.4 3.6-1.3"
+        stroke="#fff"
+        strokeWidth="1.3"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <circle cx="12" cy="7.4" r="1.1" fill="#fff" />
+      <path d="M12 8.4v2.2" stroke="#fff" strokeWidth="1.1" />
+    </svg>
+  );
+}
+
+/* YouTube — play button in a rounded tile. */
+export function YouTubeMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
+      <rect x="2" y="5" width="20" height="14" rx="4.5" fill="#FF0000" />
+      <path d="M10 8.8v6.4L15.5 12Z" fill="#fff" />
+    </svg>
+  );
+}

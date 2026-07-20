@@ -156,6 +156,26 @@ body {
   animation-play-state: paused;
 }
 
+/* Logo bubbles drifting along the U-curve in the surfaces section. Each
+   bubble rides the same offset-path; staggered animation-delay spreads them
+   evenly across one 26s loop so the set reads like a flowing conveyor. */
+.curve-bubble {
+  offset-path: path("M20,40 C160,300 360,400 500,400 C640,400 840,300 980,40");
+  offset-rotate: 0deg;
+  offset-anchor: center;
+  animation: curve-drift 26s linear infinite;
+  will-change: offset-distance;
+  margin-left: -22px;
+  margin-top: -22px;
+}
+@keyframes curve-drift {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+.motion-curve:hover .curve-bubble {
+  animation-play-state: paused;
+}
+
 /* Text stagger inside a Reveal wrapper: children tagged .reveal-item start
    hidden while the wrapper is [data-reveal="hidden"], then transition in
    on their own transition-delay once the wrapper flips to "shown". */
@@ -183,6 +203,10 @@ body {
   .animate-orbit,
   .animate-orbit-slow,
   .animate-bob {
+    animation: none !important;
+  }
+  /* reduced motion: freeze the bubbles spread evenly along the curve */
+  .curve-bubble {
     animation: none !important;
   }
 }
