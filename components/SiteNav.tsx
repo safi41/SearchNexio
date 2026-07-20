@@ -10,11 +10,12 @@ const LINKS = [
 ];
 
 /* Sasico chrome: logo left, a floating pill bar carrying the links, and
-   pill CTAs right. Solid ivory backdrop keeps it legible on every route. */
+   pill CTAs right. Transparent so it blends into the hero — the page ground
+   is always ivory, so links stay legible without a nav fill. */
 export default function SiteNav() {
   return (
-    <header id="top" className="fixed inset-x-0 top-0 z-40 bg-ivory/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3.5">
+    <header id="top" className="absolute inset-x-0 top-0 z-40">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
         <Link
           href="/"
           className="flex items-center gap-2 font-heading text-[19px] font-bold tracking-[-0.02em]"
@@ -28,12 +29,12 @@ export default function SiteNav() {
 
         {/* nav routing is disabled for the client-review build: the inner
             pages aren't ready, so links render inert (no hrefs, no routing) */}
-        <nav className="hidden items-center gap-1 rounded-full border border-line bg-surface px-2 py-1.5 shadow-[0_2px_10px_rgba(11,13,18,0.05)] md:flex">
+        <nav className="hidden items-center gap-1 md:flex">
           {LINKS.map((link) => (
             <span
               key={link.href}
               aria-disabled="true"
-              className="cursor-default rounded-full px-4 py-2 text-[14px] font-medium text-ink/80 transition-colors duration-200 hover:bg-ivory"
+              className="cursor-default rounded-full px-4 py-2 text-[14px] font-medium text-ink/80 transition-colors duration-200 hover:bg-ink/5"
             >
               {link.label}
             </span>

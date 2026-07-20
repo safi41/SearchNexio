@@ -92,8 +92,22 @@ export default function Hero() {
           <Badge>Search Visibility Agency</Badge>
         </Reveal>
         <Reveal delay={60} duration={550}>
-          <h1 className="mx-auto mt-6 max-w-4xl font-heading text-[clamp(2.8rem,6.4vw,5.1rem)] font-bold leading-[1.06] tracking-[-0.025em]">
-            Get Found Everywhere Buyers Search
+          <h1 className="mx-auto mt-6 max-w-4xl font-heading text-[clamp(2.8rem,6.4vw,5.1rem)] font-bold leading-[1.14] tracking-[-0.025em]">
+            Get Found{" "}
+            <span className="relative inline-block whitespace-nowrap text-indigo">
+              Everywhere
+              <svg
+                aria-hidden
+                className="absolute -bottom-1 left-0 w-full"
+                viewBox="0 0 300 16"
+                fill="none"
+                preserveAspectRatio="none"
+              >
+                <path d="M6 10C70 4 210 3 294 6" stroke="#635BFF" strokeWidth="4" strokeLinecap="round" />
+                <path d="M150 14c50-4 96-4 124-3" stroke="#635BFF" strokeWidth="4" strokeLinecap="round" />
+              </svg>
+            </span>{" "}
+            Buyers Search
           </h1>
         </Reveal>
         <Reveal delay={120} duration={550}>

@@ -242,7 +242,7 @@ export function ResultTile({ study }: { study: CaseStudy }) {
   return (
     <Link
       href="/case-studies"
-      className="group flex h-full flex-col gap-4 rounded-3xl border border-line bg-surface p-7 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]"
+      className="group flex h-full flex-col gap-4 rounded-3xl border border-line bg-surface p-7 transition-all duration-300 ease-soft hover:-translate-y-1"
     >
       <div className="reveal-item relative -mx-1 h-14 overflow-hidden rounded-xl border border-line/70 bg-ivory/70 [transition-delay:60ms]">
         <svg

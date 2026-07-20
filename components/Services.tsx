@@ -201,7 +201,7 @@ export default function Services() {
               delay={(i % 3) * 60}
               className="h-full"
             >
-              <article className="group h-full rounded-2xl border border-line bg-surface/80 p-6 backdrop-blur-sm transition-all duration-300 ease-soft hover:-translate-y-1 hover:border-indigo/50 hover:bg-surface hover:shadow-[0_16px_44px_rgba(99,91,255,0.14)]">
+              <article className="group h-full rounded-2xl border border-line bg-surface/80 p-6 backdrop-blur-sm transition-all duration-300 ease-soft hover:-translate-y-1 hover:border-indigo/50 hover:bg-surface">
                 <span className="grid size-12 place-items-center rounded-xl bg-gradient-to-b from-lilac to-lilac/40 text-indigo transition-transform duration-300 ease-soft group-hover:scale-110">
                   {f.icon}
                 </span>
@@ -240,7 +240,7 @@ export function ServiceTile({
 }) {
   const TileVignette = VIGNETTES[iconIndex % VIGNETTES.length];
   return (
-    <article className="group h-full rounded-3xl border border-line bg-surface p-8 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(11,13,18,0.08)]">
+    <article className="group h-full rounded-3xl border border-line bg-surface p-8 transition-all duration-300 ease-soft hover:-translate-y-1">
       <TileVignette />
       <h3 className="reveal-item font-heading text-[20px] font-bold tracking-[-0.01em] [transition-delay:190ms]">
         {service.title}

@@ -53,7 +53,7 @@ export default function Industries() {
             fill="none"
           >
             <path
-              d="M30,30 C180,340 400,440 540,440 C680,440 900,340 1050,30"
+              d="M40,60 C40,320 240,430 540,430 C840,430 1040,320 1040,60"
               stroke="var(--c-line)"
               strokeWidth="1.5"
               className="opacity-80"

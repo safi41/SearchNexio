@@ -126,7 +126,7 @@ function WhyCard({
 }) {
   return (
     <div
-      className={`group relative h-full overflow-hidden rounded-3xl border border-line bg-surface p-6 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_18px_46px_rgba(11,13,18,0.1)] ${EDGES[index]}`}
+      className={`group relative h-full overflow-hidden rounded-3xl border border-line bg-surface p-6 transition-all duration-300 ease-soft hover:-translate-y-1 ${EDGES[index]}`}
     >
       <span
         aria-hidden
@@ -185,30 +185,31 @@ export default function WhySearchNexio() {
             ))}
           </svg>
 
-          <div className="relative grid items-center gap-5 lg:grid-cols-[1fr_auto_1fr] lg:gap-8">
-            {/* left column: cards 0 and 2 */}
-            <div className="grid gap-5 lg:gap-24">
-              <Reveal variant="left" className="h-full">
+          <div className="relative grid items-stretch gap-5 lg:grid-cols-[1fr_auto_1fr] lg:gap-8">
+            {/* left column: cards 0 and 2 — equal-height rows so both columns
+                line up cleanly across the hub */}
+            <div className="grid content-between gap-5 lg:gap-20">
+              <Reveal variant="left" className="lg:min-h-[168px]">
                 <WhyCard title={WHY[0].title} body={WHY[0].body} index={0} align="left" />
               </Reveal>
-              <Reveal variant="left" delay={80} className="h-full">
+              <Reveal variant="left" delay={80} className="lg:min-h-[168px]">
                 <WhyCard title={WHY[2].title} body={WHY[2].body} index={2} align="left" />
               </Reveal>
             </div>
 
             {/* center hub (desktop) */}
-            <Reveal delay={120} variant="scale" className="hidden lg:block">
+            <Reveal delay={120} variant="scale" className="hidden self-center lg:block">
               <div className="h-56 w-40">
                 <CoreHub />
               </div>
             </Reveal>
 
             {/* right column: cards 1 and 3 */}
-            <div className="grid gap-5 lg:gap-24">
-              <Reveal variant="right" className="h-full">
+            <div className="grid content-between gap-5 lg:gap-20">
+              <Reveal variant="right" className="lg:min-h-[168px]">
                 <WhyCard title={WHY[1].title} body={WHY[1].body} index={1} align="right" />
               </Reveal>
-              <Reveal variant="right" delay={80} className="h-full">
+              <Reveal variant="right" delay={80} className="lg:min-h-[168px]">
                 <WhyCard title={WHY[3].title} body={WHY[3].body} index={3} align="right" />
               </Reveal>
             </div>

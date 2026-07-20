@@ -86,216 +86,165 @@ function Screen({
   );
 }
 
-/* 01 Map — a surface audit table: which platforms you're found on, and the
-   two you're missing, over a faint radar backdrop. */
+/* a big platform logo bubble with an optional status badge */
+function LogoBubble({
+  children,
+  size = "size-16",
+  badge,
+  className = "",
+}: {
+  children: React.ReactNode;
+  size?: string;
+  badge?: "ok" | "warn" | null;
+  className?: string;
+}) {
+  return (
+    <span
+      className={`relative grid ${size} place-items-center rounded-2xl border border-line bg-surface ${className}`}
+    >
+      {children}
+      {badge === "ok" && (
+        <span aria-hidden className="absolute -bottom-1.5 -right-1.5 grid size-5 place-items-center rounded-full bg-citron">
+          <Check className="size-3 text-ink-solid" />
+        </span>
+      )}
+      {badge === "warn" && (
+        <span aria-hidden className="absolute -bottom-1.5 -right-1.5 grid size-5 place-items-center rounded-full bg-warn text-white">
+          <span className="text-[11px] font-bold leading-none">!</span>
+        </span>
+      )}
+    </span>
+  );
+}
+
+/* 01 Map — the four surfaces scanned: found ones checked, missing ones
+   flagged, over a soft radar sweep. */
 function MapVisual() {
-  const surfaces = [
-    { icon: <GoogleG size={15} />, label: "Google", score: 82, ok: true },
-    { icon: <MapsPin size={15} />, label: "Maps", score: 74, ok: true },
-    { icon: <SparkleAI size={15} />, label: "AI Overviews", score: 31, ok: false },
-    { icon: <ChatGPTMark size={15} />, label: "ChatGPT", score: 18, ok: false },
-  ];
   return (
     <Screen title="Surface Scan" status="SCANNING" statusTone="up">
-      <div aria-hidden className="grid-pattern absolute inset-0 opacity-40 [background-size:30px_30px]" />
-      <div aria-hidden className="absolute right-6 top-2 size-28 rounded-full border border-dashed border-indigo/30" />
-      <div aria-hidden className="absolute right-14 top-10 size-12 rounded-full border border-indigo/25" />
-      <div className="relative grid gap-2">
-        {surfaces.map((s) => (
-          <div
-            key={s.label}
-            className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 ${
-              s.ok
-                ? "border-line bg-surface/90"
-                : "border-warn/30 bg-warn/5"
-            }`}
-          >
-            <span className="grid size-7 place-items-center rounded-lg border border-line bg-surface">
-              {s.icon}
-            </span>
-            <span className="w-24 text-[12px] font-semibold">{s.label}</span>
-            <span className="h-2 flex-1 overflow-hidden rounded-full bg-line/70">
-              <span
-                className={`block h-full rounded-full ${s.ok ? "bg-indigo" : "bg-warn/80"}`}
-                style={{ width: `${s.score}%` }}
-              />
-            </span>
-            <span
-              className={`w-6 text-right text-[12px] font-bold tabular-nums ${
-                s.ok ? "text-ink" : "text-warn"
-              }`}
-            >
-              {s.score}
-            </span>
-          </div>
-        ))}
-      </div>
-      <div className="relative mt-3 inline-flex items-center gap-1.5 rounded-full bg-warn/10 px-3 py-1 text-[11px] font-semibold text-warn">
-        <span className="size-1.5 rounded-full bg-warn" /> 2 surfaces where buyers can&apos;t find you
+      <div className="flex h-full flex-col items-center justify-center">
+        <div className="relative size-60">
+          {/* radar rings, centered */}
+          <span aria-hidden className="absolute inset-0 rounded-full border border-dashed border-indigo/25" />
+          <span aria-hidden className="absolute inset-8 rounded-full border border-indigo/20" />
+          <span aria-hidden className="absolute inset-[4.5rem] rounded-full border border-indigo/25" />
+          <span aria-hidden className="absolute left-1/2 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo shadow-[0_0_16px_rgba(99,91,255,0.7)]" />
+          {/* four logos at the four corners of the radar */}
+          <LogoBubble badge="ok" className="absolute left-0 top-4">
+            <GoogleG size={26} />
+          </LogoBubble>
+          <LogoBubble badge="ok" className="absolute right-0 top-4">
+            <MapsPin size={26} />
+          </LogoBubble>
+          <LogoBubble badge="warn" className="absolute bottom-4 left-0">
+            <SparkleAI size={26} />
+          </LogoBubble>
+          <LogoBubble badge="warn" className="absolute bottom-4 right-0">
+            <ChatGPTMark size={26} />
+          </LogoBubble>
+        </div>
+        <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-warn/10 px-3 py-1 text-[11px] font-semibold text-warn">
+          <span className="size-1.5 rounded-full bg-warn" /> 2 surfaces where buyers can&apos;t find you
+        </div>
       </div>
     </Screen>
   );
 }
 
-/* 02 Fix — a prioritized fix queue with impact tags, most of it cleared. */
+/* 02 Fix — the flagged surfaces flip to fixed, with a progress line. */
 function FixVisual() {
-  const tasks = [
-    { label: "Core Web Vitals", tag: "High", done: true },
-    { label: "Schema markup", tag: "High", done: true },
-    { label: "Local citations", tag: "Med", done: true },
-    { label: "Broken redirects", tag: "Med", done: false, active: true },
-  ];
   return (
-    <Screen title="Fix Queue" status="3 / 4 DONE" statusTone="live">
-      <div className="grid gap-2.5">
-        {tasks.map((t) => (
-          <div
-            key={t.label}
-            className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 transition ${
-              t.active
-                ? "border-indigo/40 bg-indigo/5 shadow-[0_0_0_3px_rgba(99,91,255,0.08)]"
-                : "border-line bg-surface/90"
-            }`}
-          >
-            <span
-              className={`grid size-6 shrink-0 place-items-center rounded-full ${
-                t.done ? "bg-citron text-ink-solid" : "border-2 border-indigo/50 bg-surface"
-              }`}
-            >
-              {t.done ? (
-                <Check />
-              ) : (
-                <span className="size-1.5 rounded-full bg-indigo" />
-              )}
+    <Screen title="Fixing Gaps" status="2 / 2 FIXED" statusTone="live">
+      <div className="relative flex h-full items-center justify-center">
+        <div className="flex items-center gap-6">
+          {/* was broken */}
+          <LogoBubble size="size-20" className="opacity-50">
+            <SparkleAI size={30} />
+            <span aria-hidden className="absolute -bottom-1.5 -right-1.5 grid size-6 place-items-center rounded-full bg-warn/20 text-warn">
+              <span className="text-[12px] font-bold leading-none">!</span>
             </span>
-            <span
-              className={`flex-1 text-[12.5px] font-semibold ${
-                t.done ? "text-graphite line-through decoration-graphite/40" : "text-ink"
-              }`}
-            >
-              {t.label}
-            </span>
-            <span
-              className={`rounded-md px-2 py-0.5 text-[10px] font-bold ${
-                t.tag === "High"
-                  ? "bg-warn/10 text-warn"
-                  : "bg-lilac text-indigo"
-              }`}
-            >
-              {t.tag}
-            </span>
-          </div>
-        ))}
+          </LogoBubble>
+          {/* the fix arrow */}
+          <span className="grid size-9 place-items-center rounded-full bg-indigo text-white">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+          {/* now fixed */}
+          <LogoBubble size="size-20" badge="ok" className="border-indigo/40 shadow-[0_0_0_4px_rgba(99,91,255,0.1)]">
+            <SparkleAI size={30} />
+          </LogoBubble>
+        </div>
       </div>
-      <div className="mt-3 flex items-center gap-2 rounded-xl bg-lilac/60 px-3 py-2 text-[11px] font-semibold text-indigo">
-        <ArrowUp /> ranked by revenue impact, not by what&apos;s easy
+      <div className="mt-1 flex items-center gap-2 self-center rounded-xl bg-lilac/60 px-3 py-2 text-[11px] font-semibold text-indigo">
+        <ArrowUp /> fixed in order of revenue impact
       </div>
     </Screen>
   );
 }
 
-/* 03 Amplify — authority hub broadcasting to every surface, with a live
-   "cited" ticker beneath. */
+/* 03 Amplify — authority hub broadcasting out to every logo. */
 function AmplifyVisual() {
   const marks = [
-    { icon: <GoogleG size={16} />, pos: "left-[8%] top-[10%]" },
-    { icon: <MapsPin size={16} />, pos: "right-[10%] top-[6%]" },
-    { icon: <SparkleAI size={16} />, pos: "left-[12%] top-[46%]" },
-    { icon: <ChatGPTMark size={16} />, pos: "right-[8%] top-[42%]" },
+    { icon: <GoogleG size={22} />, pos: "left-0 top-4" },
+    { icon: <MapsPin size={22} />, pos: "right-0 top-4" },
+    { icon: <SparkleAI size={22} />, pos: "bottom-4 left-0" },
+    { icon: <ChatGPTMark size={22} />, pos: "bottom-4 right-0" },
   ];
   return (
     <Screen title="Authority Signals" status="BROADCASTING" statusTone="up">
-      <div className="relative h-[150px]">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span aria-hidden className="absolute size-40 rounded-full border border-indigo/12" />
-          <span aria-hidden className="absolute size-28 rounded-full border border-indigo/22" />
-          <span aria-hidden className="absolute size-16 rounded-full border border-indigo/35" />
-          <span className="relative grid size-12 place-items-center rounded-2xl bg-indigo text-white shadow-[0_10px_28px_rgba(99,91,255,0.45)]">
+      <div className="flex h-full items-center justify-center">
+        <div className="relative size-60">
+          <span aria-hidden className="absolute inset-0 rounded-full border border-indigo/12" />
+          <span aria-hidden className="absolute inset-7 rounded-full border border-indigo/22" />
+          <span aria-hidden className="absolute inset-16 rounded-full border border-indigo/32" />
+          {/* the SearchNexio core, centered */}
+          <span className="absolute left-1/2 top-1/2 grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl bg-gradient-to-br from-indigo to-[#4A43D9] text-white shadow-[0_12px_28px_rgba(99,91,255,0.45)]">
             <span className="flex items-center">
-              <span className="size-3 rounded-full bg-white" />
-              <span className="-ml-1 size-3 rounded-full bg-citron mix-blend-screen" />
+              <span className="size-3.5 rounded-full bg-white" />
+              <span className="-ml-1.5 size-3.5 rounded-full bg-citron mix-blend-screen" />
             </span>
           </span>
+          {/* four logos pinned to the four corners of the square */}
+          {marks.map((m, i) => (
+            <LogoBubble key={i} size="size-11" badge="ok" className={`absolute ${m.pos}`}>
+              {m.icon}
+            </LogoBubble>
+          ))}
         </div>
-        {marks.map((m, i) => (
-          <span
-            key={i}
-            className={`absolute ${m.pos} grid size-10 place-items-center rounded-xl border border-line bg-surface shadow-[0_6px_16px_rgba(11,13,18,0.1)]`}
-          >
-            {m.icon}
-          </span>
-        ))}
-      </div>
-      <div className="mt-1 grid gap-1.5">
-        {[
-          "Cited in AI Overview for “best tax advisor”",
-          "Featured in Google top 3 · local pack",
-        ].map((line) => (
-          <div
-            key={line}
-            className="flex items-center gap-2 rounded-lg border border-line bg-surface/90 px-3 py-1.5 text-[11px] font-medium text-graphite"
-          >
-            <span className="grid size-4 place-items-center rounded-full bg-citron text-ink-solid">
-              <Check className="size-2.5" />
-            </span>
-            <span className="truncate">{line}</span>
-          </div>
-        ))}
       </div>
     </Screen>
   );
 }
 
-/* 04 Prove — a reporting card: KPI tiles over a growth area chart. */
+/* 04 Prove — the logos as a citation row, growth arrow rising behind. */
 function ProveVisual() {
   return (
-    <Screen title="Revenue Report" status="+64% MoM" statusTone="live">
-      <div className="grid grid-cols-3 gap-2">
-        {[
-          { label: "Visibility", value: "82", delta: "+14" },
-          { label: "Leads", value: "1,284", delta: "+64%" },
-          { label: "Pipeline", value: "$1.9M", delta: "+41%" },
-        ].map((k) => (
-          <div key={k.label} className="rounded-xl border border-line bg-surface/90 px-3 py-2.5">
-            <p className="text-[10px] font-medium text-graphite">{k.label}</p>
-            <p className="mt-0.5 font-heading text-[17px] font-bold tabular-nums leading-none">
-              {k.value}
-            </p>
-            <p className="mt-1 inline-flex items-center gap-0.5 text-[9.5px] font-bold text-indigo">
-              <ArrowUp className="size-2" /> {k.delta}
-            </p>
-          </div>
-        ))}
-      </div>
-      <div className="relative mt-3 h-[128px] overflow-hidden rounded-xl border border-line bg-surface/90 p-3">
-        <p className="relative z-10 text-[10px] font-semibold text-graphite">
-          Organic leads &middot; 12 mo
-        </p>
-        <svg
-          className="absolute inset-x-1 bottom-1 h-[104px] w-[calc(100%-8px)]"
-          viewBox="0 0 300 104"
-          preserveAspectRatio="none"
-          aria-hidden
-        >
+    <Screen title="Now Cited On" status="+64% LEADS" statusTone="live">
+      <div className="relative flex h-full items-center justify-center">
+        {/* rising arrow behind */}
+        <svg aria-hidden className="absolute inset-0 h-full w-full" viewBox="0 0 300 160" fill="none" preserveAspectRatio="none">
           <defs>
             <linearGradient id="prove-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#635BFF" stopOpacity="0.32" />
+              <stop offset="0%" stopColor="#635BFF" stopOpacity="0.18" />
               <stop offset="100%" stopColor="#635BFF" stopOpacity="0" />
             </linearGradient>
           </defs>
-          <path
-            d="M0,90 C36,86 60,76 96,66 C150,50 205,34 250,20 C270,14 286,10 300,7 L300,104 L0,104 Z"
-            fill="url(#prove-fill)"
-          />
-          <path
-            d="M0,90 C36,86 60,76 96,66 C150,50 205,34 250,20 C270,14 286,10 300,7"
-            fill="none"
-            stroke="#635BFF"
-            strokeWidth="2.5"
-            vectorEffect="non-scaling-stroke"
-          />
-          <circle cx="298" cy="7" r="3.5" fill="#635BFF" />
+          <path d="M14,140 C80,132 150,110 210,72 C240,54 270,32 292,14 L292,160 L14,160 Z" fill="url(#prove-fill)" />
+          <path d="M14,140 C80,132 150,110 210,72 C240,54 270,32 292,14" stroke="#635BFF" strokeWidth="2.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M292 14 279 16.5M292 14l-4 12" stroke="#635BFF" strokeWidth="2.5" strokeLinecap="round" />
         </svg>
+        {/* the four logos, all now cited */}
+        <div className="relative flex items-center gap-2.5">
+          {[<GoogleG key="g" size={20} />, <MapsPin key="m" size={20} />, <SparkleAI key="s" size={20} />, <ChatGPTMark key="c" size={20} />].map((mark, i) => (
+            <LogoBubble key={i} size="size-12" badge="ok">
+              {mark}
+            </LogoBubble>
+          ))}
+        </div>
+      </div>
+      <div className="mt-1 inline-flex items-center gap-2 self-center rounded-full bg-lilac/70 px-3 py-1 text-[11px] font-bold text-indigo">
+        <ArrowUp /> Visibility 68 &rarr; 82 &middot; +64% leads
       </div>
     </Screen>
   );
