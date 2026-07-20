@@ -167,9 +167,9 @@ function Connectors({ paths, width }: { paths: string[]; width: number }) {
 
 function Pill({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
-    <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-line bg-surface px-4 py-2.5 text-[13px] font-semibold shadow-[0_6px_18px_rgba(11,13,18,0.07)]">
-      {icon}
-      {label}
+    <span className="inline-flex min-w-0 items-center justify-center gap-1.5 rounded-2xl border border-line bg-surface px-2.5 py-2 text-center text-[12px] font-semibold leading-tight shadow-[0_6px_18px_rgba(11,13,18,0.07)]">
+      <span className="shrink-0">{icon}</span>
+      <span className="min-w-0">{label}</span>
     </span>
   );
 }
@@ -184,19 +184,18 @@ function JourneyOld() {
         <Hub tone="white">
           <GoogleG size={26} />
         </Hub>
+        {/* connectors land on the 3 equal columns: centers at 100, 300, 500 */}
         <Connectors
-          width={560}
+          width={600}
           paths={[
-            "M280,0 V4 Q280,16 264,16 H112 Q96,16 96,28 V56",
-            "M280,0 V56",
-            "M280,0 V4 Q280,16 296,16 H448 Q464,16 464,28 V56",
+            "M300,0 V4 Q300,16 284,16 H116 Q100,16 100,28 V56",
+            "M300,0 V56",
+            "M300,0 V4 Q300,16 316,16 H484 Q500,16 500,28 V56",
           ]}
         />
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-3 md:mt-0 md:flex-nowrap md:justify-between">
+        <div className="mt-4 grid grid-cols-3 items-stretch gap-2 md:mt-0">
           <Pill icon={<span className="text-indigo"><SearchIcon /></span>} label="Google query" />
-          <span aria-hidden className="hidden text-graphite/60 md:inline">&rarr;</span>
           <Pill icon={<span className="text-indigo"><ListIcon /></span>} label="10 blue links" />
-          <span aria-hidden className="hidden text-graphite/60 md:inline">&rarr;</span>
           <Pill icon={<span className="text-indigo"><CursorIcon /></span>} label="Click to your site" />
         </div>
       </div>
@@ -222,16 +221,17 @@ function JourneyNew() {
             />
           </svg>
         </Hub>
+        {/* connectors land on the 4 equal columns: centers at 80, 240, 400, 560 */}
         <Connectors
           width={640}
           paths={[
-            "M320,0 V4 Q320,16 304,16 H92 Q76,16 76,28 V56",
-            "M320,0 V4 Q320,16 312,16 H254 Q238,16 238,28 V56",
-            "M320,0 V4 Q320,16 328,16 H386 Q402,16 402,28 V56",
-            "M320,0 V4 Q320,16 336,16 H548 Q564,16 564,28 V56",
+            "M320,0 V4 Q320,16 304,16 H96 Q80,16 80,28 V56",
+            "M320,0 V4 Q320,16 312,16 H256 Q240,16 240,28 V56",
+            "M320,0 V4 Q320,16 328,16 H384 Q400,16 400,28 V56",
+            "M320,0 V4 Q320,16 336,16 H544 Q560,16 560,28 V56",
           ]}
         />
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-3 md:mt-0 md:flex-nowrap md:justify-between">
+        <div className="mt-4 grid grid-cols-4 items-stretch gap-2 md:mt-0">
           <Pill icon={<GoogleG />} label="Google" />
           <Pill icon={<MapsPin />} label="Maps" />
           <Pill icon={<SparkleAI />} label="AI Overviews" />
