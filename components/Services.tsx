@@ -178,8 +178,8 @@ const VIGNETTES = [SerpVignette, LocalVignette, AiVignette, RecoveryVignette];
 
 export default function Services() {
   return (
-    <section className="relative overflow-x-clip py-16 md:py-24">
-      {/* faint ribbed backdrop, masked to fade at the edges */}
+    <section className="relative overflow-x-clip wash-lilac-full py-16 md:py-24">
+      {/* faint ribbed backdrop over the lilac wash, masked to fade at edges */}
       <div
         aria-hidden
         className="rib-pattern pointer-events-none absolute inset-0 opacity-70 [mask-image:radial-gradient(ellipse_80%_70%_at_50%_45%,#000_40%,transparent_85%)]"
