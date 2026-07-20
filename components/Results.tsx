@@ -31,7 +31,7 @@ function PhoneMock() {
     { icon: <ChatGPTMark size={16} />, label: "ChatGPT", score: 58, ok: true },
   ];
   return (
-    <div className="relative w-[268px] rounded-[2.6rem] border border-line bg-surface p-2.5 shadow-[0_30px_70px_rgba(11,13,18,0.22)]">
+    <div className="relative w-[268px] rounded-[2.6rem] border border-line bg-surface p-2.5">
       <div className="overflow-hidden rounded-[2.1rem] bg-gradient-to-b from-lilac/50 to-surface">
         {/* status bar */}
         <div className="flex items-center justify-between px-5 pt-3 text-[10px] font-semibold text-ink/70">
@@ -90,7 +90,7 @@ function PhoneMock() {
 /* floating card 1 — a "surface flip" card, styled like the reference's swap */
 function FlipCard() {
   return (
-    <div className="w-60 rounded-2xl border border-line bg-surface/95 p-4 shadow-[0_20px_50px_rgba(11,13,18,0.18)] backdrop-blur">
+    <div className="w-60 rounded-2xl border border-line bg-surface/95 p-4 backdrop-blur">
       <div className="flex items-center justify-between rounded-xl border border-line bg-ivory/70 px-3 py-2.5">
         <span className="flex items-center gap-2">
           <span className="grid size-6 place-items-center rounded-full border border-line bg-surface">
@@ -101,7 +101,7 @@ function FlipCard() {
         <span className="text-[12px] font-bold">AI search</span>
       </div>
       <div className="relative -my-1 flex justify-center">
-        <span className="grid size-7 place-items-center rounded-full border border-line bg-surface shadow-sm">
+        <span className="grid size-7 place-items-center rounded-full border border-line bg-surface">
           <ArrowUp className="rotate-180 text-indigo" />
         </span>
       </div>
@@ -123,7 +123,7 @@ function FlipCard() {
 /* floating card 2 — a "total leads" balance-style card */
 function TotalCard() {
   return (
-    <div className="w-56 rounded-2xl border border-line bg-surface/95 p-4 shadow-[0_20px_50px_rgba(11,13,18,0.18)] backdrop-blur">
+    <div className="w-56 rounded-2xl border border-line bg-surface/95 p-4 backdrop-blur">
       <p className="text-[10px] font-medium text-graphite">Leads this quarter</p>
       <p className="mt-1 flex items-end gap-1.5">
         <span className="font-heading text-[26px] font-bold leading-none tabular-nums">1,284</span>
@@ -188,8 +188,6 @@ export default function Results() {
           {/* right: the app mockup with floating cards */}
           <Reveal variant="right" delay={120}>
             <div className="relative mx-auto flex h-[560px] max-w-lg items-center justify-center">
-              {/* glow behind the device */}
-              <span aria-hidden className="absolute size-80 rounded-full bg-indigo/20 blur-3xl" />
               {/* phone sits slightly right so cards float off its left/bottom */}
               <div className="relative translate-x-6">
                 <PhoneMock />

@@ -43,17 +43,18 @@ export default function Industries() {
             centered and clipped to the section width. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-6 hidden h-[460px] w-[1080px] -translate-x-1/2 md:block"
+          className="pointer-events-none absolute left-1/2 top-20 hidden h-[460px] w-[1080px] -translate-x-1/2 md:block"
         >
-          {/* faint guide curve, drawn in the same 1080x460 space. The bottom
-              of the U is pushed down (y=440) so it clears the CTA button. */}
+          {/* faint guide curve: a wide, shallow catenary-style U. Sides start
+              high near the top corners and sweep gently inward to a broad
+              shallow bottom bowl that the CTA sits inside. */}
           <svg
             className="absolute inset-0 h-full w-full"
             viewBox="0 0 1080 460"
             fill="none"
           >
             <path
-              d="M40,60 C40,320 240,430 540,430 C840,430 1040,320 1040,60"
+              d="M30,70 C120,340 380,410 540,410 C700,410 960,340 1050,70"
               stroke="var(--c-line)"
               strokeWidth="1.5"
               className="opacity-80"
@@ -111,7 +112,7 @@ export default function Industries() {
         </Reveal>
 
         <Reveal delay={160}>
-          <p className="relative z-10 mt-10 text-center text-[13.5px] text-graphite md:mt-24">
+          <p className="relative z-10 mt-10 text-center text-[13.5px] text-graphite md:mt-40">
             Not sure where you&apos;re missing? The visibility review maps every
             surface.
           </p>

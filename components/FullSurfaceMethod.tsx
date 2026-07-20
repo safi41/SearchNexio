@@ -43,44 +43,11 @@ function Check({ className = "" }: { className?: string }) {
   );
 }
 
-/* App-window frame with a header row: title on the left, live pill on the
-   right. Gives every visual a consistent product-screen look. */
-function Screen({
-  title,
-  status,
-  statusTone = "live",
-  children,
-}: {
-  title: string;
-  status: string;
-  statusTone?: "live" | "warn" | "up";
-  children: React.ReactNode;
-}) {
-  const tone =
-    statusTone === "warn"
-      ? "bg-warn/10 text-warn"
-      : statusTone === "up"
-        ? "bg-indigo/10 text-indigo"
-        : "bg-citron/40 text-ink-solid";
+/* Bare frame: no card chrome, just centers the visual so only the graphic
+   shows. */
+function Screen({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-6 flex h-full flex-col">
-      <div className="flex items-center justify-between border-b border-line px-1 pb-3 pt-6">
-        <div className="flex items-center gap-2">
-          <span aria-hidden className="flex items-center">
-            <span className="size-3 rounded-full bg-ink" />
-            <span className="-ml-1 size-3 rounded-full bg-indigo mix-blend-multiply" />
-          </span>
-          <span className="font-heading text-[13px] font-bold tracking-[-0.01em]">
-            {title}
-          </span>
-        </div>
-        <span
-          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-[0.04em] ${tone}`}
-        >
-          <span className="size-1.5 rounded-full bg-current" />
-          {status}
-        </span>
-      </div>
+    <div className="flex h-full flex-col">
       <div className="relative flex-1 py-4">{children}</div>
     </div>
   );
@@ -121,7 +88,7 @@ function LogoBubble({
    flagged, over a soft radar sweep. */
 function MapVisual() {
   return (
-    <Screen title="Surface Scan" status="SCANNING" statusTone="up">
+    <Screen>
       <div className="flex h-full flex-col items-center justify-center">
         <div className="relative size-60">
           {/* radar rings, centered */}
@@ -154,7 +121,7 @@ function MapVisual() {
 /* 02 Fix — the flagged surfaces flip to fixed, with a progress line. */
 function FixVisual() {
   return (
-    <Screen title="Fixing Gaps" status="2 / 2 FIXED" statusTone="live">
+    <Screen>
       <div className="relative flex h-full items-center justify-center">
         <div className="flex items-center gap-6">
           {/* was broken */}
@@ -192,7 +159,7 @@ function AmplifyVisual() {
     { icon: <ChatGPTMark size={22} />, pos: "bottom-4 right-0" },
   ];
   return (
-    <Screen title="Authority Signals" status="BROADCASTING" statusTone="up">
+    <Screen>
       <div className="flex h-full items-center justify-center">
         <div className="relative size-60">
           <span aria-hidden className="absolute inset-0 rounded-full border border-indigo/12" />
@@ -220,7 +187,7 @@ function AmplifyVisual() {
 /* 04 Prove — the logos as a citation row, growth arrow rising behind. */
 function ProveVisual() {
   return (
-    <Screen title="Now Cited On" status="+64% LEADS" statusTone="live">
+    <Screen>
       <div className="relative flex h-full items-center justify-center">
         {/* rising arrow behind */}
         <svg aria-hidden className="absolute inset-0 h-full w-full" viewBox="0 0 300 160" fill="none" preserveAspectRatio="none">
@@ -355,7 +322,7 @@ export default function FullSurfaceMethod() {
                       </p>
 
                       {/* mobile: each step carries its own visual inline */}
-                      <div className="mt-4 h-72 overflow-hidden rounded-2xl border border-line bg-surface shadow-[0_14px_36px_rgba(11,13,18,0.06)] lg:hidden">
+                      <div className="mt-4 h-72 overflow-hidden lg:hidden">
                         {(() => {
                           const StepVisual = VISUALS[i];
                           return <StepVisual />;
@@ -371,11 +338,7 @@ export default function FullSurfaceMethod() {
           {/* the sticky panel: its graphic follows the active step */}
           <Reveal variant="right" className="hidden lg:block">
             <div className="sticky top-28 h-[460px]">
-              <div className="relative h-full overflow-hidden rounded-[2rem] border border-line bg-surface shadow-[0_20px_50px_rgba(11,13,18,0.07)]">
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-lilac/40 to-transparent"
-                />
+              <div className="relative h-full">
                 {VISUALS.map((StepVisual, i) => (
                   <div
                     key={i}

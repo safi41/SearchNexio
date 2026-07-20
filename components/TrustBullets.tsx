@@ -159,7 +159,7 @@ function ShieldArt() {
       <IndustryChip icon={<HeartGlyph />} label="Healthcare" className="left-1/2 top-1 -translate-x-[64%]" delay={150} />
       <IndustryChip icon={<BankGlyph />} label="Finance" className="left-0 top-[38%]" delay={220} />
       <IndustryChip icon={<ScalesGlyph />} label="Legal" className="right-0 top-[44%]" delay={290} />
-      <IndustryChip icon={<DocGlyph />} label="Tax" className="bottom-3 left-[22%]" delay={360} />
+      <IndustryChip icon={<DocGlyph />} label="Tax" className="bottom-1 left-1/2 -translate-x-[46%]" delay={360} />
     </div>
   );
 }

@@ -216,18 +216,6 @@ export default function WhySearchNexio() {
           </div>
         </div>
 
-        {/* Testimonial slot: single quote, no carousel; pending permission outreach. */}
-        <Reveal delay={140}>
-          <figure className="mx-auto mt-10 max-w-3xl rounded-3xl border border-dashed border-graphite/40 bg-surface/60 p-10 text-center">
-            <span aria-hidden className="font-heading text-4xl leading-none text-ink">
-              &ldquo;
-            </span>
-            <figcaption className="mt-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-graphite">
-              One client quote, one sentence, name, company. Pending permission
-              outreach.
-            </figcaption>
-          </figure>
-        </Reveal>
       </div>
     </section>
   );
