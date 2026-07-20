@@ -168,11 +168,11 @@ body {
 .curve-bubble {
   offset-path: path("M30,70 C120,340 380,410 540,410 C700,410 960,340 1050,70");
   offset-rotate: 0deg;
+  /* offset-anchor centers each bubble's own center on the path, so no
+     negative margins are needed — those would double-shift it off the line. */
   offset-anchor: center;
   animation: curve-drift 26s linear infinite;
   will-change: offset-distance;
-  margin-left: -22px;
-  margin-top: -22px;
 }
 @keyframes curve-drift {
   from { offset-distance: 0%; }

@@ -18,7 +18,7 @@ function TileFrame({
 }) {
   return (
     <span
-      className={`relative grid size-12 shrink-0 place-items-center rounded-2xl text-white shadow-[0_10px_26px_rgba(99,91,255,0.35)] ${gradient}`}
+      className={`relative grid size-12 shrink-0 place-items-center rounded-2xl text-white ${gradient}`}
     >
       {children}
     </span>
@@ -89,14 +89,11 @@ const ACCENTS = ["from-indigo/12", "from-[#8F7BFF]/15", "from-[#4CC9F0]/15", "fr
 function CoreHub() {
   return (
     <div className="relative grid size-full place-items-center">
-      {/* soft glow behind the core */}
-      <span aria-hidden className="absolute size-44 rounded-full bg-indigo/25 blur-3xl" />
-      <span aria-hidden className="absolute size-28 rounded-full bg-violet-500/25 blur-2xl" />
       {/* orbit rings */}
       <span aria-hidden className="absolute size-40 rounded-full border border-indigo/20" />
       <span aria-hidden className="absolute size-28 rounded-full border border-indigo/30" />
       {/* the chip core */}
-      <span className="relative grid size-20 place-items-center rounded-[1.4rem] bg-gradient-to-br from-indigo to-[#4A43D9] shadow-[0_16px_40px_rgba(99,91,255,0.5)]">
+      <span className="relative grid size-20 place-items-center rounded-[1.4rem] bg-gradient-to-br from-indigo to-[#4A43D9]">
         <span aria-hidden className="absolute inset-1.5 rounded-[1.1rem] border border-white/25" />
         <span className="flex items-center">
           <span className="size-4 rounded-full bg-white" />
