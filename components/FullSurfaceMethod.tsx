@@ -3,201 +3,227 @@
 import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/motion/Reveal";
 import { SectionHead } from "@/components/ui";
-import {
-  GoogleG,
-  MapsPin,
-  SparkleAI,
-  ChatGPTMark,
-  GeminiMark,
-  PerplexityMark,
-  BingMark,
-  RedditMark,
-} from "@/components/brand-icons";
+import { GoogleG, MapsPin, SparkleAI, ChatGPTMark } from "@/components/brand-icons";
 import { METHOD_STEPS } from "@/lib/content";
 
-/* The method as a scroll-swap timeline (reference layout): a large panel with
-   a lifestyle photo + frosted app-dock on the left, step copy on the right,
-   and a numbered rail on the far right. The active step swaps as you scroll.
+/* The method as a timeline: a vertical rail of steps on the left with a
+   progress line that fills as you scroll, and a sticky visual panel on the
+   right whose graphic switches to match the active step. */
 
-   Photos live in /public/method/step-0X.jpg — drop real photos over the
-   gradient placeholders using the same filenames. */
+/* ---------- step visuals (the "images" that change with the timeline) ---
+   Each visual is framed as a small product screen: a titled app window with
+   a live-status header, so the panel reads like a real dashboard rather than
+   a loose diagram. */
 
-/* per-step content: the photo, the platforms shown in the frosted dock, and
-   two sub-features (bold label + one-line description). name/body come from
-   METHOD_STEPS so the section stays in sync with the locked copy. */
-const STEPS = [
-  {
-    image: "/method/step-01.jpg",
-    lead: "See exactly where buyers can and cannot find you.",
-    dock: [
-      <GoogleG key="g" size={20} />,
-      <MapsPin key="m" size={20} />,
-      <ChatGPTMark key="c" size={20} />,
-      <GeminiMark key="ge" size={20} />,
-      <PerplexityMark key="p" size={20} />,
-      <BingMark key="b" size={20} />,
-    ],
-    features: [
-      { title: "Full-surface audit", desc: "Every platform your buyers use, mapped in one place." },
-      { title: "Real data, not guesses", desc: "Every campaign starts from measured visibility gaps." },
-    ],
-  },
-  {
-    image: "/method/step-02.jpg",
-    lead: "Clear the technical and local issues holding you back.",
-    dock: [
-      <GoogleG key="g" size={20} />,
-      <MapsPin key="m" size={20} />,
-      <BingMark key="b" size={20} />,
-    ],
-    features: [
-      { title: "Revenue-first priority", desc: "We fix what moves pipeline before what is easy to code." },
-      { title: "Technical + local cleanup", desc: "Errors, content gaps, and business data, all handled." },
-    ],
-  },
-  {
-    image: "/method/step-03.jpg",
-    lead: "Build the authority that earns rankings and AI citations.",
-    dock: [
-      <ChatGPTMark key="c" size={20} />,
-      <GeminiMark key="ge" size={20} />,
-      <PerplexityMark key="p" size={20} />,
-      <SparkleAI key="s" size={20} />,
-      <RedditMark key="r" size={20} />,
-    ],
-    features: [
-      { title: "Rankings that hold", desc: "Durable authority, not short-lived tactics." },
-      { title: "Cited inside AI answers", desc: "Show up when buyers ask ChatGPT, Gemini, and more." },
-    ],
-  },
-  {
-    image: "/method/step-04.jpg",
-    lead: "Tie every change to leads and pipeline you can measure.",
-    dock: [
-      <GoogleG key="g" size={20} />,
-      <MapsPin key="m" size={20} />,
-      <ChatGPTMark key="c" size={20} />,
-      <SparkleAI key="s" size={20} />,
-    ],
-    features: [
-      { title: "Clear reporting", desc: "See what we changed, what it cost, and what it returned." },
-      { title: "Leads, not vanity metrics", desc: "Outcomes measured in pipeline, not keyword positions." },
-    ],
-  },
-];
-
-/* the frosted app-dock overlaid on the bottom of the photo */
-function AppDock({ marks }: { marks: React.ReactNode[] }) {
+function ArrowUp({ className = "" }: { className?: string }) {
   return (
-    <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/40 bg-white/25 p-3 backdrop-blur-md">
-      {/* a couple of soft signal waves above the dock */}
-      <svg aria-hidden className="pointer-events-none absolute -top-10 inset-x-3 h-9 w-[calc(100%-24px)]" viewBox="0 0 300 36" fill="none" preserveAspectRatio="none">
-        <path d="M0,20 C60,6 100,30 150,18 C200,6 240,28 300,14" stroke="#ffffff" strokeWidth="1.5" opacity="0.7" />
-        <path d="M0,28 C60,16 100,36 150,26 C200,16 240,34 300,22" stroke="#ffffff" strokeWidth="1.5" opacity="0.4" />
-      </svg>
-      <div className="flex items-center justify-center gap-2 sm:gap-2.5">
-        {marks.map((m, i) => (
-          <span
-            key={i}
-            className="grid size-8 place-items-center rounded-full bg-white shadow-[0_4px_12px_rgba(11,13,18,0.12)] sm:size-9"
-          >
-            {m}
-          </span>
-        ))}
-      </div>
+    <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden className={className}>
+      <path
+        d="M6 10V2m0 0L2.5 5.5M6 2l3.5 3.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function Check({ className = "" }: { className?: string }) {
+  return (
+    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden className={className}>
+      <path
+        d="m2.5 6.5 2.5 2.5 4.5-5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/* Bare frame: no card chrome, just centers the visual so only the graphic
+   shows. */
+function Screen({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex h-full flex-col">
+      <div className="relative flex-1 py-4">{children}</div>
     </div>
   );
 }
 
-/* one full panel: photo + dock on the left, step copy on the right */
-function StepPanel({ index }: { index: number }) {
-  const step = METHOD_STEPS[index];
-  const v = STEPS[index];
+/* a big platform logo bubble with an optional status badge */
+function LogoBubble({
+  children,
+  size = "size-16",
+  badge,
+  className = "",
+}: {
+  children: React.ReactNode;
+  size?: string;
+  badge?: "ok" | "warn" | null;
+  className?: string;
+}) {
   return (
-    <div className="grid h-full gap-8 rounded-[2rem] border border-line bg-surface p-4 md:grid-cols-2 md:p-5 lg:gap-4">
-      {/* photo panel */}
-      <div className="relative min-h-[320px] overflow-hidden rounded-[1.5rem] md:min-h-full">
-        <img
-          src={v.image}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 size-full object-cover"
-        />
-        <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
-        <AppDock marks={v.dock} />
+    <span
+      className={`relative grid ${size} place-items-center rounded-2xl border border-line bg-surface ${className}`}
+    >
+      {children}
+      {badge === "ok" && (
+        <span aria-hidden className="absolute -bottom-1.5 -right-1.5 grid size-5 place-items-center rounded-full bg-citron">
+          <Check className="size-3 text-ink-solid" />
+        </span>
+      )}
+      {badge === "warn" && (
+        <span aria-hidden className="absolute -bottom-1.5 -right-1.5 grid size-5 place-items-center rounded-full bg-warn text-white">
+          <span className="text-[11px] font-bold leading-none">!</span>
+        </span>
+      )}
+    </span>
+  );
+}
+
+/* 01 Map — the four surfaces scanned: found ones checked, missing ones
+   flagged, over a soft radar sweep. */
+function MapVisual() {
+  return (
+    <Screen>
+      <div className="flex h-full flex-col items-center justify-center">
+        <div className="relative size-60">
+          {/* radar rings, centered */}
+          <span aria-hidden className="absolute inset-0 rounded-full border border-dashed border-indigo/25" />
+          <span aria-hidden className="absolute inset-8 rounded-full border border-indigo/20" />
+          <span aria-hidden className="absolute inset-[4.5rem] rounded-full border border-indigo/25" />
+          <span aria-hidden className="absolute left-1/2 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo shadow-[0_0_16px_rgba(99,91,255,0.7)]" />
+          {/* four logos at the four corners of the radar */}
+          <LogoBubble badge="ok" className="absolute left-0 top-4">
+            <GoogleG size={26} />
+          </LogoBubble>
+          <LogoBubble badge="ok" className="absolute right-0 top-4">
+            <MapsPin size={26} />
+          </LogoBubble>
+          <LogoBubble badge="warn" className="absolute bottom-4 left-0">
+            <SparkleAI size={26} />
+          </LogoBubble>
+          <LogoBubble badge="warn" className="absolute bottom-4 right-0">
+            <ChatGPTMark size={26} />
+          </LogoBubble>
+        </div>
+        <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-warn/10 px-3 py-1 text-[11px] font-semibold text-warn">
+          <span className="size-1.5 rounded-full bg-warn" /> 2 surfaces where buyers can&apos;t find you
+        </div>
       </div>
+    </Screen>
+  );
+}
 
-      {/* copy panel */}
-      <div className="flex flex-col justify-center px-2 py-4 md:px-6">
-        <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-indigo">
-          Step {step.index}
-        </p>
-        <h3 className="mt-3 font-heading text-[clamp(1.7rem,2.6vw,2.3rem)] font-bold leading-[1.1] tracking-[-0.02em]">
-          {step.name}
-        </h3>
-        <p className="mt-3 max-w-md text-[14.5px] leading-relaxed text-graphite">
-          {v.lead}
-        </p>
+/* 02 Fix — the flagged surfaces flip to fixed, with a progress line. */
+function FixVisual() {
+  return (
+    <Screen>
+      <div className="relative flex h-full items-center justify-center">
+        <div className="flex items-center gap-6">
+          {/* was broken */}
+          <LogoBubble size="size-20" className="opacity-50">
+            <SparkleAI size={30} />
+            <span aria-hidden className="absolute -bottom-1.5 -right-1.5 grid size-6 place-items-center rounded-full bg-warn/20 text-warn">
+              <span className="text-[12px] font-bold leading-none">!</span>
+            </span>
+          </LogoBubble>
+          {/* the fix arrow */}
+          <span className="grid size-9 place-items-center rounded-full bg-indigo text-white">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+          {/* now fixed */}
+          <LogoBubble size="size-20" badge="ok" className="border-indigo/40 shadow-[0_0_0_4px_rgba(99,91,255,0.1)]">
+            <SparkleAI size={30} />
+          </LogoBubble>
+        </div>
+      </div>
+      <div className="mt-1 flex items-center gap-2 self-center rounded-xl bg-lilac/60 px-3 py-2 text-[11px] font-semibold text-indigo">
+        <ArrowUp /> fixed in order of revenue impact
+      </div>
+    </Screen>
+  );
+}
 
-        <div className="mt-8 space-y-6">
-          {v.features.map((f) => (
-            <div key={f.title}>
-              <h4 className="font-heading text-[17px] font-bold tracking-[-0.01em]">
-                {f.title}
-              </h4>
-              <p className="mt-1.5 max-w-md text-[13.5px] leading-relaxed text-graphite">
-                {f.desc}
-              </p>
-            </div>
+/* 03 Amplify — authority hub broadcasting out to every logo. */
+function AmplifyVisual() {
+  const marks = [
+    { icon: <GoogleG size={22} />, pos: "left-0 top-4" },
+    { icon: <MapsPin size={22} />, pos: "right-0 top-4" },
+    { icon: <SparkleAI size={22} />, pos: "bottom-4 left-0" },
+    { icon: <ChatGPTMark size={22} />, pos: "bottom-4 right-0" },
+  ];
+  return (
+    <Screen>
+      <div className="flex h-full items-center justify-center">
+        <div className="relative size-60">
+          <span aria-hidden className="absolute inset-0 rounded-full border border-indigo/12" />
+          <span aria-hidden className="absolute inset-7 rounded-full border border-indigo/22" />
+          <span aria-hidden className="absolute inset-16 rounded-full border border-indigo/32" />
+          {/* the SearchNexio core, centered */}
+          <span className="absolute left-1/2 top-1/2 grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl bg-gradient-to-br from-indigo to-[#4A43D9] text-white shadow-[0_12px_28px_rgba(99,91,255,0.45)]">
+            <span className="flex items-center">
+              <span className="size-3.5 rounded-full bg-white" />
+              <span className="-ml-1.5 size-3.5 rounded-full bg-citron mix-blend-screen" />
+            </span>
+          </span>
+          {/* four logos pinned to the four corners of the square */}
+          {marks.map((m, i) => (
+            <LogoBubble key={i} size="size-11" badge="ok" className={`absolute ${m.pos}`}>
+              {m.icon}
+            </LogoBubble>
           ))}
         </div>
       </div>
-    </div>
+    </Screen>
   );
 }
 
-/* the numbered rail on the far right */
-function Rail({ active }: { active: number }) {
+/* 04 Prove — the logos as a citation row, growth arrow rising behind. */
+function ProveVisual() {
   return (
-    <div className="relative hidden w-12 shrink-0 flex-col items-center lg:flex">
-      {/* base + progress line */}
-      <span aria-hidden className="absolute bottom-5 left-1/2 top-5 w-0.5 -translate-x-1/2 rounded bg-line" />
-      <span
-        aria-hidden
-        className="absolute left-1/2 top-5 w-0.5 -translate-x-1/2 rounded bg-indigo transition-all duration-500 ease-soft"
-        style={{ height: `calc((100% - 40px) * ${active / (STEPS.length - 1)})` }}
-      />
-      <div className="flex h-full flex-col justify-between py-0">
-        {STEPS.map((_, i) => (
-          <span
-            key={i}
-            className={`relative z-10 grid size-10 place-items-center rounded-full font-heading text-[13px] font-bold tabular-nums transition-all duration-300 ease-soft ${
-              i === active
-                ? "bg-indigo text-white shadow-[0_0_0_5px_var(--c-page)]"
-                : i < active
-                  ? "bg-indigo text-white"
-                  : "border border-line bg-surface text-graphite"
-            }`}
-          >
-            {i < active ? (
-              <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden>
-                <path d="m2.5 6.5 2.5 2.5 4.5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            ) : (
-              METHOD_STEPS[i].index
-            )}
-          </span>
-        ))}
+    <Screen>
+      <div className="relative flex h-full items-center justify-center">
+        {/* rising arrow behind */}
+        <svg aria-hidden className="absolute inset-0 h-full w-full" viewBox="0 0 300 160" fill="none" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="prove-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#635BFF" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="#635BFF" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <path d="M14,140 C80,132 150,110 210,72 C240,54 270,32 292,14 L292,160 L14,160 Z" fill="url(#prove-fill)" />
+          <path d="M14,140 C80,132 150,110 210,72 C240,54 270,32 292,14" stroke="#635BFF" strokeWidth="2.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M292 14 279 16.5M292 14l-4 12" stroke="#635BFF" strokeWidth="2.5" strokeLinecap="round" />
+        </svg>
+        {/* the four logos, all now cited */}
+        <div className="relative flex items-center gap-2.5">
+          {[<GoogleG key="g" size={20} />, <MapsPin key="m" size={20} />, <SparkleAI key="s" size={20} />, <ChatGPTMark key="c" size={20} />].map((mark, i) => (
+            <LogoBubble key={i} size="size-12" badge="ok">
+              {mark}
+            </LogoBubble>
+          ))}
+        </div>
       </div>
-    </div>
+      <div className="mt-1 inline-flex items-center gap-2 self-center rounded-full bg-lilac/70 px-3 py-1 text-[11px] font-bold text-indigo">
+        <ArrowUp /> Visibility 68 &rarr; 82 &middot; +64% leads
+      </div>
+    </Screen>
   );
 }
 
-/* ---------- the section --------------------------------------------------- */
+const VISUALS = [MapVisual, FixVisual, AmplifyVisual, ProveVisual];
+
+/* ---------- the timeline ------------------------------------------------ */
 
 export default function FullSurfaceMethod() {
   const [active, setActive] = useState(0);
-  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const stepRefs = useRef<(HTMLLIElement | null)[]>([]);
 
   useEffect(() => {
     const observers = stepRefs.current.map((el, i) => {
@@ -206,7 +232,8 @@ export default function FullSurfaceMethod() {
         (entries) => {
           if (entries[0].isIntersecting) setActive(i);
         },
-        { rootMargin: "-40% 0px -50% 0px" }
+        /* a step becomes active while it crosses the middle band of the viewport */
+        { rootMargin: "-38% 0px -48% 0px" }
       );
       io.observe(el);
       return io;
@@ -229,67 +256,111 @@ export default function FullSurfaceMethod() {
           />
         </Reveal>
 
-        {/* desktop: a sticky panel that swaps as you scroll, with the rail.
-            The two columns are each tall (one screen-ish per step). The panel
-            and rail are sticky at the top of their tall columns, so they stay
-            pinned while spy markers spaced down the column drive the active
-            step. */}
-        <div className="mt-14 hidden gap-6 lg:flex">
-          {/* left column: tall, holds the sticky panel + the spy markers */}
-          <div className="relative flex-1" style={{ height: `${STEPS.length * 55}vh` }}>
-            <div className="sticky top-24">
-              <Reveal variant="scale">
-                <div className="relative min-h-[480px]">
-                  {STEPS.map((_, i) => (
-                    <div
-                      key={i}
-                      aria-hidden={active !== i}
-                      className={`transition-all duration-500 ease-soft ${
-                        active === i
-                          ? "relative opacity-100"
-                          : "pointer-events-none absolute inset-0 opacity-0"
+        <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+          {/* the rail */}
+          <Reveal variant="left">
+            <ol className="relative">
+              {/* base line + scroll-filled progress line */}
+              <span aria-hidden className="absolute bottom-5 left-[19px] top-5 w-0.5 rounded bg-line" />
+              <span
+                aria-hidden
+                className="absolute left-[19px] top-5 w-0.5 rounded bg-indigo transition-all duration-700 ease-soft"
+                style={{ height: `calc((100% - 40px) * ${active / (METHOD_STEPS.length - 1)})` }}
+              />
+              {METHOD_STEPS.map((step, i) => {
+                const state = i < active ? "done" : i === active ? "active" : "next";
+                return (
+                  <li
+                    key={step.name}
+                    ref={(el) => {
+                      stepRefs.current[i] = el;
+                    }}
+                    className={`relative flex gap-5 pl-0 ${
+                      i < METHOD_STEPS.length - 1 ? "pb-12" : ""
+                    }`}
+                  >
+                    <span
+                      className={`relative z-10 grid size-10 shrink-0 place-items-center rounded-full font-heading text-[14px] font-bold transition-all duration-500 ease-soft ${
+                        state === "active"
+                          ? "bg-indigo text-white shadow-[0_0_0_6px_var(--c-lilac)]"
+                          : state === "done"
+                            ? "bg-indigo text-white"
+                            : "border border-line bg-surface text-graphite"
                       }`}
                     >
-                      <StepPanel index={i} />
-                    </div>
-                  ))}
-                </div>
-              </Reveal>
-            </div>
-            {/* spy markers spaced down the tall column; each activates its step
-                as it crosses the viewport middle band */}
-            <div aria-hidden className="pointer-events-none absolute inset-0">
-              {STEPS.map((_, i) => (
-                <div
-                  key={i}
-                  ref={(el) => {
-                    stepRefs.current[i] = el;
-                  }}
-                  className="absolute inset-x-0 h-px"
-                  style={{ top: `${(i / STEPS.length) * 100}%` }}
-                />
-              ))}
-            </div>
-          </div>
-          {/* right column: tall too, so the rail can stay sticky alongside */}
-          <div style={{ height: `${STEPS.length * 55}vh` }}>
-            <div className="sticky top-24 h-[480px]">
-              <Rail active={active} />
-            </div>
-          </div>
-        </div>
+                      {state === "done" ? (
+                        <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden>
+                          <path
+                            d="m2.5 6.5 2.5 2.5 4.5-5"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      ) : (
+                        step.index
+                      )}
+                    </span>
+                    <div
+                      className={`pt-1 transition-opacity duration-500 ${
+                        state === "next" ? "opacity-50" : "opacity-100"
+                      }`}
+                    >
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-graphite">
+                        Step {step.index}
+                      </p>
+                      <h3
+                        className={`mt-1 font-heading text-[21px] font-bold transition-colors duration-500 ${
+                          state === "active" ? "text-indigo" : "text-ink"
+                        }`}
+                      >
+                        {step.name}
+                      </h3>
+                      <p className="mt-2 max-w-md text-[13.5px] leading-relaxed text-graphite">
+                        {step.body}
+                      </p>
 
-        {/* mobile / tablet: every step stacked, no scroll-swap */}
-        <div className="mt-12 space-y-6 lg:hidden">
-          {STEPS.map((_, i) => (
-            <Reveal key={i} variant="up" delay={i * 40}>
-              <StepPanel index={i} />
-            </Reveal>
-          ))}
+                      {/* mobile: each step carries its own visual inline */}
+                      <div className="mt-4 h-72 overflow-hidden lg:hidden">
+                        {(() => {
+                          const StepVisual = VISUALS[i];
+                          return <StepVisual />;
+                        })()}
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </Reveal>
+
+          {/* the sticky panel: its graphic follows the active step */}
+          <Reveal variant="right" className="hidden lg:block">
+            <div className="sticky top-28 h-[460px]">
+              <div className="relative h-full">
+                {VISUALS.map((StepVisual, i) => (
+                  <div
+                    key={i}
+                    aria-hidden={active !== i}
+                    className={`absolute inset-0 transition-all duration-700 ease-soft ${
+                      active === i
+                        ? "scale-100 opacity-100"
+                        : active > i
+                          ? "-translate-y-3 scale-[0.97] opacity-0"
+                          : "translate-y-3 scale-[0.97] opacity-0"
+                    }`}
+                  >
+                    <StepVisual />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
 
         <Reveal delay={120}>
-          <p className="mx-auto mt-14 max-w-xl text-center text-[14px] leading-relaxed text-ink">
+          <p className="mx-auto mt-12 max-w-xl text-center text-[14px] leading-relaxed text-ink">
             No long-term lock-in contracts. We keep our clients by delivering
             results, not through legal commitments.
           </p>
