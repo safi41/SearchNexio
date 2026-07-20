@@ -10,167 +10,294 @@ import { METHOD_STEPS } from "@/lib/content";
    progress line that fills as you scroll, and a sticky visual panel on the
    right whose graphic switches to match the active step. */
 
-/* ---------- step visuals (the "images" that change with the timeline) --- */
+/* ---------- step visuals (the "images" that change with the timeline) ---
+   Each visual is framed as a small product screen: a titled app window with
+   a live-status header, so the panel reads like a real dashboard rather than
+   a loose diagram. */
 
-function PanelChip({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function ArrowUp({ className = "" }: { className?: string }) {
   return (
-    <span
-      className={`inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1 text-[11px] font-semibold shadow-sm ${className}`}
-    >
-      {children}
-    </span>
+    <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden className={className}>
+      <path
+        d="M6 10V2m0 0L2.5 5.5M6 2l3.5 3.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
-/* 01 Map — the surface radar sweeping the grid */
-function MapVisual() {
+function Check({ className = "" }: { className?: string }) {
   return (
-    <div className="relative flex h-full items-center justify-center overflow-hidden">
-      <div aria-hidden className="grid-pattern absolute inset-0 opacity-70 [background-size:34px_34px]" />
-      <span aria-hidden className="absolute size-56 rounded-full border border-dashed border-indigo/40" />
-      <span aria-hidden className="absolute size-36 rounded-full border border-indigo/25" />
-      <span aria-hidden className="absolute size-20 rounded-full border border-indigo/40" />
-      <span className="relative size-4 rounded-full bg-indigo shadow-[0_0_18px_rgba(99,91,255,0.8)]" />
-      <span aria-hidden className="absolute left-[26%] top-[28%] size-3 rounded-full bg-ink/50" />
-      <span aria-hidden className="absolute right-[24%] top-[60%] size-3 rounded-full bg-warn/80" />
-      <span aria-hidden className="absolute right-[34%] top-[22%] size-2 rounded-full bg-ink/35" />
-      <span aria-hidden className="absolute left-[30%] bottom-[24%] size-2 rounded-full bg-indigo/50" />
-      <PanelChip className="absolute bottom-5 left-1/2 -translate-x-1/2">
-        <span className="size-1.5 rounded-full bg-warn" /> 2 invisible surfaces found
-      </PanelChip>
+    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden className={className}>
+      <path
+        d="m2.5 6.5 2.5 2.5 4.5-5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/* App-window frame with a header row: title on the left, live pill on the
+   right. Gives every visual a consistent product-screen look. */
+function Screen({
+  title,
+  status,
+  statusTone = "live",
+  children,
+}: {
+  title: string;
+  status: string;
+  statusTone?: "live" | "warn" | "up";
+  children: React.ReactNode;
+}) {
+  const tone =
+    statusTone === "warn"
+      ? "bg-warn/10 text-warn"
+      : statusTone === "up"
+        ? "bg-indigo/10 text-indigo"
+        : "bg-citron/40 text-ink-solid";
+  return (
+    <div className="mx-6 flex h-full flex-col">
+      <div className="flex items-center justify-between border-b border-line px-1 pb-3 pt-6">
+        <div className="flex items-center gap-2">
+          <span aria-hidden className="flex items-center">
+            <span className="size-3 rounded-full bg-ink" />
+            <span className="-ml-1 size-3 rounded-full bg-indigo mix-blend-multiply" />
+          </span>
+          <span className="font-heading text-[13px] font-bold tracking-[-0.01em]">
+            {title}
+          </span>
+        </div>
+        <span
+          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-[0.04em] ${tone}`}
+        >
+          <span className="size-1.5 rounded-full bg-current" />
+          {status}
+        </span>
+      </div>
+      <div className="relative flex-1 py-4">{children}</div>
     </div>
   );
 }
 
-/* 02 Fix — the prioritized checklist working itself down */
-function FixVisual() {
-  const rows = [
-    { done: true, w: "w-40" },
-    { done: true, w: "w-32" },
-    { done: true, w: "w-36" },
-    { done: false, w: "w-28" },
+/* 01 Map — a surface audit table: which platforms you're found on, and the
+   two you're missing, over a faint radar backdrop. */
+function MapVisual() {
+  const surfaces = [
+    { icon: <GoogleG size={15} />, label: "Google", score: 82, ok: true },
+    { icon: <MapsPin size={15} />, label: "Maps", score: 74, ok: true },
+    { icon: <SparkleAI size={15} />, label: "AI Overviews", score: 31, ok: false },
+    { icon: <ChatGPTMark size={15} />, label: "ChatGPT", score: 18, ok: false },
   ];
   return (
-    <div className="relative flex h-full items-center justify-center">
-      <div className="w-64 rounded-2xl border border-line bg-surface p-5 shadow-[0_14px_36px_rgba(11,13,18,0.08)]">
-        <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-graphite">
-          Fix queue
-        </p>
-        <div className="grid gap-3">
-          {rows.map((row, i) => (
-            <div key={i} className="flex items-center gap-2.5">
+    <Screen title="Surface Scan" status="SCANNING" statusTone="up">
+      <div aria-hidden className="grid-pattern absolute inset-0 opacity-40 [background-size:30px_30px]" />
+      <div aria-hidden className="absolute right-6 top-2 size-28 rounded-full border border-dashed border-indigo/30" />
+      <div aria-hidden className="absolute right-14 top-10 size-12 rounded-full border border-indigo/25" />
+      <div className="relative grid gap-2">
+        {surfaces.map((s) => (
+          <div
+            key={s.label}
+            className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 ${
+              s.ok
+                ? "border-line bg-surface/90"
+                : "border-warn/30 bg-warn/5"
+            }`}
+          >
+            <span className="grid size-7 place-items-center rounded-lg border border-line bg-surface">
+              {s.icon}
+            </span>
+            <span className="w-24 text-[12px] font-semibold">{s.label}</span>
+            <span className="h-2 flex-1 overflow-hidden rounded-full bg-line/70">
               <span
-                className={`grid size-5 shrink-0 place-items-center rounded-full ${
-                  row.done ? "bg-citron" : "border border-warn/60 bg-surface"
-                }`}
-              >
-                {row.done ? (
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden>
-                    <path
-                      d="m2.5 6.5 2.5 2.5 4.5-5"
-                      stroke="#0B0D12"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                ) : (
-                  <span className="size-1.5 rounded-full bg-warn" />
-                )}
-              </span>
-              <span className={`h-2 rounded-full bg-line ${row.w}`} />
-            </div>
-          ))}
-        </div>
+                className={`block h-full rounded-full ${s.ok ? "bg-indigo" : "bg-warn/80"}`}
+                style={{ width: `${s.score}%` }}
+              />
+            </span>
+            <span
+              className={`w-6 text-right text-[12px] font-bold tabular-nums ${
+                s.ok ? "text-ink" : "text-warn"
+              }`}
+            >
+              {s.score}
+            </span>
+          </div>
+        ))}
       </div>
-      <PanelChip className="absolute bottom-5 left-1/2 -translate-x-1/2">
-        prioritized by revenue impact
-      </PanelChip>
-    </div>
+      <div className="relative mt-3 inline-flex items-center gap-1.5 rounded-full bg-warn/10 px-3 py-1 text-[11px] font-semibold text-warn">
+        <span className="size-1.5 rounded-full bg-warn" /> 2 surfaces where buyers can&apos;t find you
+      </div>
+    </Screen>
   );
 }
 
-/* 03 Amplify — authority radiating out to every surface */
+/* 02 Fix — a prioritized fix queue with impact tags, most of it cleared. */
+function FixVisual() {
+  const tasks = [
+    { label: "Core Web Vitals", tag: "High", done: true },
+    { label: "Schema markup", tag: "High", done: true },
+    { label: "Local citations", tag: "Med", done: true },
+    { label: "Broken redirects", tag: "Med", done: false, active: true },
+  ];
+  return (
+    <Screen title="Fix Queue" status="3 / 4 DONE" statusTone="live">
+      <div className="grid gap-2.5">
+        {tasks.map((t) => (
+          <div
+            key={t.label}
+            className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 transition ${
+              t.active
+                ? "border-indigo/40 bg-indigo/5 shadow-[0_0_0_3px_rgba(99,91,255,0.08)]"
+                : "border-line bg-surface/90"
+            }`}
+          >
+            <span
+              className={`grid size-6 shrink-0 place-items-center rounded-full ${
+                t.done ? "bg-citron text-ink-solid" : "border-2 border-indigo/50 bg-surface"
+              }`}
+            >
+              {t.done ? (
+                <Check />
+              ) : (
+                <span className="size-1.5 rounded-full bg-indigo" />
+              )}
+            </span>
+            <span
+              className={`flex-1 text-[12.5px] font-semibold ${
+                t.done ? "text-graphite line-through decoration-graphite/40" : "text-ink"
+              }`}
+            >
+              {t.label}
+            </span>
+            <span
+              className={`rounded-md px-2 py-0.5 text-[10px] font-bold ${
+                t.tag === "High"
+                  ? "bg-warn/10 text-warn"
+                  : "bg-lilac text-indigo"
+              }`}
+            >
+              {t.tag}
+            </span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-3 flex items-center gap-2 rounded-xl bg-lilac/60 px-3 py-2 text-[11px] font-semibold text-indigo">
+        <ArrowUp /> ranked by revenue impact, not by what&apos;s easy
+      </div>
+    </Screen>
+  );
+}
+
+/* 03 Amplify — authority hub broadcasting to every surface, with a live
+   "cited" ticker beneath. */
 function AmplifyVisual() {
   const marks = [
-    { icon: <GoogleG size={16} />, pos: "left-[16%] top-[24%]" },
-    { icon: <MapsPin size={16} />, pos: "right-[18%] top-[28%]" },
-    { icon: <SparkleAI size={16} />, pos: "left-[20%] bottom-[22%]" },
-    { icon: <ChatGPTMark size={16} />, pos: "right-[16%] bottom-[26%]" },
+    { icon: <GoogleG size={16} />, pos: "left-[8%] top-[10%]" },
+    { icon: <MapsPin size={16} />, pos: "right-[10%] top-[6%]" },
+    { icon: <SparkleAI size={16} />, pos: "left-[12%] top-[46%]" },
+    { icon: <ChatGPTMark size={16} />, pos: "right-[8%] top-[42%]" },
   ];
   return (
-    <div className="relative flex h-full items-center justify-center overflow-hidden">
-      <span aria-hidden className="absolute size-64 rounded-full border border-indigo/15" />
-      <span aria-hidden className="absolute size-44 rounded-full border border-indigo/25" />
-      <span aria-hidden className="absolute size-24 rounded-full border border-indigo/40" />
-      <span className="relative grid size-12 place-items-center rounded-full bg-indigo shadow-[0_10px_28px_rgba(99,91,255,0.45)]">
-        <svg width="20" height="20" viewBox="0 0 12 12" fill="none" aria-hidden>
-          <path
-            d="M6 10V2m0 0L2.5 5.5M6 2l3.5 3.5"
-            stroke="#ffffff"
-            strokeWidth="1.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </span>
-      {marks.map((mark, i) => (
-        <span
-          key={i}
-          className={`absolute ${mark.pos} grid size-10 place-items-center rounded-full border border-line bg-surface shadow-[0_6px_16px_rgba(11,13,18,0.1)]`}
-        >
-          {mark.icon}
-        </span>
-      ))}
-      <PanelChip className="absolute bottom-5 left-1/2 -translate-x-1/2">
-        cited across every surface
-      </PanelChip>
-    </div>
+    <Screen title="Authority Signals" status="BROADCASTING" statusTone="up">
+      <div className="relative h-[150px]">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span aria-hidden className="absolute size-40 rounded-full border border-indigo/12" />
+          <span aria-hidden className="absolute size-28 rounded-full border border-indigo/22" />
+          <span aria-hidden className="absolute size-16 rounded-full border border-indigo/35" />
+          <span className="relative grid size-12 place-items-center rounded-2xl bg-indigo text-white shadow-[0_10px_28px_rgba(99,91,255,0.45)]">
+            <span className="flex items-center">
+              <span className="size-3 rounded-full bg-white" />
+              <span className="-ml-1 size-3 rounded-full bg-citron mix-blend-screen" />
+            </span>
+          </span>
+        </div>
+        {marks.map((m, i) => (
+          <span
+            key={i}
+            className={`absolute ${m.pos} grid size-10 place-items-center rounded-xl border border-line bg-surface shadow-[0_6px_16px_rgba(11,13,18,0.1)]`}
+          >
+            {m.icon}
+          </span>
+        ))}
+      </div>
+      <div className="mt-1 grid gap-1.5">
+        {[
+          "Cited in AI Overview for “best tax advisor”",
+          "Featured in Google top 3 · local pack",
+        ].map((line) => (
+          <div
+            key={line}
+            className="flex items-center gap-2 rounded-lg border border-line bg-surface/90 px-3 py-1.5 text-[11px] font-medium text-graphite"
+          >
+            <span className="grid size-4 place-items-center rounded-full bg-citron text-ink-solid">
+              <Check className="size-2.5" />
+            </span>
+            <span className="truncate">{line}</span>
+          </div>
+        ))}
+      </div>
+    </Screen>
   );
 }
 
-/* 04 Prove — the reporting curve and the numbers that moved */
+/* 04 Prove — a reporting card: KPI tiles over a growth area chart. */
 function ProveVisual() {
   return (
-    <div className="relative flex h-full items-center justify-center overflow-hidden">
-      <svg
-        className="absolute inset-x-6 bottom-6 h-40 w-[calc(100%-48px)]"
-        viewBox="0 0 300 140"
-        preserveAspectRatio="none"
-        aria-hidden
-      >
-        <path
-          d="M0,120 C40,116 70,106 105,94 C150,79 200,55 300,20 L300,140 L0,140 Z"
-          className="fill-lilac"
-          opacity="0.8"
-        />
-        <path
-          d="M0,120 C40,116 70,106 105,94 C150,79 200,55 300,20"
-          fill="none"
-          stroke="#635BFF"
-          strokeWidth="3"
-        />
-        <circle cx="300" cy="20" r="4.5" fill="#635BFF" />
-      </svg>
-      <div className="absolute left-6 top-6 grid gap-2">
-        <PanelChip>
-          Visibility 68 <span aria-hidden className="text-graphite">&rarr;</span>{" "}
-          <span className="text-indigo">82</span>
-        </PanelChip>
-        <PanelChip>
-          <svg width="9" height="9" viewBox="0 0 12 12" fill="none" aria-hidden>
-            <path
-              d="M6 10V2m0 0L2.5 5.5M6 2l3.5 3.5"
-              stroke="#635BFF"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          +64% organic leads
-        </PanelChip>
+    <Screen title="Revenue Report" status="+64% MoM" statusTone="live">
+      <div className="grid grid-cols-3 gap-2">
+        {[
+          { label: "Visibility", value: "82", delta: "+14" },
+          { label: "Leads", value: "1,284", delta: "+64%" },
+          { label: "Pipeline", value: "$1.9M", delta: "+41%" },
+        ].map((k) => (
+          <div key={k.label} className="rounded-xl border border-line bg-surface/90 px-3 py-2.5">
+            <p className="text-[10px] font-medium text-graphite">{k.label}</p>
+            <p className="mt-0.5 font-heading text-[17px] font-bold tabular-nums leading-none">
+              {k.value}
+            </p>
+            <p className="mt-1 inline-flex items-center gap-0.5 text-[9.5px] font-bold text-indigo">
+              <ArrowUp className="size-2" /> {k.delta}
+            </p>
+          </div>
+        ))}
       </div>
-    </div>
+      <div className="relative mt-3 h-[128px] overflow-hidden rounded-xl border border-line bg-surface/90 p-3">
+        <p className="relative z-10 text-[10px] font-semibold text-graphite">
+          Organic leads &middot; 12 mo
+        </p>
+        <svg
+          className="absolute inset-x-1 bottom-1 h-[104px] w-[calc(100%-8px)]"
+          viewBox="0 0 300 104"
+          preserveAspectRatio="none"
+          aria-hidden
+        >
+          <defs>
+            <linearGradient id="prove-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#635BFF" stopOpacity="0.32" />
+              <stop offset="100%" stopColor="#635BFF" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0,90 C36,86 60,76 96,66 C150,50 205,34 250,20 C270,14 286,10 300,7 L300,104 L0,104 Z"
+            fill="url(#prove-fill)"
+          />
+          <path
+            d="M0,90 C36,86 60,76 96,66 C150,50 205,34 250,20 C270,14 286,10 300,7"
+            fill="none"
+            stroke="#635BFF"
+            strokeWidth="2.5"
+            vectorEffect="non-scaling-stroke"
+          />
+          <circle cx="298" cy="7" r="3.5" fill="#635BFF" />
+        </svg>
+      </div>
+    </Screen>
   );
 }
 
@@ -279,7 +406,7 @@ export default function FullSurfaceMethod() {
                       </p>
 
                       {/* mobile: each step carries its own visual inline */}
-                      <div className="mt-4 h-44 overflow-hidden rounded-2xl border border-line/70 bg-ivory/70 lg:hidden">
+                      <div className="mt-4 h-72 overflow-hidden rounded-2xl border border-line bg-surface shadow-[0_14px_36px_rgba(11,13,18,0.06)] lg:hidden">
                         {(() => {
                           const StepVisual = VISUALS[i];
                           return <StepVisual />;
@@ -294,11 +421,11 @@ export default function FullSurfaceMethod() {
 
           {/* the sticky panel: its graphic follows the active step */}
           <Reveal variant="right" className="hidden lg:block">
-            <div className="sticky top-28 h-[420px]">
-              <div className="relative h-full overflow-hidden rounded-[2rem] border border-line bg-surface shadow-[0_20px_50px_rgba(11,13,18,0.06)]">
+            <div className="sticky top-28 h-[460px]">
+              <div className="relative h-full overflow-hidden rounded-[2rem] border border-line bg-surface shadow-[0_20px_50px_rgba(11,13,18,0.07)]">
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-lilac/60 to-transparent"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-lilac/40 to-transparent"
                 />
                 {VISUALS.map((StepVisual, i) => (
                   <div
@@ -315,9 +442,6 @@ export default function FullSurfaceMethod() {
                     <StepVisual />
                   </div>
                 ))}
-                <span className="absolute right-5 top-5 rounded-full bg-lilac px-3 py-1 text-[10.5px] font-semibold tracking-[0.06em] text-indigo">
-                  STEP {METHOD_STEPS[active].index} / 04
-                </span>
               </div>
             </div>
           </Reveal>
