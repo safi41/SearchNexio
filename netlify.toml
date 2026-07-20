@@ -1,0 +1,9 @@
+# Netlify config for the SearchNexio static export.
+# `next build` (with output: "export" in next.config.mjs) emits the site
+# into `out/`, which Netlify serves directly — no Next.js runtime needed.
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "20"
