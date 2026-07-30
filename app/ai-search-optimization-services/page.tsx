@@ -5,6 +5,20 @@ import {
   AiSearchMeaning,
   AiSearchServices,
 } from "@/components/aisearch/AiSearchIntro";
+import { AiSearchWorkCovers, AiSearchPlatforms } from "@/components/aisearch/AiSearchWork";
+import {
+  AiSearchProcess,
+  AiSearchReceive,
+  AiSearchMeasure,
+} from "@/components/aisearch/AiSearchProcess";
+import {
+  AiSearchWhy,
+  AiSearchIndustries,
+  AiSearchWays,
+  AiSearchLimitations,
+  AiSearchFaq,
+  AiSearchForm,
+} from "@/components/aisearch/AiSearchClose";
 
 export const metadata: Metadata = {
   title: "AI Search Optimization Services | Search Nexio",
@@ -19,6 +33,17 @@ export default function AiSearchOptimizationServicesPage() {
       <AiSearchBuildVisibility />
       <AiSearchMeaning />
       <AiSearchServices />
+      <AiSearchWorkCovers />
+      <AiSearchPlatforms />
+      <AiSearchProcess />
+      <AiSearchReceive />
+      <AiSearchMeasure />
+      <AiSearchWhy />
+      <AiSearchIndustries />
+      <AiSearchWays />
+      <AiSearchLimitations />
+      <AiSearchFaq />
+      <AiSearchForm />
     </main>
   );
 }
