@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-/* Primary nav links point at the live service pages. */
+/* Primary nav links point at the live pages. */
 const LINKS = [
+  { href: "/", label: "Home" },
   { href: "/ai-search-optimization-services/", label: "AI Search" },
   { href: "/generative-engine-optimization/", label: "GEO" },
   { href: "/services/local-seo-services/", label: "Local SEO" },
