@@ -143,3 +143,91 @@ export function YouTubeMark({ size = 18 }: { size?: number }) {
     </svg>
   );
 }
+
+/* ChatGPT knot on a mint disc — the light chip variant used in the GEO hero. */
+export function ChatGPTKnot({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
+      <circle cx="12" cy="12" r="11" fill="#E7F6EE" />
+      <g stroke="#10A37F" strokeWidth="1.9" strokeLinecap="round">
+        <path d="M12 5.6v12.8" />
+        <path d="M6.5 8.8l11 6.4" />
+        <path d="M17.5 8.8l-11 6.4" />
+      </g>
+      <circle cx="12" cy="12" r="2.1" fill="#E7F6EE" />
+    </svg>
+  );
+}
+
+/* Perplexity — bare teal knot, no disc (light-surface chips and bubbles). */
+export function PerplexityKnot({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
+      <g stroke="#1FB8CD" strokeWidth="1.8" fill="none" strokeLinecap="round">
+        <path d="M12 4.5v15" />
+        <path d="M6 7.5 12 12l6-4.5" />
+        <path d="M6 16.5 12 12l6 4.5" />
+        <path d="M6 7.5v9M18 7.5v9" />
+      </g>
+    </svg>
+  );
+}
+
+/* Claude — radiating sunburst in Anthropic clay orange. */
+export function ClaudeSpark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
+      <g stroke="#D97757" strokeWidth="2.4" strokeLinecap="round">
+        <path d="M16 12h6" />
+        <path d="M15.2 14.4l4.9 3.5" />
+        <path d="M13.2 15.8l1.9 5.7" />
+        <path d="M10.8 15.8l-1.9 5.7" />
+        <path d="M8.8 14.4l-4.9 3.5" />
+        <path d="M8 12H2" />
+        <path d="M8.8 9.6 3.9 6.1" />
+        <path d="M10.8 8.2 8.9 2.5" />
+        <path d="M13.2 8.2l1.9-5.7" />
+        <path d="M15.2 9.6l4.9-3.5" />
+      </g>
+    </svg>
+  );
+}
+
+/* Anthropic "AI\" logotype strokes — the orbit-bubble version of Claude. */
+export function AnthropicLogotype({ width = 40 }: { width?: number }) {
+  return (
+    <svg width={width} height={(width * 26) / 44} viewBox="0 0 44 26" aria-hidden>
+      <g stroke="#C15F3C" strokeWidth="4" fill="none" strokeLinejoin="miter">
+        <path d="M3 23 10.5 3 18 23" />
+        <path d="M6.6 16.2h7.8" />
+        <path d="M24 3v20" />
+        <path d="M31.5 3l9 20" />
+      </g>
+    </svg>
+  );
+}
+
+/* Microsoft Copilot — three angled gradient ribbons. */
+export function CopilotMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
+      <defs>
+        <linearGradient id="cop-a" x1="6" y1="3" x2="18" y2="10">
+          <stop offset="0%" stopColor="#12B3F8" />
+          <stop offset="100%" stopColor="#1D4FD7" />
+        </linearGradient>
+        <linearGradient id="cop-b" x1="6" y1="14" x2="18" y2="21">
+          <stop offset="0%" stopColor="#7B5CF0" />
+          <stop offset="100%" stopColor="#E5488F" />
+        </linearGradient>
+        <linearGradient id="cop-c" x1="4" y1="12" x2="20" y2="12">
+          <stop offset="0%" stopColor="#2E8DEE" />
+          <stop offset="100%" stopColor="#6A64F1" />
+        </linearGradient>
+      </defs>
+      <path d="M8.7 5.1C9.1 3.9 10.3 3 11.6 3h5.8c1 0 1.7 1 1.4 1.9l-1.4 4.4H7.3Z" fill="url(#cop-a)" />
+      <path d="M15.3 18.9c-.4 1.2-1.6 2.1-2.9 2.1H6.6c-1 0-1.7-1-1.4-1.9l1.4-4.4h10.1Z" fill="url(#cop-b)" />
+      <path d="M7.3 9.3h10.1l-1 5.4H6.3Z" fill="url(#cop-c)" />
+    </svg>
+  );
+}
