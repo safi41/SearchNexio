@@ -4,6 +4,10 @@ import GeoBuildVisibility from "@/components/geo/GeoBuildVisibility";
 import GeoWhyMatters from "@/components/geo/GeoWhyMatters";
 import GeoComparison from "@/components/geo/GeoComparison";
 import GeoServices from "@/components/geo/GeoServices";
+import GeoDeliverables from "@/components/geo/GeoDeliverables";
+import GeoInPractice from "@/components/geo/GeoInPractice";
+import GeoPlatforms from "@/components/geo/GeoPlatforms";
+import GeoAuthority from "@/components/geo/GeoAuthority";
 
 export const metadata: Metadata = {
   title: "Generative Engine Optimization Agency | Search Nexio",
@@ -19,6 +23,10 @@ export default function GenerativeEngineOptimizationPage() {
       <GeoWhyMatters />
       <GeoComparison />
       <GeoServices />
+      <GeoDeliverables />
+      <GeoInPractice />
+      <GeoPlatforms />
+      <GeoAuthority />
     </main>
   );
 }

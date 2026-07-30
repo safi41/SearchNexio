@@ -216,6 +216,17 @@ body {
     from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  /* Citation-source-map connections draw from the brand core outward once
+     their Reveal wrapper is visible, and retract when scrolled away. */
+  .geo-conn {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.7s var(--ease-soft);
+  }
+  [data-reveal="hidden"] .geo-conn {
+    stroke-dashoffset: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
