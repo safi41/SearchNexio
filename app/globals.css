@@ -206,6 +206,16 @@ body {
   [data-reveal="hidden"] .journey-line {
     transform: scaleY(0);
   }
+
+  /* Crossfade when the GEO services analysis panel swaps to a new service
+     (the element is remounted via a changing React key). */
+  .geo-panel-fade {
+    animation: geo-panel-fade 0.4s var(--ease-soft);
+  }
+  @keyframes geo-panel-fade {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

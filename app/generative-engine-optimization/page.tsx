@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import GeoHero from "@/components/geo/GeoHero";
 import GeoBuildVisibility from "@/components/geo/GeoBuildVisibility";
 import GeoWhyMatters from "@/components/geo/GeoWhyMatters";
+import GeoComparison from "@/components/geo/GeoComparison";
+import GeoServices from "@/components/geo/GeoServices";
 
 export const metadata: Metadata = {
   title: "Generative Engine Optimization Agency | Search Nexio",
@@ -15,6 +17,8 @@ export default function GenerativeEngineOptimizationPage() {
       <GeoHero />
       <GeoBuildVisibility />
       <GeoWhyMatters />
+      <GeoComparison />
+      <GeoServices />
     </main>
   );
 }
