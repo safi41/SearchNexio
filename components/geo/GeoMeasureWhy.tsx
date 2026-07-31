@@ -475,31 +475,36 @@ function EngageDecor() {
             "radial-gradient(150px 95px at 18% 38%, #000 55%, transparent 78%), radial-gradient(120px 70px at 48% 22%, #000 55%, transparent 78%), radial-gradient(95px 120px at 40% 72%, #000 50%, transparent 78%), radial-gradient(150px 100px at 78% 42%, #000 55%, transparent 78%), radial-gradient(80px 60px at 92% 78%, #000 50%, transparent 78%)",
         }}
       />
-      {/* orbit rings with a glowing indigo core */}
-      <div className="absolute right-[22%] top-[34%] size-44 rounded-full border border-indigo/30" />
-      <div className="absolute right-[16%] top-[22%] size-64 rounded-full border border-indigo/20" />
-      <div className="absolute right-[33%] top-[52%] grid size-16 place-items-center rounded-full bg-lilac">
-        <span className="size-3.5 rounded-full bg-indigo" />
-      </div>
-      {/* floating icon tiles */}
-      <div className="animate-bob absolute right-[8%] top-0 grid size-16 place-items-center rounded-2xl bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.12)]">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4.5 20h15" />
-          <path d="M6.5 20v-4M10.5 20v-7M14.5 20v-4.5M18.5 20V9" />
-          <path d="M6.5 12 12 7.5l2.5 2L18.5 6" />
-        </svg>
-      </div>
-      <div className="animate-bob absolute left-[30%] top-[30%] grid size-14 place-items-center rounded-2xl bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.12)]" style={{ animationDelay: "1.4s" }}>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-          <circle cx="12" cy="12" r="8" />
-          <path d="M4 12h16M12 4c2.5 2.3 3.8 5 3.8 8S14.5 17.7 12 20c-2.5-2.3-3.8-5-3.8-8S9.5 6.3 12 4Z" />
-        </svg>
-      </div>
-      <div className="animate-bob absolute bottom-2 right-[4%] grid size-14 place-items-center rounded-2xl bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.12)]" style={{ animationDelay: "2.6s" }}>
-        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
-          <circle cx="11" cy="11" r="6.5" />
-          <path d="M15.8 15.8 20 20" />
-        </svg>
+      {/* concentric rings with the icon tiles pinned on the outer ring */}
+      <div className="absolute left-1/2 top-1/2 size-[260px] -translate-x-1/2 -translate-y-1/2">
+        {/* outer + inner ring, sharing the same center */}
+        <div className="absolute inset-0 rounded-full border border-indigo/20" />
+        <div className="absolute inset-[17%] rounded-full border border-indigo/30" />
+        {/* glowing core */}
+        <div className="absolute left-1/2 top-1/2 grid size-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-lilac">
+          <span className="size-3.5 rounded-full bg-indigo" />
+        </div>
+
+        {/* tiles sit exactly on the outer ring (center 130,130 / radius 130) */}
+        <div className="absolute grid size-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.12)]" style={{ left: 214, top: 30 }}>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4.5 20h15" />
+            <path d="M6.5 20v-4M10.5 20v-7M14.5 20v-4.5M18.5 20V9" />
+            <path d="M6.5 12 12 7.5l2.5 2L18.5 6" />
+          </svg>
+        </div>
+        <div className="absolute grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.12)]" style={{ left: 1, top: 119 }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+            <circle cx="12" cy="12" r="8" />
+            <path d="M4 12h16M12 4c2.5 2.3 3.8 5 3.8 8S14.5 17.7 12 20c-2.5-2.3-3.8-5-3.8-8S9.5 6.3 12 4Z" />
+          </svg>
+        </div>
+        <div className="absolute grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.12)]" style={{ left: 214, top: 230 }}>
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+            <circle cx="11" cy="11" r="6.5" />
+            <path d="M15.8 15.8 20 20" />
+          </svg>
+        </div>
       </div>
       {/* scattered accent dots */}
       <span className="absolute left-[18%] top-[8%] size-1.5 rounded-full bg-indigo" />
@@ -556,11 +561,10 @@ export function GeoEngagements() {
                     </svg>
                   </span>
                 </div>
-                <p className="mt-6 font-heading text-[46px] font-extrabold leading-none tracking-[-0.02em]">
+                <p className="mt-6 font-heading text-[30px] font-extrabold leading-none tracking-[-0.02em]">
                   {String(i + 1).padStart(2, "0")}
                 </p>
-                <span className="mt-3 block h-1 w-10 rounded-full bg-indigo" />
-                <h3 className="mt-4 font-heading text-[19px] font-bold tracking-[-0.01em]">{e.title}</h3>
+                <h3 className="mt-3 font-heading text-[19px] font-bold tracking-[-0.01em]">{e.title}</h3>
                 <p className="mt-3 text-[14px] leading-relaxed text-graphite">{e.desc}</p>
               </Reveal>
             ))}
