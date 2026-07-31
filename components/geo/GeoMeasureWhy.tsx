@@ -374,18 +374,16 @@ export function GeoIndustries() {
   return (
     <section className="overflow-x-clip wash-lilac-full py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal>
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full bg-lilac px-4 py-1.5 text-[12px] font-bold uppercase tracking-[0.1em] text-indigo">
-              <span className="size-1.5 rounded-full bg-indigo" />
-              Industries
-            </span>
-            <h2 className="mt-5 font-heading text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.1] tracking-[-0.02em]">
-              Built for complex
-              <br />
-              buying <span className="text-indigo">journeys</span>
-            </h2>
-          </div>
+        <Reveal variant="left">
+          <span className="inline-flex items-center gap-2 rounded-full bg-lilac px-4 py-1.5 text-[12px] font-bold uppercase tracking-[0.1em] text-indigo">
+            <span className="size-1.5 rounded-full bg-indigo" />
+            Industries
+          </span>
+          <h2 className="mt-5 max-w-2xl font-heading text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.1] tracking-[-0.02em]">
+            Built for complex
+            <br />
+            buying <span className="text-indigo">journeys</span>
+          </h2>
         </Reveal>
 
         {/* bento grid: three cards up top, two wide cards below. Each card
