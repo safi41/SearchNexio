@@ -170,40 +170,150 @@ export function GeoMeasure() {
 }
 
 /* ---- Why choose Search Nexio ---- */
+
+/* Line icons for the five reasons. */
+const WHY_ICONS = [
+  /* 10+ years — award rosette */
+  <g key="w1">
+    <circle cx="12" cy="9" r="5.5" />
+    <path d="m12 6.6.9 1.8 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2L9.1 8.7l2-.3Z" />
+    <path d="m8.8 13.5-1.6 6 4.8-2.7 4.8 2.7-1.6-6" />
+  </g>,
+  /* 50+ projects — folder */
+  <g key="w2">
+    <path d="M3.5 7.5v10A2.5 2.5 0 0 0 6 20h12a2.5 2.5 0 0 0 2.5-2.5v-8A2.5 2.5 0 0 0 18 7h-6L9.8 4.8A2 2 0 0 0 8.4 4H6a2.5 2.5 0 0 0-2.5 2.5Z" />
+    <path d="M3.5 11h17" />
+  </g>,
+  /* enterprise collaboration — team */
+  <g key="w3">
+    <circle cx="12" cy="7.4" r="2.5" />
+    <circle cx="5.9" cy="9.6" r="2" />
+    <circle cx="18.1" cy="9.6" r="2" />
+    <path d="M7.6 19.4c.4-2.9 2.2-4.6 4.4-4.6s4 1.7 4.4 4.6" />
+    <path d="M2.6 16.8c.3-2.1 1.6-3.4 3.2-3.4.7 0 1.3.2 1.9.7M21.4 16.8c-.3-2.1-1.6-3.4-3.2-3.4-.7 0-1.3.2-1.9.7" />
+  </g>,
+  /* human quality control — shield check */
+  <g key="w4">
+    <path d="M12 3.5c2.4 1.4 4.9 2.1 7 2.2v6.1c0 4-2.8 7-7 8.7-4.2-1.7-7-4.7-7-8.7V5.7c2.1-.1 4.6-.8 7-2.2Z" />
+    <path d="m8.8 11.8 2.3 2.3 4.2-4.6" />
+  </g>,
+  /* transparent reporting — doc chart */
+  <g key="w5">
+    <path d="M6.5 3.5h7.2L18.5 8v10a2.5 2.5 0 0 1-2.5 2.5H8A2.5 2.5 0 0 1 5.5 18V6a2.5 2.5 0 0 1 1-2.5Z" />
+    <path d="M13.5 3.5V8h5" />
+    <path d="M8.8 16.5v-3M12 16.5v-5.5M15.2 16.5v-4" />
+  </g>,
+];
+
 export function GeoWhyChoose() {
   return (
-    <section className="overflow-x-clip py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <Reveal>
-          <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+    <section className="relative overflow-hidden py-16 md:py-24">
+      {/* top-right decor: rings with a core dot + dot grid */}
+      <div aria-hidden className="pointer-events-none absolute right-0 top-0 hidden lg:block">
+        <div className="relative h-[340px] w-[420px]">
+          <div className="absolute right-[-120px] top-[-140px] size-[420px] rounded-full border border-indigo/10" />
+          <div className="absolute right-[-60px] top-[-80px] size-[300px] rounded-full border border-indigo/15" />
+          <div className="absolute right-[16px] top-[4px] size-[140px] rounded-full border border-indigo/20" />
+          <div className="absolute right-[80px] top-[68px] size-3 rounded-full bg-indigo" />
+          <div
+            className="absolute left-0 top-[90px] h-28 w-24"
+            style={{
+              backgroundImage: "radial-gradient(var(--wm-stroke) 1.6px, transparent 1.6px)",
+              backgroundSize: "14px 14px",
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="relative mx-auto max-w-6xl px-6">
+        <Reveal variant="left">
+          <span className="inline-flex items-center gap-2 rounded-full bg-lilac px-4 py-2 text-[12px] font-bold uppercase tracking-[0.08em] text-indigo">
+            <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden>
+              <path d="M12 2c.4 5 5 9.6 10 10-5 .4-9.6 5-10 10-.4-5-5-9.6-10-10 5-.4 9.6-5 10-10Z" fill="currentColor" />
+            </svg>
             Why choose Search Nexio
+          </span>
+          <h2 className="mt-6 font-heading text-[clamp(2.4rem,5vw,4rem)] font-bold leading-[1.04] tracking-[-0.03em]">
+            Why choose
+            <br />
+            Search <span className="text-indigo">Nexio</span>
           </h2>
+          <span className="mt-6 block h-1 w-12 rounded-full bg-indigo" />
         </Reveal>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {WHY_GEO.map((w, i) => (
-            <Reveal key={w.title} variant="up" delay={Math.min((i % 3) * 60, 120)} className={i === 4 ? "lg:col-span-1" : ""}>
-              <article className="flex h-full flex-col rounded-2xl border border-line bg-surface p-6">
-                <h3 className="font-heading text-[16.5px] font-bold tracking-[-0.01em]">{w.title}</h3>
-                <p className="mt-2.5 text-[13.5px] leading-relaxed text-graphite">{w.desc}</p>
-              </article>
-            </Reveal>
-          ))}
-          {/* collaboration diagram card */}
-          <Reveal variant="up" delay={120}>
-            <article className="flex h-full flex-col justify-center rounded-2xl border border-indigo/25 bg-lilac/40 p-6">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-indigo">Collaboration</p>
+        {/* 2x3 grid separated by hairlines, accent dots on the intersections */}
+        <div className="mt-12 grid lg:grid-cols-3">
+          {WHY_GEO.map((w, i) => {
+            const row = Math.floor(i / 3);
+            const col = i % 3;
+            return (
+              <Reveal
+                key={w.title}
+                variant="up"
+                delay={Math.min(i * 60, 240)}
+                className={`relative border-line py-9 ${i > 0 ? "max-lg:border-t" : ""} ${
+                  row > 0 ? "lg:border-t" : ""
+                } ${col > 0 ? "lg:border-l lg:pl-10" : ""} ${col < 2 ? "lg:pr-10" : ""}`}
+              >
+                {row === 1 && col > 0 && (
+                  <span aria-hidden className="absolute left-0 top-0 hidden size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo lg:block" />
+                )}
+                <div className="flex gap-6">
+                  <span className="grid size-[76px] shrink-0 place-items-center rounded-full border border-indigo/25 bg-gradient-to-br from-surface to-lilac/50 text-ink">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      {WHY_ICONS[i]}
+                    </svg>
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="font-heading text-[18px] font-bold tracking-[-0.01em]">{w.title}</h3>
+                    <span className="mt-2.5 block h-0.5 w-7 rounded-full bg-indigo" />
+                    <p className="mt-3 text-[13.5px] leading-relaxed text-graphite">{w.desc}</p>
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
+
+          {/* collaboration card fills the sixth cell */}
+          <Reveal variant="up" delay={240} className="relative border-t border-line py-9 lg:border-l lg:pl-10">
+            <span aria-hidden className="absolute left-0 top-0 hidden size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo lg:block" />
+            <article className="flex h-full flex-col justify-center rounded-2xl border border-indigo/20 bg-lilac/40 p-6">
+              <div className="flex items-center gap-3">
+                <span className="grid size-10 place-items-center rounded-full bg-indigo/15 text-indigo">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                    <circle cx="9.5" cy="8.5" r="2.4" />
+                    <circle cx="15.5" cy="8.5" r="2.4" />
+                    <path d="M4.5 18c.4-2.6 2.2-4.2 5-4.2 1 0 1.9.2 2.5.6M13 18c.4-2.6 2.2-4.2 5-4.2" />
+                  </svg>
+                </span>
+                <p className="text-[12px] font-bold uppercase tracking-[0.14em] text-indigo">Collaboration</p>
+              </div>
               <div className="mt-4 flex flex-wrap gap-2">
                 {["SEO", "Content", "Development", "PR", "Analytics", "Compliance"].map((t) => (
-                  <span key={t} className="rounded-full border border-line bg-surface px-2.5 py-1 text-[11.5px] font-semibold text-ink">{t}</span>
+                  <span key={t} className="rounded-full border border-line bg-surface px-3 py-1.5 text-[12px] font-semibold text-ink">{t}</span>
                 ))}
               </div>
               <p className="mt-4 text-[13px] leading-relaxed text-graphite">
                 Review the company background and search experience on{" "}
-                <span className="font-semibold text-indigo underline decoration-indigo/30 underline-offset-2">About Search Nexio</span>.
+                <span className="font-semibold text-indigo underline decoration-indigo/30 underline-offset-2">About Search Nexio</span>
+                <span aria-hidden className="ml-1.5 inline-grid size-5 -translate-y-px place-items-center rounded-full bg-indigo/15 align-middle text-indigo">
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
               </p>
             </article>
           </Reveal>
+        </div>
+
+        {/* dotted arc closing the section, sparkle badge on its apex */}
+        <div aria-hidden className="relative mt-16 h-20 overflow-hidden">
+          <div className="absolute left-1/2 top-7 h-[560px] w-[1100px] -translate-x-1/2 rounded-[100%] border-2 border-dotted border-indigo/40" />
+          <span className="absolute left-1/2 top-7 grid size-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-indigo text-white shadow-[0_10px_28px_rgba(99,91,255,0.4)]">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+              <path d="M12 2c.4 5 5 9.6 10 10-5 .4-9.6 5-10 10-.4-5-5-9.6-10-10 5-.4 9.6-5 10-10Z" fill="currentColor" />
+            </svg>
+          </span>
         </div>
       </div>
     </section>
