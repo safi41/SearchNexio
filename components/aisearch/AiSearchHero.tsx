@@ -36,7 +36,7 @@ const NODES = [
     cited: true,
     icon: <ChatGPTInk size={44} />,
     node: { left: "12%", top: "50%" },
-    label: { right: "91%", top: "42%" },
+    label: { right: "101%", top: "42%" },
     align: "text-right",
   },
   {
@@ -44,7 +44,7 @@ const NODES = [
     cited: false,
     icon: <GeminiMark size={42} />,
     node: { left: "88%", top: "50%" },
-    label: { left: "91%", top: "42%" },
+    label: { left: "101%", top: "42%" },
     align: "text-left",
   },
   {
@@ -119,8 +119,8 @@ function HubDiagram() {
       {NODES.map((n) => (
         <div key={n.name}>
           <div
-            className="animate-bob absolute grid size-[21%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.1)]"
-            style={{ ...n.node, animationDelay: `${NODES.indexOf(n) * 1.1}s` }}
+            className="absolute grid size-[21%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.1)]"
+            style={n.node}
           >
             {n.icon}
           </div>
@@ -188,7 +188,6 @@ export default function AiSearchHero() {
               <br />
               Services
             </h1>
-            <span className="mt-5 block h-1.5 w-14 rounded-full bg-indigo/60" />
           </Reveal>
           <Reveal delay={120} duration={600}>
             <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-graphite">{AISEARCH_HERO.intro}</p>
@@ -204,15 +203,7 @@ export default function AiSearchHero() {
         {/* right: heading + hub diagram */}
         <Reveal variant="right" delay={120}>
           <div className="mx-auto max-w-[560px]">
-            <h2 className="font-heading text-[clamp(1.3rem,2.2vw,1.6rem)] font-bold tracking-[-0.02em]">
-              Where your brand shows up in AI search
-            </h2>
-            <p className="mt-2 max-w-md text-[15px] leading-relaxed text-graphite">
-              We help you get discovered, cited and trusted across the platforms that shape buyer decisions.
-            </p>
-            <div className="mt-6">
-              <HubDiagram />
-            </div>
+            <HubDiagram />
           </div>
         </Reveal>
       </div>
