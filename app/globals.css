@@ -143,9 +143,11 @@ body {
   );
 }
 
-/* Footer glow layers (theme-aware). */
+/* Footer glow layers (theme-aware). Only background-image is set, so an
+   element can pair the glow with its own bg-* color utility — the shorthand
+   would reset that color to transparent. */
 .footer-glow-bottom {
-  background: radial-gradient(
+  background-image: radial-gradient(
     55% 110% at 50% 100%,
     var(--glow-bottom-a),
     var(--glow-bottom-b) 45%,
