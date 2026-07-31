@@ -2,12 +2,13 @@ import Reveal from "@/components/motion/Reveal";
 import { CtaLink } from "@/components/ui";
 import { DELIVERABLES } from "@/lib/geo-content";
 
-/* What you receive: a full-bleed dark band. Header splits badge + big
-   two-line headline on the left from the supporting sentence on the right;
-   below, a 5-across grid of dark glass cards — icon chip, citron number,
-   title, one-line description and a citron end-dash. */
+/* What you receive: header splits badge + big two-line headline on the left
+   from the supporting sentence on the right; below, a 5-across grid of cards
+   — icon chip, number, title, one-line description and a citron end-dash.
+   Colors follow the site's light system (ivory ground, surface cards, indigo
+   accents) and adapt to dark mode via the theme variables. */
 
-/* Line icons, one per deliverable, drawn in the card's citron accent. */
+/* Line icons, one per deliverable, drawn in the card's indigo accent. */
 const ICONS = [
   /* 01 benchmark — bar chart */
   <g key="i1">
@@ -80,31 +81,31 @@ function SparkGlyph({ size = 13 }: { size?: number }) {
 
 export default function GeoDeliverables() {
   return (
-    <section className="relative overflow-hidden bg-ink-solid py-16 md:py-24">
+    <section className="relative overflow-hidden py-16 md:py-24">
       {/* faint vertical slabs along the right edge, echoing the reference */}
       <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 hidden w-[420px] lg:block">
-        <div className="absolute right-0 top-0 h-[45%] w-24 bg-gradient-to-b from-indigo/15 to-transparent" />
-        <div className="absolute right-24 top-[12%] h-[55%] w-24 bg-gradient-to-b from-indigo/10 to-transparent" />
+        <div className="absolute right-0 top-0 h-[45%] w-24 bg-gradient-to-b from-indigo/10 to-transparent" />
+        <div className="absolute right-24 top-[12%] h-[55%] w-24 bg-gradient-to-b from-indigo/[0.07] to-transparent" />
         <div className="absolute right-48 top-0 h-[30%] w-24 bg-gradient-to-b from-indigo/5 to-transparent" />
-        <div className="absolute bottom-0 right-10 h-[35%] w-24 bg-gradient-to-t from-indigo/10 to-transparent" />
+        <div className="absolute bottom-0 right-10 h-[35%] w-24 bg-gradient-to-t from-indigo/[0.07] to-transparent" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6">
         {/* header: badge + headline left, supporting sentence right */}
         <div className="grid items-end gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           <Reveal variant="left">
-            <span className="inline-flex items-center gap-2 rounded-full border border-citron/50 px-4 py-1.5 text-[12px] font-bold uppercase tracking-[0.1em] text-citron">
+            <span className="inline-flex items-center gap-2 rounded-full border border-indigo/30 px-4 py-1.5 text-[12px] font-bold uppercase tracking-[0.1em] text-indigo">
               <SparkGlyph />
               What you receive
             </span>
-            <h2 className="mt-6 font-heading text-[clamp(2.1rem,4.2vw,3.3rem)] font-bold leading-[1.1] tracking-[-0.02em] text-white">
+            <h2 className="mt-6 font-heading text-[clamp(2.1rem,4.2vw,3.3rem)] font-bold leading-[1.1] tracking-[-0.02em]">
               Everything you need for
               <br />
-              actionable visibility<span className="text-citron">.</span>
+              actionable visibility<span className="text-indigo">.</span>
             </h2>
           </Reveal>
           <Reveal variant="right" delay={80}>
-            <p className="max-w-sm text-[16.5px] leading-relaxed text-white/70 lg:justify-self-end">
+            <p className="max-w-sm text-[16.5px] leading-relaxed text-graphite lg:justify-self-end">
               Every engagement is built around defined outputs rather than
               broad activity descriptions.
             </p>
@@ -115,8 +116,8 @@ export default function GeoDeliverables() {
         <div className="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {DELIVERABLES.map((d, i) => (
             <Reveal key={d.title} variant="up" delay={(i % 5) * 60}>
-              <article className="group flex h-full flex-col rounded-xl border border-white/10 bg-white/[0.04] p-5 transition-colors duration-300 ease-soft hover:border-citron/40 hover:bg-white/[0.07]">
-                <span className="grid size-14 place-items-center rounded-full border border-white/10 bg-white/[0.05] text-citron transition-transform duration-300 ease-soft group-hover:scale-110">
+              <article className="group flex h-full flex-col rounded-xl border border-line bg-surface p-5 transition-colors duration-300 ease-soft hover:border-indigo/30">
+                <span className="grid size-14 place-items-center rounded-full bg-gradient-to-b from-lilac to-lilac/40 text-indigo transition-transform duration-300 ease-soft group-hover:scale-110">
                   <svg
                     width="26"
                     height="26"
@@ -131,13 +132,13 @@ export default function GeoDeliverables() {
                     {ICONS[i]}
                   </svg>
                 </span>
-                <span className="mt-5 text-[12.5px] font-bold tabular-nums text-citron">
+                <span className="mt-5 text-[12.5px] font-bold tabular-nums text-indigo">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-2 font-heading text-[16.5px] font-bold leading-snug tracking-[-0.01em] text-white">
+                <h3 className="mt-2 font-heading text-[16.5px] font-bold leading-snug tracking-[-0.01em] transition-colors group-hover:text-indigo">
                   {d.title}
                 </h3>
-                <p className="mt-2.5 text-[13px] leading-relaxed text-white/60">
+                <p className="mt-2.5 text-[13px] leading-relaxed text-graphite">
                   {d.desc}
                 </p>
                 <span className="mt-auto block pt-5">
