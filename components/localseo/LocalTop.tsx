@@ -6,49 +6,140 @@ import { Badge, CtaLink } from "@/components/ui";
 import { MapsPin, GoogleG } from "@/components/brand-icons";
 import { LOCAL_HERO, LOCAL_JOURNEY, LOCAL_PROBLEMS, LOCAL_SERVICES, WHO_WE_HELP } from "@/lib/local-seo-content";
 
-/* ---- Hero: copy + a Maps/Local-Pack dashboard visual ---- */
-function MapsVisual() {
-  const results = [
-    { name: "Your business", rating: "4.9", reviews: 128, you: true },
-    { name: "Competitor A", rating: "4.6", reviews: 74, you: false },
-    { name: "Competitor B", rating: "4.4", reviews: 52, you: false },
-  ];
+/* ---- Hero: copy left, an orbiting map-pin illustration right, and an
+   icon trust bar across the bottom ---- */
+
+/* Trust bar icons, one per LOCAL_HERO.trust item. */
+const TRUST_ICONS = [
+  /* rosette — years of experience */
+  <g key="tr1">
+    <circle cx="12" cy="9" r="5.5" />
+    <path d="m12 6.6.9 1.8 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2L9.1 8.7l2-.3Z" />
+    <path d="m8.8 13.5-1.6 6 4.8-2.7 4.8 2.7-1.6-6" />
+  </g>,
+  /* folder — projects */
+  <g key="tr2">
+    <path d="M3.5 7.5v10A2.5 2.5 0 0 0 6 20h12a2.5 2.5 0 0 0 2.5-2.5v-8A2.5 2.5 0 0 0 18 7h-6L9.8 4.8A2 2 0 0 0 8.4 4H6a2.5 2.5 0 0 0-2.5 2.5Z" />
+    <path d="M3.5 11h17" />
+  </g>,
+  /* trend — lead-focused reporting */
+  <g key="tr3">
+    <path d="M4 17.5 10 11l3.5 3.5L20 8" />
+    <path d="M15 7.5h5V12.5" />
+  </g>,
+  /* people — multi-location support */
+  <g key="tr4">
+    <circle cx="9.5" cy="8.5" r="2.4" />
+    <circle cx="15.5" cy="8.5" r="2.4" />
+    <path d="M4.5 18c.4-2.6 2.2-4.2 5-4.2 1 0 1.9.2 2.5.6M13 18c.4-2.6 2.2-4.2 5-4.2" />
+  </g>,
+  /* shield check — human-reviewed implementation */
+  <g key="tr5">
+    <path d="M12 3.5c2.4 1.4 4.9 2.1 7 2.2v6.1c0 4-2.8 7-7 8.7-4.2-1.7-7-4.7-7-8.7V5.7c2.1-.1 4.6-.8 7-2.2Z" />
+    <path d="m8.8 11.8 2.3 2.3 4.2-4.6" />
+  </g>,
+];
+
+/* Bubbles pinned on the orbit ring around the pin. */
+const ORBIT_BUBBLES = [
+  {
+    label: "Calls",
+    left: "64%",
+    top: "7%",
+    icon: (
+      <path d="M7.5 4.5 9.7 4a1 1 0 0 1 1.1.6l1.1 2.6a1 1 0 0 1-.3 1.2l-1.4 1a11 11 0 0 0 4.4 4.4l1-1.4a1 1 0 0 1 1.2-.3l2.6 1.1a1 1 0 0 1 .6 1.1l-.5 2.2a1.6 1.6 0 0 1-1.6 1.2C11.3 18 6 12.7 6.3 6.1a1.6 1.6 0 0 1 1.2-1.6Z" fill="var(--color-indigo)" stroke="none" />
+    ),
+  },
+  {
+    label: "Business profile",
+    left: "4%",
+    top: "46%",
+    icon: (
+      <g fill="var(--color-indigo)" stroke="none">
+        <path d="M5 5h14v3.2c0 1.2-.8 2.1-2 2.1s-1.9-.9-1.9-2.1c0 1.2-.9 2.1-2.1 2.1s-2.1-.9-2.1-2.1c0 1.2-.7 2.1-1.9 2.1s-2-.9-2-2.1Z" />
+        <path d="M6 11.8V19h12v-7.2c-.6.3-1.3.5-2 .5-.8 0-1.5-.2-2.1-.7-.5.5-1.2.7-1.9.7s-1.4-.2-1.9-.7c-.6.5-1.3.7-2.1.7-.7 0-1.4-.2-2-.5Zm7 6.2v-3.5h3V18Z" />
+      </g>
+    ),
+  },
+  {
+    label: "Reviews",
+    left: "96%",
+    top: "46%",
+    icon: (
+      <path d="m12 4 2.3 4.7 5.2.8-3.8 3.7.9 5.2L12 15.9l-4.6 2.5.9-5.2-3.8-3.7 5.2-.8Z" fill="var(--color-indigo)" stroke="none" />
+    ),
+  },
+  {
+    label: "Growth",
+    left: "36%",
+    top: "92%",
+    icon: (
+      <g fill="var(--color-indigo)" stroke="none">
+        <rect x="5" y="13" width="2.8" height="6" rx="0.9" />
+        <rect x="10.6" y="10" width="2.8" height="9" rx="0.9" />
+        <rect x="16.2" y="6.5" width="2.8" height="12.5" rx="0.9" />
+        <path d="m5.5 9.5 4.6-3.4 3 1.8L18 4.5l.9 1.2-5.6 3.9-3-1.8-4 3Z" />
+      </g>
+    ),
+  },
+];
+
+function PinOrbitVisual() {
   return (
-    <div className="relative">
-      <div aria-hidden className="pointer-events-none absolute inset-0 grid place-items-center">
-        <span className="animate-orbit-slow absolute size-[420px] rounded-full border border-indigo/10" style={{ animationDuration: "44s" }} />
-        <span className="absolute size-72 rounded-full bg-indigo/5 blur-3xl" />
+    <div className="relative mx-auto aspect-square w-full max-w-[540px]">
+      {/* dashed orbit rings + crosshair axes */}
+      <div aria-hidden className="absolute inset-[2%] rounded-full border border-dashed border-indigo/25" />
+      <div aria-hidden className="absolute inset-[19%] rounded-full border border-dotted border-indigo/20" />
+      <span aria-hidden className="absolute inset-x-0 top-1/2 border-t border-dashed border-indigo/15" />
+      <span aria-hidden className="absolute inset-y-0 left-1/2 border-l border-dashed border-indigo/15" />
+
+      {/* dot grid accent */}
+      <div
+        aria-hidden
+        className="absolute right-[-4%] top-[16%] h-16 w-28"
+        style={{
+          backgroundImage: "radial-gradient(var(--wm-stroke) 1.6px, transparent 1.6px)",
+          backgroundSize: "13px 13px",
+        }}
+      />
+
+      {/* layered ripple base + the 3D pin */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <svg width="240" height="250" viewBox="0 0 240 250" fill="none" aria-hidden>
+          <defs>
+            <radialGradient id="pin-body" cx="0.35" cy="0.25" r="0.9">
+              <stop offset="0%" stopColor="#8F84FF" />
+              <stop offset="55%" stopColor="#635BFF" />
+              <stop offset="100%" stopColor="#4A43D9" />
+            </radialGradient>
+          </defs>
+          {/* ripple layers */}
+          <ellipse cx="120" cy="200" rx="100" ry="30" fill="var(--c-lilac)" opacity="0.55" />
+          <ellipse cx="120" cy="198" rx="72" ry="21" fill="#C9C2FF" opacity="0.5" />
+          <ellipse cx="120" cy="196" rx="46" ry="13" fill="#A99EFF" opacity="0.55" />
+          <ellipse cx="120" cy="195" rx="24" ry="7" fill="#635BFF" opacity="0.5" />
+          {/* pin */}
+          <path
+            d="M120 30c-31 0-56 24.5-56 55 0 41 56 110 56 110s56-69 56-110c0-30.5-25-55-56-55Z"
+            fill="url(#pin-body)"
+          />
+          <circle cx="120" cy="84" r="22" fill="#ffffff" />
+        </svg>
       </div>
-      <div className="relative rounded-3xl border border-line bg-surface p-5 shadow-[0_20px_50px_rgba(11,13,18,0.08)]">
-        <div className="flex items-center justify-between border-b border-line pb-3.5">
-          <div className="flex items-center gap-2">
-            <GoogleG size={17} />
-            <span className="font-heading text-[13.5px] font-bold tracking-[-0.01em]">plumber near me</span>
-          </div>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo/10 px-2.5 py-1 text-[10px] font-semibold tracking-[0.04em] text-indigo">
-            <span className="size-1.5 rounded-full bg-current" /> LOCAL PACK
-          </span>
-        </div>
-        {/* map strip with pins */}
-        <div className="relative mt-4 h-24 overflow-hidden rounded-xl border border-line bg-ivory/60">
-          <div aria-hidden className="grid-pattern absolute inset-0 opacity-70 [background-size:22px_22px]" />
-          <span aria-hidden className="absolute left-[26%] top-[30%]"><MapsPin size={22} /></span>
-          <span aria-hidden className="absolute right-[30%] top-[50%]"><MapsPin size={16} /></span>
-          <span aria-hidden className="absolute left-[52%] bottom-[22%] size-2 rounded-full bg-indigo/60" />
-        </div>
-        {/* the three results */}
-        <div className="mt-3 grid gap-2">
-          {results.map((r) => (
-            <div key={r.name} className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 ${r.you ? "border-indigo/40 bg-indigo/5" : "border-line bg-surface"}`}>
-              <span className={`grid size-6 shrink-0 place-items-center rounded-full text-[11px] font-bold ${r.you ? "bg-citron text-ink-solid" : "bg-lilac text-indigo"}`}>{r.you ? "1" : ""}</span>
-              <span className="flex-1 text-[12.5px] font-semibold">{r.name}</span>
-              <span className="text-[11px] font-bold text-indigo">{r.rating}</span>
-              <span className="text-[10.5px] text-graphite">{r.reviews} reviews</span>
-            </div>
-          ))}
-        </div>
-        <p className="mt-4 text-[10.5px] text-graphite">Illustrative example.</p>
-      </div>
+
+      {/* icon bubbles on the ring */}
+      {ORBIT_BUBBLES.map((b) => (
+        <span
+          key={b.label}
+          title={b.label}
+          className="absolute grid size-[72px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(99,91,255,0.18)]"
+          style={{ left: b.left, top: b.top }}
+        >
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+            {b.icon}
+          </svg>
+        </span>
+      ))}
     </div>
   );
 }
@@ -56,13 +147,28 @@ function MapsVisual() {
 export function LocalHero() {
   return (
     <section className="relative overflow-x-clip pt-[136px]">
-      <div aria-hidden className="wash-lilac absolute inset-x-0 top-0 h-[680px]" />
+      <div aria-hidden className="wash-lilac absolute inset-x-0 top-0 h-[720px]" />
       <div aria-hidden className="grid-pattern absolute left-1/2 top-24 h-[440px] w-[760px] -translate-x-1/2 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_40%,#000_35%,transparent_75%)]" />
-      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-6 pb-20 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12 lg:pb-28">
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10">
         <div>
-          <Reveal><Badge>{LOCAL_HERO.eyebrow}</Badge></Reveal>
+          <Reveal>
+            <span className="inline-flex items-center gap-2 rounded-full bg-lilac px-4 py-2 text-[12.5px] font-bold uppercase tracking-[0.1em] text-indigo">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M12 21s-7-6.4-7-11.5a7 7 0 0 1 14 0C19 14.6 12 21 12 21Z" />
+                <circle cx="12" cy="9.3" r="2.4" />
+              </svg>
+              {LOCAL_HERO.eyebrow}
+            </span>
+          </Reveal>
           <Reveal delay={60} duration={600}>
-            <h1 className="mt-6 max-w-xl font-heading text-[clamp(2.4rem,4.6vw,3.6rem)] font-bold leading-[1.08] tracking-[-0.025em]">{LOCAL_HERO.title}</h1>
+            <h1 className="mt-6 font-heading text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[1.06] tracking-[-0.03em]">
+              Local SEO that
+              <br />
+              brings you <span className="text-indigo">closer</span>
+              <br />
+              <span className="text-indigo">to more customers.</span>
+            </h1>
           </Reveal>
           <Reveal delay={120} duration={600}>
             <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-graphite">{LOCAL_HERO.intro}</p>
@@ -73,19 +179,30 @@ export function LocalHero() {
               <CtaLink href={LOCAL_HERO.secondaryCta.href} variant="ghost">{LOCAL_HERO.secondaryCta.label}</CtaLink>
             </div>
           </Reveal>
-          <Reveal delay={240}>
-            <div className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-line pt-7 text-[12.5px] font-semibold text-graphite">
-              {LOCAL_HERO.trust.map((t, i) => (
-                <span key={t} className="inline-flex items-center gap-3">
-                  {i > 0 && <span aria-hidden className="text-graphite/40">·</span>}
-                  {t}
-                </span>
-              ))}
-            </div>
-          </Reveal>
         </div>
-        <Reveal variant="right" delay={120}><MapsVisual /></Reveal>
+
+        <Reveal variant="right" delay={120}>
+          <PinOrbitVisual />
+        </Reveal>
       </div>
+
+      {/* icon trust bar */}
+      <Reveal delay={240}>
+        <div className="relative mx-auto mt-14 max-w-7xl px-6 pb-20 lg:pb-24">
+          <div className="grid gap-6 rounded-3xl border border-line bg-surface/70 px-6 py-7 backdrop-blur-sm sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
+            {LOCAL_HERO.trust.map((t, i) => (
+              <div key={t} className={`flex items-center gap-3.5 lg:justify-center ${i > 0 ? "lg:border-l lg:border-line" : ""}`}>
+                <span className="grid size-12 shrink-0 place-items-center rounded-full bg-lilac/80 text-indigo">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    {TRUST_ICONS[i]}
+                  </svg>
+                </span>
+                <span className="text-[13px] font-semibold leading-snug text-ink">{t}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Reveal>
     </section>
   );
 }
