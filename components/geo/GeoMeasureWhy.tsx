@@ -475,15 +475,15 @@ function EngageDecor() {
             "radial-gradient(150px 95px at 18% 38%, #000 55%, transparent 78%), radial-gradient(120px 70px at 48% 22%, #000 55%, transparent 78%), radial-gradient(95px 120px at 40% 72%, #000 50%, transparent 78%), radial-gradient(150px 100px at 78% 42%, #000 55%, transparent 78%), radial-gradient(80px 60px at 92% 78%, #000 50%, transparent 78%)",
         }}
       />
-      {/* orbit rings with a glowing citron core */}
-      <div className="absolute right-[22%] top-[34%] size-44 rounded-full border border-citron-deep/40" />
-      <div className="absolute right-[16%] top-[22%] size-64 rounded-full border border-citron-deep/25" />
-      <div className="absolute right-[33%] top-[52%] grid size-16 place-items-center rounded-full bg-citron/30">
-        <span className="size-3.5 rounded-full bg-citron-deep" />
+      {/* orbit rings with a glowing indigo core */}
+      <div className="absolute right-[22%] top-[34%] size-44 rounded-full border border-indigo/30" />
+      <div className="absolute right-[16%] top-[22%] size-64 rounded-full border border-indigo/20" />
+      <div className="absolute right-[33%] top-[52%] grid size-16 place-items-center rounded-full bg-lilac">
+        <span className="size-3.5 rounded-full bg-indigo" />
       </div>
       {/* floating icon tiles */}
       <div className="animate-bob absolute right-[8%] top-0 grid size-16 place-items-center rounded-2xl bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.12)]">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-citron-deep)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
           <path d="M4.5 20h15" />
           <path d="M6.5 20v-4M10.5 20v-7M14.5 20v-4.5M18.5 20V9" />
           <path d="M6.5 12 12 7.5l2.5 2L18.5 6" />
@@ -502,9 +502,9 @@ function EngageDecor() {
         </svg>
       </div>
       {/* scattered accent dots */}
-      <span className="absolute left-[18%] top-[8%] size-1.5 rounded-full bg-citron-deep" />
-      <span className="absolute left-[48%] bottom-[16%] size-1.5 rounded-full bg-citron-deep" />
-      <span className="absolute right-[2%] top-[38%] size-1.5 rounded-full bg-citron-deep/70" />
+      <span className="absolute left-[18%] top-[8%] size-1.5 rounded-full bg-indigo" />
+      <span className="absolute left-[48%] bottom-[16%] size-1.5 rounded-full bg-indigo" />
+      <span className="absolute right-[2%] top-[38%] size-1.5 rounded-full bg-indigo/70" />
     </div>
   );
 }
@@ -516,7 +516,7 @@ export function GeoEngagements() {
         {/* header: copy left, dotted-map decor right */}
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
           <Reveal variant="left">
-            <span className="inline-flex items-center gap-2 rounded-full bg-citron px-4 py-2 text-[12px] font-bold uppercase tracking-[0.08em] text-ink-solid">
+            <span className="inline-flex items-center gap-2 rounded-full bg-lilac px-4 py-2 text-[12px] font-bold uppercase tracking-[0.08em] text-indigo">
               <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden>
                 <path d="M12 2c.4 5 5 9.6 10 10-5 .4-9.6 5-10 10-.4-5-5-9.6-10-10 5-.4 9.6-5 10-10Z" fill="currentColor" />
               </svg>
@@ -525,7 +525,7 @@ export function GeoEngagements() {
             <h2 className="mt-6 font-heading text-[clamp(2.4rem,5vw,4rem)] font-bold leading-[1.02] tracking-[-0.03em]">
               GEO engagement
               <br />
-              <span className="text-citron-deep">options.</span>
+              <span className="text-indigo">options.</span>
             </h2>
             <p className="mt-6 max-w-md text-[16px] leading-relaxed text-graphite">
               An AI Visibility Audit is the recommended starting point when no reliable benchmark exists.
@@ -538,10 +538,10 @@ export function GeoEngagements() {
         <div className="relative mt-14">
           <Reveal className="absolute inset-x-8 top-11 hidden lg:block" duration={500}>
             <div className="relative">
-              <span className="trend-bar block h-0.5 bg-citron-deep/60" style={{ "--bar-delay": "200ms" } as React.CSSProperties} />
-              <span className="absolute left-1/3 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-citron-deep" />
+              <span className="trend-bar block h-0.5 bg-indigo/40" style={{ "--bar-delay": "200ms" } as React.CSSProperties} />
+              <span className="absolute left-1/3 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo" />
               <span className="absolute left-2/3 top-1/2 grid size-3.5 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-ink">
-                <span className="size-1.5 rounded-full bg-citron" />
+                <span className="size-1.5 rounded-full bg-lilac" />
               </span>
             </div>
           </Reveal>
@@ -550,7 +550,7 @@ export function GeoEngagements() {
             {ENGAGEMENTS.map((e, i) => (
               <Reveal key={e.title} variant="up" delay={Math.min(i * 100, 200)}>
                 <div className="relative flex justify-center lg:justify-center">
-                  <span className="grid size-[88px] place-items-center rounded-full border border-citron-deep/30 bg-surface text-ink shadow-[0_14px_34px_rgba(11,13,18,0.08)]">
+                  <span className="grid size-[88px] place-items-center rounded-full border border-indigo/25 bg-surface text-ink shadow-[0_14px_34px_rgba(11,13,18,0.08)]">
                     <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                       {ENGAGE_ICONS[i]}
                     </svg>
@@ -559,7 +559,7 @@ export function GeoEngagements() {
                 <p className="mt-6 font-heading text-[46px] font-extrabold leading-none tracking-[-0.02em]">
                   {String(i + 1).padStart(2, "0")}
                 </p>
-                <span className="mt-3 block h-1 w-10 rounded-full bg-citron-deep" />
+                <span className="mt-3 block h-1 w-10 rounded-full bg-indigo" />
                 <h3 className="mt-4 font-heading text-[19px] font-bold tracking-[-0.01em]">{e.title}</h3>
                 <p className="mt-3 text-[14px] leading-relaxed text-graphite">{e.desc}</p>
               </Reveal>
