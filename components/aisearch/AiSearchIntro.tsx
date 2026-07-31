@@ -1,6 +1,31 @@
 import Reveal from "@/components/motion/Reveal";
 import { CtaLink } from "@/components/ui";
 import { AI_JOURNEY, AI_COMPARISON, AI_SERVICES, ROUTES } from "@/lib/ai-search-content";
+import { GoogleG, GeminiMark, PerplexityKnot } from "@/components/brand-icons";
+
+/* Platform logos for the journey chips. ChatGPT is the ink knot, Website a
+   small indigo globe. */
+const PLATFORM_ICONS: Record<string, React.ReactNode> = {
+  "Google AI": <GoogleG size={15} />,
+  Gemini: <GeminiMark size={15} />,
+  Perplexity: <PerplexityKnot size={15} />,
+  ChatGPT: (
+    <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden>
+      <g stroke="#0B0D12" strokeWidth="1.9" strokeLinecap="round" fill="none">
+        <path d="M12 4.2v15.6" />
+        <path d="M5.2 8.1l13.6 7.8" />
+        <path d="M18.8 8.1 5.2 15.9" />
+        <circle cx="12" cy="12" r="7.8" />
+      </g>
+    </svg>
+  ),
+  Website: (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.7" strokeLinecap="round" aria-hidden>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M3.5 12h17M12 3.5c2.6 2.4 4 5.3 4 8.5s-1.4 6.1-4 8.5c-2.6-2.4-4-5.3-4-8.5s1.4-6.1 4-8.5Z" />
+    </svg>
+  ),
+};
 
 /* Build Visibility Across AI Search: full-width text + a horizontal buyer
    journey (Research, Compare, Validate, Contact) with platforms below each
@@ -43,7 +68,16 @@ export function AiSearchBuildVisibility() {
                   <p className="mx-auto mt-2 max-w-[15rem] text-[13px] leading-relaxed text-graphite">{s.desc}</p>
                   <div className="mt-3 flex flex-wrap justify-center gap-1.5">
                     {s.platforms.map((p) => (
-                      <span key={p} className="rounded-full border border-line bg-surface px-2 py-0.5 text-[10.5px] font-semibold text-indigo">{p}</span>
+                      <span
+                        key={p}
+                        title={p}
+                        aria-label={p}
+                        className="grid size-7 place-items-center rounded-full border border-line bg-surface"
+                      >
+                        {PLATFORM_ICONS[p] ?? (
+                          <span className="text-[10.5px] font-semibold text-indigo">{p}</span>
+                        )}
+                      </span>
                     ))}
                   </div>
                 </li>
