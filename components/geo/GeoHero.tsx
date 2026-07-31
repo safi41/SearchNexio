@@ -48,48 +48,51 @@ const PLATFORM_CHIPS = [
 
 /* Logo bubbles riding the orbit. The whole group revolves around the sphere
    while each bubble counter-rotates at the same rate, so the logos stay
-   upright as they travel. All five sit on one shared radius (positions are
-   50% ± 45% on the angle noted) so their paths are a single clean circle. */
+   upright as they travel.
+
+   All five share one radius and sit exactly 72 degrees apart, so the gaps
+   between them are equal. Positions are 50% + 45% * (cos, sin) of the angle
+   noted, starting at -125deg to keep the reference composition. */
 const ORBIT_SPEED = "48s";
 
 const ORBIT_BUBBLES = [
   {
-    label: "ChatGPT",
+    label: "ChatGPT", // -125deg
     icon: <ChatGPTKnot size={44} />,
-    left: "15.5%",
-    top: "21.1%",
-    size: 88,
+    left: "24.2%",
+    top: "13.1%",
+    size: 84,
     bg: "#EAF7F0",
   },
   {
-    label: "Gemini",
-    icon: <GeminiMark size={34} />,
-    left: "83.4%",
-    top: "19.9%",
-    size: 76,
+    label: "Gemini", // -53deg
+    icon: <GeminiMark size={36} />,
+    left: "77.1%",
+    top: "14.1%",
+    size: 84,
     bg: "#ffffff",
   },
   {
-    label: "Perplexity",
+    label: "Perplexity", // 19deg
     icon: <PerplexityKnot size={40} />,
-    left: "94.3%",
-    top: "57.8%",
-    size: 90,
+    left: "92.5%",
+    top: "64.7%",
+    size: 84,
     bg: "#F2FAF8",
   },
   {
-    label: "Claude",
-    icon: <AnthropicLogotype width={42} />,
-    left: "6.3%",
-    top: "60.9%",
-    size: 86,
+    label: "Claude", // 91deg
+    icon: <AnthropicLogotype width={44} />,
+    left: "49.2%",
+    top: "95.0%",
+    size: 84,
     bg: "#ffffff",
   },
   {
-    label: "Microsoft Copilot",
+    label: "Microsoft Copilot", // 163deg
     icon: <CopilotMark size={38} />,
-    left: "63.2%",
-    top: "93.0%",
+    left: "7.0%",
+    top: "63.2%",
     size: 84,
     bg: "#ffffff",
   },
