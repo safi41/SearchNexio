@@ -133,7 +133,9 @@ export function AiSearchMeaning() {
   );
 }
 
-/* Our AI Search Services: three large cards + one shared CTA below. */
+/* Our AI Search Services: an editorial index list. Each service is a
+   full-width hairline row — oversized ghost number, title + link, outcome
+   with dash-led capabilities, and a circular arrow that fills on hover. */
 export function AiSearchServices() {
   return (
     <section className="overflow-x-clip py-16 md:py-24">
@@ -149,38 +151,64 @@ export function AiSearchServices() {
           </div>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+        <div className="mt-12">
           {AI_SERVICES.map((s, i) => (
-            <Reveal key={s.key} variant="up" delay={Math.min(i * 70, 140)}>
-              <article className="group flex h-full flex-col rounded-3xl border border-line bg-surface p-7 transition-colors duration-300 ease-soft hover:border-indigo/30">
-                <span className="font-heading text-[13px] font-bold tabular-nums text-indigo/70">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-3 font-heading text-[19px] font-bold leading-snug tracking-[-0.01em]">{s.name}</h3>
-                <p className="mt-3 text-[13.5px] leading-relaxed text-graphite">{s.outcome}</p>
-                <ul className="mt-5 grid flex-1 gap-2.5">
-                  {s.bullets.map((b) => (
-                    <li key={b} className="flex gap-2.5 text-[13px] leading-relaxed text-ink">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-indigo" /> {b}
-                    </li>
-                  ))}
-                </ul>
-                <a href={s.link.href} className="mt-6 inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-indigo">
-                  {s.link.label}
-                  <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                </a>
-              </article>
+            <Reveal key={s.key} variant="up" delay={Math.min(i * 80, 160)}>
+              <a
+                href={s.link.href}
+                className="group grid gap-5 border-t border-line py-9 transition-colors duration-300 ease-soft last:border-b hover:bg-lilac/20 lg:grid-cols-[110px_1.05fr_1fr_72px] lg:items-start lg:gap-8"
+              >
+                <span
+                  aria-hidden
+                  className="font-heading text-[42px] font-bold leading-none tracking-[-0.02em] text-indigo/20 transition-colors duration-300 group-hover:text-indigo/50"
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
+                <div>
+                  <h3 className="font-heading text-[clamp(1.25rem,2.1vw,1.6rem)] font-bold leading-snug tracking-[-0.015em] transition-colors duration-300 group-hover:text-indigo">
+                    {s.name}
+                  </h3>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-indigo">
+                    {s.link.label}
+                    <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5">
+                      <path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </div>
+
+                <div>
+                  <p className="text-[14px] leading-relaxed text-graphite">{s.outcome}</p>
+                  <ul className="mt-4 grid gap-2">
+                    {s.bullets.map((b) => (
+                      <li key={b} className="flex items-center gap-3 text-[13px] leading-relaxed text-ink">
+                        <span aria-hidden className="h-px w-5 shrink-0 bg-indigo/50" />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <span
+                  aria-hidden
+                  className="hidden size-12 place-items-center justify-self-end rounded-full border border-line text-ink transition-all duration-300 ease-soft group-hover:border-indigo group-hover:bg-indigo group-hover:text-white lg:grid"
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M4 12 12 4m0 0H5.5M12 4v6.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </a>
             </Reveal>
           ))}
         </div>
 
-        {/* one shared CTA + small contextual line */}
+        {/* shared CTA strip */}
         <Reveal delay={100}>
-          <div className="mt-10 rounded-2xl border border-dashed border-indigo/25 bg-lilac/30 px-6 py-5 text-center">
-            <p className="text-[14px] text-graphite">
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-6">
+            <p className="text-[14.5px] text-graphite">
               Not sure where to start? The AI Visibility Audit gives you the baseline before any implementation begins.
             </p>
-            <div className="mt-4 flex justify-center">
-              <CtaLink href={ROUTES.audit}>Request an AI Visibility Review</CtaLink>
-            </div>
+            <CtaLink href={ROUTES.audit}>Request an AI Visibility Review</CtaLink>
           </div>
         </Reveal>
       </div>
