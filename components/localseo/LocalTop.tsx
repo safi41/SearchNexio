@@ -40,20 +40,22 @@ const TRUST_ICONS = [
   </g>,
 ];
 
-/* Bubbles pinned on the orbit ring around the pin. */
+/* Bubbles pinned on the orbit ring around the pin. All four share one
+   radius (46%) and sit exactly 90 degrees apart, starting at -75deg, so the
+   gaps between them are equal. */
 const ORBIT_BUBBLES = [
   {
     label: "Calls",
-    left: "64%",
-    top: "7%",
+    left: "61.9%",
+    top: "5.6%",
     icon: (
       <path d="M7.5 4.5 9.7 4a1 1 0 0 1 1.1.6l1.1 2.6a1 1 0 0 1-.3 1.2l-1.4 1a11 11 0 0 0 4.4 4.4l1-1.4a1 1 0 0 1 1.2-.3l2.6 1.1a1 1 0 0 1 .6 1.1l-.5 2.2a1.6 1.6 0 0 1-1.6 1.2C11.3 18 6 12.7 6.3 6.1a1.6 1.6 0 0 1 1.2-1.6Z" fill="var(--color-indigo)" stroke="none" />
     ),
   },
   {
     label: "Business profile",
-    left: "4%",
-    top: "46%",
+    left: "5.6%",
+    top: "38.1%",
     icon: (
       <g fill="var(--color-indigo)" stroke="none">
         <path d="M5 5h14v3.2c0 1.2-.8 2.1-2 2.1s-1.9-.9-1.9-2.1c0 1.2-.9 2.1-2.1 2.1s-2.1-.9-2.1-2.1c0 1.2-.7 2.1-1.9 2.1s-2-.9-2-2.1Z" />
@@ -63,16 +65,16 @@ const ORBIT_BUBBLES = [
   },
   {
     label: "Reviews",
-    left: "96%",
-    top: "46%",
+    left: "94.4%",
+    top: "61.9%",
     icon: (
       <path d="m12 4 2.3 4.7 5.2.8-3.8 3.7.9 5.2L12 15.9l-4.6 2.5.9-5.2-3.8-3.7 5.2-.8Z" fill="var(--color-indigo)" stroke="none" />
     ),
   },
   {
     label: "Growth",
-    left: "36%",
-    top: "92%",
+    left: "38.1%",
+    top: "94.4%",
     icon: (
       <g fill="var(--color-indigo)" stroke="none">
         <rect x="5" y="13" width="2.8" height="6" rx="0.9" />
@@ -163,11 +165,9 @@ export function LocalHero() {
           </Reveal>
           <Reveal delay={60} duration={600}>
             <h1 className="mt-6 font-heading text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[1.06] tracking-[-0.03em]">
-              Local SEO that
+              Local SEO
               <br />
-              brings you <span className="text-indigo">closer</span>
-              <br />
-              <span className="text-indigo">to more customers.</span>
+              <span className="text-indigo">Services</span>
             </h1>
           </Reveal>
           <Reveal delay={120} duration={600}>
@@ -189,9 +189,9 @@ export function LocalHero() {
       {/* icon trust bar */}
       <Reveal delay={240}>
         <div className="relative mx-auto mt-14 max-w-7xl px-6 pb-20 lg:pb-24">
-          <div className="grid gap-6 rounded-3xl border border-line bg-surface/70 px-6 py-7 backdrop-blur-sm sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
+          <div className="grid gap-6 rounded-3xl border border-line bg-surface/70 px-7 py-7 backdrop-blur-sm sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
             {LOCAL_HERO.trust.map((t, i) => (
-              <div key={t} className={`flex items-center gap-3.5 lg:justify-center ${i > 0 ? "lg:border-l lg:border-line" : ""}`}>
+              <div key={t} className={`flex items-center gap-3.5 lg:px-6 ${i === 0 ? "lg:pl-0" : "lg:border-l lg:border-line"} ${i === LOCAL_HERO.trust.length - 1 ? "lg:pr-0" : ""}`}>
                 <span className="grid size-12 shrink-0 place-items-center rounded-full bg-lilac/80 text-indigo">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                     {TRUST_ICONS[i]}
