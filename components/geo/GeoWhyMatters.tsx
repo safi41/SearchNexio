@@ -24,21 +24,42 @@ function TrendsChart() {
         </span>
       </figcaption>
 
-      {/* horizontal bars, one per term */}
+      {/* horizontal bars, one per term. The coloured fill sits at its final
+          width and is scaled down to nothing until the chart is revealed, so
+          it grows out to its endpoint on scroll-in (see .trend-bar). */}
       <div className="mt-6 grid gap-3.5">
-        {TRENDS.series.map((s) => (
-          <div key={s.name} className="flex items-center gap-3">
-            <span className="w-20 shrink-0 text-[12.5px] font-semibold">{s.name}</span>
-            <span className="relative h-6 flex-1 overflow-hidden rounded-lg bg-ivory">
-              <span
-                className="flex h-full items-center justify-end rounded-lg px-2 text-[11px] font-bold tabular-nums text-white"
-                style={{ width: `${Math.max((s.avg / max) * 100, 8)}%`, backgroundColor: s.color }}
-              >
-                {s.avg}
+        {TRENDS.series.map((s, i) => {
+          const width = `${Math.max((s.avg / max) * 100, 8)}%`;
+          return (
+            <div key={s.name} className="flex items-center gap-3">
+              <span className="w-20 shrink-0 text-[12.5px] font-semibold">{s.name}</span>
+              <span className="relative h-6 flex-1 overflow-hidden rounded-lg bg-ivory">
+                <span
+                  className="trend-bar absolute inset-y-0 left-0 rounded-lg"
+                  style={
+                    {
+                      width,
+                      backgroundColor: s.color,
+                      "--bar-delay": `${i * 110}ms`,
+                    } as React.CSSProperties
+                  }
+                />
+                {/* label rides the bar's end without being scaled by it */}
+                <span
+                  className="trend-bar-value absolute inset-y-0 flex items-center justify-end pr-2 text-[11px] font-bold tabular-nums text-white"
+                  style={
+                    {
+                      width,
+                      "--bar-delay": `${i * 110}ms`,
+                    } as React.CSSProperties
+                  }
+                >
+                  {s.avg}
+                </span>
               </span>
-            </span>
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </div>
 
       <p className="mt-6 border-t border-line pt-4 text-[11.5px] leading-relaxed text-graphite">

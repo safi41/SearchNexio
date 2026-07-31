@@ -227,6 +227,27 @@ body {
   [data-reveal="hidden"] .geo-conn {
     stroke-dashoffset: 1;
   }
+
+  /* Google Trends bars grow from zero to their value when the chart scrolls
+     into view. Each bar carries its own --bar-delay so they fill in sequence;
+     the value label fades in behind the bar's leading edge. */
+  .trend-bar {
+    transform-origin: left center;
+    transform: scaleX(1);
+    transition: transform 0.9s var(--ease-soft) var(--bar-delay, 0ms);
+  }
+  [data-reveal="hidden"] .trend-bar {
+    transform: scaleX(0);
+  }
+  /* the label is un-squashed by the parent's scaleX, so it stays legible */
+  .trend-bar-value {
+    opacity: 1;
+    transition: opacity 0.4s var(--ease-soft)
+      calc(var(--bar-delay, 0ms) + 0.45s);
+  }
+  [data-reveal="hidden"] .trend-bar-value {
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -250,5 +271,12 @@ body {
   /* reduced motion: the journey line stays fully drawn */
   .journey-line {
     transform: scaleY(1) !important;
+  }
+  /* reduced motion: trends bars sit at their final value */
+  .trend-bar {
+    transform: scaleX(1) !important;
+  }
+  .trend-bar-value {
+    opacity: 1 !important;
   }
 }
