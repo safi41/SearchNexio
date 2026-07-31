@@ -6,37 +6,163 @@ import { CtaLink } from "@/components/ui";
    the card-grid sections between the process and the FAQ. */
 
 /* ---- How we measure GEO ---- */
+
+/* Line icons for the seven measurement metrics. */
+const MEASURE_ICONS = [
+  /* brand mention — tag */
+  <g key="m1">
+    <path d="M12.6 3.5H19a1.5 1.5 0 0 1 1.5 1.5v6.4a2 2 0 0 1-.6 1.4l-7.6 7.6a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l7.7-7.5a2 2 0 0 1 1.4-.6Z" />
+    <circle cx="15.7" cy="8.3" r="1.4" />
+  </g>,
+  /* citation — document */
+  <g key="m2">
+    <path d="M6.5 3.5h7.2L18.5 8v10a2.5 2.5 0 0 1-2.5 2.5H8A2.5 2.5 0 0 1 5.5 18V6a2.5 2.5 0 0 1 1-2.5Z" />
+    <path d="M13.5 3.5V8h5" />
+    <path d="M8.8 12.5h6.4M8.8 16h4" />
+  </g>,
+  /* recommendation — star */
+  <g key="m3">
+    <path d="m12 3.6 2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8Z" />
+  </g>,
+  /* share of voice — audio wave */
+  <g key="m4">
+    <path d="M12 5.5v13M8.5 8.5v7M5 10.5v3M15.5 8.5v7M19 10.5v3" />
+  </g>,
+  /* brand accuracy — target */
+  <g key="m5">
+    <circle cx="12" cy="12" r="8" />
+    <circle cx="12" cy="12" r="4.5" />
+    <circle cx="12" cy="12" r="1.2" />
+  </g>,
+  /* source coverage — shield */
+  <g key="m6">
+    <path d="M12 3.5c2.4 1.4 4.9 2.1 7 2.2v6.1c0 4-2.8 7-7 8.7-4.2-1.7-7-4.7-7-8.7V5.7c2.1-.1 4.6-.8 7-2.2Z" />
+  </g>,
+  /* AI-referred demand — trend arrow */
+  <g key="m7">
+    <path d="M4.5 17.5 10 12l3 3 6.5-7" />
+    <path d="M15 8h4.5v4.5" />
+  </g>,
+];
+
+/* Right-hand decor: analytics browser card with floating chart tiles. */
+function MeasureDecor() {
+  return (
+    <div aria-hidden className="relative hidden h-[320px] select-none lg:block">
+      {/* concentric rings */}
+      <div className="absolute right-[2%] top-[6%] size-72 rounded-full border border-indigo/10" />
+      <div className="absolute right-[8%] top-[16%] size-52 rounded-full border border-indigo/15" />
+      {/* dot pattern */}
+      <div
+        className="absolute left-[4%] top-[16%] h-28 w-36"
+        style={{
+          backgroundImage: "radial-gradient(var(--wm-stroke) 1.6px, transparent 1.6px)",
+          backgroundSize: "12px 12px",
+        }}
+      />
+      {/* browser analytics card */}
+      <div className="absolute left-[16%] top-[10%] h-56 w-72 rounded-2xl border border-line bg-surface p-4 shadow-[0_24px_60px_rgba(11,13,18,0.1)]">
+        <div className="flex gap-1.5">
+          <span className="size-1.5 rounded-full bg-indigo" />
+          <span className="size-1.5 rounded-full bg-indigo/40" />
+          <span className="size-1.5 rounded-full bg-indigo/20" />
+        </div>
+        <svg className="mt-3 w-full" viewBox="0 0 240 150" fill="none">
+          <path d="M8 132h18v-34H8Zm28 0h18v-52H36Zm28 0h18v-24H64Zm28 0h18v-44H92Zm28 0h18v-64h-18Zm28 0h18v-38h-18Zm28 0h18v-56h-18Z" fill="var(--color-lilac)" />
+          <path d="M6 84c16-26 30-40 46-40 20 0 22 30 40 30s24-42 44-42 22 26 36 26 24-14 40-30" stroke="var(--color-indigo)" strokeWidth="3.5" strokeLinecap="round" />
+        </svg>
+      </div>
+      {/* donut chart overlapping the card */}
+      <svg className="animate-bob absolute right-[14%] top-[46%]" width="84" height="84" viewBox="0 0 84 84" style={{ animationDelay: "1.2s" }}>
+        <circle cx="42" cy="42" r="30" fill="none" stroke="var(--color-lilac)" strokeWidth="16" />
+        <circle cx="42" cy="42" r="30" fill="none" stroke="var(--color-indigo)" strokeWidth="16" strokeDasharray="120 190" strokeLinecap="round" transform="rotate(-90 42 42)" />
+      </svg>
+      {/* floating tiles */}
+      <div className="animate-bob absolute right-[2%] top-0 grid size-16 place-items-center rounded-2xl bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.12)]">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--color-indigo)">
+          <rect x="4" y="12" width="4" height="8" rx="1.2" />
+          <rect x="10" y="8" width="4" height="12" rx="1.2" opacity="0.75" />
+          <rect x="16" y="4" width="4" height="16" rx="1.2" />
+        </svg>
+      </div>
+      <div className="animate-bob absolute bottom-[6%] left-[6%] grid size-16 place-items-center rounded-2xl bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.12)]" style={{ animationDelay: "2.2s" }}>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--color-indigo)">
+          <path d="M11 3.5A8.5 8.5 0 1 0 20.5 13H11Z" />
+          <path d="M13.5 3.2a8.5 8.5 0 0 1 7.3 7.3h-7.3Z" opacity="0.55" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
 export function GeoMeasure() {
   return (
     <section className="overflow-x-clip wash-lilac-full py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal>
-          <h2 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            How we measure GEO
-          </h2>
-          <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-graphite">
-            GEO performance cannot be represented by one permanent ranking. Search Nexio uses structured prompt groups, repeated testing and platform-specific reporting to measure directional performance.
-          </p>
-        </Reveal>
+        {/* header: copy left, analytics decor right */}
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
+          <Reveal variant="left">
+            <span className="inline-flex items-center gap-2 rounded-full bg-lilac px-4 py-1.5 text-[12px] font-bold uppercase tracking-[0.1em] text-indigo">
+              <span className="size-1.5 rounded-full bg-indigo" />
+              How we measure
+            </span>
+            <h2 className="mt-6 font-heading text-[clamp(2.4rem,5vw,4rem)] font-bold leading-[1.02] tracking-[-0.03em]">
+              How we
+              <br />
+              <span className="text-indigo">measure</span> GEO.
+            </h2>
+            <p className="mt-6 max-w-lg text-[16px] leading-relaxed text-graphite">
+              GEO performance cannot be represented by one permanent ranking. Search Nexio uses structured prompt groups, repeated testing and platform-specific reporting to measure directional performance.
+            </p>
+          </Reveal>
+          <MeasureDecor />
+        </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* metric rows: icon chip, number on a drawn line, title, description */}
+        <div className="mt-14 grid gap-x-10 gap-y-11 md:grid-cols-2 lg:grid-cols-3">
           {METRICS.map((m, i) => (
-            <Reveal key={m.title} variant="up" delay={Math.min((i % 3) * 60, 120)}>
-              <article className="flex h-full flex-col rounded-2xl border border-line bg-surface p-6">
-                <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-indigo">
-                  <span className="size-1.5 rounded-full bg-indigo" /> Metric
+            <Reveal key={m.title} variant="up" delay={Math.min((i % 3) * 80, 160)}>
+              <div className="flex gap-5">
+                <span className="grid size-[76px] shrink-0 place-items-center rounded-full border border-indigo/15 bg-surface shadow-[0_10px_28px_rgba(99,91,255,0.1)]">
+                  <span className="grid size-14 place-items-center rounded-full bg-lilac/70 text-indigo">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      {MEASURE_ICONS[i]}
+                    </svg>
+                  </span>
                 </span>
-                <h3 className="mt-3 font-heading text-[16.5px] font-bold tracking-[-0.01em]">{m.title}</h3>
-                <p className="mt-2 text-[13.5px] leading-relaxed text-graphite">{m.desc}</p>
-              </article>
+                <div className="min-w-0 flex-1 pt-1">
+                  <div className="flex items-center gap-4">
+                    <span className="font-heading text-[26px] font-extrabold leading-none tracking-[-0.01em] text-indigo">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="relative mr-1 h-px flex-1">
+                      <span
+                        className="trend-bar absolute inset-0 bg-indigo/30"
+                        style={{ "--bar-delay": `${(i % 3) * 120}ms` } as React.CSSProperties}
+                      />
+                      <span className="absolute right-0 top-1/2 size-2 -translate-y-1/2 translate-x-1/2 rounded-full bg-indigo" />
+                    </span>
+                  </div>
+                  <h3 className="mt-3 font-heading text-[17px] font-bold tracking-[-0.01em]">{m.title}</h3>
+                  <p className="mt-2 text-[13.5px] leading-relaxed text-graphite">{m.desc}</p>
+                </div>
+              </div>
             </Reveal>
           ))}
         </div>
 
+        {/* measurement note */}
         <Reveal delay={80}>
-          <p className="mt-8 rounded-2xl border border-dashed border-graphite/30 bg-surface/50 px-5 py-4 text-[13px] leading-relaxed text-graphite">
-            <span className="font-semibold text-ink">Measurement note.</span> Reports document the prompt sample, platform mix, testing frequency and attribution limits. A single AI response is never presented as a permanent result.
-          </p>
+          <div className="mt-14 flex items-start gap-4 rounded-2xl border border-dashed border-indigo/40 bg-lilac/25 px-6 py-5">
+            <span aria-hidden className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full border border-indigo/30 text-indigo">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 7.2v4M8 4.6v.2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+            </span>
+            <p className="text-[14px] leading-relaxed text-graphite">
+              <span className="font-semibold text-ink">Measurement note.</span> Reports document the prompt sample, platform mix, testing frequency and attribution limits. A single AI response is never presented as a permanent result.
+            </p>
+          </div>
         </Reveal>
       </div>
     </section>
