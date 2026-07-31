@@ -46,53 +46,52 @@ const PLATFORM_CHIPS = [
   { icon: <CopilotMark size={20} />, label: "Microsoft Copilot" },
 ];
 
-/* Logo bubbles pinned around the orbit rings. Positions are percentages of
-   the square container; each bobs gently on its own delay. */
+/* Logo bubbles riding the orbit. The whole group revolves around the sphere
+   while each bubble counter-rotates at the same rate, so the logos stay
+   upright as they travel. All five sit on one shared radius (positions are
+   50% ± 45% on the angle noted) so their paths are a single clean circle. */
+const ORBIT_SPEED = "48s";
+
 const ORBIT_BUBBLES = [
   {
     label: "ChatGPT",
     icon: <ChatGPTKnot size={44} />,
-    left: "11%",
-    top: "17%",
+    left: "15.5%",
+    top: "21.1%",
     size: 88,
     bg: "#EAF7F0",
-    delay: "0s",
   },
   {
     label: "Gemini",
     icon: <GeminiMark size={34} />,
-    left: "87%",
-    top: "17%",
+    left: "83.4%",
+    top: "19.9%",
     size: 76,
     bg: "#ffffff",
-    delay: "0.9s",
   },
   {
     label: "Perplexity",
     icon: <PerplexityKnot size={40} />,
-    left: "97%",
-    top: "58%",
+    left: "94.3%",
+    top: "57.8%",
     size: 90,
     bg: "#F2FAF8",
-    delay: "1.7s",
   },
   {
     label: "Claude",
     icon: <AnthropicLogotype width={42} />,
-    left: "6%",
-    top: "61%",
+    left: "6.3%",
+    top: "60.9%",
     size: 86,
     bg: "#ffffff",
-    delay: "2.4s",
   },
   {
     label: "Microsoft Copilot",
     icon: <CopilotMark size={38} />,
-    left: "63%",
-    top: "92%",
+    left: "63.2%",
+    top: "93.0%",
     size: 84,
     bg: "#ffffff",
-    delay: "3.1s",
   },
 ];
 
@@ -108,7 +107,7 @@ function OrbitVisual() {
       {/* outer dashed orbit — rotates slowly, carrying its small dots */}
       <div
         aria-hidden
-        className="animate-orbit-slow absolute inset-[1%] rounded-full border border-dashed border-indigo/30"
+        className="animate-orbit-slow absolute inset-[5%] rounded-full border border-dashed border-indigo/30"
         style={{ animationDuration: "56s" }}
       >
         <span className="absolute left-1/2 top-0 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-400" />
@@ -149,22 +148,34 @@ function OrbitVisual() {
         </svg>
       </div>
 
-      {/* platform logo bubbles */}
-      {ORBIT_BUBBLES.map((b) => (
-        <div
-          key={b.label}
-          className="animate-bob absolute -translate-x-1/2 -translate-y-1/2"
-          style={{ left: b.left, top: b.top, animationDelay: b.delay }}
-        >
-          <span
-            title={b.label}
-            className="grid place-items-center rounded-full shadow-[0_18px_44px_rgba(99,91,255,0.2)]"
-            style={{ width: b.size, height: b.size, background: b.bg }}
+      {/* platform logo bubbles — the group revolves around the sphere; each
+          bubble spins in reverse at the same rate so its logo stays upright */}
+      <div
+        className="animate-orbit absolute inset-0"
+        style={{ animationDuration: ORBIT_SPEED }}
+      >
+        {ORBIT_BUBBLES.map((b) => (
+          <div
+            key={b.label}
+            className="absolute -translate-x-1/2 -translate-y-1/2"
+            style={{ left: b.left, top: b.top }}
           >
-            {b.icon}
-          </span>
-        </div>
-      ))}
+            <span
+              title={b.label}
+              className="animate-orbit grid place-items-center rounded-full shadow-[0_18px_44px_rgba(99,91,255,0.2)]"
+              style={{
+                width: b.size,
+                height: b.size,
+                background: b.bg,
+                animationDuration: ORBIT_SPEED,
+                animationDirection: "reverse",
+              }}
+            >
+              {b.icon}
+            </span>
+          </div>
+        ))}
+      </div>
 
       {/* scattered decor sparks and dots */}
       <MiniSpark
