@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Reveal from "@/components/motion/Reveal";
 import { WORK_COVERS, AI_PLATFORMS } from "@/lib/ai-search-content";
-import { GoogleG, ChatGPTMark, GeminiMark, PerplexityMark, SparkleAI } from "@/components/brand-icons";
+import { GoogleG, ChatGPTMark, GeminiMark, PerplexityKnot, ClaudeSpark, CopilotMark } from "@/components/brand-icons";
 
 /* What the Work Covers: an interactive five-item list with a sticky detail
    panel on desktop (selecting an item updates the panel), accordion on
@@ -112,16 +112,23 @@ export function AiSearchWorkCovers() {
   );
 }
 
-/* Platforms We Optimize For: five compact cards, soft hover only. */
+/* Platforms We Optimize For: an expanding card rail. The hovered platform
+   opens into a full card; the others collapse into vertical indigo pills
+   with their number chip, like an accordion. Stacked cards below lg. */
 const PLATFORM_ICONS = [
-  <SparkleAI key="g" size={20} />,
-  <ChatGPTMark key="c" size={20} />,
-  <GeminiMark key="ge" size={20} />,
-  <PerplexityMark key="p" size={20} />,
-  <GoogleG key="cop" size={20} />,
+  <GoogleG key="g" size={26} />,
+  <ChatGPTMark key="c" size={26} />,
+  <GeminiMark key="ge" size={26} />,
+  <PerplexityKnot key="p" size={26} />,
+  <span key="cc" className="flex items-center gap-1.5">
+    <ClaudeSpark size={18} />
+    <CopilotMark size={20} />
+  </span>,
 ];
 
 export function AiSearchPlatforms() {
+  const [active, setActive] = useState(0);
+
   return (
     <section className="overflow-x-clip py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
@@ -136,11 +143,82 @@ export function AiSearchPlatforms() {
           </div>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {/* desktop: expanding rail */}
+        <Reveal delay={80}>
+          <div className="mt-12 hidden h-[360px] gap-4 lg:flex">
+            {AI_PLATFORMS.map((p, i) => {
+              const open = active === i;
+              const num = String(i + 1).padStart(2, "0");
+              return (
+                <div
+                  key={p.name}
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={open}
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => setActive(i)}
+                  onClick={() => setActive(i)}
+                  className={`relative cursor-pointer overflow-hidden rounded-3xl transition-all duration-500 ease-soft ${
+                    open
+                      ? "border border-line bg-surface"
+                      : "border border-transparent bg-gradient-to-b from-indigo to-indigo-deep"
+                  }`}
+                  style={{ flexGrow: open ? 3.2 : 0.55, flexBasis: 0 }}
+                >
+                  {/* open card */}
+                  <div
+                    className={`absolute inset-0 flex min-w-[300px] flex-col p-8 transition-opacity duration-300 ${
+                      open ? "opacity-100 delay-150" : "pointer-events-none opacity-0"
+                    }`}
+                  >
+                    <span aria-hidden className="absolute -bottom-20 -right-20 size-64 rounded-full bg-lilac/70 blur-2xl" />
+                    <div className="relative flex items-start justify-between">
+                      <span className="grid size-14 place-items-center rounded-2xl bg-gradient-to-b from-lilac to-lilac/40">
+                        {PLATFORM_ICONS[i]}
+                      </span>
+                      <span className="grid size-9 place-items-center rounded-full border border-line bg-surface text-[12.5px] font-bold text-indigo">
+                        {num}
+                      </span>
+                    </div>
+                    <h3 className="relative mt-auto font-heading text-[22px] font-bold tracking-[-0.01em]">
+                      {p.name}
+                    </h3>
+                    <p className="relative mt-3 max-w-md text-[14px] leading-relaxed text-graphite">
+                      {p.desc}
+                    </p>
+                  </div>
+
+                  {/* collapsed pill */}
+                  <div
+                    className={`absolute inset-0 flex flex-col items-center justify-between py-6 transition-opacity duration-300 ${
+                      open ? "pointer-events-none opacity-0" : "opacity-100 delay-150"
+                    }`}
+                  >
+                    <span
+                      className="whitespace-nowrap font-heading text-[16.5px] font-bold tracking-[-0.01em] text-white"
+                      style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+                    >
+                      {p.name}
+                    </span>
+                    <span className="grid size-9 place-items-center rounded-full bg-white text-[12.5px] font-bold text-indigo">
+                      {num}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Reveal>
+
+        {/* mobile: stacked cards */}
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:hidden">
           {AI_PLATFORMS.map((p, i) => (
             <Reveal key={p.name} variant="up" delay={Math.min(i * 50, 200)}>
-              <article className="group flex h-full flex-col rounded-2xl border border-line bg-surface p-5 transition-colors duration-300 ease-soft hover:border-indigo/30">
-                <span className="grid size-10 place-items-center rounded-xl border border-line bg-ivory">{PLATFORM_ICONS[i]}</span>
+              <article className="flex h-full flex-col rounded-2xl border border-line bg-surface p-5">
+                <div className="flex items-center justify-between">
+                  <span className="grid size-10 place-items-center rounded-xl border border-line bg-ivory">{PLATFORM_ICONS[i]}</span>
+                  <span className="text-[12px] font-bold tabular-nums text-indigo/60">{String(i + 1).padStart(2, "0")}</span>
+                </div>
                 <h3 className="mt-4 font-heading text-[15px] font-bold leading-snug tracking-[-0.01em]">{p.name}</h3>
                 <p className="mt-2 text-[12.5px] leading-relaxed text-graphite">{p.desc}</p>
               </article>
