@@ -8,29 +8,167 @@ import {
   LOCAL_ENGAGEMENTS, LOCAL_LIMITATIONS, LOCAL_FAQS, L_ROUTES,
 } from "@/lib/local-seo-content";
 
-/* ---- What You Receive: 12 deliverables ---- */
+/* ---- What You Receive: a bento of product-UI feature cards for the most
+   visual deliverables, plus a documented-scope checklist for the rest ---- */
+
+/* Feature-card indexes into LOCAL_DELIVERABLES, with an abstract UI graphic
+   each (no sample data, just shapes). */
+const FEATURED = [0, 11, 2, 1, 10];
+const LISTED = [3, 4, 5, 6, 7, 8, 9];
+
+function BenchmarkArt() {
+  return (
+    <div className="relative h-32 overflow-hidden rounded-2xl border border-line bg-ivory/60 p-4">
+      <div aria-hidden className="grid-pattern absolute inset-0 opacity-60 [background-size:20px_20px]" />
+      <div className="relative grid gap-2.5">
+        {[82, 58, 40].map((w, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className={`h-3.5 rounded-full ${i === 0 ? "bg-indigo" : "bg-indigo/20"}`} style={{ width: `${w}%` }} />
+            {i === 0 && (
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden>
+                <path d="M12 21s-7-6.4-7-11.5a7 7 0 0 1 14 0C19 14.6 12 21 12 21Z" fill="var(--color-indigo)" />
+                <circle cx="12" cy="9.3" r="2.4" fill="#fff" />
+              </svg>
+            )}
+          </div>
+        ))}
+      </div>
+      <span className="relative mt-3 inline-block rounded-full bg-indigo px-2.5 py-1 text-[10px] font-bold text-white">Your position</span>
+    </div>
+  );
+}
+
+function ReportArt() {
+  return (
+    <div className="relative h-32 overflow-hidden rounded-2xl border border-line bg-ivory/60 p-4">
+      <div className="flex h-14 items-end gap-1.5">
+        {[34, 52, 42, 66, 58, 82, 74, 96].map((h, i) => (
+          <span key={i} className={`flex-1 rounded-t-md ${i >= 5 ? "bg-indigo" : "bg-indigo/25"}`} style={{ height: `${h}%` }} />
+        ))}
+      </div>
+      <div className="mt-3 flex flex-wrap gap-1.5">
+        {["Calls", "Forms", "Bookings"].map((m) => (
+          <span key={m} className="rounded-full border border-line bg-surface px-2 py-0.5 text-[10px] font-semibold text-ink">{m}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ProfileArt() {
+  return (
+    <div className="relative h-32 overflow-hidden rounded-2xl border border-line bg-ivory/60 p-4">
+      <div className="flex items-center gap-2.5">
+        <span className="size-8 rounded-full bg-indigo/20" />
+        <div className="grid flex-1 gap-1.5">
+          <span className="h-2 w-3/4 rounded-full bg-ink/15" />
+          <span className="h-2 w-1/2 rounded-full bg-ink/10" />
+        </div>
+      </div>
+      <div className="mt-3.5 grid gap-2">
+        {[0, 1].map((i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className="grid size-4 place-items-center rounded-full bg-citron">
+              <svg width="8" height="8" viewBox="0 0 12 12" fill="none" aria-hidden><path d="m2.5 6.5 2.5 2.5 4.5-5" stroke="#0B0D12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </span>
+            <span className="h-2 flex-1 rounded-full bg-ink/10" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MapArt() {
+  return (
+    <div className="relative h-32 overflow-hidden rounded-2xl border border-line bg-ivory/60">
+      <div aria-hidden className="grid-pattern absolute inset-0 opacity-70 [background-size:20px_20px]" />
+      <svg aria-hidden className="absolute inset-0 size-full" viewBox="0 0 200 128" fill="none">
+        <path d="M-4 96C40 70 70 108 108 84s52-42 100-38" stroke="var(--color-indigo)" strokeOpacity="0.35" strokeWidth="2" strokeDasharray="5 6" />
+      </svg>
+      <span aria-hidden className="absolute left-[30%] top-[26%]">
+        <svg width="26" height="26" viewBox="0 0 24 24"><path d="M12 21s-7-6.4-7-11.5a7 7 0 0 1 14 0C19 14.6 12 21 12 21Z" fill="var(--color-indigo)" /><circle cx="12" cy="9.3" r="2.4" fill="#fff" /></svg>
+      </span>
+      <span aria-hidden className="absolute right-[24%] top-[48%] size-3 rounded-full border-2 border-graphite/40 bg-surface" />
+      <span aria-hidden className="absolute left-[52%] bottom-[18%] size-3 rounded-full border-2 border-graphite/40 bg-surface" />
+    </div>
+  );
+}
+
+function TrackingArt() {
+  const tiles = [
+    <path key="a" d="M7.5 4.5 9.7 4a1 1 0 0 1 1.1.6l1.1 2.6a1 1 0 0 1-.3 1.2l-1.4 1a11 11 0 0 0 4.4 4.4l1-1.4a1 1 0 0 1 1.2-.3l2.6 1.1a1 1 0 0 1 .6 1.1l-.5 2.2a1.6 1.6 0 0 1-1.6 1.2C11.3 18 6 12.7 6.3 6.1a1.6 1.6 0 0 1 1.2-1.6Z" />,
+    <g key="b"><rect x="4.5" y="4.5" width="15" height="15" rx="2.5" /><path d="M8 9h8M8 12.5h8M8 16h4.5" /></g>,
+    <g key="c"><rect x="4" y="5.5" width="16" height="14" rx="2.5" /><path d="M4 9.5h16M8.5 3.5v3.5M15.5 3.5v3.5" /><path d="m9.5 14.5 2 2 3.5-3.8" /></g>,
+  ];
+  return (
+    <div className="relative grid h-32 grid-cols-3 gap-2 rounded-2xl border border-line bg-ivory/60 p-3.5">
+      {tiles.map((t, i) => (
+        <span key={i} className="grid place-items-center rounded-xl border border-line bg-surface text-indigo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>{t}</svg>
+        </span>
+      ))}
+    </div>
+  );
+}
+
+const FEATURE_ART = [<BenchmarkArt key="f0" />, <ReportArt key="f1" />, <ProfileArt key="f2" />, <MapArt key="f3" />, <TrackingArt key="f4" />];
+
 export function LocalReceive() {
   return (
     <section className="overflow-x-clip py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <h2 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">What You Receive</h2>
+          <h2 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+            What You <span className="text-indigo">Receive</span>
+          </h2>
           <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-graphite">
             Every SearchNexio local SEO engagement includes a defined set of deliverables. Before work begins, the scope is confirmed in writing.
           </p>
         </Reveal>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {LOCAL_DELIVERABLES.map((d, i) => (
-            <Reveal key={d.title} variant="up" delay={Math.min((i % 3) * 60, 120)}>
-              <article className="flex h-full gap-3 rounded-2xl border border-line bg-surface p-5">
-                <span className="font-heading text-[13px] font-bold tabular-nums text-indigo/60">{String(i + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3 className="font-heading text-[15px] font-bold tracking-[-0.01em]">{d.title}</h3>
-                  <p className="mt-1.5 text-[12.5px] leading-relaxed text-graphite">{d.desc}</p>
-                </div>
-              </article>
-            </Reveal>
-          ))}
+
+        {/* bento: two wide feature cards, then three across */}
+        <div className="mt-12 grid gap-4 lg:grid-cols-6">
+          {FEATURED.map((idx, i) => {
+            const d = LOCAL_DELIVERABLES[idx];
+            return (
+              <Reveal
+                key={d.title}
+                variant="up"
+                delay={Math.min(i * 70, 280)}
+                className={i < 2 ? "lg:col-span-3" : "lg:col-span-2"}
+              >
+                <article className="group flex h-full flex-col rounded-3xl border border-line bg-surface p-6 transition-all duration-300 ease-soft hover:-translate-y-1 hover:border-indigo/40 hover:shadow-[0_18px_44px_rgba(99,91,255,0.12)]">
+                  {FEATURE_ART[i]}
+                  <h3 className="mt-5 font-heading text-[17px] font-bold tracking-[-0.01em] transition-colors group-hover:text-indigo">{d.title}</h3>
+                  <p className="mt-2 text-[13px] leading-relaxed text-graphite">{d.desc}</p>
+                </article>
+              </Reveal>
+            );
+          })}
+
+          {/* documented-scope checklist for the remaining deliverables */}
+          <Reveal delay={120} className="lg:col-span-6">
+            <div className="grid overflow-hidden rounded-3xl border border-line bg-surface sm:grid-cols-2">
+              {LISTED.map((idx, i) => {
+                const d = LOCAL_DELIVERABLES[idx];
+                return (
+                  <div
+                    key={d.title}
+                    className={`flex gap-4 border-line p-6 ${i > 0 ? "border-t sm:border-t-0" : ""} ${i >= 2 ? "sm:border-t" : ""} ${i % 2 === 1 ? "sm:border-l" : ""}`}
+                  >
+                    <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-citron">
+                      <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden><path d="m2.5 6.5 2.5 2.5 4.5-5" stroke="#0B0D12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    </span>
+                    <div>
+                      <h3 className="font-heading text-[15px] font-bold tracking-[-0.01em]">{d.title}</h3>
+                      <p className="mt-1.5 text-[12.5px] leading-relaxed text-graphite">{d.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
