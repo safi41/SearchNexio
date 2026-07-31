@@ -83,7 +83,7 @@ export default function GeoProcess() {
       {/* conversion banner */}
       <Reveal delay={80}>
         <div className="mx-auto mt-16 max-w-6xl px-6">
-          <div className="footer-glow-bottom relative overflow-hidden rounded-[2rem] bg-ink-solid px-8 py-12 text-center md:px-12">
+          <div className="cta-indigo relative overflow-hidden rounded-[2rem] px-8 py-12 text-center md:px-12">
             <div className="relative">
               <h3 className="font-heading text-[clamp(1.6rem,3vw,2.2rem)] font-bold leading-[1.12] tracking-[-0.02em] text-white">
                 Review your AI visibility
@@ -93,7 +93,7 @@ export default function GeoProcess() {
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <CtaLink href="#visibility-audit">Request an AI Visibility Audit</CtaLink>
-                <CtaLink href="#geo-process" variant="dark">See Our GEO Process</CtaLink>
+                <CtaLink href="#geo-process" variant="glass">See Our GEO Process</CtaLink>
               </div>
             </div>
           </div>

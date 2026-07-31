@@ -154,6 +154,23 @@ body {
     transparent 75%
   );
 }
+
+/* Deep indigo ground for the full-width CTA banners: a blue-violet field
+   rather than flat black, still dark enough to carry white text. */
+.cta-indigo {
+  background-color: #241f66;
+  background-image:
+    radial-gradient(75% 130% at 50% 108%, rgba(99, 91, 255, 0.75), transparent 68%),
+    radial-gradient(90% 120% at 8% 0%, rgba(74, 67, 217, 0.5), transparent 62%),
+    linear-gradient(160deg, #2b2578 0%, #1d1950 58%, #171341 100%);
+}
+.dark .cta-indigo {
+  background-color: #14113a;
+  background-image:
+    radial-gradient(75% 130% at 50% 108%, rgba(99, 91, 255, 0.5), transparent 68%),
+    radial-gradient(90% 120% at 8% 0%, rgba(74, 67, 217, 0.35), transparent 62%),
+    linear-gradient(160deg, #1c1856 0%, #141138 58%, #100d2e 100%);
+}
 .footer-glow-top {
   background:
     radial-gradient(40% 100% at 0% 0%, var(--glow-top-a), transparent 70%),

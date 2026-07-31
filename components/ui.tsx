@@ -27,11 +27,16 @@ export function Eyebrow({
 }
 
 /* The circle-arrow chip inside every Sasico button. */
-function ArrowChip({ tone = "ink" }: { tone?: "ink" | "citron" | "indigo" }) {
+function ArrowChip({
+  tone = "ink",
+}: {
+  tone?: "ink" | "citron" | "indigo" | "white";
+}) {
   const tones = {
     ink: "bg-ink-solid text-citron",
     citron: "bg-citron text-ink-solid",
     indigo: "bg-indigo text-white",
+    white: "bg-white text-indigo",
   };
   return (
     <span
@@ -59,21 +64,31 @@ export function CtaLink({
 }: {
   href: string;
   children: ReactNode;
-  variant?: "solid" | "ghost" | "dark";
+  variant?: "solid" | "ghost" | "dark" | "glass";
   tone?: "light" | "dark";
   disabled?: boolean;
 }) {
   const base =
     "group inline-flex items-center gap-2.5 rounded-full py-2.5 pl-6 pr-2.5 text-[14.5px] font-semibold transition-colors duration-200";
   const styles =
-    variant === "dark"
-      ? `${base} bg-ink-solid text-white hover:bg-ink-solid/85`
+    variant === "glass"
+      ? `${base} border border-white/25 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20`
+      : variant === "dark"
+        ? `${base} bg-ink-solid text-white hover:bg-ink-solid/85`
       : variant === "ghost"
         ? `${base} border border-line bg-surface text-ink hover:border-ink/30`
         : `${base} bg-citron text-ink-solid hover:bg-citron-deep`;
   const chip = (
     <ArrowChip
-      tone={variant === "dark" ? "citron" : variant === "ghost" ? "indigo" : "ink"}
+      tone={
+        variant === "glass"
+          ? "white"
+          : variant === "dark"
+            ? "citron"
+            : variant === "ghost"
+              ? "indigo"
+              : "ink"
+      }
     />
   );
 

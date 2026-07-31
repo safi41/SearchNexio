@@ -81,7 +81,7 @@ export function LocalProcess() {
 
       <Reveal delay={80}>
         <div className="mx-auto mt-16 max-w-6xl px-6">
-          <div className="footer-glow-bottom relative overflow-hidden rounded-[2rem] bg-ink-solid px-8 py-12 text-center md:px-12">
+          <div className="cta-indigo relative overflow-hidden rounded-[2rem] px-8 py-12 text-center md:px-12">
             <div className="relative">
               <h3 className="mx-auto max-w-2xl font-heading text-[clamp(1.5rem,2.8vw,2rem)] font-bold leading-[1.14] tracking-[-0.02em] text-white">
                 Is your local presence turning visibility into enquiries right now?
@@ -309,7 +309,7 @@ export function LocalFinalCta() {
   return (
     <section id="visibility-review" className="scroll-mt-24 overflow-x-clip py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="footer-glow-bottom overflow-hidden rounded-[2rem] bg-ink-solid p-8 md:p-12">
+        <div className="cta-indigo overflow-hidden rounded-[2rem] p-8 md:p-12">
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
             {/* left copy */}
             <Reveal variant="left">

@@ -62,7 +62,7 @@ export function AiSearchProcess() {
       {/* dark CTA banner */}
       <Reveal delay={80}>
         <div className="mx-auto mt-16 max-w-6xl px-6">
-          <div className="footer-glow-bottom relative overflow-hidden rounded-[2rem] bg-ink-solid px-8 py-12 text-center md:px-12">
+          <div className="cta-indigo relative overflow-hidden rounded-[2rem] px-8 py-12 text-center md:px-12">
             <div className="relative">
               <h3 className="mx-auto max-w-2xl font-heading text-[clamp(1.5rem,2.8vw,2rem)] font-bold leading-[1.14] tracking-[-0.02em] text-white">
                 See where your brand stands across priority AI platforms.
