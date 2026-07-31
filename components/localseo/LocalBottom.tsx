@@ -238,35 +238,138 @@ export function LocalProcess() {
   );
 }
 
-/* ---- How We Measure Local Growth: 8 metric cards grouped ---- */
+/* ---- How We Measure Local Growth: a two-panel reporting board — lead
+   metrics and visibility metrics as grouped report cards ---- */
+
+const METRIC_ICONS: Record<string, React.ReactNode> = {
+  "Calls from Profile": (
+    <path d="M7.5 4.5 9.7 4a1 1 0 0 1 1.1.6l1.1 2.6a1 1 0 0 1-.3 1.2l-1.4 1a11 11 0 0 0 4.4 4.4l1-1.4a1 1 0 0 1 1.2-.3l2.6 1.1a1 1 0 0 1 .6 1.1l-.5 2.2a1.6 1.6 0 0 1-1.6 1.2C11.3 18 6 12.7 6.3 6.1a1.6 1.6 0 0 1 1.2-1.6Z" />
+  ),
+  "Website Calls": (
+    <g>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M3.5 12h17M12 3.5c2.6 2.4 4 5.3 4 8.5s-1.4 6.1-4 8.5c-2.6-2.4-4-5.3-4-8.5s1.4-6.1 4-8.5Z" />
+    </g>
+  ),
+  "Form Submissions": (
+    <g>
+      <rect x="4.5" y="3.5" width="15" height="17" rx="2.5" />
+      <path d="M8 8h8M8 11.5h8M8 15h4.5" />
+    </g>
+  ),
+  "Qualified Leads": (
+    <g>
+      <path d="M4 5h16l-6 7v6l-4 2v-8Z" />
+    </g>
+  ),
+  "Maps Visibility": (
+    <g>
+      <path d="M12 21s-7-6.4-7-11.5a7 7 0 0 1 14 0C19 14.6 12 21 12 21Z" />
+      <circle cx="12" cy="9.3" r="2.4" />
+    </g>
+  ),
+  "Local Organic Visibility": (
+    <g>
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="M15.8 15.8 20 20" />
+    </g>
+  ),
+  "Direction Requests": (
+    <g>
+      <path d="m12 2.5 9.5 9.5-9.5 9.5L2.5 12Z" />
+      <path d="M8.5 13.5v-1.6a1.4 1.4 0 0 1 1.4-1.4h4.3M12.5 8.5l2.3 2-2.3 2" />
+    </g>
+  ),
+  "Performance by Location": (
+    <g>
+      <path d="M4 20h16" />
+      <path d="M6 20v-8h4v8M14 20V6h4v14" />
+    </g>
+  ),
+};
+
+function MetricPanel({ group }: { group: "lead" | "visibility" }) {
+  const items = LOCAL_METRICS.filter((m) => m.group === group);
+  const lead = group === "lead";
+  return (
+    <div className="h-full overflow-hidden rounded-3xl border border-line bg-surface">
+      <div className={`flex items-center gap-3.5 border-b border-line px-6 py-5 ${lead ? "bg-citron/15" : "bg-lilac/50"}`}>
+        <span className={`grid size-10 shrink-0 place-items-center rounded-xl ${lead ? "bg-citron text-ink-solid" : "bg-indigo text-white"}`}>
+          {lead ? (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M7.5 4.5 9.7 4a1 1 0 0 1 1.1.6l1.1 2.6a1 1 0 0 1-.3 1.2l-1.4 1a11 11 0 0 0 4.4 4.4l1-1.4a1 1 0 0 1 1.2-.3l2.6 1.1a1 1 0 0 1 .6 1.1l-.5 2.2a1.6 1.6 0 0 1-1.6 1.2C11.3 18 6 12.7 6.3 6.1a1.6 1.6 0 0 1 1.2-1.6Z" />
+            </svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" />
+              <circle cx="12" cy="12" r="2.8" />
+            </svg>
+          )}
+        </span>
+        <div className="flex-1">
+          <h3 className="font-heading text-[16px] font-bold tracking-[-0.01em]">
+            {lead ? "Lead metrics" : "Visibility metrics"}
+          </h3>
+          <p className="text-[11.5px] font-medium text-graphite">{items.length} metrics</p>
+        </div>
+        <span className={`size-2.5 rounded-full ${lead ? "bg-citron-deep" : "bg-indigo"}`} />
+      </div>
+
+      <div>
+        {items.map((m, i) => (
+          <div key={m.name} className={`flex items-start gap-4 px-6 py-4.5 ${i > 0 ? "border-t border-line" : ""}`}>
+            <span className={`mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg ${lead ? "bg-citron/25 text-ink" : "bg-lilac/70 text-indigo"}`}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                {METRIC_ICONS[m.name]}
+              </svg>
+            </span>
+            <div>
+              <h4 className="font-heading text-[14.5px] font-bold tracking-[-0.01em]">{m.name}</h4>
+              <p className="mt-1 text-[12.5px] leading-relaxed text-graphite">{m.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function LocalMeasure() {
   return (
     <section className="overflow-x-clip py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <div className="max-w-3xl">
-            <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">How We Measure Local Growth</h2>
+            <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+              How We <span className="text-indigo">Measure</span> Local Growth
+            </h2>
             <p className="mt-6 text-[15px] leading-relaxed text-graphite">
               Local SEO performance cannot be measured by one keyword position. Rankings vary by the searcher's location, device, history and time. We measure across a connected set of metrics, reported monthly at the location level.
             </p>
           </div>
         </Reveal>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {LOCAL_METRICS.map((m, i) => (
-            <Reveal key={m.name} variant="up" delay={Math.min((i % 4) * 50, 150)}>
-              <article className={`h-full rounded-2xl border border-line bg-surface p-5 ${m.group === "lead" ? "border-l-[3px] border-l-citron-deep" : "border-l-[3px] border-l-indigo"}`}>
-                <span className={`text-[10px] font-bold uppercase tracking-[0.1em] ${m.group === "lead" ? "text-citron-deep" : "text-indigo"}`}>{m.group === "lead" ? "Lead metric" : "Visibility metric"}</span>
-                <h3 className="mt-2 font-heading text-[14.5px] font-bold tracking-[-0.01em]">{m.name}</h3>
-                <p className="mt-1.5 font-heading text-[20px] font-bold tabular-nums text-ink/25">Illustrative</p>
-                <p className="mt-1 text-[12px] leading-relaxed text-graphite">{m.desc}</p>
-              </article>
-            </Reveal>
-          ))}
+
+        <div className="mt-12 grid gap-4 lg:grid-cols-2">
+          <Reveal variant="left">
+            <MetricPanel group="lead" />
+          </Reveal>
+          <Reveal variant="right" delay={80}>
+            <MetricPanel group="visibility" />
+          </Reveal>
         </div>
-        <Reveal delay={80}>
-          <p className="mt-8 max-w-3xl rounded-2xl border border-dashed border-graphite/30 bg-surface/50 px-5 py-4 text-[13px] leading-relaxed text-graphite">
-            <span className="font-semibold text-ink">Measurement note.</span> Rank-grid tools show sampled positions across geographic points and represent one moment in time, not every searcher's view. Phone call data may include spam before filtering. Revenue reporting requires reliable CRM or booking attribution.
-          </p>
+
+        <Reveal delay={120}>
+          <div className="mt-8 flex items-center gap-5 rounded-2xl bg-lilac/40 px-6 py-5">
+            <span aria-hidden className="grid size-11 shrink-0 place-items-center rounded-full border border-indigo/30 text-indigo">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 7.2v4M8 4.6v.2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+            </span>
+            <span aria-hidden className="hidden h-10 w-px bg-indigo/15 sm:block" />
+            <p className="text-[13px] leading-relaxed text-graphite">
+              <span className="font-semibold text-ink">Measurement note.</span> Rank-grid tools show sampled positions across geographic points and represent one moment in time, not every searcher's view. Phone call data may include spam before filtering. Revenue reporting requires reliable CRM or booking attribution.
+            </p>
+          </div>
         </Reveal>
       </div>
     </section>
