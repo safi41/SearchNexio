@@ -511,23 +511,44 @@ export function AiSearchForm() {
   return (
     <section id="visibility-review" className="scroll-mt-24 overflow-x-clip py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
-          <Reveal variant="left">
-            <Badge>AI Visibility Review</Badge>
-            <h2 className="mt-5 font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-              Request an AI Visibility Review
-            </h2>
-            <p className="mt-5 text-[15px] leading-relaxed text-graphite">
-              Share a few details about your business and current search priorities. Search Nexio will review the request and recommend the most appropriate starting point across the AI Visibility Audit, GEO and AEO.
-            </p>
-            <p className="mt-6 text-[14px] text-graphite">
-              Prefer to speak directly?{" "}
-              <a href={ROUTES.contact} className="font-semibold text-indigo underline decoration-indigo/30 underline-offset-2">Book a Strategy Call</a>
-            </p>
-          </Reveal>
+        <div className="cta-indigo relative overflow-hidden rounded-[2rem] p-7 md:p-12">
+          {/* decor: orbit rings top-right, dot grid bottom-left, spark dots */}
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <div className="absolute -right-28 -top-28 size-96 rounded-full border border-white/10" />
+            <div className="absolute -right-10 -top-10 size-56 rounded-full border border-white/10" />
+            <div
+              className="absolute bottom-6 left-6 h-28 w-40 opacity-60"
+              style={{
+                backgroundImage: "radial-gradient(rgba(255,255,255,0.25) 1.5px, transparent 1.5px)",
+                backgroundSize: "14px 14px",
+              }}
+            />
+            <span className="absolute right-[38%] top-10 size-1.5 rounded-full bg-citron/80" />
+            <span className="absolute left-[46%] bottom-12 size-1.5 rounded-full bg-white/40" />
+          </div>
 
-          <Reveal variant="right" delay={80}>
-            <div className="rounded-3xl border border-line bg-surface p-7 md:p-8">
+          <div className="relative grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+            <Reveal variant="left">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-[12px] font-semibold text-white backdrop-blur-sm">
+                <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden className="text-citron">
+                  <path d="M12 2c.4 5 5 9.6 10 10-5 .4-9.6 5-10 10-.4-5-5-9.6-10-10 5-.4 9.6-5 10-10Z" fill="currentColor" />
+                </svg>
+                AI Visibility Review
+              </span>
+              <h2 className="mt-6 font-heading text-[clamp(1.9rem,3.6vw,2.7rem)] font-bold leading-[1.1] tracking-[-0.02em] text-white">
+                Request an AI Visibility Review
+              </h2>
+              <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-white/70">
+                Share a few details about your business and current search priorities. Search Nexio will review the request and recommend the most appropriate starting point across the AI Visibility Audit, GEO and AEO.
+              </p>
+              <p className="mt-7 text-[14px] text-white/70">
+                Prefer to speak directly?{" "}
+                <a href={ROUTES.contact} className="font-semibold text-white underline decoration-white/40 underline-offset-2">Book a Strategy Call</a>
+              </p>
+            </Reveal>
+
+            <Reveal variant="right" delay={80}>
+              <div className="rounded-3xl bg-surface p-7 shadow-[0_30px_80px_rgba(11,13,18,0.35)] md:p-8">
               {sent ? (
                 <div className="grid min-h-[360px] place-items-center text-center">
                   <div>
@@ -553,7 +574,7 @@ export function AiSearchForm() {
                       <textarea required rows={4} className="mt-1.5 w-full resize-none rounded-xl border border-line bg-ivory/60 px-3.5 py-2.5 text-[14px] text-ink outline-none transition-colors focus:border-indigo/50 focus:bg-surface" />
                     </label>
                   </div>
-                  <button type="submit" className="group mt-6 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-citron py-3 text-[14.5px] font-semibold text-ink-solid transition-colors duration-200 hover:bg-citron-deep sm:w-auto sm:justify-start sm:pl-6 sm:pr-2.5">
+                  <button type="submit" className="group mt-6 flex w-full items-center justify-center gap-2.5 rounded-full bg-citron py-3 text-[14.5px] font-semibold text-ink-solid transition-colors duration-200 hover:bg-citron-deep">
                     Request My AI Visibility Review
                     <span aria-hidden className="grid size-6 place-items-center rounded-full bg-ink-solid text-citron transition-transform duration-200 group-hover:translate-x-0.5">
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -567,6 +588,7 @@ export function AiSearchForm() {
               )}
             </div>
           </Reveal>
+          </div>
         </div>
       </div>
     </section>
