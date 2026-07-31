@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Reveal from "@/components/motion/Reveal";
-import { Badge } from "@/components/ui";
+import { Badge, CtaLink } from "@/components/ui";
 import { AI_WHY, AI_INDUSTRIES, AI_ENGAGEMENTS, AI_LIMITATIONS, AI_FAQS, ROUTES } from "@/lib/ai-search-content";
 
 /* Why Businesses Choose Search Nexio: centered header + icon stat strip,
@@ -262,33 +262,62 @@ export function AiSearchWays() {
   return (
     <section className="overflow-x-clip wash-lilac-full py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal>
-          <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Ways to Work With Us
-          </h2>
-        </Reveal>
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {AI_ENGAGEMENTS.map((e, i) => (
-            <Reveal key={e.title} variant="up" delay={Math.min(i * 60, 120)}>
-              <article className="flex h-full flex-col rounded-2xl border border-line bg-surface p-7">
-                <span className="inline-flex w-fit items-center rounded-full bg-lilac px-2.5 py-1 text-[10.5px] font-bold uppercase tracking-[0.08em] text-indigo">Best for: {e.bestFor}</span>
-                <h3 className="mt-4 font-heading text-[18px] font-bold tracking-[-0.01em]">{e.title}</h3>
-                <p className="mt-3 flex-1 text-[13.5px] leading-relaxed text-graphite">{e.desc}</p>
-                <a href={e.next.href} className="mt-5 inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-indigo">
-                  {e.next.label}
-                  <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden><path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                </a>
-              </article>
-            </Reveal>
-          ))}
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          {/* sticky intro column */}
+          <Reveal variant="left" className="lg:sticky lg:top-28 lg:self-start">
+            <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.8rem)] font-bold leading-[1.1] tracking-[-0.02em]">
+              Ways to Work
+              <br />
+              With <span className="text-indigo">Us</span>
+            </h2>
+            <span className="mt-6 block h-1 w-12 rounded-full bg-indigo" />
+            <div className="mt-10 hidden lg:block">
+              <CtaLink href={ROUTES.contact} variant="ghost">
+                Discuss Your AI Search Strategy
+              </CtaLink>
+            </div>
+          </Reveal>
+
+          {/* decision path on a drawn spine */}
+          <Reveal>
+            <div className="relative">
+              <span
+                aria-hidden
+                className="journey-line absolute bottom-6 left-5 top-6 w-px bg-indigo/25"
+              />
+              {AI_ENGAGEMENTS.map((e, i) => (
+                <div
+                  key={e.title}
+                  className={`reveal-item relative pl-16 ${i > 0 ? "border-t border-line" : ""} py-9 first:pt-2 last:pb-2`}
+                  style={{ transitionDelay: `${150 + i * 120}ms` }}
+                >
+                  <span className={`absolute left-0 grid size-10 place-items-center rounded-full bg-gradient-to-b from-indigo to-indigo-deep font-heading text-[14px] font-bold text-white ${i === 0 ? "top-2" : "top-9"}`}>
+                    {i + 1}
+                  </span>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-indigo">
+                    Best for · {e.bestFor}
+                  </p>
+                  <h3 className="mt-2.5 font-heading text-[clamp(1.2rem,2vw,1.5rem)] font-bold leading-snug tracking-[-0.015em]">
+                    {e.title}
+                  </h3>
+                  <p className="mt-3 max-w-xl text-[14px] leading-relaxed text-graphite">{e.desc}</p>
+                  <a href={e.next.href} className="group mt-4 inline-flex items-center gap-2 text-[13.5px] font-semibold text-indigo">
+                    {e.next.label}
+                    <span className="grid size-5 place-items-center rounded-full bg-indigo/10 transition-all duration-200 group-hover:bg-indigo group-hover:text-white">
+                      <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden><path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    </span>
+                  </a>
+                </div>
+              ))}
+            </div>
+            {/* mobile CTA */}
+            <div className="mt-8 lg:hidden">
+              <CtaLink href={ROUTES.contact} variant="ghost">
+                Discuss Your AI Search Strategy
+              </CtaLink>
+            </div>
+          </Reveal>
         </div>
-        <Reveal delay={80}>
-          <div className="mt-8 flex justify-center">
-            <a href={ROUTES.contact} className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-indigo underline decoration-indigo/30 underline-offset-2">
-              Discuss Your AI Search Strategy
-            </a>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
