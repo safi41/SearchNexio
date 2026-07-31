@@ -410,15 +410,15 @@ export function GeoIndustries() {
                 <p className="mt-4 flex-1 text-[13.5px] leading-relaxed text-graphite">{ind.desc}</p>
 
                 {/* the buyer prompt as an AI composer input */}
-                <div className="mt-6 flex items-center gap-3 rounded-2xl bg-ink-solid py-3 pl-4 pr-3 transition-shadow duration-300 group-hover:shadow-[0_0_0_3px_rgba(99,91,255,0.25)]">
-                  <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden className="shrink-0 text-indigo">
+                <div className="mt-6 flex items-center gap-3 rounded-2xl bg-gradient-to-r from-indigo to-indigo-deep py-3 pl-4 pr-3 shadow-[0_10px_26px_rgba(99,91,255,0.3)] transition-shadow duration-300 group-hover:shadow-[0_0_0_3px_rgba(99,91,255,0.25),0_10px_26px_rgba(99,91,255,0.35)]">
+                  <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden className="shrink-0 text-white/90">
                     <path d="M12 2c.4 5 5 9.6 10 10-5 .4-9.6 5-10 10-.4-5-5-9.6-10-10 5-.4 9.6-5 10-10Z" fill="currentColor" />
                   </svg>
-                  <p className="min-w-0 flex-1 text-[12.5px] font-medium leading-snug text-white/85">
+                  <p className="min-w-0 flex-1 text-[12.5px] font-medium leading-snug text-white/90">
                     <PromptText text={ind.prompt} />
-                    <span aria-hidden className="animate-pulse ml-1 inline-block h-3 w-px translate-y-0.5 bg-white/70" />
+                    <span aria-hidden className="animate-pulse ml-1 inline-block h-3 w-px translate-y-0.5 bg-white/80" />
                   </p>
-                  <span aria-hidden className="grid size-7 shrink-0 place-items-center rounded-full bg-indigo text-white transition-transform duration-200 group-hover:translate-x-0.5">
+                  <span aria-hidden className="grid size-7 shrink-0 place-items-center rounded-full bg-white text-indigo transition-transform duration-200 group-hover:translate-x-0.5">
                     <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
                       <path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
