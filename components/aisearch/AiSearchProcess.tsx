@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/motion/Reveal";
 import { CtaLink } from "@/components/ui";
-import { AI_PROCESS, AI_DELIVERABLES, AI_METRICS, ROUTES } from "@/lib/ai-search-content";
+import { AI_PROCESS, AI_DELIVERABLES, ROUTES } from "@/lib/ai-search-content";
 
 /* Our AI Search Process: four-step scroll-activated timeline (reused pattern)
    + the dark CTA banner, plus What You Receive and How We Measure. */
@@ -112,45 +112,146 @@ export function AiSearchReceive() {
   );
 }
 
-/* How We Measure AI Visibility: summary paragraph + six-metric preview strip
-   + links to the GEO and AEO measurement frameworks. */
+/* How We Measure AI Visibility: eyebrow + big heading, a six-column metric
+   strip divided by hairlines (icon, title, indigo dash, one-liner), the
+   framework links and the measurement note panel. */
+
+const MEASURE_METRICS = [
+  {
+    title: "Brand mention rate",
+    desc: "How often your brand is mentioned across AI responses.",
+    icon: (
+      <g>
+        <path d="M3.5 10.5v3a1.5 1.5 0 0 0 1.5 1.5h2l7.5 4.5V6L7 10.5H5a1.5 1.5 0 0 0-1.5 0Z" />
+        <path d="M7 15v4.5" />
+        <path d="M17.5 9.5c.7.6 1 1.5 1 2.5s-.3 1.9-1 2.5M19.5 7c1.3 1.3 2 3 2 5s-.7 3.7-2 5" />
+      </g>
+    ),
+  },
+  {
+    title: "Citation rate",
+    desc: "How often AI responses include a citation or source link.",
+    icon: (
+      <g>
+        <circle cx="12" cy="11" r="7.5" />
+        <path d="M12 18.5c-1.5 1.4-3.4 2-5.5 2 .8-1 1.3-2.1 1.4-3.2" />
+        <path d="M9.2 9.2c0-.9.7-1.7 1.6-1.7M13.6 9.2c0-.9.7-1.7 1.6-1.7" />
+        <path d="M9.2 9.2v1.6M13.6 9.2v1.6" />
+      </g>
+    ),
+  },
+  {
+    title: "Recommendation frequency",
+    desc: "How often your brand is recommended by AI.",
+    icon: (
+      <g>
+        <path d="m12 3.6 2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8Z" />
+      </g>
+    ),
+  },
+  {
+    title: "AI share of voice",
+    desc: "Your visibility compared to competitors in AI answers.",
+    icon: (
+      <g>
+        <path d="M12 5.5v13M8.5 8.5v7M5 10.5v3M15.5 8.5v7M19 10.5v3" />
+      </g>
+    ),
+  },
+  {
+    title: "Brand accuracy",
+    desc: "How accurately AI represents your brand and offerings.",
+    icon: (
+      <g>
+        <circle cx="12" cy="12" r="7" />
+        <circle cx="12" cy="12" r="2.6" />
+        <path d="M12 2.5V5M12 19v2.5M21.5 12H19M5 12H2.5" />
+      </g>
+    ),
+  },
+  {
+    title: "AI-referred demand",
+    desc: "The volume of visits or actions driven by AI referrals.",
+    icon: (
+      <g>
+        <path d="M4 17.5 10 11l3.5 3.5L20 8" />
+        <path d="M15 7.5h5V12.5" />
+      </g>
+    ),
+  },
+];
+
 export function AiSearchMeasure() {
   return (
-    <section className="overflow-x-clip py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="relative overflow-hidden py-16 md:py-24">
+      {/* faint arc decor, top right */}
+      <div aria-hidden className="pointer-events-none absolute -right-40 -top-40 hidden lg:block">
+        <div className="size-[480px] rounded-full border border-indigo/[0.06]" />
+        <div className="absolute inset-10 rounded-full border border-indigo/[0.07]" />
+        <div className="absolute inset-20 rounded-full border border-indigo/[0.08]" />
+      </div>
+
+      <div className="relative mx-auto max-w-6xl px-6">
         <Reveal>
-          <div className="max-w-3xl">
-            <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-              How We Measure AI Visibility
-            </h2>
-            <p className="mt-6 text-[15px] leading-relaxed text-graphite">
-              AI visibility does not behave like a fixed keyword ranking. Results can differ by platform, prompt wording, location and repeated testing. Search Nexio uses structured prompt groups and platform-level reporting to track directional performance across six core metrics.
-            </p>
-          </div>
+          <p className="flex items-center gap-3 text-[13px] font-bold uppercase tracking-[0.1em] text-indigo">
+            Why it matters
+            <span aria-hidden className="flex items-center">
+              <span className="size-1.5 rounded-full bg-indigo" />
+              <span className="ml-0.5 h-px w-14 bg-indigo/60" />
+            </span>
+          </p>
+          <h2 className="mt-4 font-heading text-[clamp(2.2rem,4.5vw,3.4rem)] font-bold leading-[1.06] tracking-[-0.03em]">
+            How We Measure AI Visibility
+          </h2>
+          <p className="mt-6 max-w-3xl text-[16px] leading-relaxed text-graphite">
+            AI visibility does not behave like a fixed keyword ranking. Results can differ by platform, prompt wording, location and repeated testing. Search Nexio uses structured prompt groups and platform-level reporting to track directional performance across six core metrics.
+          </p>
         </Reveal>
 
-        <Reveal delay={80}>
-          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {AI_METRICS.map((m) => (
-              <div key={m} className="flex items-center gap-2.5 rounded-xl border border-line bg-surface px-4 py-3">
-                <span className="size-1.5 rounded-full bg-indigo" />
-                <span className="text-[13.5px] font-semibold text-ink">{m}</span>
-              </div>
-            ))}
-          </div>
-        </Reveal>
+        {/* six-column metric strip with hairline dividers */}
+        <div className="mt-12 grid gap-y-10 border-line sm:grid-cols-2 lg:grid-cols-6">
+          {MEASURE_METRICS.map((m, i) => (
+            <Reveal
+              key={m.title}
+              variant="up"
+              delay={Math.min(i * 60, 300)}
+              className={`lg:px-6 ${i > 0 ? "lg:border-l lg:border-line" : "lg:pl-0"} ${i % 2 === 1 ? "sm:max-lg:border-l sm:max-lg:border-line sm:max-lg:pl-6" : ""}`}
+            >
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                {m.icon}
+              </svg>
+              <h3 className="mt-6 font-heading text-[16.5px] font-bold leading-snug tracking-[-0.01em]">{m.title}</h3>
+              <span className="mt-3 block h-0.5 w-7 rounded-full bg-indigo" />
+              <p className="mt-3 text-[13px] leading-relaxed text-graphite">{m.desc}</p>
+            </Reveal>
+          ))}
+        </div>
 
         <Reveal delay={120}>
-          <p className="mt-8 max-w-3xl text-[14px] leading-relaxed text-graphite">
-            Full metric definitions and measurement methodology are documented on each service page. The{" "}
-            <a href={ROUTES.geo} className="font-semibold text-indigo underline decoration-indigo/30 underline-offset-2">GEO measurement framework</a>{" "}
-            covers generative platform monitoring. The{" "}
-            <a href={ROUTES.aeo} className="font-semibold text-indigo underline decoration-indigo/30 underline-offset-2">AEO measurement framework</a>{" "}
-            covers direct-answer retrieval tracking.
-          </p>
-          <p className="mt-4 max-w-3xl rounded-2xl border border-dashed border-graphite/30 bg-surface/50 px-5 py-4 text-[13px] leading-relaxed text-graphite">
-            <span className="font-semibold text-ink">Measurement note.</span> Reports document the prompt sample, platform mix, testing frequency and attribution limits. A single AI response is never presented as a permanent result.
-          </p>
+          <div className="mt-12 border-t border-line pt-8">
+            <p className="max-w-4xl text-[14.5px] leading-relaxed text-graphite">
+              Full metric definitions and measurement methodology are documented on each service page.
+              <br className="hidden md:block" /> The{" "}
+              <a href={ROUTES.geo} className="font-semibold text-indigo underline decoration-indigo/30 underline-offset-2">GEO measurement framework</a>{" "}
+              covers generative platform monitoring. The{" "}
+              <a href={ROUTES.aeo} className="font-semibold text-indigo underline decoration-indigo/30 underline-offset-2">AEO measurement framework</a>{" "}
+              covers direct-answer retrieval tracking.
+            </p>
+          </div>
+
+          {/* measurement note panel */}
+          <div className="mt-8 flex items-center gap-5 rounded-2xl bg-lilac/40 px-6 py-5">
+            <span aria-hidden className="grid size-12 shrink-0 place-items-center rounded-full bg-lilac text-indigo">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="5" y="3.5" width="14" height="17" rx="2.5" />
+                <path d="M8.5 8h7M8.5 12h7M8.5 16h4.5" />
+              </svg>
+            </span>
+            <span aria-hidden className="hidden h-10 w-px bg-indigo/15 sm:block" />
+            <p className="text-[13.5px] leading-relaxed text-graphite">
+              <span className="font-semibold text-ink">Measurement note.</span> Reports document the prompt sample, platform mix, testing frequency and attribution limits. A single AI response is never presented as a permanent result.
+            </p>
+          </div>
         </Reveal>
       </div>
     </section>
