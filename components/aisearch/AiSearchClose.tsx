@@ -323,21 +323,116 @@ export function AiSearchWays() {
   );
 }
 
-/* Realistic Outcomes and Limitations: restrained text, single column. */
+/* Realistic Outcomes and Limitations: shield emblem over a centered
+   two-tone heading, then three soft rows — icon, divider, copy with the
+   load-bearing phrases highlighted in indigo. */
+
+/* Wraps the listed phrases of a sentence in bold indigo. */
+function Highlighted({ text, phrases }: { text: string; phrases: string[] }) {
+  const pattern = new RegExp(`(${phrases.map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`, "g");
+  return (
+    <>
+      {text.split(pattern).map((part, i) =>
+        phrases.includes(part) ? (
+          <strong key={i} className="font-semibold text-indigo">{part}</strong>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  );
+}
+
 export function AiSearchLimitations() {
+  const rows = [
+    {
+      icon: (
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M4.5 19.5h15" />
+          <path d="M7 19.5v-4M11 19.5v-6.5M15 19.5v-4.5" />
+          <path d="M6.5 11 12 6l2.5 2.5L19 4.5" />
+          <path d="M15.5 4.5H19V8" />
+        </svg>
+      ),
+      body: (
+        <Highlighted
+          text={AI_LIMITATIONS.intro}
+          phrases={["cannot guarantee"]}
+        />
+      ),
+    },
+    {
+      icon: (
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M19.5 12a7.5 7.5 0 0 1-13 5.1M4.5 12a7.5 7.5 0 0 1 13-5.1" />
+          <path d="M17.5 3.5v3.4h-3.4M6.5 20.5v-3.4h3.4" />
+        </svg>
+      ),
+      body: (
+        <Highlighted
+          text={AI_LIMITATIONS.outro}
+          phrases={[
+            "differences",
+            "gradual movement",
+            "what changed, what can be measured and where uncertainty remains",
+          ]}
+        />
+      ),
+    },
+    {
+      icon: (
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--color-indigo)" aria-hidden>
+          <path d="M5 6.5C6.8 6.8 8 8.2 8 10.2c0 .3 0 .6-.1.8H10v6.5H3.5v-6C3.5 8.6 4 7.3 5 6.5Z" />
+          <path d="M14.5 6.5c1.8.3 3 1.7 3 3.7 0 .3 0 .6-.1.8h2.1v6.5H13v-6c0-2.9.5-4.2 1.5-5Z" />
+        </svg>
+      ),
+      body: (
+        <>
+          AI visibility is earned through clarity, authority and continuous
+          optimization,{" "}
+          <strong className="font-semibold text-indigo">not guaranteed by any platform.</strong>
+        </>
+      ),
+    },
+  ];
+
   return (
     <section className="overflow-x-clip py-16 md:py-24">
-      <div className="mx-auto max-w-3xl px-6 text-center">
+      <div className="mx-auto max-w-5xl px-6">
         <Reveal>
-          <span aria-hidden className="mx-auto grid size-11 place-items-center rounded-2xl bg-lilac text-indigo">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M11 3 4 6v5c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6l-7-3Z" /></svg>
-          </span>
-          <h2 className="mt-6 font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Realistic Outcomes and Limitations
+          {/* shield emblem over faint arcs */}
+          <div className="relative flex justify-center">
+            <span aria-hidden className="absolute top-1/2 size-36 -translate-y-1/2 rounded-full border border-indigo/10" />
+            <span aria-hidden className="absolute top-1/2 size-52 -translate-y-1/2 rounded-full border border-indigo/[0.06]" />
+            <span aria-hidden className="absolute left-[34%] top-0 size-1.5 rounded-full bg-indigo/40" />
+            <span aria-hidden className="absolute right-[33%] top-10 size-1.5 rounded-full bg-indigo/30" />
+            <span className="relative grid size-20 place-items-center rounded-full bg-surface shadow-[0_16px_44px_rgba(99,91,255,0.18)]">
+              <svg width="30" height="30" viewBox="0 0 22 22" fill="none" stroke="var(--color-indigo)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M11 3 4 6v5c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6l-7-3Z" />
+              </svg>
+            </span>
+          </div>
+
+          <h2 className="mt-8 text-center font-heading text-[clamp(2rem,4.4vw,3.2rem)] font-bold leading-[1.08] tracking-[-0.03em]">
+            Realistic Outcomes <span className="text-indigo">and Limitations</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-[15px] leading-relaxed text-graphite">{AI_LIMITATIONS.intro}</p>
-          <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-graphite">{AI_LIMITATIONS.outro}</p>
+          <div className="mt-5 flex items-center justify-center gap-1.5" aria-hidden>
+            <span className="h-1 w-14 rounded-full bg-indigo/60" />
+            <span className="size-1.5 rounded-full bg-indigo/60" />
+          </div>
         </Reveal>
+
+        <div className="mt-12 grid gap-5">
+          {rows.map((r, i) => (
+            <Reveal key={i} variant="up" delay={Math.min(i * 90, 180)}>
+              <div className="flex flex-col items-start gap-5 rounded-3xl bg-surface px-7 py-7 shadow-[0_14px_40px_rgba(11,13,18,0.06)] sm:flex-row sm:items-center sm:gap-7">
+                <span className="grid size-16 shrink-0 place-items-center rounded-full bg-lilac/70">{r.icon}</span>
+                <span aria-hidden className="hidden h-12 w-px shrink-0 bg-line sm:block" />
+                <p className="text-[15px] leading-relaxed text-ink/85">{r.body}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
