@@ -321,26 +321,108 @@ export function GeoWhyChoose() {
 }
 
 /* ---- Built for complex buying journeys (industries) ---- */
+
+/* Line icons, one per industry. */
+const INDUSTRY_ICONS = [
+  /* B2B SaaS — stacked layers */
+  <g key="n1">
+    <path d="m12 3.5 8.5 4.4L12 12.3 3.5 7.9Z" />
+    <path d="m3.5 12.2 8.5 4.4 8.5-4.4" />
+    <path d="m3.5 16.4 8.5 4.4 8.5-4.4" />
+  </g>,
+  /* Healthcare — heart pulse */
+  <g key="n2">
+    <path d="M12 20.2C7 16.6 3.6 13.3 3.6 9.6a4.6 4.6 0 0 1 8.4-2.6 4.6 4.6 0 0 1 8.4 2.6c0 3.7-3.4 7-8.4 10.6Z" />
+    <path d="M6.5 11.5h3l1.4-2.6 2 4.6 1.4-2h3.2" />
+  </g>,
+  /* Financial services — bank columns */
+  <g key="n3">
+    <path d="m12 3.5 8.5 4.5H3.5Z" />
+    <path d="M5.5 11v6M9.8 11v6M14.2 11v6M18.5 11v6" />
+    <path d="M3.5 20.5h17" />
+  </g>,
+  /* Professional services — briefcase */
+  <g key="n4">
+    <rect x="3.5" y="7.5" width="17" height="12.5" rx="2.5" />
+    <path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5" />
+    <path d="M3.5 12.5c2.8 1.3 5.6 2 8.5 2s5.7-.7 8.5-2" />
+    <path d="M12 13.5v2" />
+  </g>,
+  /* Enterprise websites — globe grid */
+  <g key="n5">
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M3.5 12h17M12 3.5c2.6 2.4 4 5.3 4 8.5s-1.4 6.1-4 8.5c-2.6-2.4-4-5.3-4-8.5s1.4-6.1 4-8.5Z" />
+  </g>,
+];
+
+/* Renders a prompt string with its [placeholder] tokens highlighted. */
+function PromptText({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/(\[[^\]]+\])/).map((part, i) =>
+        part.startsWith("[") ? (
+          <span key={i} className="text-citron">{part}</span>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  );
+}
+
 export function GeoIndustries() {
   return (
     <section className="overflow-x-clip wash-lilac-full py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Built for complex buying journeys
-          </h2>
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="inline-flex items-center gap-2 rounded-full bg-lilac px-4 py-1.5 text-[12px] font-bold uppercase tracking-[0.1em] text-indigo">
+              <span className="size-1.5 rounded-full bg-indigo" />
+              Industries
+            </span>
+            <h2 className="mt-5 font-heading text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.1] tracking-[-0.02em]">
+              Built for complex
+              <br />
+              buying <span className="text-indigo">journeys</span>
+            </h2>
+          </div>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* bento grid: three cards up top, two wide cards below. Each card
+            closes with its buyer prompt styled as a live AI search input. */}
+        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-6">
           {GEO_INDUSTRIES.map((ind, i) => (
-            <Reveal key={ind.name} variant="up" delay={Math.min((i % 3) * 60, 120)}>
-              <article className="group flex h-full flex-col rounded-2xl border border-line bg-surface p-6 transition-colors duration-300 ease-soft hover:border-indigo/30">
-                <h3 className="font-heading text-[17px] font-bold tracking-[-0.01em]">{ind.name}</h3>
-                <p className="mt-2 flex-1 text-[13.5px] leading-relaxed text-graphite">{ind.desc}</p>
-                {/* the example prompt reveals on hover/tap */}
-                <div className="mt-4 overflow-hidden rounded-xl border border-line bg-ivory/50 px-3 py-2.5 opacity-70 transition-opacity duration-300 group-hover:opacity-100">
-                  <p className="text-[10.5px] font-semibold uppercase tracking-[0.1em] text-graphite">Example prompt</p>
-                  <p className="mt-1 text-[12.5px] font-medium text-indigo">&ldquo;{ind.prompt}&rdquo;</p>
+            <Reveal
+              key={ind.name}
+              variant="up"
+              delay={Math.min(i * 70, 280)}
+              className={i < 3 ? "lg:col-span-2" : "md:col-span-1 lg:col-span-3"}
+            >
+              <article className="group flex h-full flex-col rounded-3xl border border-line bg-surface p-7 transition-all duration-300 ease-soft hover:-translate-y-1 hover:border-indigo/40 hover:shadow-[0_18px_44px_rgba(99,91,255,0.14)]">
+                <div className="flex items-center gap-4">
+                  <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-b from-lilac to-lilac/40 text-indigo transition-transform duration-300 ease-soft group-hover:scale-110">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      {INDUSTRY_ICONS[i]}
+                    </svg>
+                  </span>
+                  <h3 className="font-heading text-[18px] font-bold tracking-[-0.01em]">{ind.name}</h3>
+                </div>
+                <p className="mt-4 flex-1 text-[13.5px] leading-relaxed text-graphite">{ind.desc}</p>
+
+                {/* the buyer prompt as an AI composer input */}
+                <div className="mt-6 flex items-center gap-3 rounded-2xl bg-ink-solid py-3 pl-4 pr-3 transition-shadow duration-300 group-hover:shadow-[0_0_0_3px_rgba(99,91,255,0.25)]">
+                  <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden className="shrink-0 text-indigo">
+                    <path d="M12 2c.4 5 5 9.6 10 10-5 .4-9.6 5-10 10-.4-5-5-9.6-10-10 5-.4 9.6-5 10-10Z" fill="currentColor" />
+                  </svg>
+                  <p className="min-w-0 flex-1 text-[12.5px] font-medium leading-snug text-white/85">
+                    <PromptText text={ind.prompt} />
+                    <span aria-hidden className="animate-pulse ml-1 inline-block h-3 w-px translate-y-0.5 bg-white/70" />
+                  </p>
+                  <span aria-hidden className="grid size-7 shrink-0 place-items-center rounded-full bg-indigo text-white transition-transform duration-200 group-hover:translate-x-0.5">
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
                 </div>
               </article>
             </Reveal>

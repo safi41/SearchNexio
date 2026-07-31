@@ -280,7 +280,8 @@ body {
   }
   .animate-orbit,
   .animate-orbit-slow,
-  .animate-bob {
+  .animate-bob,
+  .animate-pulse {
     animation: none !important;
   }
   /* reduced motion: freeze the bubbles spread evenly along the curve */
