@@ -30,7 +30,7 @@ export function AiSearchProcess() {
       <div className="mx-auto max-w-4xl px-6">
         <Reveal>
           <h2 className="text-center font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Our AI Search Process
+            Our AI Search <span className="text-indigo">Process</span>
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-center text-[15px] leading-relaxed text-graphite">
             Every Search Nexio AI search engagement follows a four-phase sequence. Strategy is set before implementation begins, and measurement starts before any changes are made.
@@ -88,7 +88,7 @@ export function AiSearchReceive() {
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <h2 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            What You Receive
+            What You <span className="text-indigo">Receive</span>
           </h2>
           <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-graphite">
             Every engagement is built around clear outputs rather than broad activity descriptions.
@@ -201,7 +201,7 @@ export function AiSearchMeasure() {
             </span>
           </p>
           <h2 className="mt-4 font-heading text-[clamp(2.2rem,4.5vw,3.4rem)] font-bold leading-[1.06] tracking-[-0.03em]">
-            How We Measure AI Visibility
+            How We <span className="text-indigo">Measure</span> AI Visibility
           </h2>
           <p className="mt-6 max-w-3xl text-[16px] leading-relaxed text-graphite">
             AI visibility does not behave like a fixed keyword ranking. Results can differ by platform, prompt wording, location and repeated testing. Search Nexio uses structured prompt groups and platform-level reporting to track directional performance across six core metrics.

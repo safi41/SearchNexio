@@ -163,7 +163,7 @@ export function AiSearchWhy() {
               </span>
             </p>
             <h2 className="mt-4 font-heading text-[clamp(2.2rem,4.6vw,3.5rem)] font-bold leading-[1.06] tracking-[-0.03em]">
-              Why Businesses Choose Search Nexio
+              Why Businesses Choose Search <span className="text-indigo">Nexio</span>
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[16px] leading-relaxed text-graphite">
               We combine deep SEO expertise, proven processes, and AI-powered technology to deliver search visibility that drives real business results.
@@ -225,7 +225,7 @@ export function AiSearchIndustries() {
         <Reveal>
           <div className="max-w-3xl">
             <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-              Built for Complex Buying Journeys
+              Built for Complex Buying <span className="text-indigo">Journeys</span>
             </h2>
             <p className="mt-6 text-[15px] leading-relaxed text-graphite">
               AI search optimization produces the most measurable impact where buyers compare providers, validate expertise and review several sources before making contact. These are the conditions under which AI tools become embedded in the evaluation process.
@@ -467,7 +467,7 @@ export function AiSearchFaq() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Reveal>
         <h2 className="text-center font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-          Frequently Asked Questions
+          Frequently Asked <span className="text-indigo">Questions</span>
         </h2>
       </Reveal>
       <div className="mt-10 grid gap-3">

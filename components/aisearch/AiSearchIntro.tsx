@@ -43,7 +43,7 @@ export function AiSearchBuildVisibility() {
       <div className="mx-auto max-w-5xl px-6">
         <Reveal>
           <h2 className="mx-auto max-w-3xl text-center font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Build Visibility Across AI Search
+            Build <span className="text-indigo">Visibility</span> Across AI Search
           </h2>
           <div className="mx-auto mt-6 grid max-w-3xl gap-4 text-center">
             {buildParas.map((p, i) => (
@@ -97,7 +97,7 @@ export function AiSearchMeaning() {
       <div className="mx-auto max-w-5xl px-6">
         <Reveal>
           <h2 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            What AI Search Optimization Means
+            What AI Search <span className="text-indigo">Optimization</span> Means
           </h2>
           <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-graphite">
             AI search optimization improves how search engines and generative platforms discover, interpret, retrieve and reference your brand. It builds on established SEO foundations and extends them to the surfaces where AI systems generate answers, cite sources and recommend providers.
@@ -143,7 +143,7 @@ export function AiSearchServices() {
         <Reveal>
           <div className="max-w-3xl">
             <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-              Our AI Search Services
+              Our AI Search <span className="text-indigo">Services</span>
             </h2>
             <p className="mt-6 text-[15px] leading-relaxed text-graphite">
               Search Nexio currently offers three focused AI search services. Each addresses a different stage of the visibility journey, from diagnosis to implementation. Together they form a connected program. Separately they address specific gaps.

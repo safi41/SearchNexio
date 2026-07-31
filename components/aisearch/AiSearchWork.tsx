@@ -81,7 +81,7 @@ export function AiSearchWorkCovers() {
               Our work coverage
             </p>
             <h2 className="mt-3 font-heading text-[clamp(2.1rem,4.2vw,3.2rem)] font-bold leading-[1.08] tracking-[-0.03em]">
-              What the Work Covers
+              What the Work <span className="text-indigo">Covers</span>
             </h2>
             <p className="mt-5 text-[15.5px] leading-relaxed text-graphite">
               The three services are supported by a coordinated set of technical, content, entity and authority activities. These are delivery components within the engagement, not separate service pages.
@@ -209,7 +209,7 @@ export function AiSearchPlatforms() {
         <Reveal>
           <div className="max-w-3xl">
             <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-              Platforms We Optimize For
+              Platforms We <span className="text-indigo">Optimize</span> For
             </h2>
             <p className="mt-6 text-[15px] leading-relaxed text-graphite">
               Platform relevance depends on where your customers research, compare and validate providers. Search Nexio selects the platforms that matter to the buying journey rather than applying an identical method to every surface.
