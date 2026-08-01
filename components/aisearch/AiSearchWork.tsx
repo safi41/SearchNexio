@@ -232,7 +232,7 @@ export function AiSearchPlatforms() {
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
                   onClick={() => setActive(i)}
-                  className={`relative cursor-pointer overflow-hidden rounded-3xl transition-all duration-500 ease-soft ${
+                  className={`relative cursor-pointer overflow-hidden rounded-3xl transition-all duration-700 ease-soft ${
                     open
                       ? "border border-line bg-surface"
                       : "border border-transparent bg-gradient-to-b from-indigo to-indigo-deep"
@@ -241,8 +241,8 @@ export function AiSearchPlatforms() {
                 >
                   {/* open card */}
                   <div
-                    className={`absolute inset-0 flex min-w-[300px] flex-col p-8 transition-opacity duration-300 ${
-                      open ? "opacity-100 delay-150" : "pointer-events-none opacity-0"
+                    className={`absolute inset-0 flex min-w-[300px] flex-col p-8 transition-opacity duration-500 ease-soft ${
+                      open ? "opacity-100 delay-300" : "pointer-events-none opacity-0"
                     }`}
                   >
                     <span aria-hidden className="absolute -bottom-20 -right-20 size-64 rounded-full bg-lilac/70 blur-2xl" />
@@ -264,8 +264,8 @@ export function AiSearchPlatforms() {
 
                   {/* collapsed pill */}
                   <div
-                    className={`absolute inset-0 flex flex-col items-center justify-between py-6 transition-opacity duration-300 ${
-                      open ? "pointer-events-none opacity-0" : "opacity-100 delay-150"
+                    className={`absolute inset-0 flex flex-col items-center justify-between py-6 transition-opacity duration-500 ease-soft ${
+                      open ? "pointer-events-none opacity-0" : "opacity-100 delay-300"
                     }`}
                   >
                     <span

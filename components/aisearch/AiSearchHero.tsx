@@ -23,58 +23,15 @@ function ChatGPTInk({ size = 40 }: { size?: number }) {
 }
 
 /* Nodes orbit as a group (one revolution per ORBIT_SPEED); each node
-   counter-rotates so its logo and label stay upright. Labels ride beside
-   their node on the given side. */
+   counter-rotates so its logo stays upright. */
 const ORBIT_SPEED = "48s";
 
 const NODES = [
-  {
-    name: "Google AI",
-    cited: true,
-    icon: <GoogleG size={42} />,
-    node: { left: "50%", top: "12%" },
-    side: "right",
-  },
-  {
-    name: "ChatGPT",
-    cited: true,
-    icon: <ChatGPTInk size={44} />,
-    node: { left: "12%", top: "50%" },
-    side: "left",
-  },
-  {
-    name: "Gemini",
-    cited: false,
-    icon: <GeminiMark size={42} />,
-    node: { left: "88%", top: "50%" },
-    side: "right",
-  },
-  {
-    name: "Perplexity",
-    cited: true,
-    icon: <PerplexityKnot size={44} />,
-    node: { left: "50%", top: "88%" },
-    side: "right",
-  },
+  { name: "Google AI", icon: <GoogleG size={42} />, node: { left: "50%", top: "12%" } },
+  { name: "ChatGPT", icon: <ChatGPTInk size={44} />, node: { left: "12%", top: "50%" } },
+  { name: "Gemini", icon: <GeminiMark size={42} />, node: { left: "88%", top: "50%" } },
+  { name: "Perplexity", icon: <PerplexityKnot size={44} />, node: { left: "50%", top: "88%" } },
 ];
-
-function StatusChip({ cited }: { cited: boolean }) {
-  return cited ? (
-    <span className="mt-1 inline-flex items-center gap-1.5 text-[12px] font-semibold text-ink/70">
-      Cited
-      <span className="grid size-4 place-items-center rounded-full bg-citron text-ink-solid">
-        <svg width="9" height="9" viewBox="0 0 12 12" fill="none" aria-hidden><path d="m2.5 6.5 2.5 2.5 4.5-5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-      </span>
-    </span>
-  ) : (
-    <span className="mt-1 inline-flex items-center gap-1.5 text-[12px] font-semibold text-graphite">
-      <span className="grid size-4 place-items-center rounded-full bg-graphite/25 text-white">
-        <svg width="8" height="8" viewBox="0 0 12 12" fill="none" aria-hidden><path d="m3.5 3.5 5 5m0-5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
-      </span>
-      Not cited
-    </span>
-  );
-}
 
 function HubDiagram() {
   return (
@@ -109,18 +66,11 @@ function HubDiagram() {
             style={n.node}
           >
             <span
-              className="animate-orbit relative grid size-[104px] place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.1)]"
+              title={n.name}
+              className="animate-orbit grid size-[104px] place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.1)]"
               style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
             >
               {n.icon}
-              <span
-                className={`absolute top-1/2 -translate-y-1/2 whitespace-nowrap ${
-                  n.side === "left" ? "right-[115%] text-right" : "left-[115%] text-left"
-                }`}
-              >
-                <p className="text-[15px] font-bold text-indigo">{n.name}</p>
-                <StatusChip cited={n.cited} />
-              </span>
             </span>
           </div>
         ))}
