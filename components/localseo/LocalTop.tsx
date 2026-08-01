@@ -214,33 +214,94 @@ export function LocalDriveBusiness() {
     "A business can rank in the top three map positions and still receive fewer calls than a competitor ranked fourth, because the fourth business has more reviews, better photos, clearer service information, and a website that makes contacting them easier.",
     "SearchNexio treats local visibility as the start of a commercial process, not the end of an SEO task. The strategy connects what appears in Google Maps with what buyers find when they investigate further.",
   ];
+  /* Mini UI vignettes, one per journey step (abstract, no sample data). */
+  const stepArt = [
+    /* local pack rows, yours highlighted */
+    <div key="a1" className="mt-4 grid max-w-[280px] gap-1.5">
+      {[0, 1, 2].map((r) => (
+        <div key={r} className={`flex items-center gap-2.5 rounded-lg border px-3 py-2 ${r === 0 ? "border-indigo/40 bg-indigo/5" : "border-line bg-surface"}`}>
+          {r === 0 ? (
+            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden><path d="M12 21s-7-6.4-7-11.5a7 7 0 0 1 14 0C19 14.6 12 21 12 21Z" fill="var(--color-indigo)" /><circle cx="12" cy="9.3" r="2.4" fill="#fff" /></svg>
+          ) : (
+            <span className="size-2 rounded-full bg-graphite/30" />
+          )}
+          <span className={`h-2 rounded-full ${r === 0 ? "w-2/3 bg-indigo/40" : "w-1/2 bg-ink/10"}`} />
+        </div>
+      ))}
+    </div>,
+    /* two profiles being compared */
+    <div key="a2" className="mt-4 flex max-w-[280px] gap-2">
+      {[0, 1].map((c) => (
+        <div key={c} className={`flex-1 rounded-lg border p-3 ${c === 0 ? "border-indigo/40 bg-indigo/5" : "border-line bg-surface"}`}>
+          <span className={`block size-6 rounded-full ${c === 0 ? "bg-indigo/30" : "bg-ink/10"}`} />
+          <span className="mt-2 block h-1.5 w-4/5 rounded-full bg-ink/10" />
+          <span className="mt-1.5 flex gap-0.5">
+            {[...Array(5)].map((_, s) => (
+              <svg key={s} width="9" height="9" viewBox="0 0 24 24" aria-hidden>
+                <path d="m12 4 2.3 4.7 5.2.8-3.8 3.7.9 5.2L12 15.9l-4.6 2.5.9-5.2-3.8-3.7 5.2-.8Z" fill={c === 0 || s < 4 ? "var(--color-indigo)" : "rgba(11,13,18,0.15)"} />
+              </svg>
+            ))}
+          </span>
+        </div>
+      ))}
+    </div>,
+    /* call + booking chips */
+    <div key="a3" className="mt-4 flex max-w-[280px] items-center gap-2">
+      <span className="inline-flex items-center gap-2 rounded-full bg-citron px-3.5 py-2 text-[11.5px] font-bold text-ink-solid">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M7.5 4.5 9.7 4a1 1 0 0 1 1.1.6l1.1 2.6a1 1 0 0 1-.3 1.2l-1.4 1a11 11 0 0 0 4.4 4.4l1-1.4a1 1 0 0 1 1.2-.3l2.6 1.1a1 1 0 0 1 .6 1.1l-.5 2.2a1.6 1.6 0 0 1-1.6 1.2C11.3 18 6 12.7 6.3 6.1a1.6 1.6 0 0 1 1.2-1.6Z" /></svg>
+        Call
+      </span>
+      <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-2 text-[11.5px] font-bold text-ink">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="4" y="5.5" width="16" height="14" rx="2.5" /><path d="M4 9.5h16M8.5 3.5v3.5M15.5 3.5v3.5" /><path d="m9.5 14.5 2 2 3.5-3.8" /></svg>
+        Book
+      </span>
+    </div>,
+  ];
+
+  const stepIcons = [
+    <g key="i1"><path d="M12 21s-7-6.4-7-11.5a7 7 0 0 1 14 0C19 14.6 12 21 12 21Z" /><circle cx="12" cy="9.3" r="2.4" /></g>,
+    <g key="i2"><circle cx="11" cy="11" r="6.5" /><path d="M15.8 15.8 20 20" /></g>,
+    <g key="i3"><path d="M7.5 4.5 9.7 4a1 1 0 0 1 1.1.6l1.1 2.6a1 1 0 0 1-.3 1.2l-1.4 1a11 11 0 0 0 4.4 4.4l1-1.4a1 1 0 0 1 1.2-.3l2.6 1.1a1 1 0 0 1 .6 1.1l-.5 2.2a1.6 1.6 0 0 1-1.6 1.2C11.3 18 6 12.7 6.3 6.1a1.6 1.6 0 0 1 1.2-1.6Z" /></g>,
+  ];
+
   return (
     <section className="overflow-x-clip py-16 md:py-24">
-      <div className="mx-auto max-w-3xl px-6 text-center">
-        <Reveal>
-          <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Local Visibility Should Drive Business
-          </h2>
-          <div className="mt-6 grid gap-4">
-            {paras.map((p, i) => (<p key={i} className="text-[15px] leading-relaxed text-graphite">{p}</p>))}
-          </div>
-        </Reveal>
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+          {/* copy column */}
+          <Reveal variant="left">
+            <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+              Local Visibility Should <span className="text-indigo">Drive</span> Business
+            </h2>
+            <div className="mt-6 grid gap-4">
+              {paras.map((p, i) => (<p key={i} className="text-[15px] leading-relaxed text-graphite">{p}</p>))}
+            </div>
+          </Reveal>
 
-        <Reveal delay={80}>
-          <div className="relative mt-12">
-            <span aria-hidden className="absolute left-[16%] right-[16%] top-5 hidden h-px bg-line sm:block" />
-            <span aria-hidden className="journey-line absolute left-[16%] top-5 hidden h-px w-[68%] origin-left bg-gradient-to-r from-indigo to-indigo/50 sm:block" />
-            <ol className="grid gap-8 sm:grid-cols-3 sm:gap-4">
+          {/* the buyer journey on a drawn spine */}
+          <Reveal>
+            <div className="relative">
+              <span aria-hidden className="journey-line absolute bottom-10 left-6 top-8 w-px bg-indigo/25" />
               {LOCAL_JOURNEY.map((s, i) => (
-                <li key={s.step} className="reveal-item relative" style={{ transitionDelay: `${i * 120}ms` }}>
-                  <span className="relative z-10 mx-auto grid size-10 place-items-center rounded-full bg-indigo text-[13px] font-bold text-white">{i + 1}</span>
-                  <p className="mt-4 font-heading text-[15px] font-bold tracking-[-0.01em]">{s.step}</p>
-                  <p className="mx-auto mt-1.5 max-w-[15rem] text-[13px] leading-relaxed text-graphite">{s.desc}</p>
-                </li>
+                <div
+                  key={s.step}
+                  className={`reveal-item relative pl-[72px] ${i < LOCAL_JOURNEY.length - 1 ? "pb-10" : ""}`}
+                  style={{ transitionDelay: `${150 + i * 130}ms` }}
+                >
+                  <span className="absolute left-0 top-0 grid size-12 place-items-center rounded-2xl bg-gradient-to-b from-indigo to-indigo-deep text-white">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      {stepIcons[i]}
+                    </svg>
+                  </span>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-indigo">Step {i + 1}</p>
+                  <h3 className="mt-1.5 font-heading text-[17px] font-bold tracking-[-0.01em]">{s.step}</h3>
+                  <p className="mt-1.5 text-[13.5px] leading-relaxed text-graphite">{s.desc}</p>
+                  {stepArt[i]}
+                </div>
               ))}
-            </ol>
-          </div>
-        </Reveal>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
