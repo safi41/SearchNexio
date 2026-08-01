@@ -79,7 +79,7 @@ export default function Industries() {
           <Reveal>
             <Badge>Everywhere Buyers Search</Badge>
             <h2 className="mx-auto mt-5 max-w-xl font-heading text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.1] tracking-[-0.02em]">
-              Your entire search presence &mdash; fully covered
+              Your entire search <span className="text-indigo">presence</span> &mdash; fully covered
             </h2>
             <p className="mx-auto mt-5 max-w-md text-[15.5px] leading-relaxed text-graphite">
               Google, Maps, AI Overviews, ChatGPT, and every surface your buyers

@@ -155,7 +155,7 @@ export default function WhySearchNexio() {
         <Reveal>
           <SectionHead
             badge="Why Us"
-            title="Why SearchNexio"
+            title={<>Why <span className="text-indigo">SearchNexio</span></>}
             sub="The short version: we are a search visibility agency that works the way high-trust businesses need their partners to work."
           />
         </Reveal>

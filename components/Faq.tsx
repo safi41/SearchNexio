@@ -24,7 +24,7 @@ export default function Faq() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Reveal>
-        <SectionHead badge="FAQ" title="Questions, answered directly" />
+        <SectionHead badge="FAQ" title={<>Questions, <span className="text-indigo">answered</span> directly</>} />
         <p className="mt-4 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-graphite">
           Last updated: July 2026
         </p>

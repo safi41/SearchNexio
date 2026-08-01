@@ -265,7 +265,7 @@ export default function FullSurfaceMethod() {
         <Reveal>
           <SectionHead
             badge="Our Methodology"
-            title="The Full-Surface Method"
+            title={<>The <span className="text-indigo">Full-Surface</span> Method</>}
             sub="Most SEO focuses entirely on traditional web rankings. Our approach treats every platform your buyers use as one connected system, working through them in a set order."
           />
         </Reveal>

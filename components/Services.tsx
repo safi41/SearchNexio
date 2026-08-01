@@ -538,7 +538,7 @@ export default function Services() {
         <Reveal>
           <SectionHead
             badge="What We Do"
-            title="Everything the Full-Surface Method covers."
+            title={<>Everything the <span className="text-indigo">Full-Surface</span> Method covers.</>}
             sub="Visibility problems are rarely isolated to one channel. A broken technical foundation ruins your AI citations. A messy site migration erases your keyword rankings. We fix all of it together because that is how your buyers experience it."
           />
         </Reveal>

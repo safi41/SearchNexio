@@ -21,7 +21,7 @@ export default function ProblemSection() {
             badge="Why it matters"
             title={
               <>
-                Search has changed. <br className="hidden md:block" />
+                Search has <span className="text-indigo">changed</span>. <br className="hidden md:block" />
                 Most SEO hasn&apos;t.
               </>
             }

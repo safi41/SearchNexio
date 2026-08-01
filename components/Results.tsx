@@ -152,7 +152,7 @@ export default function Results() {
             <Reveal>
               <Badge>Results</Badge>
               <h2 className="mt-5 font-heading text-[clamp(2.1rem,4.2vw,3.25rem)] font-bold leading-[1.08] tracking-[-0.02em]">
-                What this looks like when it works.
+                What this looks like when it <span className="text-indigo">works</span>.
               </h2>
               <p className="mt-5 max-w-md text-[15.5px] leading-relaxed text-graphite">
                 Real engagements, real numbers. We map where you are invisible,
