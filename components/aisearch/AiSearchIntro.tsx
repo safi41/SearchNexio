@@ -1,7 +1,7 @@
 import Reveal from "@/components/motion/Reveal";
 import { CtaLink } from "@/components/ui";
 import { AI_JOURNEY, AI_COMPARISON, AI_SERVICES, ROUTES } from "@/lib/ai-search-content";
-import { GoogleG, GeminiMark, PerplexityKnot } from "@/components/brand-icons";
+import { GoogleG, GeminiMark, PerplexityKnot, OpenAIMark } from "@/components/brand-icons";
 
 /* Platform logos for the journey chips. ChatGPT is the ink knot, Website a
    small indigo globe. */
@@ -9,16 +9,7 @@ const PLATFORM_ICONS: Record<string, React.ReactNode> = {
   "Google AI": <GoogleG size={15} />,
   Gemini: <GeminiMark size={15} />,
   Perplexity: <PerplexityKnot size={15} />,
-  ChatGPT: (
-    <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden>
-      <g stroke="#0B0D12" strokeWidth="1.9" strokeLinecap="round" fill="none">
-        <path d="M12 4.2v15.6" />
-        <path d="M5.2 8.1l13.6 7.8" />
-        <path d="M18.8 8.1 5.2 15.9" />
-        <circle cx="12" cy="12" r="7.8" />
-      </g>
-    </svg>
-  ),
+  ChatGPT: <OpenAIMark size={15} />,
   Website: (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.7" strokeLinecap="round" aria-hidden>
       <circle cx="12" cy="12" r="8.5" />
