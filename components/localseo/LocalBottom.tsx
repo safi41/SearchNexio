@@ -505,29 +505,46 @@ export function LocalWhy() {
   );
 }
 
-/* ---- Local SEO Engagement Options: three tiers, center highlighted ---- */
+/* ---- Local SEO Engagement Options: one connected plan board, three
+   columns divided by hairlines, the highlighted tier on a lilac field ---- */
 export function LocalEngagements() {
   return (
     <section className="overflow-x-clip wash-lilac-full py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">Local SEO Engagement Options</h2>
+          <h2 className="text-center font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+            Local SEO <span className="text-indigo">Engagement</span> Options
+          </h2>
         </Reveal>
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {LOCAL_ENGAGEMENTS.map((e, i) => (
-            <Reveal key={e.title} variant="up" delay={Math.min(i * 60, 120)}>
-              <article className={`flex h-full flex-col rounded-2xl border bg-surface p-7 ${e.highlight ? "border-indigo/45" : "border-line"}`}>
-                <span className="inline-flex w-fit items-center rounded-full bg-lilac px-2.5 py-1 text-[10.5px] font-bold uppercase tracking-[0.08em] text-indigo">Best for: {e.forWho}</span>
-                <h3 className="mt-4 font-heading text-[18px] font-bold tracking-[-0.01em]">{e.title}</h3>
-                <p className="mt-3 flex-1 text-[13.5px] leading-relaxed text-graphite">{e.desc}</p>
-                <p className="mt-5 text-[12px] font-semibold text-graphite">Contact us for scope</p>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+
         <Reveal delay={80}>
-          <div className="mt-8 flex justify-center">
-            <a href={L_ROUTES.contact} className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-indigo underline decoration-indigo/30 underline-offset-2">Discuss Your Local SEO Strategy</a>
+          <div className="mt-12 grid overflow-hidden rounded-3xl border border-line bg-surface shadow-[0_18px_50px_rgba(11,13,18,0.06)] lg:grid-cols-3">
+            {LOCAL_ENGAGEMENTS.map((e, i) => (
+              <div
+                key={e.title}
+                className={`reveal-item relative flex flex-col p-8 ${i > 0 ? "border-t border-line lg:border-l lg:border-t-0" : ""} ${e.highlight ? "bg-lilac/40" : ""}`}
+                style={{ transitionDelay: `${120 + i * 100}ms` }}
+              >
+                {e.highlight && <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-indigo" />}
+                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-indigo">
+                  Best for · {e.forWho}
+                </p>
+                <h3 className="mt-3 font-heading text-[19px] font-bold tracking-[-0.01em]">{e.title}</h3>
+                <p className="mt-3 flex-1 text-[13.5px] leading-relaxed text-graphite">{e.desc}</p>
+                <p className="mt-7 flex items-center gap-2.5 border-t border-line pt-5 text-[13px] font-semibold text-indigo">
+                  Contact us for scope
+                  <span aria-hidden className="grid size-5 place-items-center rounded-full bg-indigo/10">
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  </span>
+                </p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={120}>
+          <div className="mt-10 flex justify-center">
+            <CtaLink href={L_ROUTES.contact} variant="ghost">Discuss Your Local SEO Strategy</CtaLink>
           </div>
         </Reveal>
       </div>
@@ -535,32 +552,50 @@ export function LocalEngagements() {
   );
 }
 
-/* ---- What Local SEO Cannot Guarantee: restrained, shield above ---- */
+/* ---- What Local SEO Cannot Guarantee: sticky heading + a numbered
+   straight-answers ledger, lead sentence emphasized ---- */
 export function LocalLimitations() {
   return (
     <section className="overflow-x-clip py-16 md:py-24">
-      <div className="mx-auto max-w-3xl px-6">
-        <Reveal>
-          <div className="text-center">
-            <span aria-hidden className="mx-auto grid size-11 place-items-center rounded-2xl bg-lilac text-indigo">
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M11 3 4 6v5c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6l-7-3Z" /></svg>
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+          {/* sticky intro */}
+          <Reveal variant="left" className="lg:sticky lg:top-28 lg:self-start">
+            <span aria-hidden className="grid size-14 place-items-center rounded-2xl bg-lilac text-indigo">
+              <svg width="28" height="28" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M11 3 4 6v5c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6l-7-3Z" /></svg>
             </span>
-            <h2 className="mt-6 font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">What Local SEO Cannot Guarantee</h2>
-            <p className="mt-4 text-[14px] text-graphite">Every credible local SEO agency should be clear about this.</p>
+            <h2 className="mt-6 font-heading text-[clamp(1.9rem,3.6vw,2.8rem)] font-bold leading-[1.1] tracking-[-0.02em]">
+              What Local SEO
+              <br />
+              Cannot <span className="text-indigo">Guarantee</span>
+            </h2>
+            <p className="mt-5 max-w-sm text-[14.5px] leading-relaxed text-graphite">
+              Every credible local SEO agency should be clear about this.
+            </p>
+          </Reveal>
+
+          {/* numbered ledger, lead sentence bold */}
+          <div>
+            {LOCAL_LIMITATIONS.map((l, i) => {
+              const dot = l.indexOf(". ");
+              const lead = dot === -1 ? l : l.slice(0, dot + 1);
+              const rest = dot === -1 ? "" : l.slice(dot + 2);
+              return (
+                <Reveal key={l} variant="up" delay={Math.min(i * 60, 300)}>
+                  <div className={`flex gap-5 py-6 ${i > 0 ? "border-t border-line" : "lg:pt-2"}`}>
+                    <span aria-hidden className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-warn/10 font-heading text-[12.5px] font-bold tabular-nums text-warn">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-[14px] leading-relaxed text-graphite">
+                      <span className="font-semibold text-ink">{lead}</span>
+                      {rest && <> {rest}</>}
+                    </p>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
-        </Reveal>
-        <Reveal delay={80}>
-          <ul className="mt-8 grid gap-3">
-            {LOCAL_LIMITATIONS.map((l) => (
-              <li key={l} className="flex gap-3 rounded-2xl border border-line bg-surface px-5 py-4 text-[13.5px] leading-relaxed text-ink">
-                <span aria-hidden className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-warn/10 text-warn">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 1.5v5M6 9v.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
-                </span>
-                {l}
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
