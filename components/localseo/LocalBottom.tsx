@@ -389,35 +389,56 @@ export function LocalMeasure() {
   );
 }
 
-/* ---- Local SEO Results: two case-study cards, "available on request" ---- */
+/* ---- Local SEO Results: intro left, a stacked case-study dossier right ---- */
 export function LocalResults() {
   return (
     <section className="overflow-x-clip wash-lilac-full py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal>
-          <h2 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">Local SEO Results</h2>
-          <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-graphite">
-            Local SEO results are reported at the enquiry level, not the impressions level. The metrics that matter are calls, bookings and qualified leads from local search, and how those numbers change over an engagement period. We add verified case studies as they become available, with the full starting position, work completed, timeframe and measured outcome.
-          </p>
-        </Reveal>
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {/* primary dark card */}
-          <Reveal variant="up">
-            <article className="flex h-full flex-col rounded-3xl bg-ink-solid p-8 text-white">
-              <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-indigo-300 [color:#A9A2FF]">Case study</span>
-              <p className="mt-6 font-heading text-[clamp(1.6rem,3vw,2rem)] font-bold leading-tight tracking-[-0.02em]">Case study available on request</p>
-              <p className="mt-4 text-[13.5px] leading-relaxed text-white/70">Verified engagement detail, including industry, location type, starting problem, work completed, timeframe and lead outcome, is shared during scoping.</p>
-              <p className="mt-auto pt-6 text-[11.5px] text-white/45">Figures published only when verified with the client.</p>
-            </article>
+        <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+          {/* copy column */}
+          <Reveal variant="left">
+            <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+              Local SEO <span className="text-indigo">Results</span>
+            </h2>
+            <p className="mt-6 text-[15px] leading-relaxed text-graphite">
+              Local SEO results are reported at the enquiry level, not the impressions level. The metrics that matter are calls, bookings and qualified leads from local search, and how those numbers change over an engagement period. We add verified case studies as they become available, with the full starting position, work completed, timeframe and measured outcome.
+            </p>
+            <div className="mt-8 flex items-center gap-3 text-[13px] font-semibold text-ink">
+              <span aria-hidden className="grid size-9 place-items-center rounded-full bg-lilac text-indigo">
+                <svg width="17" height="17" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M11 3 4 6v5c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6l-7-3Z" /><path d="m8 11 2.2 2.2 3.8-4.2" /></svg>
+              </span>
+              Figures published only when verified with the client.
+            </div>
           </Reveal>
-          {/* secondary light card */}
-          <Reveal variant="up" delay={80}>
-            <article className="flex h-full flex-col rounded-3xl border border-line bg-surface p-8">
-              <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-indigo">Case study</span>
-              <p className="mt-6 font-heading text-[clamp(1.6rem,3vw,2rem)] font-bold leading-tight tracking-[-0.02em]">Case study available on request</p>
-              <p className="mt-4 text-[13.5px] leading-relaxed text-graphite">We report at the enquiry level: calls, bookings and qualified leads from local search, with the full starting position and timeframe.</p>
-              <p className="mt-auto pt-6 text-[11.5px] text-graphite/70">Figures published only when verified with the client.</p>
-            </article>
+
+          {/* stacked dossier */}
+          <Reveal variant="right" delay={80}>
+            <div className="relative pb-10 pr-6 pt-4 lg:pr-10">
+              {/* back document (light) */}
+              <article className="ml-auto w-[88%] rotate-2 rounded-3xl border border-line bg-surface p-7 shadow-[0_16px_44px_rgba(11,13,18,0.08)] transition-transform duration-500 ease-soft hover:rotate-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-indigo">Case study</span>
+                  <span aria-hidden className="flex gap-1"><span className="size-1.5 rounded-full bg-indigo/30" /><span className="size-1.5 rounded-full bg-indigo/20" /><span className="size-1.5 rounded-full bg-indigo/10" /></span>
+                </div>
+                <p className="mt-4 font-heading text-[19px] font-bold leading-snug tracking-[-0.015em]">Case study available on request</p>
+                <p className="mt-3 text-[13px] leading-relaxed text-graphite">We report at the enquiry level: calls, bookings and qualified leads from local search, with the full starting position and timeframe.</p>
+                <p className="mt-5 border-t border-line pt-4 text-[11.5px] text-graphite/70">Figures published only when verified with the client.</p>
+              </article>
+
+              {/* front document (dark), overlapping */}
+              <article className="relative -mt-24 w-[88%] -rotate-1 rounded-3xl bg-ink-solid p-7 text-white shadow-[0_30px_70px_rgba(11,13,18,0.3)] transition-transform duration-500 ease-soft hover:rotate-0">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] [color:#A9A2FF]">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden><rect x="5" y="10" width="14" height="10" rx="2" /><path d="M8.5 10V7.5a3.5 3.5 0 0 1 7 0V10" /></svg>
+                    Case study
+                  </span>
+                  <span aria-hidden className="rounded-full bg-white/10 px-2.5 py-1 text-[9.5px] font-bold uppercase tracking-[0.08em] text-white/70">On request</span>
+                </div>
+                <p className="mt-4 font-heading text-[clamp(1.35rem,2.4vw,1.7rem)] font-bold leading-snug tracking-[-0.015em]">Case study available on request</p>
+                <p className="mt-3 text-[13.5px] leading-relaxed text-white/70">Verified engagement detail, including industry, location type, starting problem, work completed, timeframe and lead outcome, is shared during scoping.</p>
+                <p className="mt-5 border-t border-white/10 pt-4 text-[11.5px] text-white/45">Figures published only when verified with the client.</p>
+              </article>
+            </div>
           </Reveal>
         </div>
       </div>
@@ -425,23 +446,48 @@ export function LocalResults() {
   );
 }
 
-/* ---- Why Choose SearchNexio: six proof cards ---- */
+/* ---- Why Choose SearchNexio: sticky heading + a two-column ledger of
+   proof points with icons and accent bars ---- */
+
+const LOCAL_WHY_ICONS = [
+  /* rosette */
+  <g key="lw1"><circle cx="12" cy="9" r="5.5" /><path d="m12 6.6.9 1.8 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2L9.1 8.7l2-.3Z" /><path d="m8.8 13.5-1.6 6 4.8-2.7 4.8 2.7-1.6-6" /></g>,
+  /* folder */
+  <g key="lw2"><path d="M3.5 7.5v10A2.5 2.5 0 0 0 6 20h12a2.5 2.5 0 0 0 2.5-2.5v-8A2.5 2.5 0 0 0 18 7h-6L9.8 4.8A2 2 0 0 0 8.4 4H6a2.5 2.5 0 0 0-2.5 2.5Z" /><path d="M3.5 11h17" /></g>,
+  /* trend */
+  <g key="lw3"><path d="M4 17.5 10 11l3.5 3.5L20 8" /><path d="M15 7.5h5V12.5" /></g>,
+  /* person check */
+  <g key="lw4"><circle cx="10" cy="8.4" r="3.2" /><path d="M4 19.5c.5-3.6 2.8-5.7 6-5.7 1.2 0 2.3.3 3.2.9" /><path d="m14.5 16.5 2.2 2.2 3.8-4.2" /></g>,
+  /* people */
+  <g key="lw5"><circle cx="9.5" cy="8.5" r="2.4" /><circle cx="15.5" cy="8.5" r="2.4" /><path d="M4.5 18c.4-2.6 2.2-4.2 5-4.2 1 0 1.9.2 2.5.6M13 18c.4-2.6 2.2-4.2 5-4.2" /></g>,
+  /* AI spark */
+  <g key="lw6"><path d="M12 3.5c.3 3.8 3.7 7.2 7.5 7.5-3.8.3-7.2 3.7-7.5 7.5-.3-3.8-3.7-7.2-7.5-7.5 3.8-.3 7.2-3.7 7.5-7.5Z" /><path d="M18.5 15.5c.15 1.6 1.4 2.85 3 3-1.6.15-2.85 1.4-3 3-.15-1.6-1.4-2.85-3-3 1.6-.15 2.85-1.4 3-3Z" /></g>,
+];
+
 export function LocalWhy() {
   return (
     <section className="overflow-x-clip py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal>
-          <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">Why Choose SearchNexio</h2>
-        </Reveal>
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {LOCAL_WHY.map((w, i) => (
-            <Reveal key={w.title} variant="up" delay={Math.min((i % 3) * 60, 120)}>
-              <article className="flex h-full gap-3.5 rounded-2xl border border-line bg-surface p-6">
-                <span aria-hidden className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-lilac text-indigo">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="m2.5 6.5 2.5 2.5 4.5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                </span>
-                <div>
-                  <h3 className="font-heading text-[15.5px] font-bold tracking-[-0.01em]">{w.title}</h3>
+        <div className="grid gap-12 lg:grid-cols-[0.65fr_1.35fr] lg:gap-20">
+          {/* sticky heading column */}
+          <Reveal variant="left" className="lg:sticky lg:top-28 lg:self-start">
+            <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.8rem)] font-bold leading-[1.1] tracking-[-0.02em]">
+              Why Choose
+              <br />
+              <span className="text-indigo">SearchNexio</span>
+            </h2>
+            <span className="mt-6 block h-1 w-12 rounded-full bg-indigo" />
+          </Reveal>
+
+          {/* proof-point ledger */}
+          <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
+            {LOCAL_WHY.map((w, i) => (
+              <Reveal key={w.title} variant="up" delay={Math.min((i % 2) * 80, 160)}>
+                <div className="group border-l-2 border-line pl-6 transition-colors duration-300 ease-soft hover:border-indigo">
+                  <span aria-hidden className="grid size-11 place-items-center rounded-xl bg-lilac text-indigo transition-all duration-300 ease-soft group-hover:bg-indigo group-hover:text-white">
+                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">{LOCAL_WHY_ICONS[i]}</svg>
+                  </span>
+                  <h3 className="mt-4 font-heading text-[16px] font-bold tracking-[-0.01em]">{w.title}</h3>
                   <p className="mt-2 text-[13px] leading-relaxed text-graphite">
                     {w.title === "AI search expertise" ? (
                       <>Accurate business information and credible local authority also shape how AI tools represent your business. Our{" "}
@@ -450,9 +496,9 @@ export function LocalWhy() {
                     ) : w.desc}
                   </p>
                 </div>
-              </article>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
