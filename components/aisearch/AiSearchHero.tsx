@@ -22,38 +22,39 @@ function ChatGPTInk({ size = 40 }: { size?: number }) {
   );
 }
 
+/* Nodes orbit as a group (one revolution per ORBIT_SPEED); each node
+   counter-rotates so its logo and label stay upright. Labels ride beside
+   their node on the given side. */
+const ORBIT_SPEED = "48s";
+
 const NODES = [
   {
     name: "Google AI",
     cited: true,
     icon: <GoogleG size={42} />,
     node: { left: "50%", top: "12%" },
-    label: { left: "63%", top: "5%" },
-    align: "text-left",
+    side: "right",
   },
   {
     name: "ChatGPT",
     cited: true,
     icon: <ChatGPTInk size={44} />,
     node: { left: "12%", top: "50%" },
-    label: { right: "101%", top: "42%" },
-    align: "text-right",
+    side: "left",
   },
   {
     name: "Gemini",
     cited: false,
     icon: <GeminiMark size={42} />,
     node: { left: "88%", top: "50%" },
-    label: { left: "101%", top: "42%" },
-    align: "text-left",
+    side: "right",
   },
   {
     name: "Perplexity",
     cited: true,
     icon: <PerplexityKnot size={44} />,
     node: { left: "50%", top: "88%" },
-    label: { left: "63%", top: "82%" },
-    align: "text-left",
+    side: "right",
   },
 ];
 
@@ -82,21 +83,48 @@ function HubDiagram() {
       <div aria-hidden className="animate-orbit absolute inset-[12%] rounded-full border border-dashed border-indigo/25" style={{ animationDuration: "52s" }} />
       <div aria-hidden className="animate-orbit-slow absolute inset-[27%] rounded-full border border-dashed border-indigo/15" style={{ animationDuration: "38s" }} />
 
-      {/* axis connectors with endpoint dots */}
-      <svg aria-hidden className="absolute inset-0 size-full" viewBox="0 0 100 100">
-        {[
-          [50, 23, 50, 34.5],
-          [23, 50, 34.5, 50],
-          [77, 50, 65.5, 50],
-          [50, 77, 50, 65.5],
-        ].map(([x1, y1, x2, y2], i) => (
-          <g key={i} stroke="var(--color-indigo)" opacity="0.55">
-            <line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth="0.5" />
-            <circle cx={x1} cy={y1} r="0.9" fill="var(--color-indigo)" stroke="none" />
-            <circle cx={x2} cy={y2} r="0.9" fill="var(--color-indigo)" stroke="none" />
-          </g>
+      {/* connectors + nodes revolve together around the hub */}
+      <div className="animate-orbit absolute inset-0" style={{ animationDuration: ORBIT_SPEED }}>
+        {/* axis connectors with endpoint dots */}
+        <svg aria-hidden className="absolute inset-0 size-full" viewBox="0 0 100 100">
+          {[
+            [50, 23, 50, 34.5],
+            [23, 50, 34.5, 50],
+            [77, 50, 65.5, 50],
+            [50, 77, 50, 65.5],
+          ].map(([x1, y1, x2, y2], i) => (
+            <g key={i} stroke="var(--color-indigo)" opacity="0.55">
+              <line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth="0.5" />
+              <circle cx={x1} cy={y1} r="0.9" fill="var(--color-indigo)" stroke="none" />
+              <circle cx={x2} cy={y2} r="0.9" fill="var(--color-indigo)" stroke="none" />
+            </g>
+          ))}
+        </svg>
+
+        {/* platform nodes, counter-rotating to stay upright */}
+        {NODES.map((n) => (
+          <div
+            key={n.name}
+            className="absolute -translate-x-1/2 -translate-y-1/2"
+            style={n.node}
+          >
+            <span
+              className="animate-orbit relative grid size-[104px] place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.1)]"
+              style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
+            >
+              {n.icon}
+              <span
+                className={`absolute top-1/2 -translate-y-1/2 whitespace-nowrap ${
+                  n.side === "left" ? "right-[115%] text-right" : "left-[115%] text-left"
+                }`}
+              >
+                <p className="text-[15px] font-bold text-indigo">{n.name}</p>
+                <StatusChip cited={n.cited} />
+              </span>
+            </span>
+          </div>
         ))}
-      </svg>
+      </div>
 
       {/* center: brand scope on a white disc */}
       <div className="absolute left-1/2 top-1/2 grid size-[30%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(99,91,255,0.22)]">
@@ -115,21 +143,6 @@ function HubDiagram() {
         </div>
       </div>
 
-      {/* platform nodes + labels */}
-      {NODES.map((n) => (
-        <div key={n.name}>
-          <div
-            className="absolute grid size-[21%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.1)]"
-            style={n.node}
-          >
-            {n.icon}
-          </div>
-          <div className={`absolute whitespace-nowrap ${n.align}`} style={n.label}>
-            <p className="text-[15px] font-bold text-indigo">{n.name}</p>
-            <StatusChip cited={n.cited} />
-          </div>
-        </div>
-      ))}
     </div>
   );
 }
