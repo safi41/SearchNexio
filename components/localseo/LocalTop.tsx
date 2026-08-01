@@ -451,19 +451,30 @@ export function LocalWhoWeHelp() {
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Who We Help
+            Who We <span className="text-indigo">Help</span>
           </h2>
         </Reveal>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
+        {/* open four-column strip divided by hairlines */}
+        <div className="mt-12 grid gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {WHO_WE_HELP.map((w, i) => (
-            <Reveal key={w.key} variant="up" delay={Math.min(i * 60, 180)}>
-              <article className="flex h-full flex-col rounded-2xl border border-line bg-surface p-6">
-                <span aria-hidden className="grid size-11 place-items-center rounded-xl bg-lilac text-indigo">
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">{WHO_ICONS[w.key]}</svg>
+            <Reveal
+              key={w.key}
+              variant="up"
+              delay={Math.min(i * 80, 240)}
+              className={`group border-line lg:px-7 ${i > 0 ? "max-lg:sm:odd:border-l-0 lg:border-l" : "lg:pl-0"} ${i % 2 === 1 ? "sm:max-lg:border-l sm:max-lg:pl-7" : ""} ${i === WHO_WE_HELP.length - 1 ? "lg:pr-0" : ""}`}
+            >
+              <div className="flex items-start justify-between">
+                <span aria-hidden className="grid size-14 place-items-center rounded-full border border-indigo/20 bg-gradient-to-br from-surface to-lilac/60 text-indigo transition-all duration-300 ease-soft group-hover:bg-indigo group-hover:from-indigo group-hover:to-indigo-deep group-hover:text-white">
+                  <svg width="26" height="26" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">{WHO_ICONS[w.key]}</svg>
                 </span>
-                <h3 className="mt-4 font-heading text-[16px] font-bold tracking-[-0.01em]">{w.name}</h3>
-                <p className="mt-2 text-[13px] leading-relaxed text-graphite">{w.desc}</p>
-              </article>
+                <span aria-hidden className="font-heading text-[30px] font-bold leading-none tracking-[-0.02em] text-indigo/15 transition-colors duration-300 group-hover:text-indigo/40">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <h3 className="mt-6 font-heading text-[17px] font-bold leading-snug tracking-[-0.01em]">{w.name}</h3>
+              <span className="mt-3 block h-0.5 w-7 rounded-full bg-indigo" />
+              <p className="mt-3 text-[13px] leading-relaxed text-graphite">{w.desc}</p>
             </Reveal>
           ))}
         </div>
