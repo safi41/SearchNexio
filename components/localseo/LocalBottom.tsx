@@ -205,7 +205,7 @@ export function LocalProcess() {
     <section id="local-process" className="scroll-mt-24 overflow-x-clip wash-lilac-full py-16 md:py-24">
       <div className="mx-auto max-w-4xl px-6">
         <Reveal>
-          <h2 className="text-center font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">Our Local SEO Process</h2>
+          <h2 className="text-center font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">Our Local <span className="text-indigo">SEO Process</span></h2>
           <p className="mx-auto mt-5 max-w-2xl text-center text-[15px] leading-relaxed text-graphite">
             Every engagement follows the same four-phase sequence. Each phase depends on the one before it, which is why we do not skip the audit to get to implementation faster.
           </p>

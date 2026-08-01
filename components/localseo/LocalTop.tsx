@@ -40,22 +40,24 @@ const TRUST_ICONS = [
   </g>,
 ];
 
-/* Bubbles pinned on the orbit ring around the pin. All four share one
-   radius (46%) and sit exactly 90 degrees apart, starting at -75deg, so the
-   gaps between them are equal. */
+/* Bubbles pinned on the orbit ring around the pin, at the exact cardinal
+   points (top, right, bottom, left of the dashed ring). The whole group
+   revolves slowly; each bubble counter-rotates so its icon stays upright. */
+const ORBIT_SPEED = "48s";
+
 const ORBIT_BUBBLES = [
   {
     label: "Calls",
-    left: "61.9%",
-    top: "5.6%",
+    left: "50%",
+    top: "2%",
     icon: (
       <path d="M7.5 4.5 9.7 4a1 1 0 0 1 1.1.6l1.1 2.6a1 1 0 0 1-.3 1.2l-1.4 1a11 11 0 0 0 4.4 4.4l1-1.4a1 1 0 0 1 1.2-.3l2.6 1.1a1 1 0 0 1 .6 1.1l-.5 2.2a1.6 1.6 0 0 1-1.6 1.2C11.3 18 6 12.7 6.3 6.1a1.6 1.6 0 0 1 1.2-1.6Z" fill="var(--color-indigo)" stroke="none" />
     ),
   },
   {
     label: "Business profile",
-    left: "5.6%",
-    top: "38.1%",
+    left: "2%",
+    top: "50%",
     icon: (
       <g fill="var(--color-indigo)" stroke="none">
         <path d="M5 5h14v3.2c0 1.2-.8 2.1-2 2.1s-1.9-.9-1.9-2.1c0 1.2-.9 2.1-2.1 2.1s-2.1-.9-2.1-2.1c0 1.2-.7 2.1-1.9 2.1s-2-.9-2-2.1Z" />
@@ -65,16 +67,16 @@ const ORBIT_BUBBLES = [
   },
   {
     label: "Reviews",
-    left: "94.4%",
-    top: "61.9%",
+    left: "98%",
+    top: "50%",
     icon: (
       <path d="m12 4 2.3 4.7 5.2.8-3.8 3.7.9 5.2L12 15.9l-4.6 2.5.9-5.2-3.8-3.7 5.2-.8Z" fill="var(--color-indigo)" stroke="none" />
     ),
   },
   {
     label: "Growth",
-    left: "38.1%",
-    top: "94.4%",
+    left: "50%",
+    top: "98%",
     icon: (
       <g fill="var(--color-indigo)" stroke="none">
         <rect x="5" y="13" width="2.8" height="6" rx="0.9" />
@@ -129,19 +131,26 @@ function PinOrbitVisual() {
         </svg>
       </div>
 
-      {/* icon bubbles on the ring */}
-      {ORBIT_BUBBLES.map((b) => (
-        <span
-          key={b.label}
-          title={b.label}
-          className="absolute grid size-[72px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(99,91,255,0.18)]"
-          style={{ left: b.left, top: b.top }}
-        >
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
-            {b.icon}
-          </svg>
-        </span>
-      ))}
+      {/* icon bubbles revolving on the ring, icons kept upright */}
+      <div className="animate-orbit absolute inset-0" style={{ animationDuration: ORBIT_SPEED }}>
+        {ORBIT_BUBBLES.map((b) => (
+          <div
+            key={b.label}
+            className="absolute -translate-x-1/2 -translate-y-1/2"
+            style={{ left: b.left, top: b.top }}
+          >
+            <span
+              title={b.label}
+              className="animate-orbit grid size-[72px] place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(99,91,255,0.18)]"
+              style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+                {b.icon}
+              </svg>
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -332,7 +341,7 @@ export function LocalProblems() {
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Local Problems We Solve
+            Local <span className="text-indigo">Problems</span> We Solve
           </h2>
         </Reveal>
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
@@ -396,7 +405,7 @@ export function LocalServices() {
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            What Our Local SEO Services Include
+            What Our <span className="text-indigo">Local SEO</span> Services Include
           </h2>
         </Reveal>
 

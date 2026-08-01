@@ -78,9 +78,9 @@ function StatusChip({ cited }: { cited: boolean }) {
 function HubDiagram() {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[520px]">
-      {/* dashed orbit rings */}
-      <div aria-hidden className="absolute inset-[12%] rounded-full border border-dashed border-indigo/25" />
-      <div aria-hidden className="absolute inset-[27%] rounded-full border border-dashed border-indigo/15" />
+      {/* dashed orbit rings, slowly rotating in opposite directions */}
+      <div aria-hidden className="animate-orbit absolute inset-[12%] rounded-full border border-dashed border-indigo/25" style={{ animationDuration: "52s" }} />
+      <div aria-hidden className="animate-orbit-slow absolute inset-[27%] rounded-full border border-dashed border-indigo/15" style={{ animationDuration: "38s" }} />
 
       {/* axis connectors with endpoint dots */}
       <svg aria-hidden className="absolute inset-0 size-full" viewBox="0 0 100 100">
