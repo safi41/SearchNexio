@@ -214,31 +214,49 @@ export function LocalDriveBusiness() {
     "A business can rank in the top three map positions and still receive fewer calls than a competitor ranked fourth, because the fourth business has more reviews, better photos, clearer service information, and a website that makes contacting them easier.",
     "SearchNexio treats local visibility as the start of a commercial process, not the end of an SEO task. The strategy connects what appears in Google Maps with what buyers find when they investigate further.",
   ];
-  /* Mini UI vignettes, one per journey step (abstract, no sample data). */
+  /* Mini UI vignettes, one per journey step (illustrative UI, no real data). */
   const stepArt = [
     /* local pack rows, yours highlighted */
-    <div key="a1" className="mt-4 grid max-w-[280px] gap-1.5">
-      {[0, 1, 2].map((r) => (
-        <div key={r} className={`flex items-center gap-2.5 rounded-lg border px-3 py-2 ${r === 0 ? "border-indigo/40 bg-indigo/5" : "border-line bg-surface"}`}>
-          {r === 0 ? (
+    <div key="a1" className="mt-4 grid max-w-[300px] gap-1.5">
+      {[
+        { name: "Your business", you: true },
+        { name: "Competitor A", you: false },
+        { name: "Competitor B", you: false },
+      ].map((r, i) => (
+        <div key={r.name} className={`flex items-center gap-2.5 rounded-lg border px-3 py-2 ${r.you ? "border-indigo/40 bg-indigo/5" : "border-line bg-surface"}`}>
+          {r.you ? (
             <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden><path d="M12 21s-7-6.4-7-11.5a7 7 0 0 1 14 0C19 14.6 12 21 12 21Z" fill="var(--color-indigo)" /><circle cx="12" cy="9.3" r="2.4" fill="#fff" /></svg>
           ) : (
-            <span className="size-2 rounded-full bg-graphite/30" />
+            <span className="ml-0.5 size-2 shrink-0 rounded-full bg-graphite/30" />
           )}
-          <span className={`h-2 rounded-full ${r === 0 ? "w-2/3 bg-indigo/40" : "w-1/2 bg-ink/10"}`} />
+          <span className={`text-[11.5px] font-semibold ${r.you ? "text-ink" : "text-graphite"}`}>{r.name}</span>
+          <span className={`ml-auto grid size-5 place-items-center rounded-full text-[10px] font-bold ${r.you ? "bg-citron text-ink-solid" : "bg-ink/5 text-graphite"}`}>{i + 1}</span>
         </div>
       ))}
     </div>,
     /* two profiles being compared */
-    <div key="a2" className="mt-4 flex max-w-[280px] gap-2">
-      {[0, 1].map((c) => (
-        <div key={c} className={`flex-1 rounded-lg border p-3 ${c === 0 ? "border-indigo/40 bg-indigo/5" : "border-line bg-surface"}`}>
-          <span className={`block size-6 rounded-full ${c === 0 ? "bg-indigo/30" : "bg-ink/10"}`} />
-          <span className="mt-2 block h-1.5 w-4/5 rounded-full bg-ink/10" />
-          <span className="mt-1.5 flex gap-0.5">
+    <div key="a2" className="mt-4 flex max-w-[300px] gap-2">
+      {[
+        { name: "Your profile", you: true },
+        { name: "Competitor", you: false },
+      ].map((c) => (
+        <div key={c.name} className={`relative flex-1 rounded-lg border p-3 ${c.you ? "border-indigo/40 bg-indigo/5" : "border-line bg-surface"}`}>
+          {c.you && (
+            <span className="absolute -right-1.5 -top-1.5 grid size-5 place-items-center rounded-full bg-citron">
+              <svg width="9" height="9" viewBox="0 0 12 12" fill="none" aria-hidden><path d="m2.5 6.5 2.5 2.5 4.5-5" stroke="#0B0D12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </span>
+          )}
+          <span className={`grid size-7 place-items-center rounded-full text-white ${c.you ? "bg-gradient-to-br from-indigo to-indigo-deep" : "bg-graphite/30"}`}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <path d="M5 5h14v3.2c0 1.2-.8 2.1-2 2.1s-1.9-.9-1.9-2.1c0 1.2-.9 2.1-2.1 2.1s-2.1-.9-2.1-2.1c0 1.2-.7 2.1-1.9 2.1s-2-.9-2-2.1Z" />
+              <path d="M6 11.8V19h12v-7.2c-.6.3-1.3.5-2 .5-.8 0-1.5-.2-2.1-.7-.5.5-1.2.7-1.9.7s-1.4-.2-1.9-.7c-.6.5-1.3.7-2.1.7-.7 0-1.4-.2-2-.5Z" />
+            </svg>
+          </span>
+          <p className={`mt-2 text-[10.5px] font-bold ${c.you ? "text-ink" : "text-graphite"}`}>{c.name}</p>
+          <span className="mt-1 flex gap-0.5">
             {[...Array(5)].map((_, s) => (
               <svg key={s} width="9" height="9" viewBox="0 0 24 24" aria-hidden>
-                <path d="m12 4 2.3 4.7 5.2.8-3.8 3.7.9 5.2L12 15.9l-4.6 2.5.9-5.2-3.8-3.7 5.2-.8Z" fill={c === 0 || s < 4 ? "var(--color-indigo)" : "rgba(11,13,18,0.15)"} />
+                <path d="m12 4 2.3 4.7 5.2.8-3.8 3.7.9 5.2L12 15.9l-4.6 2.5.9-5.2-3.8-3.7 5.2-.8Z" fill={c.you || s < 4 ? "var(--color-indigo)" : "rgba(11,13,18,0.15)"} />
               </svg>
             ))}
           </span>

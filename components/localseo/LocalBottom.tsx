@@ -56,22 +56,35 @@ function ReportArt() {
 }
 
 function ProfileArt() {
+  const checks = ["Business information", "Categories and services", "Photos and posts"];
   return (
-    <div className="relative h-32 overflow-hidden rounded-2xl border border-line bg-ivory/60 p-4">
+    <div className="relative overflow-hidden rounded-2xl border border-line bg-ivory/60 p-3.5">
       <div className="flex items-center gap-2.5">
-        <span className="size-8 rounded-full bg-indigo/20" />
-        <div className="grid flex-1 gap-1.5">
-          <span className="h-2 w-3/4 rounded-full bg-ink/15" />
-          <span className="h-2 w-1/2 rounded-full bg-ink/10" />
+        <span className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo to-indigo-deep text-white">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+            <path d="M5 5h14v3.2c0 1.2-.8 2.1-2 2.1s-1.9-.9-1.9-2.1c0 1.2-.9 2.1-2.1 2.1s-2.1-.9-2.1-2.1c0 1.2-.7 2.1-1.9 2.1s-2-.9-2-2.1Z" />
+            <path d="M6 11.8V19h12v-7.2c-.6.3-1.3.5-2 .5-.8 0-1.5-.2-2.1-.7-.5.5-1.2.7-1.9.7s-1.4-.2-1.9-.7c-.6.5-1.3.7-2.1.7-.7 0-1.4-.2-2-.5Zm7 6.2v-3.5h3V18Z" />
+          </svg>
+        </span>
+        <div className="min-w-0">
+          <p className="text-[11px] font-bold text-ink">Business Profile</p>
+          <span className="mt-0.5 flex gap-0.5">
+            {[...Array(5)].map((_, s) => (
+              <svg key={s} width="8" height="8" viewBox="0 0 24 24" aria-hidden>
+                <path d="m12 4 2.3 4.7 5.2.8-3.8 3.7.9 5.2L12 15.9l-4.6 2.5.9-5.2-3.8-3.7 5.2-.8Z" fill="var(--color-indigo)" />
+              </svg>
+            ))}
+          </span>
         </div>
+        <span className="ml-auto rounded-full bg-lilac px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.06em] text-indigo">Audit</span>
       </div>
-      <div className="mt-3.5 grid gap-2">
-        {[0, 1].map((i) => (
-          <div key={i} className="flex items-center gap-2">
-            <span className="grid size-4 place-items-center rounded-full bg-citron">
+      <div className="mt-3 grid gap-1.5">
+        {checks.map((c) => (
+          <div key={c} className="flex items-center gap-2 rounded-lg border border-line bg-surface px-2.5 py-1">
+            <span className="grid size-4 shrink-0 place-items-center rounded-full bg-citron">
               <svg width="8" height="8" viewBox="0 0 12 12" fill="none" aria-hidden><path d="m2.5 6.5 2.5 2.5 4.5-5" stroke="#0B0D12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </span>
-            <span className="h-2 flex-1 rounded-full bg-ink/10" />
+            <span className="truncate text-[10.5px] font-semibold text-ink/80">{c}</span>
           </div>
         ))}
       </div>
