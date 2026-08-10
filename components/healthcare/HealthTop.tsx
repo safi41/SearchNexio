@@ -96,17 +96,16 @@ function PatientLoop() {
     return () => io.disconnect();
   }, []);
 
-  /* Node centres sit on the solid ring at the four cardinal points; the
-     label sits just beyond the node on the same side. */
+  /* Node centres sit on the solid ring at the four cardinal points. */
   const spots = [
-    { node: "left-1/2 top-[16%] -translate-x-1/2 -translate-y-1/2", label: "bottom-full left-1/2 mb-4 -translate-x-1/2 text-center" },
-    { node: "left-[84%] top-1/2 -translate-x-1/2 -translate-y-1/2", label: "left-full top-1/2 ml-4 -translate-y-1/2 text-left" },
-    { node: "left-1/2 top-[84%] -translate-x-1/2 -translate-y-1/2", label: "top-full left-1/2 mt-4 -translate-x-1/2 text-center" },
-    { node: "left-[16%] top-1/2 -translate-x-1/2 -translate-y-1/2", label: "right-full top-1/2 mr-4 -translate-y-1/2 text-right" },
+    "left-1/2 top-[16%] -translate-x-1/2 -translate-y-1/2",
+    "left-[84%] top-1/2 -translate-x-1/2 -translate-y-1/2",
+    "left-1/2 top-[84%] -translate-x-1/2 -translate-y-1/2",
+    "left-[16%] top-1/2 -translate-x-1/2 -translate-y-1/2",
   ];
 
   return (
-    <div ref={ref} className="relative mx-auto aspect-square w-full max-w-[440px] lg:max-w-[470px]">
+    <div ref={ref} className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[500px]">
       {/* dashed outer ring with slowly travelling dots */}
       <div aria-hidden className="absolute inset-0 rounded-full border border-dashed border-indigo/25" />
       <div aria-hidden className="animate-orbit absolute inset-0" style={{ animationDuration: "58s" }}>
@@ -150,24 +149,23 @@ function PatientLoop() {
         </span>
       </div>
 
-      {/* four journey nodes with their outside labels */}
+      {/* four journey nodes; each keeps its stage name as a tooltip and an
+          accessible label, so the meaning survives without visible text */}
       {HC_HERO.orbit.map((n, i) => (
         <div
           key={n.title}
-          className={`absolute ${spots[i].node} transition-all duration-700 ease-soft ${
+          className={`absolute ${spots[i]} transition-all duration-700 ease-soft ${
             lit >= i ? "scale-100 opacity-100" : "scale-90 opacity-0"
           }`}
         >
-          <span className="relative grid size-[68px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]">
+          <span
+            title={`${n.title} ${n.sub}`}
+            aria-label={`${n.title} ${n.sub}`}
+            className="grid size-[68px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
+          >
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               {HERO_ICONS[n.icon]}
             </svg>
-            <span className={`absolute w-[170px] ${spots[i].label}`}>
-              <span className="block font-heading text-[13.5px] font-bold leading-tight tracking-[-0.01em]">
-                {n.title}
-              </span>
-              <span className="mt-1 block text-[12px] leading-snug text-graphite">{n.sub}</span>
-            </span>
           </span>
         </div>
       ))}
