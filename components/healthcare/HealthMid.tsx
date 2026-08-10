@@ -266,14 +266,17 @@ export function HealthAudiences() {
           </h2>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {HC_AUDIENCES.map((a) => (
             <article
               key={a.name}
-              className="flex h-full flex-col rounded-2xl border border-line border-l-2 border-l-transparent bg-surface p-6 transition-colors duration-150 hover:border-l-indigo"
+              className="group flex h-full flex-col rounded-3xl bg-surface p-7 shadow-[0_10px_30px_rgba(11,13,18,0.05)] transition-all duration-300 ease-soft hover:-translate-y-1.5 hover:scale-[1.015] hover:shadow-[0_24px_56px_rgba(99,91,255,0.14)]"
             >
-              <h3 className="font-heading text-[16px] font-bold tracking-[-0.01em]">{a.name}</h3>
-              <p className="mt-2.5 text-[13px] leading-relaxed text-graphite">{a.desc}</p>
+              <h3 className="font-heading text-[16.5px] font-bold tracking-[-0.01em] transition-colors duration-300 group-hover:text-indigo">
+                {a.name}
+              </h3>
+              <span className="mt-3 block h-0.5 w-7 rounded-full bg-indigo transition-all duration-300 ease-soft group-hover:w-12" />
+              <p className="mt-3 text-[13px] leading-relaxed text-graphite">{a.desc}</p>
             </article>
           ))}
         </div>
@@ -294,18 +297,21 @@ export function HealthTrust() {
           </h2>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {HC_TRUST.map((t, i) => (
-            <article key={t.title} className="flex h-full gap-5 rounded-2xl border border-line bg-surface p-7">
-              <span className="grid size-10 shrink-0 place-items-center rounded-full border border-indigo/25 font-heading text-[13px] font-bold tabular-nums text-indigo">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <h3 className="font-heading text-[16px] font-bold tracking-[-0.01em]">{t.title}</h3>
+        {/* A review workflow: the four controls run left to right as
+            connected steps, showing the order content passes through. */}
+        <div className="relative mt-12">
+          <span aria-hidden className="absolute left-[10%] right-[10%] top-6 hidden h-px bg-indigo/20 lg:block" />
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {HC_TRUST.map((t, i) => (
+              <div key={t.title} className="relative">
+                <span className="relative z-10 grid size-12 place-items-center rounded-2xl bg-gradient-to-b from-lilac to-lilac/40 font-heading text-[14px] font-bold tabular-nums text-indigo">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-5 font-heading text-[16px] font-bold leading-snug tracking-[-0.01em]">{t.title}</h3>
                 <p className="mt-2.5 text-[13px] leading-relaxed text-graphite">{t.desc}</p>
               </div>
-            </article>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

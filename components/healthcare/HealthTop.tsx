@@ -242,33 +242,54 @@ export function HealthSearchStages() {
           </div>
         </Reveal>
 
+        {/* The care-seeking journey reads as a vertical path: each stage is a
+            row on a drawn spine, moving from uncertainty toward an
+            appointment-ready search. An intent meter shows how close each
+            stage sits to a booking. */}
         <Reveal delay={80}>
           <div className="relative mt-12">
-            <span aria-hidden className="absolute left-[12%] right-[12%] top-[26px] hidden h-px bg-line lg:block" />
-            <span
-              aria-hidden
-              className="trend-bar absolute left-[12%] top-[26px] hidden h-px w-[76%] bg-indigo/50 lg:block"
-              style={{ "--bar-delay": "200ms" } as React.CSSProperties}
-            />
+            <span aria-hidden className="journey-line absolute bottom-8 left-[27px] top-8 w-px bg-indigo/25" />
 
-            <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            <ol className="grid gap-2">
               {HC_SEARCH_STAGES.stages.map((s, i) => (
-                <li key={s.name} className="reveal-item relative" style={{ transitionDelay: `${150 + i * 90}ms` }}>
-                  <span className="relative z-10 grid size-13 place-items-center rounded-full border border-indigo/25 bg-surface font-heading text-[15px] font-bold text-indigo">
+                <li
+                  key={s.name}
+                  className="reveal-item group relative rounded-2xl pl-[76px] pr-6 py-6 transition-colors duration-300 ease-soft hover:bg-surface"
+                  style={{ transitionDelay: `${150 + i * 110}ms` }}
+                >
+                  <span className="absolute left-[6px] top-6 z-10 grid size-11 place-items-center rounded-full border border-indigo/25 bg-surface font-heading text-[14px] font-bold text-indigo transition-all duration-300 ease-soft group-hover:border-indigo group-hover:bg-indigo group-hover:text-white">
                     {i + 1}
                   </span>
-                  <h3 className="mt-5 font-heading text-[16px] font-bold leading-snug tracking-[-0.01em]">{s.name}</h3>
 
-                  <div className="mt-3 flex items-center gap-2.5 rounded-xl border border-line bg-surface px-3 py-2.5">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.9" strokeLinecap="round" aria-hidden className="shrink-0">
-                      <circle cx="11" cy="11" r="6.5" />
-                      <path d="M15.8 15.8 20 20" />
-                    </svg>
-                    <span className="min-w-0 flex-1 truncate text-[12px] font-medium text-ink">{s.query}</span>
-                    <span aria-hidden className="animate-pulse h-3 w-px shrink-0 bg-ink/40" />
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                    <h3 className="font-heading text-[17px] font-bold tracking-[-0.01em]">{s.name}</h3>
+                    {/* intent meter: how close this stage is to an appointment */}
+                    <span className="flex items-center gap-2">
+                      <span aria-hidden className="flex gap-1">
+                        {[0, 1, 2, 3].map((b) => (
+                          <span
+                            key={b}
+                            className={`h-1.5 w-5 rounded-full ${b <= i ? "bg-indigo" : "bg-indigo/15"}`}
+                          />
+                        ))}
+                      </span>
+                      <span className="text-[11px] font-semibold text-graphite">
+                        {i === 3 ? "Appointment ready" : i === 0 ? "Early research" : "Rising intent"}
+                      </span>
+                    </span>
                   </div>
 
-                  <p className="mt-3 text-[13px] leading-relaxed text-graphite">{s.desc}</p>
+                  <div className="mt-3 grid gap-4 lg:grid-cols-[minmax(0,300px)_1fr] lg:items-start lg:gap-8">
+                    <div className="flex items-center gap-2.5 rounded-xl border border-line bg-ivory/70 px-3 py-2.5">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.9" strokeLinecap="round" aria-hidden className="shrink-0">
+                        <circle cx="11" cy="11" r="6.5" />
+                        <path d="M15.8 15.8 20 20" />
+                      </svg>
+                      <span className="min-w-0 flex-1 truncate text-[12px] font-medium text-ink">{s.query}</span>
+                      <span aria-hidden className="animate-pulse h-3 w-px shrink-0 bg-ink/40" />
+                    </div>
+                    <p className="text-[13.5px] leading-relaxed text-graphite">{s.desc}</p>
+                  </div>
                 </li>
               ))}
             </ol>
@@ -294,13 +315,18 @@ export function HealthDifferent() {
           </div>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {HC_DIFFERENT.cards.map((c) => (
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
+          {HC_DIFFERENT.cards.map((c, i) => (
             <article
               key={c.title}
-              className="flex h-full flex-col rounded-2xl border border-line border-t-2 border-t-indigo bg-surface p-7"
+              className="group flex h-full flex-col rounded-3xl bg-surface p-8 shadow-[0_10px_30px_rgba(11,13,18,0.05)] transition-all duration-300 ease-soft hover:-translate-y-1.5 hover:scale-[1.015] hover:shadow-[0_24px_56px_rgba(99,91,255,0.14)]"
             >
-              <h3 className="font-heading text-[16px] font-bold tracking-[-0.01em]">{c.title}</h3>
+              <span className="grid size-12 place-items-center rounded-2xl bg-gradient-to-b from-lilac to-lilac/40 font-heading text-[15px] font-bold tabular-nums text-indigo transition-transform duration-300 ease-soft group-hover:scale-110">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-5 font-heading text-[17px] font-bold tracking-[-0.01em] transition-colors duration-300 group-hover:text-indigo">
+                {c.title}
+              </h3>
               <p className="mt-3 text-[13.5px] leading-relaxed text-graphite">{c.desc}</p>
             </article>
           ))}

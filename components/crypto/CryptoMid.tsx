@@ -233,23 +233,36 @@ export function CryptoAudiences() {
           </h2>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {CRYPTO_AUDIENCES.map((a) => (
+        {/* Crypto audiences read as an index: hairline-divided rows with the
+            audience name held left and its detail right, so the section
+            scans differently from the healthcare card grid. */}
+        <div className="mt-10 grid border-t border-line">
+          {CRYPTO_AUDIENCES.map((a, i) => (
             <article
               key={a.name}
-              className="group flex h-full flex-col rounded-2xl border border-line border-l-2 border-l-transparent bg-surface p-6 transition-colors duration-150 hover:border-l-indigo"
+              className="group grid gap-3 border-b border-line py-7 transition-colors duration-300 ease-soft hover:bg-surface lg:grid-cols-[56px_0.8fr_1.2fr] lg:items-start lg:gap-8 lg:px-5"
             >
-              <h3 className="font-heading text-[16px] font-bold tracking-[-0.01em]">{a.name}</h3>
-              <p className="mt-2.5 flex-1 text-[13px] leading-relaxed text-graphite">{a.desc}</p>
-              {a.query && (
-                <p className="mt-4 inline-flex w-fit items-center gap-2 rounded-lg border border-line bg-ivory/70 px-3 py-1.5 text-[11.5px] font-medium text-ink">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="2" strokeLinecap="round" aria-hidden>
-                    <circle cx="11" cy="11" r="6.5" />
-                    <path d="M15.8 15.8 20 20" />
-                  </svg>
-                  {a.query}
-                </p>
-              )}
+              <span
+                aria-hidden
+                className="font-heading text-[13px] font-bold tabular-nums text-indigo/40 transition-colors duration-300 group-hover:text-indigo"
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="font-heading text-[17px] font-bold leading-snug tracking-[-0.01em] transition-colors duration-300 group-hover:text-indigo">
+                {a.name}
+              </h3>
+              <div>
+                <p className="text-[13.5px] leading-relaxed text-graphite">{a.desc}</p>
+                {a.query && (
+                  <p className="mt-3 inline-flex w-fit items-center gap-2 rounded-lg bg-ink-solid px-3 py-1.5 text-[11.5px] font-medium text-white/90">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--color-citron)" strokeWidth="2" strokeLinecap="round" aria-hidden>
+                      <circle cx="11" cy="11" r="6.5" />
+                      <path d="M15.8 15.8 20 20" />
+                    </svg>
+                    {a.query}
+                  </p>
+                )}
+              </div>
             </article>
           ))}
         </div>
@@ -270,19 +283,21 @@ export function CryptoTrust() {
           </h2>
         </Reveal>
 
-        <div className="relative mt-12">
-          <span aria-hidden className="absolute left-[10%] right-[10%] top-5 hidden h-px bg-line lg:block" />
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-            {CRYPTO_TRUST.map((t, i) => (
-              <div key={t.title} className="relative">
-                <span className="relative z-10 grid size-10 place-items-center rounded-full border border-indigo/25 bg-surface font-heading text-[13px] font-bold tabular-nums text-indigo">
-                  {String(i + 1).padStart(2, "0")}
+        {/* Crypto presents its trust controls as a 2x2 of quiet panels with
+            a rule above each title, rather than a connected sequence. */}
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          {CRYPTO_TRUST.map((t, i) => (
+            <article key={t.title} className="rounded-3xl bg-surface p-8 shadow-[0_10px_30px_rgba(11,13,18,0.05)]">
+              <div className="flex items-center gap-3">
+                <span className="h-0.5 w-8 rounded-full bg-indigo" />
+                <span className="font-heading text-[12px] font-bold uppercase tracking-[0.14em] text-indigo">
+                  Control {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-5 font-heading text-[16px] font-bold tracking-[-0.01em]">{t.title}</h3>
-                <p className="mt-2.5 text-[13px] leading-relaxed text-graphite">{t.desc}</p>
               </div>
-            ))}
-          </div>
+              <h3 className="mt-4 font-heading text-[17px] font-bold tracking-[-0.01em]">{t.title}</h3>
+              <p className="mt-3 text-[13.5px] leading-relaxed text-graphite">{t.desc}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>

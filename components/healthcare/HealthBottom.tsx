@@ -136,21 +136,35 @@ export function HealthMeasure() {
           </div>
         </Reveal>
 
-        <div className="mt-12 grid gap-4 lg:grid-cols-2">
+        {/* Reads as a monthly report sheet: two labelled blocks of rows, each
+            row a metric with its own definition. Deliberately plain, since
+            the section's argument is measurement honesty. */}
+        <div className="mt-12 grid gap-10">
           {groups.map((g, gi) => (
-            <Reveal key={g.key} variant={gi === 0 ? "left" : "right"} delay={gi * 80}>
-              <div className="h-full overflow-hidden rounded-3xl border border-line bg-surface">
-                <div className={`flex items-center gap-3 border-b border-line px-6 py-5 ${gi === 0 ? "bg-citron/15" : "bg-lilac/50"}`}>
+            <Reveal key={g.key} delay={gi * 80}>
+              <div>
+                <div className="flex items-center gap-3 border-b-2 border-ink/10 pb-3">
                   <span className={`size-2.5 rounded-full ${gi === 0 ? "bg-citron-deep" : "bg-indigo"}`} />
-                  <h3 className="font-heading text-[16px] font-bold tracking-[-0.01em]">{g.label}</h3>
+                  <h3 className="font-heading text-[15px] font-bold uppercase tracking-[0.08em]">{g.label}</h3>
+                  <span className="ml-auto text-[12px] font-medium text-graphite">
+                    {HC_METRICS.items.filter((m) => m.group === g.key).length} reported monthly
+                  </span>
                 </div>
-                <div>
+                <div className="grid md:grid-cols-2">
                   {HC_METRICS.items
                     .filter((m) => m.group === g.key)
                     .map((m, i) => (
-                      <div key={m.name} className={`px-6 py-4.5 ${i > 0 ? "border-t border-line" : ""}`}>
-                        <h4 className="font-heading text-[14.5px] font-bold tracking-[-0.01em]">{m.name}</h4>
-                        <p className="mt-1 text-[12.5px] leading-relaxed text-graphite">{m.desc}</p>
+                      <div
+                        key={m.name}
+                        className={`group flex gap-4 border-b border-line py-5 transition-colors duration-300 hover:bg-surface md:px-5 ${i % 2 === 0 ? "md:border-r" : ""}`}
+                      >
+                        <span
+                          className={`mt-1 h-8 w-1 shrink-0 rounded-full transition-all duration-300 ease-soft group-hover:h-10 ${gi === 0 ? "bg-citron-deep" : "bg-indigo"}`}
+                        />
+                        <div>
+                          <h4 className="font-heading text-[14.5px] font-bold tracking-[-0.01em]">{m.name}</h4>
+                          <p className="mt-1 text-[12.5px] leading-relaxed text-graphite">{m.desc}</p>
+                        </div>
                       </div>
                     ))}
                 </div>
@@ -229,20 +243,36 @@ export function HealthEngagements() {
           </h2>
         </Reveal>
 
+        {/* Comparison cards: the middle tier is raised and outlined so the
+            three read as options to weigh side by side. */}
         <Reveal delay={80}>
-          <div className="mt-12 grid overflow-hidden rounded-3xl border border-line bg-surface shadow-[0_18px_50px_rgba(11,13,18,0.06)] lg:grid-cols-3">
-            {HC_ENGAGEMENTS.map((e, i) => (
+          <div className="mt-12 grid items-start gap-5 lg:grid-cols-3">
+            {HC_ENGAGEMENTS.map((e) => (
               <div
                 key={e.title}
-                className={`relative flex flex-col p-8 ${i > 0 ? "border-t border-line lg:border-l lg:border-t-0" : ""} ${e.highlight ? "bg-lilac/40" : ""}`}
+                className={`group relative flex h-full flex-col rounded-3xl p-8 transition-all duration-300 ease-soft hover:-translate-y-1.5 ${
+                  e.highlight
+                    ? "border-2 border-indigo bg-surface shadow-[0_24px_60px_rgba(99,91,255,0.18)] lg:-mt-4 lg:pb-12"
+                    : "border border-line bg-surface shadow-[0_10px_30px_rgba(11,13,18,0.05)] hover:shadow-[0_24px_56px_rgba(99,91,255,0.12)]"
+                }`}
               >
-                {e.highlight && <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-indigo" />}
-                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-indigo">Best for · {e.forWho}</p>
-                <h3 className="mt-3 font-heading text-[19px] font-bold tracking-[-0.01em]">{e.title}</h3>
-                <p className="mt-3 flex-1 text-[13.5px] leading-relaxed text-graphite">{e.desc}</p>
+                {e.highlight && (
+                  <span className="absolute -top-3 left-8 rounded-full bg-indigo px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.1em] text-white">
+                    Most coordinated
+                  </span>
+                )}
+                <span className="inline-flex w-fit items-center rounded-full bg-lilac px-3 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.1em] text-indigo">
+                  {e.forWho}
+                </span>
+                <h3 className="mt-4 font-heading text-[20px] font-bold tracking-[-0.01em]">{e.title}</h3>
+                <span className="mt-3 block h-px w-full bg-line" />
+                <p className="mt-4 flex-1 text-[13.5px] leading-relaxed text-graphite">{e.desc}</p>
                 {e.link && (
-                  <a href={e.link.href} className="mt-6 text-[13px] font-semibold text-indigo underline decoration-indigo/30 underline-offset-2">
+                  <a href={e.link.href} className="mt-6 inline-flex w-fit items-center gap-2 text-[13px] font-semibold text-indigo">
                     {e.link.label}
+                    <span aria-hidden className="grid size-5 place-items-center rounded-full bg-indigo/10 transition-all duration-200 group-hover:bg-indigo group-hover:text-white">
+                      <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    </span>
                   </a>
                 )}
               </div>

@@ -260,42 +260,50 @@ export function CryptoSearchStages() {
           </div>
         </Reveal>
 
+        {/* Crypto reads as a query board: each stage is a card whose header
+            is the real user query in a terminal-style bar, with the stage
+            name as a label above it. Cards step down progressively to show
+            movement toward the buying decision. */}
         <Reveal delay={80}>
-          <div className="relative mt-12">
-            {/* connecting line, draws once on entry */}
-            <span aria-hidden className="absolute left-[12%] right-[12%] top-[26px] hidden h-px bg-line lg:block" />
-            <span
-              aria-hidden
-              className="trend-bar absolute left-[12%] top-[26px] hidden h-px w-[76%] bg-indigo/50 lg:block"
-              style={{ "--bar-delay": "200ms" } as React.CSSProperties}
-            />
-
-            <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-              {CRYPTO_SEARCH_STAGES.stages.map((s, i) => (
-                <li
-                  key={s.name}
-                  className="reveal-item relative"
-                  style={{ transitionDelay: `${150 + i * 80}ms` }}
-                >
-                  <span className="relative z-10 grid size-13 place-items-center rounded-full border border-indigo/25 bg-surface font-heading text-[15px] font-bold text-indigo">
-                    {i + 1}
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+            {CRYPTO_SEARCH_STAGES.stages.map((s, i) => (
+              <article
+                key={s.name}
+                className="reveal-item group flex h-full flex-col rounded-3xl bg-surface p-6 shadow-[0_10px_30px_rgba(11,13,18,0.05)] transition-all duration-300 ease-soft hover:-translate-y-1.5 hover:shadow-[0_24px_56px_rgba(99,91,255,0.14)] lg:mt-[var(--step)]"
+                style={
+                  {
+                    transitionDelay: `${150 + i * 80}ms`,
+                    "--step": `${i * 18}px`,
+                  } as React.CSSProperties
+                }
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-indigo">
+                    Stage {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-5 font-heading text-[16px] font-bold leading-snug tracking-[-0.01em]">{s.name}</h3>
+                  <span aria-hidden className="flex gap-1">
+                    {[0, 1, 2, 3].map((b) => (
+                      <span key={b} className={`size-1.5 rounded-full ${b <= i ? "bg-indigo" : "bg-indigo/15"}`} />
+                    ))}
+                  </span>
+                </div>
 
-                  {/* the example query as a search bar */}
-                  <div className="mt-3 flex items-center gap-2.5 rounded-xl border border-line bg-surface px-3 py-2.5">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.9" strokeLinecap="round" aria-hidden className="shrink-0">
-                      <circle cx="11" cy="11" r="6.5" />
-                      <path d="M15.8 15.8 20 20" />
-                    </svg>
-                    <span className="min-w-0 flex-1 truncate text-[12px] font-medium text-ink">{s.query}</span>
-                    <span aria-hidden className="animate-pulse h-3 w-px shrink-0 bg-ink/40" />
-                  </div>
+                {/* the real user query, in a dark query bar */}
+                <div className="mt-4 flex items-center gap-2.5 rounded-xl bg-ink-solid px-3 py-2.5 transition-shadow duration-300 group-hover:shadow-[0_0_0_3px_rgba(99,91,255,0.25)]">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-citron)" strokeWidth="2" strokeLinecap="round" aria-hidden className="shrink-0">
+                    <circle cx="11" cy="11" r="6.5" />
+                    <path d="M15.8 15.8 20 20" />
+                  </svg>
+                  <span className="min-w-0 flex-1 truncate text-[12px] font-medium text-white/90">{s.query}</span>
+                  <span aria-hidden className="animate-pulse h-3 w-px shrink-0 bg-white/60" />
+                </div>
 
-                  <p className="mt-3 text-[13px] leading-relaxed text-graphite">{s.desc}</p>
-                </li>
-              ))}
-            </ol>
+                <h3 className="mt-4 font-heading text-[15.5px] font-bold leading-snug tracking-[-0.01em] transition-colors duration-300 group-hover:text-indigo">
+                  {s.name}
+                </h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-graphite">{s.desc}</p>
+              </article>
+            ))}
           </div>
         </Reveal>
       </div>
@@ -315,14 +323,24 @@ export function CryptoDifferent() {
           </h2>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {CRYPTO_DIFFERENT.map((c) => (
+        {/* Crypto uses a wide 2x2 of dark-accent panels: each card carries a
+            large ghost keyword in the corner rather than a number chip. */}
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
+          {CRYPTO_DIFFERENT.map((c, i) => (
             <article
               key={c.title}
-              className="flex h-full flex-col rounded-2xl border border-line border-t-2 border-t-indigo bg-surface p-7"
+              className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-surface p-8 shadow-[0_10px_30px_rgba(11,13,18,0.05)] transition-all duration-300 ease-soft hover:-translate-y-1.5 hover:scale-[1.015] hover:shadow-[0_24px_56px_rgba(99,91,255,0.14)]"
             >
-              <h3 className="font-heading text-[16px] font-bold tracking-[-0.01em]">{c.title}</h3>
-              <p className="mt-3 text-[13.5px] leading-relaxed text-graphite">{c.desc}</p>
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -right-2 -top-5 font-heading text-[86px] font-extrabold leading-none tracking-[-0.04em] text-indigo/[0.07] transition-colors duration-300 group-hover:text-indigo/[0.13]"
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="relative font-heading text-[17px] font-bold tracking-[-0.01em] transition-colors duration-300 group-hover:text-indigo">
+                {c.title}
+              </h3>
+              <p className="relative mt-3 text-[13.5px] leading-relaxed text-graphite">{c.desc}</p>
             </article>
           ))}
         </div>
