@@ -28,6 +28,20 @@ export const HC_HERO = {
     "We work with medical practices, specialist clinics, multi-location healthcare groups and healthcare organizations where the standard for accuracy, trust and measured results has to be higher than an ordinary commercial SEO engagement.",
   primaryCta: { label: "Request a Healthcare SEO Audit", href: H_ROUTES.audit },
   secondaryCta: { label: "See How We Work", href: H_ROUTES.process },
+  /* Hero trust chips. "Privacy aware" rather than any HIPAA claim: the copy
+     on this page is explicit that we do not provide compliance guarantees. */
+  chips: [
+    { title: "Privacy aware", sub: "Measurement by design", icon: "shield" },
+    { title: "Patient focused", sub: "Enquiries, not just rankings", icon: "chart" },
+    { title: "Multi-location", sub: "Reported per branch", icon: "pin" },
+    { title: "Human reviewed", sub: "Before anything ships", icon: "check" },
+  ],
+  /* The three orbit nodes of the patient-acquisition loop. */
+  orbit: [
+    { title: "Patients search", sub: "for treatments and specialists", icon: "search" },
+    { title: "They find you", sub: "and book an appointment", icon: "calendar" },
+    { title: "Your practice grows", sub: "with qualified patients", icon: "trend" },
+  ],
 };
 
 /* Search should bring patients. */
