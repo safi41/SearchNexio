@@ -10,54 +10,82 @@ import {
   CRYPTO_DIFFERENT,
 } from "@/lib/crypto-seo-content";
 
-/* ---- Hero: copy left, a three-step acquisition flow right ----
-   The flow shows the outcome (search to service page to submitted form),
-   not the technology. It plays once when it enters view and then holds its
-   final state; reduced-motion users get the completed state immediately. */
+/* ---- Hero: copy and trust chips left, the acquisition loop right ----
+   Same ring construction as the healthcare hero, but the core and the four
+   nodes carry this page's own story: trust at the centre, and a loop from
+   search through evaluation and brand checks to qualified acquisition. */
 
-/* Types out a string once, then stops. */
-function useTypedOnce(text: string, start: boolean, speed = 55) {
-  const [shown, setShown] = useState("");
-  useEffect(() => {
-    if (!start) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setShown(text);
-      return;
-    }
-    let i = 0;
-    const id = setInterval(() => {
-      i += 1;
-      setShown(text.slice(0, i));
-      if (i >= text.length) clearInterval(id);
-    }, speed);
-    return () => clearInterval(id);
-  }, [text, start, speed]);
-  return shown;
-}
+/* Chip and node glyphs. Deliberately no coins, cubes or candlesticks. */
+const HERO_ICONS: Record<string, React.ReactNode> = {
+  shield: (
+    <g>
+      <path d="M12 3.5 5.5 6.2v5c0 3.7 2.6 6.3 6.5 7.6 3.9-1.3 6.5-3.9 6.5-7.6v-5Z" />
+      <path d="m9.3 11.7 2 2 3.5-3.9" />
+    </g>
+  ),
+  target: (
+    <g>
+      <circle cx="12" cy="12" r="7.5" />
+      <circle cx="12" cy="12" r="3.4" />
+      <circle cx="12" cy="12" r="0.6" />
+    </g>
+  ),
+  code: (
+    <g>
+      <path d="m8.5 9-3.5 3 3.5 3M15.5 9l3.5 3-3.5 3" />
+      <path d="m13.5 6-3 12" />
+    </g>
+  ),
+  chart: (
+    <g>
+      <path d="M4.5 19.5h15" />
+      <path d="M7.5 19.5v-5M12 19.5v-9m4.5 9v-6" />
+    </g>
+  ),
+  search: (
+    <g>
+      <circle cx="11" cy="11" r="6.2" />
+      <path d="M15.6 15.6 20 20" />
+    </g>
+  ),
+  compare: (
+    <g>
+      <rect x="3.5" y="5" width="7" height="14" rx="2" />
+      <rect x="13.5" y="5" width="7" height="14" rx="2" />
+      <path d="M6 9h2M6 12h2M16 9h2M16 12h2" />
+    </g>
+  ),
+  verify: (
+    <g>
+      <path d="M12 3.5 5.5 6.2v5c0 3.7 2.6 6.3 6.5 7.6 3.9-1.3 6.5-3.9 6.5-7.6v-5Z" />
+      <circle cx="12" cy="10.8" r="1.9" />
+      <path d="M9.2 16c.5-1.5 1.6-2.3 2.8-2.3s2.3.8 2.8 2.3" />
+    </g>
+  ),
+  trend: (
+    <g>
+      <path d="M4 17 9.5 11l3.5 3.5L20 7.5" />
+      <path d="M15 7.5h5V12" />
+    </g>
+  ),
+};
 
-function AcquisitionFlow() {
+function CryptoLoop() {
   const ref = useRef<HTMLDivElement>(null);
-  /* step 0 typing, 1 page appears, 2 form submitted */
-  const [step, setStep] = useState(-1);
+  const [lit, setLit] = useState(-1);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setStep(2);
+      setLit(3);
       return;
     }
     const io = new IntersectionObserver(
       (entries) => {
         if (!entries[0].isIntersecting) return;
         io.disconnect();
-        setStep(0);
-        const t1 = setTimeout(() => setStep(1), 1500);
-        const t2 = setTimeout(() => setStep(2), 2900);
-        return () => {
-          clearTimeout(t1);
-          clearTimeout(t2);
-        };
+        [0, 1, 2, 3].forEach((i) => setTimeout(() => setLit(i), 450 + i * 480));
       },
       { rootMargin: "0px 0px -15% 0px" }
     );
@@ -65,75 +93,78 @@ function AcquisitionFlow() {
     return () => io.disconnect();
   }, []);
 
-  const typed = useTypedOnce("crypto tax help", step >= 0);
+  /* node centres on the solid ring, at the four cardinal points */
+  const spots = [
+    "left-1/2 top-[16%] -translate-x-1/2 -translate-y-1/2",
+    "left-[84%] top-1/2 -translate-x-1/2 -translate-y-1/2",
+    "left-1/2 top-[84%] -translate-x-1/2 -translate-y-1/2",
+    "left-[16%] top-1/2 -translate-x-1/2 -translate-y-1/2",
+  ];
 
   return (
-    <div ref={ref} className="relative mx-auto w-full max-w-[520px]">
-      {/* soft indigo wash behind the stack */}
-      <div aria-hidden className="absolute inset-x-6 top-10 bottom-6 rounded-[2rem] bg-indigo/10 blur-3xl" />
-
-      <div className="relative grid gap-4">
-        {/* step 1: the search */}
-        <div className="rounded-2xl border border-line bg-surface p-4 shadow-[0_16px_40px_rgba(11,13,18,0.07)]">
-          <p className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-indigo">Step 1 · The search</p>
-          <div className="mt-3 flex items-center gap-3 rounded-xl border border-line bg-ivory/70 px-3.5 py-2.5">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--color-graphite)" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
-              <circle cx="11" cy="11" r="6.5" />
-              <path d="M15.8 15.8 20 20" />
-            </svg>
-            <span className="text-[13.5px] font-medium text-ink">
-              {typed}
-              {step === 0 && <span className="animate-pulse ml-0.5 inline-block h-3.5 w-px translate-y-0.5 bg-ink/70" />}
-            </span>
-          </div>
-        </div>
-
-        {/* connector */}
-        <div aria-hidden className="flex justify-center">
-          <svg width="16" height="18" viewBox="0 0 16 18" fill="none" className={`transition-opacity duration-500 ${step >= 1 ? "opacity-100" : "opacity-0"}`}>
-            <path d="M8 0v12M3.5 8 8 13l4.5-5" stroke="var(--color-indigo)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-
-        {/* step 2: the service page */}
-        <div className={`rounded-2xl border bg-surface p-4 transition-all duration-700 ease-soft ${step >= 1 ? "translate-y-0 border-indigo/30 opacity-100 shadow-[0_18px_44px_rgba(99,91,255,0.14)]" : "translate-y-3 border-line opacity-0"}`}>
-          <p className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-indigo">Step 2 · The service page</p>
-          <div className="mt-3 flex items-start gap-3">
-            <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-indigo to-indigo-deep text-white">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <rect x="4.5" y="3.5" width="15" height="17" rx="2.5" />
-                <path d="M8 8h8M8 11.5h8M8 15h4.5" />
-              </svg>
-            </span>
-            <div className="min-w-0 flex-1">
-              <span className="block h-2 w-2/3 rounded-full bg-ink/15" />
-              <span className="mt-2 block h-2 w-full rounded-full bg-ink/8" />
-              <span className="mt-2 block h-2 w-4/5 rounded-full bg-ink/8" />
-              <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-citron px-3 py-1 text-[11px] font-bold text-ink-solid">
-                Book a consultation
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* connector */}
-        <div aria-hidden className="flex justify-center">
-          <svg width="16" height="18" viewBox="0 0 16 18" fill="none" className={`transition-opacity duration-500 ${step >= 2 ? "opacity-100" : "opacity-0"}`}>
-            <path d="M8 0v12M3.5 8 8 13l4.5-5" stroke="var(--color-indigo)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-
-        {/* step 3: the qualified enquiry */}
-        <div className={`flex items-center gap-3.5 rounded-2xl border border-line bg-surface p-4 transition-all duration-700 ease-soft ${step >= 2 ? "translate-y-0 opacity-100 shadow-[0_18px_44px_rgba(11,13,18,0.08)]" : "translate-y-3 opacity-0"}`}>
-          <span className="grid size-10 shrink-0 place-items-center rounded-full bg-citron">
-            <svg width="18" height="18" viewBox="0 0 12 12" fill="none" aria-hidden><path d="m2.5 6.5 2.5 2.5 4.5-5" stroke="#0B0D12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-          </span>
-          <div>
-            <p className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-indigo">Step 3 · The outcome</p>
-            <p className="mt-0.5 font-heading text-[15px] font-bold tracking-[-0.01em]">Qualified enquiry received</p>
-          </div>
-        </div>
+    <div ref={ref} className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[500px]">
+      {/* dashed outer ring with slowly travelling dots */}
+      <div aria-hidden className="absolute inset-0 rounded-full border border-dashed border-indigo/25" />
+      <div aria-hidden className="animate-orbit absolute inset-0" style={{ animationDuration: "58s" }}>
+        <span className="absolute left-[82%] top-[10%] size-1.5 rounded-full bg-indigo/60" />
+        <span className="absolute left-[10%] top-[74%] size-1.5 rounded-full bg-indigo/45" />
+        <span className="absolute left-[74%] top-[88%] size-1.5 rounded-full bg-citron-deep/70" />
       </div>
+
+      {/* solid orbit ring the nodes sit on */}
+      <div aria-hidden className="absolute inset-[16%] rounded-full border border-indigo/45" />
+      <div aria-hidden className="animate-orbit-slow absolute inset-[16%]" style={{ animationDuration: "44s" }}>
+        <span className="absolute left-[6%] top-[24%] size-2 rounded-full bg-indigo" />
+        <span className="absolute left-[92%] top-[68%] size-2 rounded-full bg-indigo" />
+      </div>
+
+      {/* core: a verified-trust shield, the argument this page is built on */}
+      <div className="absolute left-1/2 top-1/2 grid size-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center">
+        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-indigo/10 blur-2xl" />
+        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(99,91,255,0.18)]">
+          <svg width="58%" height="58%" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <defs>
+              <linearGradient id="cr-shield" x1="4" y1="3" x2="20" y2="21" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#8F84FF" />
+                <stop offset="55%" stopColor="#635BFF" />
+                <stop offset="100%" stopColor="#4A43D9" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M12 2.6 4.4 5.8v6c0 4.5 3.1 7.7 7.6 9.2 4.5-1.5 7.6-4.7 7.6-9.2v-6Z"
+              fill="url(#cr-shield)"
+            />
+            <path
+              d="m8.6 12.1 2.4 2.4 4.5-4.9"
+              stroke="#ffffff"
+              strokeWidth="1.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
+          </svg>
+        </span>
+      </div>
+
+      {/* four loop nodes; names stay as tooltips and accessible labels */}
+      {CRYPTO_HERO.orbit.map((n, i) => (
+        <div
+          key={n.title}
+          className={`absolute ${spots[i]} transition-all duration-700 ease-soft ${
+            lit >= i ? "scale-100 opacity-100" : "scale-90 opacity-0"
+          }`}
+        >
+          <span
+            title={`${n.title} ${n.sub}`}
+            aria-label={`${n.title} ${n.sub}`}
+            className="grid size-[68px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
+          >
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              {HERO_ICONS[n.icon]}
+            </svg>
+          </span>
+        </div>
+      ))}
     </div>
   );
 }
@@ -147,33 +178,63 @@ export function CryptoHero() {
         className="grid-pattern absolute left-1/2 top-24 h-[440px] w-[760px] -translate-x-1/2 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_40%,#000_35%,transparent_75%)]"
       />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-6 pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-28">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-6 pb-20 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10 lg:pb-28">
         <div>
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full bg-lilac px-4 py-2 text-[12.5px] font-bold uppercase tracking-[0.1em] text-indigo">
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden>
-                <path d="M12 2c.4 5 5 9.6 10 10-5 .4-9.6 5-10 10-.4-5-5-9.6-10-10 5-.4 9.6-5 10-10Z" fill="currentColor" />
-              </svg>
-              {CRYPTO_HERO.eyebrow}
+            <span className="inline-flex items-center gap-2.5 rounded-full border border-indigo/20 bg-surface/80 px-4 py-2 text-[12.5px] font-bold uppercase tracking-[0.1em] text-indigo shadow-[0_2px_12px_rgba(99,91,255,0.08)]">
+              <span className="grid size-5 place-items-center rounded-full border border-indigo/30">
+                <svg width="10" height="10" viewBox="0 0 24 24" aria-hidden>
+                  <path d="M12 2c.4 5 5 9.6 10 10-5 .4-9.6 5-10 10-.4-5-5-9.6-10-10 5-.4 9.6-5 10-10Z" fill="currentColor" />
+                </svg>
+              </span>
+              Crypto SEO Services
             </span>
           </Reveal>
           <Reveal delay={60} duration={600}>
-            <h1 className="mt-6 font-heading text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[1.06] tracking-[-0.03em]">
+            <h1 className="mt-6 font-heading text-[clamp(2.5rem,5.2vw,4.1rem)] font-bold leading-[1.04] tracking-[-0.03em]">
               Crypto SEO
               <br />
-              <span className="text-indigo">Services</span>
+              <span className="relative inline-block text-indigo">
+                Services
+                <svg
+                  aria-hidden
+                  viewBox="0 0 240 14"
+                  preserveAspectRatio="none"
+                  className="absolute -bottom-2 left-0 h-3 w-full text-indigo/35"
+                >
+                  <path d="M2 10C52 3 150 2 238 6" stroke="currentColor" strokeWidth="3" strokeLinecap="round" fill="none" />
+                </svg>
+              </span>
             </h1>
           </Reveal>
           <Reveal delay={120} duration={600}>
-            <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-graphite">{CRYPTO_HERO.intro}</p>
+            <p className="mt-8 max-w-xl text-[16px] leading-relaxed text-graphite">{CRYPTO_HERO.intro}</p>
           </Reveal>
-          <Reveal delay={180} duration={600}>
-            <div className="mt-9 flex flex-wrap items-center gap-4">
+          {/* trust chips, divided by hairlines */}
+          <Reveal delay={180}>
+            <div className="mt-9 grid grid-cols-2 gap-y-6 sm:grid-cols-4">
+              {CRYPTO_HERO.chips.map((c, i) => (
+                <div key={c.title} className={`px-4 first:pl-0 ${i > 0 ? "border-l border-line" : ""}`}>
+                  <span className="grid size-10 place-items-center rounded-full bg-lilac text-indigo">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      {HERO_ICONS[c.icon]}
+                    </svg>
+                  </span>
+                  <span className="mt-3 block text-[13px] font-bold leading-tight">{c.title}</span>
+                  <span className="mt-1 block text-[12px] leading-snug text-graphite">{c.sub}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={240} duration={600}>
+            <div className="mt-10 flex flex-wrap items-center gap-4">
               <CtaLink href={CRYPTO_HERO.primaryCta.href}>{CRYPTO_HERO.primaryCta.label}</CtaLink>
               <CtaLink href={CRYPTO_HERO.secondaryCta.href} variant="ghost">{CRYPTO_HERO.secondaryCta.label}</CtaLink>
             </div>
           </Reveal>
-          <Reveal delay={240}>
+
+          <Reveal delay={300}>
             <p className="mt-9 flex max-w-lg items-start gap-3 border-t border-line pt-7 text-[13px] leading-relaxed text-graphite">
               <span aria-hidden className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-lilac text-indigo">
                 <svg width="11" height="11" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 3 4 6v5c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6l-7-3Z" /></svg>
@@ -184,7 +245,7 @@ export function CryptoHero() {
         </div>
 
         <Reveal variant="right" delay={120}>
-          <AcquisitionFlow />
+          <CryptoLoop />
         </Reveal>
       </div>
     </section>

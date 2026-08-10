@@ -27,6 +27,22 @@ export const CRYPTO_HERO = {
   secondaryCta: { label: "See How We Work", href: C_ROUTES.process },
   trust:
     "Built on direct experience in crypto tax, transaction reconciliation and other high-trust crypto service businesses.",
+  /* Hero trust chips. Each states something the page can stand behind. */
+  chips: [
+    { title: "High trust content", sub: "Sourced and reviewed", icon: "shield" },
+    { title: "Commercial intent", sub: "Not volume alone", icon: "target" },
+    { title: "Technical depth", sub: "dApps and docs portals", icon: "code" },
+    { title: "Tracked acquisition", sub: "Events, not just traffic", icon: "chart" },
+  ],
+  /* The four orbit nodes of the crypto acquisition loop, clockwise from
+     the top. Reflects this page's own journey: a user searches a problem,
+     compares options, checks the brand, then converts. */
+  orbit: [
+    { title: "Users search", sub: "problems, products and comparisons", icon: "search" },
+    { title: "They evaluate", sub: "your product and service pages", icon: "compare" },
+    { title: "Qualified acquisition", sub: "consultations, trials and signups", icon: "trend" },
+    { title: "They check the brand", sub: "reviews, founders and coverage", icon: "verify" },
+  ],
 };
 
 /* Search Should Drive Qualified Demand. */
