@@ -10,6 +10,7 @@ const LINKS = [
   { href: "/generative-engine-optimization/", label: "GEO" },
   { href: "/services/local-seo-services/", label: "Local SEO" },
   { href: "/industries/crypto-seo/", label: "Crypto" },
+  { href: "/industries/healthcare/", label: "Healthcare" },
 ];
 
 /* Sasico chrome: logo left, a floating pill bar carrying the links, and
