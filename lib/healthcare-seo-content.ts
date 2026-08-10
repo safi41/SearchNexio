@@ -36,11 +36,13 @@ export const HC_HERO = {
     { title: "Multi-location", sub: "Reported per branch", icon: "pin" },
     { title: "Human reviewed", sub: "Before anything ships", icon: "check" },
   ],
-  /* The three orbit nodes of the patient-acquisition loop. */
+  /* The four orbit nodes of the patient-acquisition loop, clockwise from
+     the top. Labels sit outside the ring on the node's own side. */
   orbit: [
-    { title: "Patients search", sub: "for treatments and specialists", icon: "search" },
-    { title: "They find you", sub: "and book an appointment", icon: "calendar" },
-    { title: "Your practice grows", sub: "with qualified patients", icon: "trend" },
+    { title: "Patients search", sub: "for treatments, specialists and locations", icon: "search", side: "top" },
+    { title: "They find you", sub: "and request appointments", icon: "calendar", side: "right" },
+    { title: "Your practice grows", sub: "with real calls, bookings and new patients", icon: "trend", side: "bottom" },
+    { title: "Stronger visibility", sub: "across search and maps", icon: "people", side: "left" },
   ],
 };
 

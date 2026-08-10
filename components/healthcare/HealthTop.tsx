@@ -46,6 +46,14 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
       <path d="M15.6 15.6 20 20" />
     </g>
   ),
+  people: (
+    <g>
+      <circle cx="9.5" cy="8.4" r="2.9" />
+      <circle cx="16" cy="9.2" r="2.3" />
+      <path d="M4 18.5c.5-3.3 2.6-5.2 5.5-5.2s5 1.9 5.5 5.2" />
+      <path d="M15.5 13.6c2.2.2 3.7 1.8 4.1 4.4" />
+    </g>
+  ),
   calendar: (
     <g>
       <rect x="4" y="5.5" width="16" height="14" rx="2.5" />
@@ -61,9 +69,10 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
   ),
 };
 
-/* The patient-acquisition loop: a brand core with three orbit nodes wired
-   to it. Nodes and their connector lines draw in one after another when the
-   hero enters view, then hold. Reduced motion shows the finished diagram. */
+/* The patient-acquisition loop: a heart core at the centre of a solid
+   orbit ring, with four white icon nodes at the cardinal points and their
+   labels outside the ring. Nodes light up clockwise once on entry, then
+   hold. Reduced motion shows the finished diagram. */
 function PatientLoop() {
   const ref = useRef<HTMLDivElement>(null);
   const [lit, setLit] = useState(-1);
@@ -72,14 +81,14 @@ function PatientLoop() {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setLit(2);
+      setLit(3);
       return;
     }
     const io = new IntersectionObserver(
       (entries) => {
         if (!entries[0].isIntersecting) return;
         io.disconnect();
-        [0, 1, 2].forEach((i) => setTimeout(() => setLit(i), 500 + i * 620));
+        [0, 1, 2, 3].forEach((i) => setTimeout(() => setLit(i), 450 + i * 480));
       },
       { rootMargin: "0px 0px -15% 0px" }
     );
@@ -87,80 +96,78 @@ function PatientLoop() {
     return () => io.disconnect();
   }, []);
 
-  /* Node centers as percentages of the square stage. Kept left of 70% so
-     each label has room to sit beside its node without clipping. */
+  /* Node centres sit on the solid ring at the four cardinal points; the
+     label sits just beyond the node on the same side. */
   const spots = [
-    { left: "62%", top: "15%" },
-    { left: "70%", top: "50%" },
-    { left: "62%", top: "85%" },
+    { node: "left-1/2 top-[16%] -translate-x-1/2 -translate-y-1/2", label: "bottom-full left-1/2 mb-4 -translate-x-1/2 text-center" },
+    { node: "left-[84%] top-1/2 -translate-x-1/2 -translate-y-1/2", label: "left-full top-1/2 ml-4 -translate-y-1/2 text-left" },
+    { node: "left-1/2 top-[84%] -translate-x-1/2 -translate-y-1/2", label: "top-full left-1/2 mt-4 -translate-x-1/2 text-center" },
+    { node: "left-[16%] top-1/2 -translate-x-1/2 -translate-y-1/2", label: "right-full top-1/2 mr-4 -translate-y-1/2 text-right" },
   ];
 
   return (
-    <div ref={ref} className="relative mx-auto aspect-square w-full max-w-[560px]">
-      {/* concentric orbit rings */}
-      <div aria-hidden className="absolute inset-0 rounded-full border border-indigo/12" />
-      <div aria-hidden className="absolute inset-[13%] rounded-full border border-indigo/15" />
-      <div aria-hidden className="absolute left-[8%] top-[14%] size-[52%] rounded-full border border-indigo/10" />
-      {/* travelling dots on the outer ring */}
-      <div aria-hidden className="animate-orbit absolute inset-0" style={{ animationDuration: "54s" }}>
-        <span className="absolute left-1/2 top-0 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo/60" />
-        <span className="absolute bottom-0 left-[30%] size-1.5 translate-y-1/2 rounded-full bg-indigo/40" />
-        <span className="absolute left-0 top-[46%] size-1.5 -translate-x-1/2 rounded-full bg-indigo/30" />
+    <div ref={ref} className="relative mx-auto aspect-square w-full max-w-[440px] lg:max-w-[470px]">
+      {/* dashed outer ring with slowly travelling dots */}
+      <div aria-hidden className="absolute inset-0 rounded-full border border-dashed border-indigo/25" />
+      <div aria-hidden className="animate-orbit absolute inset-0" style={{ animationDuration: "58s" }}>
+        <span className="absolute left-[82%] top-[10%] size-1.5 rounded-full bg-indigo/60" />
+        <span className="absolute left-[10%] top-[74%] size-1.5 rounded-full bg-indigo/45" />
+        <span className="absolute left-[74%] top-[88%] size-1.5 rounded-full bg-indigo/35" />
       </div>
 
-      {/* connectors from the core out to each node */}
-      <svg aria-hidden className="absolute inset-0 size-full" viewBox="0 0 100 100" fill="none">
-        {[
-          "M40 37 L58 18",
-          "M48 47 L66 50",
-          "M40 63 L58 82",
-        ].map((d, i) => (
-          <path
-            key={i}
-            d={d}
-            stroke="var(--color-indigo)"
-            strokeWidth="0.55"
-            strokeOpacity={lit >= i ? 0.55 : 0}
-            className="transition-[stroke-opacity] duration-700 ease-soft"
-          />
-        ))}
-      </svg>
+      {/* solid orbit ring the nodes sit on, with its own accent dots */}
+      <div aria-hidden className="absolute inset-[16%] rounded-full border border-indigo/45" />
+      <div aria-hidden className="animate-orbit-slow absolute inset-[16%]" style={{ animationDuration: "44s" }}>
+        <span className="absolute left-[6%] top-[24%] size-2 rounded-full bg-indigo" />
+        <span className="absolute left-[92%] top-[68%] size-2 rounded-full bg-indigo" />
+      </div>
 
-      {/* brand core: a dotted ring around the patients glyph */}
-      <div className="absolute left-[8%] top-[32%] grid size-[36%] place-items-center">
-        <span aria-hidden className="absolute inset-0 rounded-full bg-indigo/15 blur-2xl" />
-        <span
-          aria-hidden
-          className="absolute inset-0 rounded-full border-2 border-dotted border-indigo/45"
-        />
-        <span className="relative grid size-[78%] place-items-center rounded-full bg-surface shadow-[0_20px_50px_rgba(99,91,255,0.2)]">
-          <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-            <circle cx="9.5" cy="8.4" r="2.9" />
-            <circle cx="16" cy="9.2" r="2.3" />
-            <path d="M4 18.5c.5-3.3 2.6-5.2 5.5-5.2s5 1.9 5.5 5.2" />
-            <path d="M15.5 13.6c2.2.2 3.7 1.8 4.1 4.4" />
+      {/* heart core on a soft white disc */}
+      <div className="absolute left-1/2 top-1/2 grid size-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center">
+        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-indigo/10 blur-2xl" />
+        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(99,91,255,0.18)]">
+          <svg width="58%" height="58%" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <defs>
+              <linearGradient id="hc-heart" x1="4" y1="3" x2="20" y2="21" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#8F84FF" />
+                <stop offset="55%" stopColor="#635BFF" />
+                <stop offset="100%" stopColor="#4A43D9" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M12 20.8C6.7 17 3.4 13.6 3.4 9.7a4.9 4.9 0 0 1 8.6-3.1 4.9 4.9 0 0 1 8.6 3.1c0 3.9-3.3 7.3-8.6 11.1Z"
+              fill="url(#hc-heart)"
+            />
+            <path
+              d="M6.4 11.4h2.8l1.3-2.6 1.9 5 1.3-2.4h3.1"
+              stroke="#ffffff"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
           </svg>
         </span>
       </div>
 
-      {/* the three journey nodes */}
+      {/* four journey nodes with their outside labels */}
       {HC_HERO.orbit.map((n, i) => (
         <div
           key={n.title}
-          className={`absolute flex -translate-y-1/2 items-center gap-3.5 transition-all duration-700 ease-soft ${
-            lit >= i ? "translate-x-0 opacity-100" : "translate-x-3 opacity-0"
+          className={`absolute ${spots[i].node} transition-all duration-700 ease-soft ${
+            lit >= i ? "scale-100 opacity-100" : "scale-90 opacity-0"
           }`}
-          style={spots[i]}
         >
-          <span className="relative grid size-[62px] shrink-0 place-items-center rounded-full border border-indigo/25 bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.16)]">
-            <span aria-hidden className="absolute inset-[-7px] rounded-full border border-dashed border-indigo/25" />
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <span className="relative grid size-[68px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               {HERO_ICONS[n.icon]}
             </svg>
-          </span>
-          <span className="whitespace-nowrap">
-            <span className="block font-heading text-[14.5px] font-bold tracking-[-0.01em]">{n.title}</span>
-            <span className="mt-0.5 block text-[12.5px] leading-snug text-graphite">{n.sub}</span>
+            <span className={`absolute w-[170px] ${spots[i].label}`}>
+              <span className="block font-heading text-[13.5px] font-bold leading-tight tracking-[-0.01em]">
+                {n.title}
+              </span>
+              <span className="mt-1 block text-[12px] leading-snug text-graphite">{n.sub}</span>
+            </span>
           </span>
         </div>
       ))}
@@ -186,7 +193,7 @@ export function HealthHero() {
                   <path d="M12 6.5v11M6.5 12h11" />
                 </svg>
               </span>
-              {HC_HERO.eyebrow}
+              Healthcare SEO Services
             </span>
           </Reveal>
 
@@ -210,23 +217,27 @@ export function HealthHero() {
           </Reveal>
 
           <Reveal delay={120} duration={600}>
-            <p className="mt-8 max-w-xl text-[16px] leading-relaxed text-graphite">{HC_HERO.intro}</p>
+            <p className="mt-8 max-w-xl text-[16px] leading-relaxed text-graphite">
+              {HC_HERO.intro.replace(" actual patient growth.", " ")}
+              <span className="font-medium text-indigo">actual patient growth</span>.
+            </p>
           </Reveal>
 
           {/* trust chips, divided by hairlines */}
           <Reveal delay={180}>
-            <div className="mt-9 grid gap-x-6 gap-y-5 sm:grid-cols-2">
-              {HC_HERO.chips.map((c) => (
-                <div key={c.title} className="flex items-center gap-3">
-                  <span className="grid size-9 shrink-0 place-items-center rounded-full bg-lilac text-indigo">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <div className="mt-9 grid grid-cols-2 gap-y-6 sm:grid-cols-4">
+              {HC_HERO.chips.map((c, i) => (
+                <div
+                  key={c.title}
+                  className={`px-4 first:pl-0 ${i > 0 ? "border-l border-line" : ""}`}
+                >
+                  <span className="grid size-10 place-items-center rounded-full bg-lilac text-indigo">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                       {HERO_ICONS[c.icon]}
                     </svg>
                   </span>
-                  <span className="min-w-0">
-                    <span className="block whitespace-nowrap text-[12.5px] font-bold leading-tight">{c.title}</span>
-                    <span className="mt-0.5 block text-[11.5px] leading-tight text-graphite">{c.sub}</span>
-                  </span>
+                  <span className="mt-3 block text-[13px] font-bold leading-tight">{c.title}</span>
+                  <span className="mt-1 block text-[12px] leading-snug text-graphite">{c.sub}</span>
                 </div>
               ))}
             </div>
