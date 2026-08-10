@@ -333,11 +333,11 @@ export function CryptoDifferent() {
             >
               <span
                 aria-hidden
-                className="pointer-events-none absolute -right-2 -top-5 font-heading text-[86px] font-extrabold leading-none tracking-[-0.04em] text-indigo/[0.07] transition-colors duration-300 group-hover:text-indigo/[0.13]"
+                className="pointer-events-none absolute right-7 top-6 font-heading text-[42px] font-extrabold leading-none tracking-[-0.03em] text-indigo/[0.12] transition-colors duration-300 group-hover:text-indigo/25"
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="relative font-heading text-[17px] font-bold tracking-[-0.01em] transition-colors duration-300 group-hover:text-indigo">
+              <h3 className="relative max-w-[75%] font-heading text-[17px] font-bold tracking-[-0.01em] transition-colors duration-300 group-hover:text-indigo">
                 {c.title}
               </h3>
               <p className="relative mt-3 text-[13.5px] leading-relaxed text-graphite">{c.desc}</p>
