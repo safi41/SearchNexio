@@ -92,6 +92,10 @@
 
 html {
   scroll-behavior: smooth;
+  /* The body safety net below only holds if html clips too: with
+     overflow-x on body alone the value propagates to the viewport and
+     the page still scrolls sideways. */
+  overflow-x: clip;
 }
 
 body {
