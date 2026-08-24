@@ -21,11 +21,12 @@ import {
    rockets or candlestick charts, per the client's visual brief. */
 const HERO_ICONS: Record<string, React.ReactNode> = {
   /* --- chip glyphs --- */
-  /* shielded ledger: high trust content, sourced and reviewed */
+  /* document: high trust content, sourced and reviewed */
   shield: (
     <g>
-      <path d="M12 3.4 5.6 6v4.9c0 3.6 2.5 6.2 6.4 7.5 3.9-1.3 6.4-3.9 6.4-7.5V6Z" />
-      <path d="M9.3 9.4h5.4M9.3 12.1h5.4M9.3 14.8h3.2" />
+      <path d="M13.6 3.2H7.4a2.2 2.2 0 0 0-2.2 2.2v13.2a2.2 2.2 0 0 0 2.2 2.2h9.2a2.2 2.2 0 0 0 2.2-2.2V8.4Z" />
+      <path d="M13.6 3.2v5.2h5.2" />
+      <path d="M8.6 12.6h6.8M8.6 16.2h4.4" />
     </g>
   ),
   /* target: commercial intent, not volume alone */
@@ -36,18 +37,20 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
       <circle cx="12" cy="12" r="0.6" />
     </g>
   ),
-  /* code brackets: dApps, docs portals, technical depth */
+  /* magnifier: technical depth across dApps and docs portals */
   code: (
     <g>
-      <path d="m8.5 9-3.5 3 3.5 3M15.5 9l3.5 3-3.5 3" />
-      <path d="m13.5 6-3 12" />
+      <circle cx="10.8" cy="10.8" r="6.4" />
+      <path d="m15.6 15.6 4.4 4.4" />
     </g>
   ),
-  /* tracked events: acquisition measured as discrete events */
+  /* bar chart with arrow: acquisition tracked as events */
   chart: (
     <g>
-      <path d="M4.5 19.5h15" />
-      <path d="M7.5 19.5v-5M12 19.5v-9m4.5 9v-6" />
+      <path d="M4 19.5h16" />
+      <path d="M7 19.5v-5.2M11.4 19.5v-8.4M15.8 19.5v-6.2" />
+      <path d="m6.6 10.8 4.8-4 3.4 2.8 4.6-4.6" />
+      <path d="M15.6 4.8h3.8v3.8" />
     </g>
   ),
 
@@ -117,19 +120,20 @@ function CryptoLoop() {
   }, []);
 
   /* node centres on the solid ring, at the four cardinal points */
-  /* five nodes, 72 degrees apart on the ring, starting at the top */
+  /* Five nodes, 72 degrees apart on the solid ring. Positions are
+     50% + 38% * (cos, sin) of the angle, starting at the top. */
   const spots = [
-    "left-1/2 top-[16%] -translate-x-1/2 -translate-y-1/2",
-    "left-[82.3%] top-[39.5%] -translate-x-1/2 -translate-y-1/2",
-    "left-[70%] top-[77.5%] -translate-x-1/2 -translate-y-1/2",
-    "left-[30%] top-[77.5%] -translate-x-1/2 -translate-y-1/2",
-    "left-[17.7%] top-[39.5%] -translate-x-1/2 -translate-y-1/2",
+    "left-1/2 top-[12%] -translate-x-1/2 -translate-y-1/2",
+    "left-[86.1%] top-[38.3%] -translate-x-1/2 -translate-y-1/2",
+    "left-[72.3%] top-[80.7%] -translate-x-1/2 -translate-y-1/2",
+    "left-[27.7%] top-[80.7%] -translate-x-1/2 -translate-y-1/2",
+    "left-[13.9%] top-[38.3%] -translate-x-1/2 -translate-y-1/2",
   ];
 
   return (
     <div ref={ref} className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[500px]">
       {/* dashed outer ring with slowly travelling dots */}
-      <div aria-hidden className="absolute inset-0 rounded-full border border-dashed border-indigo/25" />
+      <div aria-hidden className="absolute inset-[2%] rounded-full border border-dashed border-indigo/25" />
       <div aria-hidden className="animate-orbit absolute inset-0" style={{ animationDuration: "58s" }}>
         <span className="absolute left-[82%] top-[10%] size-1.5 rounded-full bg-indigo/60" />
         <span className="absolute left-[10%] top-[74%] size-1.5 rounded-full bg-indigo/45" />
@@ -137,8 +141,8 @@ function CryptoLoop() {
       </div>
 
       {/* solid orbit ring the nodes sit on */}
-      <div aria-hidden className="absolute inset-[16%] rounded-full border border-indigo/45" />
-      <div aria-hidden className="animate-orbit-slow absolute inset-[16%]" style={{ animationDuration: "44s" }}>
+      <div aria-hidden className="absolute inset-[12%] rounded-full border border-indigo/40" />
+      <div aria-hidden className="animate-orbit-slow absolute inset-[12%]" style={{ animationDuration: "44s" }}>
         <span className="absolute left-[6%] top-[24%] size-2 rounded-full bg-indigo" />
         <span className="absolute left-[92%] top-[68%] size-2 rounded-full bg-indigo" />
       </div>
@@ -147,29 +151,30 @@ function CryptoLoop() {
       <div className="absolute left-1/2 top-1/2 grid size-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center">
         <span aria-hidden className="absolute inset-[-14%] rounded-full bg-indigo/10 blur-2xl" />
         <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(99,91,255,0.18)]">
-          <svg width="54%" height="54%" viewBox="0 0 24 24" fill="none" aria-hidden>
-            <defs>
-              <linearGradient id="cr-core" x1="3" y1="3" x2="21" y2="19" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#8F84FF" />
-                <stop offset="55%" stopColor="#635BFF" />
-                <stop offset="100%" stopColor="#4A43D9" />
-              </linearGradient>
-            </defs>
-            {/* monitor: the reporting surface the whole loop feeds */}
-            <rect x="2.2" y="3.4" width="19.6" height="13.4" rx="2.6" fill="url(#cr-core)" />
-            <path d="M9 20.6h6M12 16.8v3.8" stroke="url(#cr-core)" strokeWidth="1.9" strokeLinecap="round" />
-            {/* trend line inside the screen */}
-            <path
-              d="m5.8 12.6 3.3-3.4 2.4 2.3 4.6-4.7"
-              stroke="#ffffff"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
+          <svg width="46%" height="46%" viewBox="0 0 48 44" fill="none" aria-hidden>
+            {/* outlined monitor: the reporting surface the loop feeds */}
+            <rect
+              x="2" y="2" width="44" height="32" rx="4"
+              stroke="var(--color-indigo)" strokeWidth="2.6" fill="none"
             />
-            {/* magnifier over the trend, the search half of the story */}
-            <circle cx="14.6" cy="12.1" r="2.9" stroke="#ffffff" strokeWidth="1.5" fill="none" />
-            <path d="m16.8 14.3 2 2" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" />
+            <path
+              d="M18 41.4h12M24 34v7.4"
+              stroke="var(--color-indigo)" strokeWidth="2.6" strokeLinecap="round"
+            />
+            {/* trend line climbing across the screen */}
+            <path
+              d="m9 24.6 7.4-7.6 5 4.8 9.4-9.6"
+              stroke="var(--color-indigo)" strokeWidth="2.6"
+              strokeLinecap="round" strokeLinejoin="round" fill="none"
+            />
+            <path
+              d="M25.4 12.2h5.8V18"
+              stroke="var(--color-indigo)" strokeWidth="2.6"
+              strokeLinecap="round" strokeLinejoin="round" fill="none"
+            />
+            {/* magnifier reading the trend */}
+            <circle cx="30.6" cy="24.4" r="5.6" stroke="var(--color-indigo)" strokeWidth="2.6" fill="var(--color-surface)" />
+            <path d="m34.8 28.6 4.4 4.4" stroke="var(--color-indigo)" strokeWidth="2.6" strokeLinecap="round" />
           </svg>
         </span>
       </div>
