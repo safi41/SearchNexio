@@ -69,22 +69,22 @@ export const CRYPTO_SEARCH_STAGES = {
     {
       name: "Problems and use cases",
       query: "fix Koinly transactions",
-      desc: "Users search for what they want to accomplish, not for what the product is called. The gap between product vocabulary and user intent language is often where the most valuable organic acquisition sits.",
+      desc: "Users search for what they want to accomplish, not for what the product is called. Fix Koinly transactions. Crypto tax help. Stablecoin payment API. Blockchain analytics for compliance. The gap between product vocabulary and user intent language is often where the most valuable organic acquisition sits.",
     },
     {
       name: "Products and services",
       query: "crypto tax accountant",
-      desc: "Product-selection searches sit close to conversion. A user typing these has already decided they need something and is now evaluating options.",
+      desc: "Product-selection searches sit close to conversion. Crypto tax accountant. Crypto reconciliation service. Best hardware wallet for long-term storage. A user typing these has already decided they need something and is now evaluating options.",
     },
     {
       name: "Comparisons and alternatives",
       query: "best crypto tax software",
-      desc: "These searches happen when a user is actively comparing options. Appearing in them means being in the consideration set at the moment the decision is made.",
+      desc: "Best crypto tax software. Koinly alternatives. Crypto exchange with lowest fees. These searches happen when a user is actively comparing options. Appearing in them means being in the consideration set at the moment the decision is made.",
     },
     {
       name: "Brand and trust searches",
       query: "[brand] reviews",
-      desc: "After discovering a crypto product, many users search the brand before committing. These branded research searches are part of the acquisition funnel, not a vanity metric. What appears in those results affects conversion.",
+      desc: "After discovering a crypto product, many users search the brand before committing, whether that means connecting a wallet, depositing funds, or sharing financial data. Brand reviews, brand safe, brand scam, founder name. These branded research searches are part of the acquisition funnel, not a vanity metric. What appears in those results affects conversion.",
     },
   ],
 };
@@ -211,7 +211,7 @@ export const CRYPTO_AUDIENCES = [
   },
   {
     name: "Reconciliation and accounting",
-    desc: "Transaction reconciliation and data repair services are found through problem-based searches. Building service pages and supporting content around those user-language queries, not around the technical description of the work, determines whether the business is found when those problems are being actively searched.",
+    desc: "Transaction reconciliation and data repair services are found through problem-based searches: fix Koinly transactions, missing crypto cost basis, reconcile DeFi transactions. Building service pages and supporting content around those user-language queries, not around the technical description of the work, determines whether the business is found when those problems are being actively searched.",
     query: "fix Koinly transactions",
   },
   {
@@ -220,7 +220,7 @@ export const CRYPTO_AUDIENCES = [
   },
   {
     name: "Wallet and payment products",
-    desc: "Wallet and crypto payment products compete in comparison-heavy environments. Visibility for comparison searches, use-case queries, and alternative searches is often more commercially valuable than ranking for the category name alone. Product pages built around what the user wants to accomplish convert better than pages built around technical specifications.",
+    desc: "Wallet and crypto payment products compete in comparison-heavy environments. Visibility for comparison searches, use-case queries, and alternative searches is often more commercially valuable than ranking for the category name alone. Product pages built around what the user wants to accomplish, send USDC internationally, accept crypto payments on Shopify, convert better than pages built around technical specifications.",
     query: "accept crypto payments on Shopify",
   },
   {
