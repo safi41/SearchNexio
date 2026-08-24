@@ -19,36 +19,51 @@ import {
    service, with a disconnected subdomain highlighted as the problem area. */
 function ArchitectureDiagram() {
   return (
-    <figure className="mt-6 rounded-2xl border border-line bg-ivory/60 p-6">
-      <svg viewBox="0 0 420 190" className="w-full" fill="none" aria-hidden>
-        {/* marketing site */}
-        <rect x="14" y="70" width="104" height="46" rx="8" fill="var(--color-surface)" stroke="var(--color-indigo)" strokeWidth="1.4" />
-        <text x="66" y="90" textAnchor="middle" className="fill-ink" style={{ fontSize: 11, fontWeight: 700 }}>Marketing site</text>
-        <text x="66" y="105" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>crawled</text>
+    <figure className="mt-6 rounded-2xl border border-line bg-ivory/50 px-6 py-7">
+      <svg viewBox="0 0 460 208" className="w-full" fill="none" aria-hidden>
+        {/* crawl paths drawn first so the boxes sit on top of them */}
+        {/* marketing site up to docs portal */}
+        <path d="M136 88 C176 88 176 42 200 42" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.75" />
+        {/* marketing site down to asset pages */}
+        <path d="M136 116 C176 116 176 162 200 162" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.75" />
+        {/* marketing site straight across toward the app subdomain */}
+        <path d="M136 102 H318" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.75" />
+
+        {/* the break: crawl cannot reach the app subdomain */}
+        <path
+          d="m330 94 12 16M342 94l-12 16"
+          stroke="var(--color-warn)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+
+        {/* marketing site, the crawl entry point */}
+        <rect x="20" y="80" width="116" height="44" rx="9" fill="var(--color-surface)" stroke="var(--color-indigo)" strokeWidth="1.5" />
+        <text x="78" y="99" textAnchor="middle" className="fill-ink" style={{ fontSize: 11.5, fontWeight: 700 }}>Marketing site</text>
+        <text x="78" y="113" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>crawled</text>
 
         {/* docs portal */}
-        <rect x="158" y="12" width="104" height="46" rx="8" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.4" />
-        <text x="210" y="32" textAnchor="middle" className="fill-ink" style={{ fontSize: 11, fontWeight: 700 }}>Docs portal</text>
-        <text x="210" y="47" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>crawled</text>
+        <rect x="200" y="20" width="116" height="44" rx="9" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.5" />
+        <text x="258" y="39" textAnchor="middle" className="fill-ink" style={{ fontSize: 11.5, fontWeight: 700 }}>Docs portal</text>
+        <text x="258" y="53" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>crawled</text>
 
         {/* asset pages */}
-        <rect x="158" y="128" width="104" height="46" rx="8" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.4" />
-        <text x="210" y="148" textAnchor="middle" className="fill-ink" style={{ fontSize: 11, fontWeight: 700 }}>Asset pages</text>
-        <text x="210" y="163" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>crawled</text>
+        <rect x="200" y="140" width="116" height="44" rx="9" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.5" />
+        <text x="258" y="159" textAnchor="middle" className="fill-ink" style={{ fontSize: 11.5, fontWeight: 700 }}>Asset pages</text>
+        <text x="258" y="173" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>crawled</text>
 
-        {/* app subdomain, the problem area */}
-        <rect x="302" y="70" width="104" height="46" rx="8" fill="rgba(194,65,12,0.06)" stroke="var(--color-warn)" strokeWidth="1.4" strokeDasharray="5 4" />
-        <text x="354" y="90" textAnchor="middle" className="fill-ink" style={{ fontSize: 11, fontWeight: 700 }}>App subdomain</text>
-        <text x="354" y="105" textAnchor="middle" style={{ fontSize: 9.5, fill: "var(--color-warn)" }}>not reachable</text>
-
-        {/* crawl paths */}
-        <path d="M118 88 H150" stroke="var(--color-indigo)" strokeWidth="1.4" />
-        <path d="M118 84 C138 84 140 40 154 36" stroke="var(--color-indigo)" strokeWidth="1.4" />
-        <path d="M118 100 C138 100 140 148 154 152" stroke="var(--color-indigo)" strokeWidth="1.4" />
-        <path d="M266 93 H296" stroke="var(--color-warn)" strokeWidth="1.4" strokeDasharray="5 4" />
-        <path d="M275 86 l10 14M285 86 l-10 14" stroke="var(--color-warn)" strokeWidth="1.5" strokeLinecap="round" />
+        {/* app subdomain: the highlighted problem area */}
+        <rect
+          x="352" y="80" width="116" height="44" rx="9"
+          fill="rgba(194,65,12,0.05)"
+          stroke="var(--color-warn)"
+          strokeWidth="1.5"
+          strokeDasharray="6 4"
+        />
+        <text x="410" y="99" textAnchor="middle" className="fill-ink" style={{ fontSize: 11.5, fontWeight: 700 }}>App subdomain</text>
+        <text x="410" y="113" textAnchor="middle" style={{ fontSize: 9.5, fill: "var(--color-warn)" }}>not reachable</text>
       </svg>
-      <figcaption className="mt-3 text-[11.5px] text-graphite">Illustrative architecture example.</figcaption>
+      <figcaption className="mt-4 text-[11.5px] text-graphite">Illustrative architecture example.</figcaption>
     </figure>
   );
 }
