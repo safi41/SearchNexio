@@ -51,38 +51,44 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
     </g>
   ),
 
-  /* --- orbit node glyphs, one per acquisition stage --- */
-  /* 1. Users search: a magnifier reading a transaction row */
-  search: (
-    <g>
-      <circle cx="10.6" cy="10.6" r="6.4" />
-      <path d="m15.4 15.4 4.4 4.4" />
-      <path d="M7.7 10.6h5.8M7.7 8.1h5.8M7.7 13.1h3.4" />
-    </g>
-  ),
-  /* 2. They evaluate: a ledger of line entries being compared */
-  compare: (
-    <g>
-      <rect x="3.4" y="3.6" width="17.2" height="16.8" rx="2.4" />
-      <path d="M3.4 8.1h17.2" />
-      <path d="M7 11.6h6.4M7 15.1h4.4" />
-      <path d="m15.6 14.6 1.6 1.6 3-3.1" />
-    </g>
-  ),
-  /* 3. Qualified acquisition: a signed record, the conversion event */
+  /* --- orbit node glyphs --- */
+  /* rising bar chart: visibility growth on priority searches */
   trend: (
     <g>
-      <path d="M6.2 2.9h7.4l4.4 4.4v10.6a2.4 2.4 0 0 1-2.4 2.4H6.2a2.4 2.4 0 0 1-2.4-2.4V5.3a2.4 2.4 0 0 1 2.4-2.4Z" />
-      <path d="M13.4 2.9v4.6h4.6" />
-      <path d="m7.9 14.4 2.2 2.2 4.2-4.6" />
+      <path d="M4 19.5h16" />
+      <path d="M7 19.5v-5.5M11.4 19.5v-9M15.8 19.5v-6.5M20 19.5V8" />
+      <path d="m6.5 10.5 5-4 3.4 3 4.6-4.8" />
+      <path d="M15.4 4.4h4.2v4.2" />
     </g>
   ),
-  /* 4. They check the brand: a verified badge, branded due diligence */
-  verify: (
+  /* document with pen: content briefs, sourced and reviewed */
+  doc: (
     <g>
-      <path d="M12 2.6 4.6 5.7v5.6c0 4.2 3 7.2 7.4 8.7 4.4-1.5 7.4-4.5 7.4-8.7V5.7Z" />
-      <circle cx="12" cy="10.2" r="2.1" />
-      <path d="M8.7 16.1c.6-1.8 1.9-2.7 3.3-2.7s2.7.9 3.3 2.7" />
+      <path d="M13.4 3.2H7a2.3 2.3 0 0 0-2.3 2.3v13a2.3 2.3 0 0 0 2.3 2.3h7.2" />
+      <path d="M8.3 8h5.6M8.3 11.6h4" />
+      <path d="m14.8 16.6 5.1-5.1 2.1 2.1-5.1 5.1-2.7.6Z" />
+    </g>
+  ),
+  /* globe: international markets */
+  globe: (
+    <g>
+      <circle cx="12" cy="12" r="8.4" />
+      <path d="M3.6 12h16.8" />
+      <path d="M12 3.6c2.6 2.4 4 5.3 4 8.4s-1.4 6-4 8.4c-2.6-2.4-4-5.3-4-8.4s1.4-6 4-8.4Z" />
+    </g>
+  ),
+  /* chain link: authority and third-party references */
+  link: (
+    <g>
+      <path d="M10.2 13.8a3.9 3.9 0 0 0 5.7.3l2.6-2.6a3.9 3.9 0 1 0-5.5-5.5l-1.5 1.5" />
+      <path d="M13.8 10.2a3.9 3.9 0 0 0-5.7-.3l-2.6 2.6a3.9 3.9 0 1 0 5.5 5.5l1.5-1.5" />
+    </g>
+  ),
+  /* magnifier: search research */
+  search: (
+    <g>
+      <circle cx="10.8" cy="10.8" r="6.4" />
+      <path d="m15.6 15.6 4.4 4.4" />
     </g>
   ),
 };
@@ -95,14 +101,14 @@ function CryptoLoop() {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setLit(3);
+      setLit(4);
       return;
     }
     const io = new IntersectionObserver(
       (entries) => {
         if (!entries[0].isIntersecting) return;
         io.disconnect();
-        [0, 1, 2, 3].forEach((i) => setTimeout(() => setLit(i), 450 + i * 480));
+        [0, 1, 2, 3, 4].forEach((i) => setTimeout(() => setLit(i), 450 + i * 420));
       },
       { rootMargin: "0px 0px -15% 0px" }
     );
@@ -111,11 +117,13 @@ function CryptoLoop() {
   }, []);
 
   /* node centres on the solid ring, at the four cardinal points */
+  /* five nodes, 72 degrees apart on the ring, starting at the top */
   const spots = [
     "left-1/2 top-[16%] -translate-x-1/2 -translate-y-1/2",
-    "left-[84%] top-1/2 -translate-x-1/2 -translate-y-1/2",
-    "left-1/2 top-[84%] -translate-x-1/2 -translate-y-1/2",
-    "left-[16%] top-1/2 -translate-x-1/2 -translate-y-1/2",
+    "left-[82.3%] top-[39.5%] -translate-x-1/2 -translate-y-1/2",
+    "left-[70%] top-[77.5%] -translate-x-1/2 -translate-y-1/2",
+    "left-[30%] top-[77.5%] -translate-x-1/2 -translate-y-1/2",
+    "left-[17.7%] top-[39.5%] -translate-x-1/2 -translate-y-1/2",
   ];
 
   return (
@@ -139,28 +147,29 @@ function CryptoLoop() {
       <div className="absolute left-1/2 top-1/2 grid size-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center">
         <span aria-hidden className="absolute inset-[-14%] rounded-full bg-indigo/10 blur-2xl" />
         <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(99,91,255,0.18)]">
-          <svg width="58%" height="58%" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <svg width="54%" height="54%" viewBox="0 0 24 24" fill="none" aria-hidden>
             <defs>
-              <linearGradient id="cr-shield" x1="4" y1="3" x2="20" y2="21" gradientUnits="userSpaceOnUse">
+              <linearGradient id="cr-core" x1="3" y1="3" x2="21" y2="19" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stopColor="#8F84FF" />
                 <stop offset="55%" stopColor="#635BFF" />
                 <stop offset="100%" stopColor="#4A43D9" />
               </linearGradient>
             </defs>
+            {/* monitor: the reporting surface the whole loop feeds */}
+            <rect x="2.2" y="3.4" width="19.6" height="13.4" rx="2.6" fill="url(#cr-core)" />
+            <path d="M9 20.6h6M12 16.8v3.8" stroke="url(#cr-core)" strokeWidth="1.9" strokeLinecap="round" />
+            {/* trend line inside the screen */}
             <path
-              d="M12 2.6 4.4 5.8v6c0 4.5 3.1 7.7 7.6 9.2 4.5-1.5 7.6-4.7 7.6-9.2v-6Z"
-              fill="url(#cr-shield)"
-            />
-            {/* key in custody: the trust evaluation users run before
-                committing funds or financial records */}
-            <circle cx="12" cy="10.1" r="2.35" stroke="#ffffff" strokeWidth="1.6" fill="none" />
-            <path
-              d="M12 12.45v4.3M12 14.7h2.1M12 16.2h1.5"
+              d="m5.8 12.6 3.3-3.4 2.4 2.3 4.6-4.7"
               stroke="#ffffff"
-              strokeWidth="1.6"
+              strokeWidth="1.5"
               strokeLinecap="round"
+              strokeLinejoin="round"
               fill="none"
             />
+            {/* magnifier over the trend, the search half of the story */}
+            <circle cx="14.6" cy="12.1" r="2.9" stroke="#ffffff" strokeWidth="1.5" fill="none" />
+            <path d="m16.8 14.3 2 2" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </span>
       </div>

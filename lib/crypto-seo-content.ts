@@ -38,10 +38,11 @@ export const CRYPTO_HERO = {
      the top. Reflects this page's own journey: a user searches a problem,
      compares options, checks the brand, then converts. */
   orbit: [
-    { title: "Users search", sub: "problems, products and comparisons", icon: "search" },
-    { title: "They evaluate", sub: "your product and service pages", icon: "compare" },
-    { title: "Qualified acquisition", sub: "consultations, trials and signups", icon: "trend" },
-    { title: "They check the brand", sub: "reviews, founders and coverage", icon: "verify" },
+    { title: "Visibility growth", sub: "priority commercial searches", icon: "trend" },
+    { title: "Content and briefs", sub: "sourced and reviewed", icon: "doc" },
+    { title: "International markets", sub: "market-specific architecture", icon: "globe" },
+    { title: "Authority and references", sub: "third-party credibility", icon: "link" },
+    { title: "Search research", sub: "problems, products, comparisons", icon: "search" },
   ],
 };
 
