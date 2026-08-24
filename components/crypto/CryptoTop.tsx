@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/motion/Reveal";
 import { CtaLink } from "@/components/ui";
 import {
@@ -11,9 +10,9 @@ import {
 } from "@/lib/crypto-seo-content";
 
 /* ---- Hero: copy and trust chips left, the acquisition loop right ----
-   Same ring construction as the healthcare hero, but the core and the four
-   nodes carry this page's own story: trust at the centre, and a loop from
-   search through evaluation and brand checks to qualified acquisition. */
+   Same ring construction as the healthcare hero, but the core and nodes
+   carry this page's own story. The nodes are static; only the rings
+   drift. */
 
 /* Chip and node glyphs. Crypto-native subject matter drawn from this page's
    own copy: wallets, ledgers, transaction records, key custody and branded
@@ -97,29 +96,9 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
 };
 
 function CryptoLoop() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [lit, setLit] = useState(-1);
+  /* Nodes render immediately. The rings keep their slow drift, but the
+     nodes themselves do not stagger in on load. */
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setLit(4);
-      return;
-    }
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (!entries[0].isIntersecting) return;
-        io.disconnect();
-        [0, 1, 2, 3, 4].forEach((i) => setTimeout(() => setLit(i), 450 + i * 420));
-      },
-      { rootMargin: "0px 0px -15% 0px" }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  /* node centres on the solid ring, at the four cardinal points */
   /* Five nodes, 72 degrees apart on the solid ring. Positions are
      50% + 38% * (cos, sin) of the angle, starting at the top. */
   const spots = [
@@ -131,7 +110,7 @@ function CryptoLoop() {
   ];
 
   return (
-    <div ref={ref} className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[500px]">
+    <div className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[500px]">
       {/* dashed outer ring with slowly travelling dots */}
       <div aria-hidden className="absolute inset-[2%] rounded-full border border-dashed border-indigo/25" />
       <div aria-hidden className="animate-orbit absolute inset-0" style={{ animationDuration: "58s" }}>
@@ -181,12 +160,7 @@ function CryptoLoop() {
 
       {/* four loop nodes; names stay as tooltips and accessible labels */}
       {CRYPTO_HERO.orbit.map((n, i) => (
-        <div
-          key={n.title}
-          className={`absolute ${spots[i]} transition-all duration-700 ease-soft ${
-            lit >= i ? "scale-100 opacity-100" : "scale-90 opacity-0"
-          }`}
-        >
+        <div key={n.title} className={`absolute ${spots[i]}`}>
           <span
             title={`${n.title} ${n.sub}`}
             aria-label={`${n.title} ${n.sub}`}

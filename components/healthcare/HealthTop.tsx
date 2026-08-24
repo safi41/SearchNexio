@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/motion/Reveal";
 import { CtaLink } from "@/components/ui";
 import {
@@ -11,8 +10,8 @@ import {
 } from "@/lib/healthcare-seo-content";
 
 /* ---- Hero: copy and trust chips left, the patient-acquisition loop right.
-   A search-interface diagram rather than stock photography: the three nodes
-   wire in one at a time, then hold. Reduced motion shows it complete. ---- */
+   A search-interface diagram rather than stock photography. The nodes are
+   static; only the rings drift. ---- */
 
 /* Chip and node glyphs. */
 const HERO_ICONS: Record<string, React.ReactNode> = {
@@ -70,31 +69,10 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
 };
 
 /* The patient-acquisition loop: a heart core at the centre of a solid
-   orbit ring, with four white icon nodes at the cardinal points and their
-   labels outside the ring. Nodes light up clockwise once on entry, then
-   hold. Reduced motion shows the finished diagram. */
+   orbit ring, with four white icon nodes at the cardinal points. */
 function PatientLoop() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [lit, setLit] = useState(-1);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setLit(3);
-      return;
-    }
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (!entries[0].isIntersecting) return;
-        io.disconnect();
-        [0, 1, 2, 3].forEach((i) => setTimeout(() => setLit(i), 450 + i * 480));
-      },
-      { rootMargin: "0px 0px -15% 0px" }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+  /* Nodes render immediately. The rings keep their slow drift, but the
+     nodes themselves do not stagger in on load. */
 
   /* Node centres sit on the solid ring at the four cardinal points. */
   const spots = [
@@ -105,7 +83,7 @@ function PatientLoop() {
   ];
 
   return (
-    <div ref={ref} className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[500px]">
+    <div className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[500px]">
       {/* dashed outer ring with slowly travelling dots */}
       <div aria-hidden className="absolute inset-0 rounded-full border border-dashed border-indigo/25" />
       <div aria-hidden className="animate-orbit absolute inset-0" style={{ animationDuration: "58s" }}>
@@ -152,12 +130,7 @@ function PatientLoop() {
       {/* four journey nodes; each keeps its stage name as a tooltip and an
           accessible label, so the meaning survives without visible text */}
       {HC_HERO.orbit.map((n, i) => (
-        <div
-          key={n.title}
-          className={`absolute ${spots[i]} transition-all duration-700 ease-soft ${
-            lit >= i ? "scale-100 opacity-100" : "scale-90 opacity-0"
-          }`}
-        >
+        <div key={n.title} className={`absolute ${spots[i]}`}>
           <span
             title={`${n.title} ${n.sub}`}
             aria-label={`${n.title} ${n.sub}`}
