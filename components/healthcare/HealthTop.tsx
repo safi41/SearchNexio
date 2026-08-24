@@ -14,6 +14,8 @@ import {
    static; only the rings drift. ---- */
 
 /* Chip and node glyphs. */
+const ORBIT_SPEED = "48s";
+
 const HERO_ICONS: Record<string, React.ReactNode> = {
   shield: (
     <g>
@@ -84,20 +86,11 @@ function PatientLoop() {
 
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[540px]">
-      {/* dashed outer ring with slowly travelling dots */}
+      {/* dashed outer ring */}
       <div aria-hidden className="absolute inset-0 rounded-full border border-dashed border-indigo/25" />
-      <div aria-hidden className="animate-orbit absolute inset-0" style={{ animationDuration: "58s" }}>
-        <span className="absolute left-[82%] top-[10%] size-1.5 rounded-full bg-indigo/60" />
-        <span className="absolute left-[10%] top-[74%] size-1.5 rounded-full bg-indigo/45" />
-        <span className="absolute left-[74%] top-[88%] size-1.5 rounded-full bg-indigo/35" />
-      </div>
 
-      {/* solid orbit ring the nodes sit on, with its own accent dots */}
+      {/* solid orbit ring the nodes travel on */}
       <div aria-hidden className="absolute inset-[16%] rounded-full border border-indigo/45" />
-      <div aria-hidden className="animate-orbit-slow absolute inset-[16%]" style={{ animationDuration: "44s" }}>
-        <span className="absolute left-[6%] top-[24%] size-2 rounded-full bg-indigo" />
-        <span className="absolute left-[92%] top-[68%] size-2 rounded-full bg-indigo" />
-      </div>
 
       {/* heart core on a soft white disc */}
       <div className="absolute left-1/2 top-1/2 grid size-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center">
@@ -129,19 +122,25 @@ function PatientLoop() {
 
       {/* four journey nodes; each keeps its stage name as a tooltip and an
           accessible label, so the meaning survives without visible text */}
-      {HC_HERO.orbit.map((n, i) => (
-        <div key={n.title} className={`absolute ${spots[i]}`}>
-          <span
-            title={`${n.title} ${n.sub}`}
-            aria-label={`${n.title} ${n.sub}`}
-            className="grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
-          >
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              {HERO_ICONS[n.icon]}
-            </svg>
-          </span>
-        </div>
-      ))}
+      <div
+        className="animate-orbit absolute inset-0"
+        style={{ animationDuration: ORBIT_SPEED }}
+      >
+        {HC_HERO.orbit.map((n, i) => (
+          <div key={n.title} className={`absolute ${spots[i]}`}>
+            <span
+              title={`${n.title} ${n.sub}`}
+              aria-label={`${n.title} ${n.sub}`}
+              className="animate-orbit grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
+              style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
+            >
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                {HERO_ICONS[n.icon]}
+              </svg>
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
