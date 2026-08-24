@@ -75,17 +75,17 @@ export const HC_SEARCH_STAGES = {
     {
       name: "Treatments and procedures",
       query: "cognitive behavioral therapy for anxiety",
-      desc: "Treatment and procedure searches sit closer to care decisions. These searches have higher patient intent, and the pages that serve them well produce the most qualified enquiries. Treatment page quality is one of the most consistently underinvested areas in healthcare websites.",
+      desc: "Treatment and procedure searches sit closer to care decisions. A patient researching GLP-1 weight loss injections, hip replacement recovery or cognitive behavioral therapy for anxiety has often already done their early research and is now comparing options, understanding what is involved, and evaluating which providers handle that specific need. These searches have higher patient intent, and the pages that serve them well produce the most qualified enquiries. Treatment page quality is one of the most consistently underinvested areas in healthcare websites, and it is one of the highest-leverage opportunities in healthcare SEO.",
     },
     {
       name: "Doctors and specialists",
       query: "doctor accepting new patients",
-      desc: "Provider searches are among the highest-intent healthcare queries. A patient searching for a specific type of specialist, a named physician, or a doctor accepting new patients is usually close to making contact.",
+      desc: "Provider searches are among the highest-intent healthcare queries. A patient searching for a specific type of specialist, a named physician, or a doctor accepting new patients is usually close to making contact. The challenge is that most healthcare websites make it harder than necessary to find this information: provider pages that bury location details, specialty pages that do not connect to individual practitioners, and GBP profiles that route to a generic homepage rather than a scheduling page.",
     },
     {
       name: "Locations and availability",
       query: "specialist near me",
-      desc: "Geographic searches are appointment-ready. The patient has decided they need care and is filtering by proximity. If the page they find does not immediately surface hours, location details, and a booking path, the opportunity is lost.",
+      desc: "Geographic searches are appointment-ready. The patient has decided they need care and is filtering by proximity. If the page they find does not immediately surface hours, location details, and a booking path, the opportunity is lost. Availability signals, accepting new patients, telehealth options, appointment types, are increasingly part of how patients filter their options in search results.",
     },
   ],
 };
@@ -97,7 +97,7 @@ export const HC_DIFFERENT = {
   cards: [
     {
       title: "Medical trust matters",
-      desc: "A patient reading about a treatment option, a medication side effect, or a mental health condition is often in a vulnerable position. Content that is inaccurate, poorly sourced, or written purely to rank can affect real decisions about care. Healthcare content that makes substantive medical or clinical claims carries a higher expectation around clear authorship, credible sourcing, appropriate expertise, and the need for clinical review where the nature of the claim warrants it. Google says its systems use a mix of signals associated with experience, expertise, authoritativeness and trust, with stronger weight given to trust-related signals for topics that can significantly affect health.",
+      desc: "A patient reading about a treatment option, a medication side effect, or a mental health condition is often in a vulnerable position. Content that is inaccurate, poorly sourced, or written purely to rank can affect real decisions about care. Healthcare content that makes substantive medical or clinical claims carries a higher expectation around clear authorship, credible sourcing, appropriate expertise, and the need for clinical review where the nature of the claim warrants it. Google says its systems use a mix of signals associated with experience, expertise, authoritativeness and trust, with stronger weight given to trust-related signals for topics that can significantly affect health. E-E-A-T is not a single ranking factor. Search Nexio does not summarize it as an SEO formula. It is a practical standard for how medical content should be produced, and we work within each client's clinical governance process where review is appropriate.",
     },
     {
       title: "Patient intent matters",
@@ -133,13 +133,13 @@ export const HC_SERVICES = [
   {
     key: "local",
     title: "Local patient discovery",
-    desc: "Patients search for care the way they search for everything else: with a location in mind, often on a mobile device, frequently using near me language or implicit geographic intent. We improve the local search presence of healthcare organizations through Google Business Profile management, location page optimization, local keyword strategy, citation accuracy, review workflows, and the technical setup that connects the website's location information with Google's local signals.",
+    desc: "Patients search for care the way they search for everything else: with a location in mind, often on a mobile device, frequently using near me language or implicit geographic intent. We improve the local search presence of healthcare organizations through Google Business Profile management, location page optimization, local keyword strategy, citation accuracy, review workflows, and the technical setup that connects the website's location information with Google's local signals. For healthcare organizations managing several locations or practitioners with their own eligible profiles, we also review where profile conflicts or cannibalization may be limiting local visibility.",
     link: { label: "Local SEO services", href: H_ROUTES.localSeo },
   },
   {
     key: "provider",
     title: "Provider and practice SEO",
-    desc: "Provider pages can become some of the highest-intent pages on a healthcare website when they are built and indexed correctly. We audit provider pages for search visibility, content quality, and conversion effectiveness. We map how individual practitioners connect to locations, specialties, and treatment pages, and identify where provider pages may be competing against each other or against the parent organization's pages for the same searches.",
+    desc: "Provider pages can become some of the highest-intent pages on a healthcare website when they are built and indexed correctly. We audit provider pages for search visibility, content quality, and conversion effectiveness. We map how individual practitioners connect to locations, specialties, and treatment pages, and identify where provider pages may be competing against each other or against the parent organization's pages for the same searches. Where providers change locations or leave a practice, we advise on how to handle those changes in a way that protects the search equity in existing pages and avoids creating orphaned or misleading content.",
     diagram: true,
   },
   {
@@ -150,7 +150,7 @@ export const HC_SERVICES = [
   {
     key: "multilocation",
     title: "Multi-location healthcare SEO",
-    desc: "Healthcare groups with several clinics, hospital systems with multiple campuses, and specialty practices with several locations face challenges that single-location practices do not encounter. We manage multi-location healthcare SEO at the location level: separate keyword research for each clinic's market, location-specific content that reflects the services actually available there, individual GBP management, and location-level reporting that shows how each branch performs rather than averaging results.",
+    desc: "Healthcare groups with several clinics, hospital systems with multiple campuses, and specialty practices with several locations face challenges that single-location practices do not encounter. Individual locations may rank strongly for nearby searches while distant locations are invisible. Location pages may be duplicated across the website with only the address changed. Provider pages may not correctly indicate which location a physician operates from. We manage multi-location healthcare SEO at the location level: separate keyword research for each clinic's market, location-specific content that reflects the services actually available there, individual GBP management, and location-level reporting that shows how each branch performs rather than averaging results.",
   },
   {
     key: "technical",
@@ -166,26 +166,26 @@ export const HC_SERVICES = [
   {
     key: "reviews",
     title: "Patient reviews and reputation",
-    desc: "Reviews of healthcare organizations can attach to a practice, to an individual practitioner, or to a specific location, and managing them consistently across all three requires more coordination than most practices invest in. We build review request workflows that are appropriate, consistent, and policy-compliant.",
+    desc: "Reviews of healthcare organizations can attach to a practice, to an individual practitioner, or to a specific location, and managing them consistently across all three requires more coordination than most practices invest in. We build review request workflows that are appropriate, consistent, and policy-compliant: systems that make it easy for satisfied patients to share their experience without pressure, gating, or incentive. We monitor review performance by location and by provider, advise on response practices that protect patient privacy, and help organizations manage their reputation across the platforms most relevant to patient research.",
     limit:
       "We do not remove legitimate negative reviews, recommend incentivized reviews, or create systems that filter patients by expected sentiment before requesting a review.",
   },
   {
     key: "booking",
     title: "Booking conversion optimization",
-    desc: "An increase in organic traffic that produces no increase in patient calls usually points to a conversion problem, not an SEO problem. We review the experience a patient has after they arrive from a search: how visible the phone number is, whether the booking path requires too many steps, whether mobile patients can navigate easily to an appointment, whether provider pages make it clear how to book a specific physician.",
+    desc: "An increase in organic traffic that produces no increase in patient calls usually points to a conversion problem, not an SEO problem. We review the experience a patient has after they arrive from a search: how visible the phone number is, whether the booking path requires too many steps, whether mobile patients can navigate easily to an appointment, whether provider pages make it clear how to book a specific physician. Small friction reductions in the booking path can produce measurable increases in contact rate without any additional SEO investment.",
   },
   {
     key: "tracking",
     title: "Patient acquisition tracking",
     desc: "We implement call tracking, form tracking, and online booking attribution that connects patient contacts to the search sources that produced them. Reporting covers call volume by source, appointment requests by page and service line, location-level organic performance, and revenue where reliable attribution exists through the client's CRM or practice management system.",
     limit:
-      "Not every patient interaction can be perfectly attributed. We are transparent about those gaps and recommend clients review any tracking configuration with their legal or compliance team where HIPAA-related considerations apply.",
+      "Healthcare measurement requires careful configuration. Not every patient interaction can be perfectly attributed. Patients often research online and call through a number that bypasses tracking. We are transparent about those gaps and recommend clients review any tracking configuration with their legal or compliance team where HIPAA-related considerations apply.",
   },
   {
     key: "ai",
     title: "AI assisted patient discovery",
-    desc: "Patients are increasingly using AI tools at some point in their health research. For AI systems to represent a healthcare organization accurately, the organization's entity signals need to be clear: what the practice does, who the providers are, what their credentials are, what specialties and treatments are offered, and which locations serve which service areas. We assess how AI systems currently represent healthcare clients and address the structural issues that affect accurate AI representation.",
+    desc: "Patients are increasingly using AI tools at some point in their health research. For AI systems to represent a healthcare organization accurately, the organization's entity signals need to be clear: what the practice does, who the providers are, what their credentials are, what specialties and treatments are offered, and which locations serve which service areas. Fragmented information, conflicting descriptions across the web, and missing entity data all reduce the likelihood that AI systems retrieve and represent the organization accurately. We assess how AI systems currently represent healthcare clients and address the structural issues that affect accurate AI representation.",
     limit:
       "We do not guarantee AI recommendations for any healthcare organization, and accurate AI representation depends on many signals beyond any single agency's control.",
     link: { label: "AI SEO services", href: H_ROUTES.aiSearch },
@@ -198,7 +198,7 @@ export const HC_SERVICES = [
 export const HC_TESTIMONIAL = {
   title: "What Our Clients Say",
   heading: "Client testimonial available on request",
-  body: "We publish testimonials only in the client's own words, with their name, role and organization, alongside a verified result. One specific, verified testimonial is worth more than a carousel of vague quotes.",
+  body: "We publish testimonials only in the client's own words, with their name, role and organization, alongside a verified result. One specific, verified testimonial is worth more than a carousel of vague five-star quotes.",
 };
 
 /* Healthcare SEO results. Held until verified. */
@@ -286,7 +286,7 @@ export const HC_DELIVERABLES = [
 export const HC_PROCESS = [
   { index: "01", name: "Discover", body: "We begin by understanding the organization's clinical structure before we look at a single keyword. Which treatments and services carry the highest priority for patient growth. Which providers and locations are performing and which are not. How the website is organized in relation to the actual clinical structure of the practice. What the current search visibility looks like and what the most significant technical gaps are." },
   { index: "02", name: "Prioritize", body: "Once the diagnostic picture is complete, we sequence the work by the combination of patient acquisition value and implementation practicality. Technical problems that prevent content from being indexed come first. High-intent treatment pages with no current search presence come next. We produce a phased plan that shows what we are working on, why, and in what order." },
-  { index: "03", name: "Implement", body: "We complete the agreed work in collaboration with the client's internal teams where their involvement is needed: developers for technical changes, clinical staff for content review where appropriate, and marketing leads for GBP updates and listing management. Every change is documented as it is made. Client account credentials remain under client ownership throughout the engagement." },
+  { index: "03", name: "Implement", body: "We complete the agreed work in collaboration with the client's internal teams where their involvement is needed: developers for technical changes, clinical staff for content review where appropriate, and marketing leads for GBP updates and listing management. Every change is documented as it is made. Client account credentials remain under client ownership throughout the engagement. We hold manager-level access to the platforms we manage and return it cleanly if the engagement ends." },
   { index: "04", name: "Measure", body: "Monthly reporting tracks organic visibility for priority treatments and locations, patient contact metrics from organic sources, GBP performance, and the authority signals being built over time. When something is not working, we say so and adjust before asking the client to continue. Transparent reporting about negative findings is part of the engagement, not an exception." },
 ];
 
