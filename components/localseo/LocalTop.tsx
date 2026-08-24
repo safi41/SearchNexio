@@ -49,14 +49,14 @@ const ORBIT_BUBBLES = [
   {
     label: "Calls",
     left: "50%",
-    top: "2%",
+    top: "12%",
     icon: (
       <path d="M7.5 4.5 9.7 4a1 1 0 0 1 1.1.6l1.1 2.6a1 1 0 0 1-.3 1.2l-1.4 1a11 11 0 0 0 4.4 4.4l1-1.4a1 1 0 0 1 1.2-.3l2.6 1.1a1 1 0 0 1 .6 1.1l-.5 2.2a1.6 1.6 0 0 1-1.6 1.2C11.3 18 6 12.7 6.3 6.1a1.6 1.6 0 0 1 1.2-1.6Z" fill="var(--color-indigo)" stroke="none" />
     ),
   },
   {
     label: "Business profile",
-    left: "2%",
+    left: "12%",
     top: "50%",
     icon: (
       <g fill="var(--color-indigo)" stroke="none">
@@ -67,7 +67,7 @@ const ORBIT_BUBBLES = [
   },
   {
     label: "Reviews",
-    left: "98%",
+    left: "88%",
     top: "50%",
     icon: (
       <path d="m12 4 2.3 4.7 5.2.8-3.8 3.7.9 5.2L12 15.9l-4.6 2.5.9-5.2-3.8-3.7 5.2-.8Z" fill="var(--color-indigo)" stroke="none" />
@@ -76,7 +76,7 @@ const ORBIT_BUBBLES = [
   {
     label: "Growth",
     left: "50%",
-    top: "98%",
+    top: "88%",
     icon: (
       <g fill="var(--color-indigo)" stroke="none">
         <rect x="5" y="13" width="2.8" height="6" rx="0.9" />
@@ -92,8 +92,8 @@ function PinOrbitVisual() {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[540px]">
       {/* dashed orbit rings + crosshair axes */}
-      <div aria-hidden className="absolute inset-[2%] rounded-full border border-dashed border-indigo/25" />
-      <div aria-hidden className="absolute inset-[19%] rounded-full border border-dotted border-indigo/20" />
+      <div aria-hidden className="absolute inset-[12%] rounded-full border border-dashed border-indigo/25" />
+      <div aria-hidden className="absolute inset-[27%] rounded-full border border-dotted border-indigo/20" />
       <span aria-hidden className="absolute inset-x-0 top-1/2 border-t border-dashed border-indigo/15" />
       <span aria-hidden className="absolute inset-y-0 left-1/2 border-l border-dashed border-indigo/15" />
 
@@ -109,7 +109,7 @@ function PinOrbitVisual() {
 
       {/* layered ripple base + the 3D pin */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <svg width="240" height="250" viewBox="0 0 240 250" fill="none" aria-hidden>
+        <svg width="196" height="204" viewBox="0 0 240 250" fill="none" aria-hidden>
           <defs>
             <radialGradient id="pin-body" cx="0.35" cy="0.25" r="0.9">
               <stop offset="0%" stopColor="#8F84FF" />
