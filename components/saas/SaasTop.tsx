@@ -253,6 +253,79 @@ function splitAccent(title: string, accent: string): [string, string, string] {
   return [title.slice(0, i), accent, title.slice(i + accent.length)];
 }
 
+/* The six commercial measures the copy names, drawn as the funnel they
+   actually describe: broad organic demand narrowing to revenue. Widths are
+   proportional stages, not data. No figures are shown because none were
+   supplied. */
+function ResultsFunnel() {
+  const stages = SAAS_RESULTS.measures;
+  const top = 452;
+  const bottom = 300;
+
+  return (
+    <figure className="rounded-3xl border border-line bg-surface p-8 shadow-[0_10px_30px_rgba(11,13,18,0.05)]">
+      <figcaption className="text-[11.5px] font-bold uppercase tracking-[0.12em] text-graphite">
+        {SAAS_RESULTS.snapshot.label}
+      </figcaption>
+      <p className="mt-4 font-heading text-[19px] font-bold leading-snug tracking-[-0.01em]">
+        {SAAS_RESULTS.snapshot.heading}
+      </p>
+      <p className="mt-3 text-[14.5px] leading-relaxed text-graphite">
+        {SAAS_RESULTS.snapshot.body}
+      </p>
+
+      <svg viewBox="0 0 512 336" className="mt-7 w-full" fill="none" aria-hidden>
+        {stages.map((label, i) => {
+          const n = stages.length;
+          const wTop = top - ((top - bottom) * i) / n;
+          const wBot = top - ((top - bottom) * (i + 1)) / n;
+          const y = i * 54;
+          const cx = 248;
+          const band = `M${cx - wTop / 2} ${y} H${cx + wTop / 2} L${cx + wBot / 2} ${y + 46} H${cx - wBot / 2} Z`;
+          return (
+            <g key={label}>
+              <path d={band} fill="var(--color-indigo)" fillOpacity={0.1 + i * 0.13} />
+              <text
+                x={cx}
+                y={y + 29}
+                textAnchor="middle"
+                className={i > 3 ? "fill-white" : "fill-ink"}
+                style={{ fontSize: 12, fontWeight: 600 }}
+              >
+                {label === "Revenue influenced by organic search"
+                  ? "Revenue influenced"
+                  : label}
+              </text>
+            </g>
+          );
+        })}
+        {/* the narrowing the copy argues for */}
+        <path
+          d="M498 8v312m0 0-6-8m6 8 6-8M498 8l-6 8m6-8 6 8"
+          stroke="var(--color-indigo)"
+          strokeWidth="1.2"
+          strokeOpacity="0.4"
+          strokeLinecap="round"
+        />
+        <text
+          x="488"
+          y="170"
+          textAnchor="middle"
+          transform="rotate(-90 488 170)"
+          className="fill-graphite"
+          style={{ fontSize: 10.5 }}
+        >
+          closer to revenue
+        </text>
+      </svg>
+
+      <p className="mt-5 border-t border-line pt-5 text-[11.5px] text-graphite">
+        Stages shown are what we report on. Figures are supplied per engagement.
+      </p>
+    </figure>
+  );
+}
+
 /* ---- B2B SaaS SEO Results ----
    Proof placement the PDF asks for, held open until verified metrics are
    supplied. The measures are named as labels only: no figures exist yet,
@@ -281,35 +354,83 @@ export function SaasResults() {
           </Reveal>
 
           <Reveal variant="right" delay={80}>
-            <div className="rounded-3xl border border-line bg-surface p-8 shadow-[0_10px_30px_rgba(11,13,18,0.05)]">
-              <span className="text-[11.5px] font-bold uppercase tracking-[0.12em] text-graphite">
-                {SAAS_RESULTS.snapshot.label}
-              </span>
-              <p className="mt-4 font-heading text-[19px] font-bold leading-snug tracking-[-0.01em]">
-                {SAAS_RESULTS.snapshot.heading}
-              </p>
-              <p className="mt-3 text-[14.5px] leading-relaxed text-graphite">
-                {SAAS_RESULTS.snapshot.body}
-              </p>
-
-              <div className="mt-7 border-t border-line pt-6">
-                <span className="text-[11.5px] font-bold uppercase tracking-[0.12em] text-graphite">
-                  What we report on
-                </span>
-                <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
-                  {SAAS_RESULTS.measures.map((m) => (
-                    <li key={m} className="flex items-start gap-2.5 text-[14px] text-ink/80">
-                      <span className="mt-[7px] size-1.5 shrink-0 rounded-full bg-indigo" />
-                      {m}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <ResultsFunnel />
           </Reveal>
         </div>
       </div>
     </section>
+  );
+}
+
+/* The copy's argument drawn as search depth: the blog sits at the top of
+   results while the pages closest to revenue sink below the fold. Depth is
+   illustrative, not measured. */
+function OpportunityDepth() {
+  const buried = SAAS_BUILT_FOR.pageTypes;
+
+  return (
+    <figure className="rounded-3xl border border-line bg-ivory/50 p-8">
+      <figcaption className="text-[11.5px] font-bold uppercase tracking-[0.12em] text-graphite">
+        Where the opportunity sits
+      </figcaption>
+
+      <svg viewBox="0 0 400 300" className="mt-6 w-full" fill="none" aria-hidden>
+        {/* what currently ranks */}
+        <rect x="60" y="14" width="280" height="30" rx="7" fill="var(--color-indigo)" />
+        <text x="200" y="34" textAnchor="middle" className="fill-white" style={{ fontSize: 12.5, fontWeight: 700 }}>
+          Blog posts
+        </text>
+        <text x="0" y="34" className="fill-graphite" style={{ fontSize: 10 }}>
+          Ranks
+        </text>
+
+        {/* the visibility line everything below fails to cross */}
+        <path d="M0 60 H400" stroke="var(--color-warn)" strokeWidth="1.2" strokeDasharray="5 4" strokeOpacity="0.8" />
+        <text x="400" y="55" textAnchor="end" className="fill-warn" style={{ fontSize: 10 }}>
+          visibility line
+        </text>
+
+        {/* the revenue-adjacent pages, sunk below it */}
+        {buried.map((t, i) => {
+          const y = 76 + i * 36;
+          const inset = 60 + i * 6;
+          return (
+            <g key={t}>
+              <rect
+                x={inset}
+                y={y}
+                width={400 - inset * 2}
+                height="26"
+                rx="6"
+                fill="var(--color-indigo)"
+                fillOpacity={0.13 - i * 0.014}
+                stroke="var(--color-indigo)"
+                strokeWidth="1"
+                strokeOpacity={0.3 - i * 0.03}
+              />
+              <text
+                x="200"
+                y={y + 17.5}
+                textAnchor="middle"
+                className="fill-ink"
+                style={{ fontSize: 11.5, fillOpacity: 1 - i * 0.09 }}
+              >
+                {t}
+              </text>
+            </g>
+          );
+        })}
+
+        <text x="0" y="300" className="fill-graphite" style={{ fontSize: 10 }}>
+          Buried
+        </text>
+      </svg>
+
+      <p className="mt-5 border-t border-line pt-5 text-[13.5px] leading-relaxed text-graphite">
+        The blog ranks while the pages closest to a buying decision stay out of
+        reach. Illustrative, not measured.
+      </p>
+    </figure>
   );
 }
 
@@ -342,27 +463,7 @@ export function SaasBuiltFor() {
           </Reveal>
 
           <Reveal variant="right" delay={120}>
-            <div className="rounded-3xl border border-line bg-ivory/50 p-8">
-              <span className="text-[11.5px] font-bold uppercase tracking-[0.12em] text-graphite">
-                Where the opportunity sits
-              </span>
-              <ul className="mt-5 grid gap-px overflow-hidden rounded-2xl border border-line bg-line/70">
-                {SAAS_BUILT_FOR.pageTypes.map((t, i) => (
-                  <li
-                    key={t}
-                    className="group flex items-center gap-4 bg-surface px-5 py-4 transition-colors duration-300 ease-soft hover:bg-ivory/70"
-                  >
-                    <span className="font-heading text-[12px] font-bold tabular-nums text-indigo/40 transition-colors duration-300 group-hover:text-indigo">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="font-heading text-[15px] font-bold tracking-[-0.01em] transition-colors duration-300 group-hover:text-indigo">
-                      {t}
-                    </span>
-                    <span className="ml-auto h-0.5 w-5 rounded-full bg-indigo/30 transition-all duration-300 ease-soft group-hover:w-9 group-hover:bg-indigo" />
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <OpportunityDepth />
           </Reveal>
         </div>
       </div>

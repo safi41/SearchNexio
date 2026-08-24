@@ -630,6 +630,79 @@ export function SaasJourney() {
   );
 }
 
+/* The seven page roles drawn as the connected structure the copy describes:
+   each one answers a distinct question and links back to the product, rather
+   than competing for the same search intent. */
+function ProductStructure() {
+  const cx = 300;
+  const cy = 152;
+  const rx = 132;
+  const ry = 118;
+  const roles = SAAS_PRODUCT_LED.roles;
+
+  return (
+    <figure className="rounded-3xl border border-line bg-surface p-8">
+      <figcaption className="text-[11.5px] font-bold uppercase tracking-[0.12em] text-graphite">
+        Each page, one distinct question
+      </figcaption>
+
+      <svg viewBox="0 0 600 304" className="mt-6 w-full" fill="none" aria-hidden>
+        {roles.map((r, i) => {
+          const a = (-90 + (360 / roles.length) * i) * (Math.PI / 180);
+          const x = cx + rx * Math.cos(a);
+          const y = cy + ry * Math.sin(a);
+          const right = Math.cos(a) > 0.15;
+          const left = Math.cos(a) < -0.15;
+          return (
+            <g key={r}>
+              {/* spoke back to the product hub */}
+              <path
+                d={`M${cx + 46 * Math.cos(a)} ${cy + 40 * Math.sin(a)} L${x - 12 * Math.cos(a)} ${y - 10 * Math.sin(a)}`}
+                stroke="var(--color-indigo)"
+                strokeWidth="1.15"
+                strokeOpacity="0.35"
+              />
+              <circle cx={x} cy={y} r="5.2" fill="var(--color-indigo)" fillOpacity="0.9" />
+              <text
+                x={right ? x + 11 : left ? x - 11 : x}
+                y={y + (Math.abs(Math.cos(a)) < 0.15 ? (Math.sin(a) > 0 ? 19 : -12) : 4)}
+                textAnchor={right ? "start" : left ? "end" : "middle"}
+                className="fill-ink"
+                style={{ fontSize: 11, fontWeight: 600 }}
+              >
+                {r}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* the product at the centre */}
+        <ellipse cx={cx} cy={cy} rx="52" ry="38" fill="var(--color-indigo)" fillOpacity="0.1" />
+        <ellipse
+          cx={cx}
+          cy={cy}
+          rx="52"
+          ry="38"
+          stroke="var(--color-indigo)"
+          strokeWidth="1.3"
+          strokeOpacity="0.5"
+        />
+        <text x={cx} y={cy - 2} textAnchor="middle" className="fill-ink" style={{ fontSize: 12, fontWeight: 700 }}>
+          Product
+        </text>
+        <text x={cx} y={cy + 14} textAnchor="middle" className="fill-graphite" style={{ fontSize: 10.5 }}>
+          trial or demo
+        </text>
+      </svg>
+
+      <p className="mt-5 border-t border-line pt-5 text-[13.5px] leading-relaxed text-graphite">
+        Connected into one structure, so the pages support discovery and
+        conversion without competing for the same search intent.
+      </p>
+    </figure>
+  );
+}
+
 /* ---- Product-Led SEO for SaaS ----
    Essay plus the page roles arranged as a connected structure, since the
    copy's own point is that these pages work as one system. */
@@ -658,25 +731,7 @@ export function SaasProductLed() {
           </Reveal>
 
           <Reveal variant="right" delay={80}>
-            <div className="rounded-3xl border border-line bg-surface p-8">
-              <span className="text-[11.5px] font-bold uppercase tracking-[0.12em] text-graphite">
-                Each page, one distinct question
-              </span>
-              <div className="mt-6 flex flex-wrap gap-2.5">
-                {SAAS_PRODUCT_LED.roles.map((r) => (
-                  <span
-                    key={r}
-                    className="rounded-full border border-line bg-ivory/60 px-4 py-2 text-[13.5px] font-bold text-ink/80 transition-all duration-300 ease-soft hover:-translate-y-0.5 hover:border-indigo/40 hover:text-indigo"
-                  >
-                    {r}
-                  </span>
-                ))}
-              </div>
-              <p className="mt-7 border-t border-line pt-6 text-[14px] leading-relaxed text-graphite">
-                Connected into one structure, so the pages support discovery and
-                conversion without competing for the same search intent.
-              </p>
-            </div>
+            <ProductStructure />
           </Reveal>
         </div>
       </div>
