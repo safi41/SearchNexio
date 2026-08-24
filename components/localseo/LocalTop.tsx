@@ -141,10 +141,10 @@ function PinOrbitVisual() {
           >
             <span
               title={b.label}
-              className="animate-orbit grid size-[72px] place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(99,91,255,0.18)]"
+              className="animate-orbit grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(99,91,255,0.18)]"
               style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
             >
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden>
                 {b.icon}
               </svg>
             </span>

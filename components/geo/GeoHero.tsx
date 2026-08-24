@@ -100,7 +100,7 @@ const ORBIT_BUBBLES = [
 
 function OrbitVisual() {
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[560px]">
+    <div className="relative mx-auto aspect-square w-full max-w-[540px]">
       {/* soft halo behind everything */}
       <div
         aria-hidden

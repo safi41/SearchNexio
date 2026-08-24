@@ -33,7 +33,7 @@ const NODES = [
 
 function HubDiagram() {
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[520px]">
+    <div className="relative mx-auto aspect-square w-full max-w-[540px]">
       {/* dashed orbit rings, slowly rotating in opposite directions */}
       <div aria-hidden className="animate-orbit absolute inset-[12%] rounded-full border border-dashed border-indigo/25" style={{ animationDuration: "52s" }} />
       <div aria-hidden className="animate-orbit-slow absolute inset-[27%] rounded-full border border-dashed border-indigo/15" style={{ animationDuration: "38s" }} />
@@ -65,7 +65,7 @@ function HubDiagram() {
           >
             <span
               title={n.name}
-              className="animate-orbit grid size-[104px] place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.1)]"
+              className="animate-orbit grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.1)]"
               style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
             >
               {n.icon}

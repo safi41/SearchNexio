@@ -110,7 +110,7 @@ function CryptoLoop() {
   ];
 
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[500px]">
+    <div className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[540px]">
       {/* dashed outer ring with slowly travelling dots */}
       <div aria-hidden className="absolute inset-[2%] rounded-full border border-dashed border-indigo/25" />
       <div aria-hidden className="animate-orbit absolute inset-0" style={{ animationDuration: "58s" }}>
@@ -164,9 +164,9 @@ function CryptoLoop() {
           <span
             title={`${n.title} ${n.sub}`}
             aria-label={`${n.title} ${n.sub}`}
-            className="grid size-[68px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
+            className="grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
           >
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               {HERO_ICONS[n.icon]}
             </svg>
           </span>
