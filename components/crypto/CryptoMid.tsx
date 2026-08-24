@@ -275,12 +275,115 @@ function EntityDiagram() {
   );
 }
 
+/* 02 High trust content SEO: the publication workflow, with maintenance
+   looping back rather than ending at publish. */
+function WorkflowDiagram() {
+  const steps = [
+    { label: "Brief", note: "intent and sourcing" },
+    { label: "Draft", note: "named author" },
+    { label: "Review", note: "before publication" },
+    { label: "Publish", note: "with attribution" },
+  ];
+  return (
+    <div>
+      <div className="grid gap-2.5 sm:grid-cols-4">
+        {steps.map((s, i) => (
+          <div key={s.label} className="relative rounded-lg border border-line bg-surface px-3 py-2.5">
+            <span className="block text-[11px] font-bold tabular-nums text-indigo">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span className="mt-1 block text-[12px] font-semibold text-ink">{s.label}</span>
+            <span className="mt-0.5 block text-[10.5px] leading-snug text-graphite">{s.note}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-2.5 flex items-center gap-2.5 rounded-lg border border-indigo/25 bg-lilac/40 px-3 py-2">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.8" strokeLinecap="round" aria-hidden className="shrink-0">
+          <path d="M19.5 12a7.5 7.5 0 0 1-13 5.1M4.5 12a7.5 7.5 0 0 1 13-5.1" />
+          <path d="M17.5 3.5v3.4h-3.4M6.5 20.5v-3.4h3.4" />
+        </svg>
+        <span className="text-[11px] text-ink">
+          Maintenance returns to the brief when tax guidance, fees or product details change.
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* 05 Crypto authority building: the source types that carry credibility.
+   Deliberately shows categories, never named publications or counts, since
+   the copy promises neither placements nor backlink volumes. */
+function AuthorityDiagram() {
+  const sources = [
+    "Editorial coverage",
+    "Original research",
+    "Founder commentary",
+    "Digital PR",
+    "Reference sources",
+  ];
+  return (
+    <div className="grid gap-4 sm:grid-cols-[auto_auto_1fr] sm:items-center">
+      <span className="grid gap-1 rounded-xl border border-indigo/30 bg-lilac/40 px-4 py-3 text-center">
+        <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-indigo">Your brand</span>
+        <span className="text-[10.5px] leading-snug text-graphite">in its sub-category</span>
+      </span>
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none" aria-hidden className="hidden justify-self-center sm:block">
+        <path d="M0 6h16m0 0-4-4M16 6l-4 4" stroke="var(--color-indigo)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <div className="flex flex-wrap gap-2">
+        {sources.map((src) => (
+          <span key={src} className="rounded-lg border border-line bg-surface px-3 py-1.5 text-[11.5px] text-ink">
+            {src}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* 08 Conversion optimization: the four checks run on a page a user lands
+   on from search. */
+function FrictionDiagram() {
+  const checks = [
+    "Page addresses the search intent",
+    "Next action is visible",
+    "Onboarding path is not longer than it needs to be",
+    "Trust signals support the decision",
+  ];
+  return (
+    <div>
+      <div className="mb-3 flex items-center gap-2.5 rounded-lg border border-indigo/30 bg-surface px-3 py-2">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="2" strokeLinecap="round" aria-hidden className="shrink-0">
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="M15.8 15.8 20 20" />
+        </svg>
+        <span className="text-[11.5px] font-semibold text-ink">User arrives from search</span>
+      </div>
+      <div className="grid gap-2">
+        {checks.map((c) => (
+          <div key={c} className="flex items-center gap-3 rounded-lg border border-line bg-surface px-3 py-2">
+            <span className="grid size-4 shrink-0 place-items-center rounded-full bg-citron">
+              <svg width="8" height="8" viewBox="0 0 12 12" fill="none" aria-hidden>
+                <path d="m2.5 6.5 2.5 2.5 4.5-5" stroke="#0B0D12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <span className="text-[11.5px] text-ink">{c}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* Maps a service's diagram key to its visual. */
 function ServiceDiagram({ kind }: { kind: string }) {
   const map: Record<string, React.ReactNode> = {
     intent: <IntentDiagram />,
+    workflow: <WorkflowDiagram />,
     coverage: <CoverageDiagram />,
     crawl: <CrawlDiagram />,
+    authority: <AuthorityDiagram />,
+    friction: <FrictionDiagram />,
     serp: <SerpDiagram />,
     markets: <MarketsDiagram />,
     attribution: <AttributionDiagram />,

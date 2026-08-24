@@ -122,6 +122,7 @@ export const CRYPTO_SERVICES = [
   },
   {
     key: "content",
+    diagram: "workflow",
     title: "High trust content SEO",
     desc: "Content covering tax treatment, financial processes, security practices, or product accuracy claims requires clear authorship, appropriate sourcing, human review before publication, and a maintenance process for pages where information changes. We build that workflow into the content strategy rather than treating publication as the endpoint.",
     limit:
@@ -144,6 +145,7 @@ export const CRYPTO_SERVICES = [
   },
   {
     key: "authority",
+    diagram: "authority",
     title: "Crypto authority building",
     desc: "Authority in this category is earned through relevant editorial coverage, original research, founder and expert commentary, digital PR, and third-party reference sources that carry credibility in the specific sub-category.",
     limit:
@@ -170,6 +172,7 @@ export const CRYPTO_SERVICES = [
   },
   {
     key: "conversion",
+    diagram: "friction",
     title: "Conversion optimization",
     desc: "We review the experience a prospective user has after arriving from a search: whether the page addresses the search intent, how visible the next action is, whether the onboarding path creates unnecessary friction, and whether the trust signals available support the conversion decision.",
     link: null,
