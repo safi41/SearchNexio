@@ -15,14 +15,20 @@ import {
    nodes carry this page's own story: trust at the centre, and a loop from
    search through evaluation and brand checks to qualified acquisition. */
 
-/* Chip and node glyphs. Deliberately no coins, cubes or candlesticks. */
+/* Chip and node glyphs. Crypto-native subject matter drawn from this page's
+   own copy: wallets, ledgers, transaction records, key custody and branded
+   verification. Deliberately no coins, token logos, blockchain cubes,
+   rockets or candlestick charts, per the client's visual brief. */
 const HERO_ICONS: Record<string, React.ReactNode> = {
+  /* --- chip glyphs --- */
+  /* shielded ledger: high trust content, sourced and reviewed */
   shield: (
     <g>
-      <path d="M12 3.5 5.5 6.2v5c0 3.7 2.6 6.3 6.5 7.6 3.9-1.3 6.5-3.9 6.5-7.6v-5Z" />
-      <path d="m9.3 11.7 2 2 3.5-3.9" />
+      <path d="M12 3.4 5.6 6v4.9c0 3.6 2.5 6.2 6.4 7.5 3.9-1.3 6.4-3.9 6.4-7.5V6Z" />
+      <path d="M9.3 9.4h5.4M9.3 12.1h5.4M9.3 14.8h3.2" />
     </g>
   ),
+  /* target: commercial intent, not volume alone */
   target: (
     <g>
       <circle cx="12" cy="12" r="7.5" />
@@ -30,42 +36,53 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
       <circle cx="12" cy="12" r="0.6" />
     </g>
   ),
+  /* code brackets: dApps, docs portals, technical depth */
   code: (
     <g>
       <path d="m8.5 9-3.5 3 3.5 3M15.5 9l3.5 3-3.5 3" />
       <path d="m13.5 6-3 12" />
     </g>
   ),
+  /* tracked events: acquisition measured as discrete events */
   chart: (
     <g>
       <path d="M4.5 19.5h15" />
       <path d="M7.5 19.5v-5M12 19.5v-9m4.5 9v-6" />
     </g>
   ),
+
+  /* --- orbit node glyphs, one per acquisition stage --- */
+  /* 1. Users search: a magnifier reading a transaction row */
   search: (
     <g>
-      <circle cx="11" cy="11" r="6.2" />
-      <path d="M15.6 15.6 20 20" />
+      <circle cx="10.6" cy="10.6" r="6.4" />
+      <path d="m15.4 15.4 4.4 4.4" />
+      <path d="M7.7 10.6h5.8M7.7 8.1h5.8M7.7 13.1h3.4" />
     </g>
   ),
+  /* 2. They evaluate: a ledger of line entries being compared */
   compare: (
     <g>
-      <rect x="3.5" y="5" width="7" height="14" rx="2" />
-      <rect x="13.5" y="5" width="7" height="14" rx="2" />
-      <path d="M6 9h2M6 12h2M16 9h2M16 12h2" />
+      <rect x="3.4" y="3.6" width="17.2" height="16.8" rx="2.4" />
+      <path d="M3.4 8.1h17.2" />
+      <path d="M7 11.6h6.4M7 15.1h4.4" />
+      <path d="m15.6 14.6 1.6 1.6 3-3.1" />
     </g>
   ),
-  verify: (
-    <g>
-      <path d="M12 3.5 5.5 6.2v5c0 3.7 2.6 6.3 6.5 7.6 3.9-1.3 6.5-3.9 6.5-7.6v-5Z" />
-      <circle cx="12" cy="10.8" r="1.9" />
-      <path d="M9.2 16c.5-1.5 1.6-2.3 2.8-2.3s2.3.8 2.8 2.3" />
-    </g>
-  ),
+  /* 3. Qualified acquisition: a signed record, the conversion event */
   trend: (
     <g>
-      <path d="M4 17 9.5 11l3.5 3.5L20 7.5" />
-      <path d="M15 7.5h5V12" />
+      <path d="M6.2 2.9h7.4l4.4 4.4v10.6a2.4 2.4 0 0 1-2.4 2.4H6.2a2.4 2.4 0 0 1-2.4-2.4V5.3a2.4 2.4 0 0 1 2.4-2.4Z" />
+      <path d="M13.4 2.9v4.6h4.6" />
+      <path d="m7.9 14.4 2.2 2.2 4.2-4.6" />
+    </g>
+  ),
+  /* 4. They check the brand: a verified badge, branded due diligence */
+  verify: (
+    <g>
+      <path d="M12 2.6 4.6 5.7v5.6c0 4.2 3 7.2 7.4 8.7 4.4-1.5 7.4-4.5 7.4-8.7V5.7Z" />
+      <circle cx="12" cy="10.2" r="2.1" />
+      <path d="M8.7 16.1c.6-1.8 1.9-2.7 3.3-2.7s2.7.9 3.3 2.7" />
     </g>
   ),
 };
@@ -134,12 +151,14 @@ function CryptoLoop() {
               d="M12 2.6 4.4 5.8v6c0 4.5 3.1 7.7 7.6 9.2 4.5-1.5 7.6-4.7 7.6-9.2v-6Z"
               fill="url(#cr-shield)"
             />
+            {/* key in custody: the trust evaluation users run before
+                committing funds or financial records */}
+            <circle cx="12" cy="10.1" r="2.35" stroke="#ffffff" strokeWidth="1.6" fill="none" />
             <path
-              d="m8.6 12.1 2.4 2.4 4.5-4.9"
+              d="M12 12.45v4.3M12 14.7h2.1M12 16.2h1.5"
               stroke="#ffffff"
-              strokeWidth="1.7"
+              strokeWidth="1.6"
               strokeLinecap="round"
-              strokeLinejoin="round"
               fill="none"
             />
           </svg>
