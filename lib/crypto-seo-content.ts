@@ -113,6 +113,7 @@ export const CRYPTO_DIFFERENT = [
 export const CRYPTO_SERVICES = [
   {
     key: "strategy",
+    diagram: "intent",
     title: "Crypto search strategy",
     desc: "We research the specific searches prospective users make in your product category, problem-based queries, service intent, comparison terms, branded research, and competitor demand, then map them to pages by intent stage and commercial proximity to acquisition.",
     deliverable:
@@ -129,6 +130,7 @@ export const CRYPTO_SERVICES = [
   },
   {
     key: "pages",
+    diagram: "coverage",
     title: "Product and service pages",
     desc: "The pages closest to conversion are usually not the high-traffic educational articles. They are the product and service pages a user lands on when evaluating specific options. We audit existing commercial pages for search visibility, content quality, and conversion effectiveness, and build new pages where gaps in coverage create acquisition risk.",
     link: null,
@@ -138,7 +140,7 @@ export const CRYPTO_SERVICES = [
     title: "Technical crypto SEO",
     desc: "JavaScript-heavy products, dApps, documentation portals, programmatic asset pages, app subdomains, and large-scale trading-pair page architectures all create indexation and crawlability problems that generic SEO strategies do not address. We audit the technical foundation with attention to the issues specific to crypto websites.",
     link: { label: "Technical SEO services", href: C_ROUTES.technicalSeo },
-    diagram: true,
+    diagram: "crawl",
   },
   {
     key: "authority",
@@ -150,6 +152,7 @@ export const CRYPTO_SERVICES = [
   },
   {
     key: "branded",
+    diagram: "serp",
     title: "Branded search reputation",
     desc: "We assess what appears when users search the brand name, founder names, and product safety terms, then identify and address the gaps in owned content, third-party coverage, and business information that are within the organization's control.",
     limit:
@@ -158,6 +161,7 @@ export const CRYPTO_SERVICES = [
   },
   {
     key: "international",
+    diagram: "markets",
     title: "International crypto SEO",
     desc: "We research search demand by market, structure international site architecture around the search strategy, and implement hreflang, language targeting, and market-specific landing pages for businesses operating across several countries.",
     limit:
@@ -172,12 +176,14 @@ export const CRYPTO_SERVICES = [
   },
   {
     key: "tracking",
+    diagram: "attribution",
     title: "Acquisition tracking",
     desc: "We connect organic sessions to the conversion events that matter for the specific business model, consultations, demos, signups, registrations, funded accounts where attribution is reliable, then report on those events alongside the visibility data. We are explicit about what cannot be reliably tracked and where attribution gaps exist.",
     link: null,
   },
   {
     key: "ai",
+    diagram: "entity",
     title: "AI assisted crypto discovery",
     desc: "Crypto users increasingly research products through AI-assisted tools alongside traditional search. For AI systems to represent a crypto business accurately, entity signals need to be clear: what the company does, what the product offers, who the founders are, and how authoritative third-party sources describe the business. We assess current AI representation and address structural gaps.",
     limit: "We do not guarantee AI recommendations.",

@@ -15,11 +15,23 @@ import {
    No decorative icons: the brief is explicit that the specificity of the
    copy is the differentiator. Accordion on mobile. */
 
-/* The one allowed visual: a flat crawl-path diagram for the technical
-   service, with a disconnected subdomain highlighted as the problem area. */
-function ArchitectureDiagram() {
+/* Service diagrams. Each explains a mechanism the copy alone cannot show.
+   Services whose copy is already self-explanatory get none, per the brief's
+   rule that nothing on this page decorates. */
+/* Shared frame so every service diagram sits in the same container. */
+function DiagramFrame({ children }: { children: React.ReactNode }) {
   return (
     <figure className="mt-6 rounded-2xl border border-line bg-ivory/50 px-6 py-7">
+      {children}
+      <figcaption className="mt-4 text-[11.5px] text-graphite">Illustrative example.</figcaption>
+    </figure>
+  );
+}
+
+/* 04 Technical crypto SEO: crawl paths, with the app subdomain unreachable. */
+function CrawlDiagram() {
+  return (
+    <>
       <svg viewBox="0 0 460 208" className="w-full" fill="none" aria-hidden>
         {/* crawl paths drawn first so the boxes sit on top of them */}
         {/* marketing site up to docs portal */}
@@ -63,9 +75,220 @@ function ArchitectureDiagram() {
         <text x="410" y="99" textAnchor="middle" className="fill-ink" style={{ fontSize: 11.5, fontWeight: 700 }}>App subdomain</text>
         <text x="410" y="113" textAnchor="middle" style={{ fontSize: 9.5, fill: "var(--color-warn)" }}>not reachable</text>
       </svg>
-      <figcaption className="mt-4 text-[11.5px] text-graphite">Illustrative architecture example.</figcaption>
-    </figure>
+    </>
   );
+}
+
+/* 01 Crypto search strategy: queries mapped to pages by intent stage. */
+function IntentDiagram() {
+  const rows = [
+    { q: "problem query", stage: "Problem", page: "Use-case page" },
+    { q: "service query", stage: "Service", page: "Service page" },
+    { q: "comparison query", stage: "Compare", page: "Comparison page" },
+  ];
+  return (
+    <div className="grid gap-2.5">
+      {rows.map((r) => (
+        <div key={r.stage} className="flex items-center gap-2.5">
+          <span className="flex min-w-0 flex-1 items-center gap-2 rounded-lg border border-line bg-surface px-3 py-2">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="2" strokeLinecap="round" aria-hidden className="shrink-0">
+              <circle cx="11" cy="11" r="6.5" />
+              <path d="M15.8 15.8 20 20" />
+            </svg>
+            <span className="truncate text-[11.5px] text-graphite">{r.q}</span>
+          </span>
+          <span className="shrink-0 rounded-md bg-lilac px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-indigo">
+            {r.stage}
+          </span>
+          <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden className="shrink-0">
+            <path d="M0 5h13m0 0-3.5-3.5M13 5l-3.5 3.5" stroke="var(--color-indigo)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <span className="w-[124px] shrink-0 truncate rounded-lg border border-indigo/30 bg-surface px-3 py-2 text-[11.5px] font-semibold text-ink">
+            {r.page}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* 03 Product and service pages: which commercial pages have coverage. */
+function CoverageDiagram() {
+  const rows = [
+    { page: "Service page", demand: 82, covered: true },
+    { page: "Comparison page", demand: 64, covered: true },
+    { page: "Use-case page", demand: 47, covered: false },
+  ];
+  return (
+    <div className="grid gap-3">
+      {rows.map((r) => (
+        <div key={r.page} className="flex items-center gap-3">
+          <span className="w-[120px] shrink-0 text-[11.5px] font-semibold text-ink">{r.page}</span>
+          <span className="h-2.5 flex-1 overflow-hidden rounded-full bg-ink/8">
+            <span
+              className={"block h-full rounded-full " + (r.covered ? "bg-indigo" : "bg-warn/45")}
+              style={{ width: r.demand + "%" }}
+            />
+          </span>
+          <span
+            className={
+              "w-[92px] shrink-0 text-right text-[10.5px] font-bold uppercase tracking-[0.06em] " +
+              (r.covered ? "text-indigo" : "text-warn")
+            }
+          >
+            {r.covered ? "covered" : "no page"}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* 06 Branded search reputation: what occupies a branded results page. */
+function SerpDiagram() {
+  const rows = [
+    { label: "Your site", owned: true },
+    { label: "Your docs and profiles", owned: true },
+    { label: "Third-party coverage", owned: false },
+    { label: "Review and forum threads", owned: false },
+  ];
+  return (
+    <div>
+      <div className="mb-3 flex items-center gap-2.5 rounded-lg bg-ink-solid px-3 py-2">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-citron)" strokeWidth="2" strokeLinecap="round" aria-hidden>
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="M15.8 15.8 20 20" />
+        </svg>
+        <span className="text-[11.5px] font-medium text-white/90">brand name</span>
+      </div>
+      <div className="grid gap-2">
+        {rows.map((r) => (
+          <div key={r.label} className="flex items-center gap-3 rounded-lg border border-line bg-surface px-3 py-2">
+            <span className={"size-2 shrink-0 rounded-full " + (r.owned ? "bg-indigo" : "bg-graphite/40")} />
+            <span className="flex-1 truncate text-[11.5px] text-ink">{r.label}</span>
+            <span className="shrink-0 text-[10px] font-bold uppercase tracking-[0.06em] text-graphite">
+              {r.owned ? "owned" : "third party"}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* 07 International crypto SEO: one architecture, per-market branches. */
+function MarketsDiagram() {
+  return (
+    <svg viewBox="0 0 460 176" className="w-full" fill="none" aria-hidden>
+      <path d="M136 88 C176 88 176 40 200 40" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.75" />
+      <path d="M136 88 H200" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.75" />
+      <path d="M136 88 C176 88 176 136 200 136" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.75" />
+
+      <rect x="20" y="66" width="116" height="44" rx="9" fill="var(--color-surface)" stroke="var(--color-indigo)" strokeWidth="1.5" />
+      <text x="78" y="85" textAnchor="middle" className="fill-ink" style={{ fontSize: 11.5, fontWeight: 700 }}>Site architecture</text>
+      <text x="78" y="99" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>hreflang set</text>
+
+      <rect x="200" y="18" width="116" height="44" rx="9" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.5" />
+      <text x="258" y="37" textAnchor="middle" className="fill-ink" style={{ fontSize: 11.5, fontWeight: 700 }}>Market A</text>
+      <text x="258" y="51" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>localized pages</text>
+
+      <rect x="200" y="66" width="116" height="44" rx="9" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.5" />
+      <text x="258" y="85" textAnchor="middle" className="fill-ink" style={{ fontSize: 11.5, fontWeight: 700 }}>Market B</text>
+      <text x="258" y="99" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>localized pages</text>
+
+      <rect x="200" y="114" width="116" height="44" rx="9" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.5" />
+      <text x="258" y="133" textAnchor="middle" className="fill-ink" style={{ fontSize: 11.5, fontWeight: 700 }}>Market C</text>
+      <text x="258" y="147" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>localized pages</text>
+
+      <path d="M316 40 C340 40 340 88 360 88" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.5" />
+      <path d="M316 88 H360" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.5" />
+      <path d="M316 136 C340 136 340 88 360 88" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.5" />
+      <rect x="360" y="66" width="84" height="44" rx="9" fill="var(--color-lilac)" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.5" />
+      <text x="402" y="85" textAnchor="middle" className="fill-ink" style={{ fontSize: 11, fontWeight: 700 }}>Reported</text>
+      <text x="402" y="99" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>per market</text>
+    </svg>
+  );
+}
+
+/* 09 Acquisition tracking: session to event, with the attribution gap named. */
+function AttributionDiagram() {
+  const steps = ["Organic session", "Product or service page", "Conversion event"];
+  return (
+    <div>
+      <div className="flex flex-wrap items-center gap-2.5">
+        {steps.map((step, i) => (
+          <span key={step} className="flex items-center gap-2.5">
+            {i > 0 && (
+              <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden>
+                <path d="M0 5h13m0 0-3.5-3.5M13 5l-3.5 3.5" stroke="var(--color-indigo)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            )}
+            <span
+              className={
+                "rounded-lg border px-3 py-2 text-[11.5px] font-semibold " +
+                (i === 2 ? "border-indigo/40 bg-lilac/50 text-ink" : "border-line bg-surface text-ink")
+              }
+            >
+              {step}
+            </span>
+          </span>
+        ))}
+      </div>
+      <div className="mt-3 flex items-center gap-2.5 rounded-lg border border-dashed border-warn/45 bg-warn/5 px-3 py-2">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden className="shrink-0">
+          <path d="M6 1.5v5M6 9v.5" stroke="var(--color-warn)" strokeWidth="1.6" strokeLinecap="round" />
+        </svg>
+        <span className="text-[11px] text-graphite">
+          On-chain actions and authenticated product events sit outside this chain. Reported as an attribution gap.
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* 10 AI assisted crypto discovery: entity signals feeding representation. */
+function EntityDiagram() {
+  const signals = [
+    "What the company does",
+    "What the product offers",
+    "Who the founders are",
+    "Third-party descriptions",
+  ];
+  return (
+    <div className="grid gap-4 sm:grid-cols-[1fr_auto_auto] sm:items-center">
+      <div className="grid gap-2">
+        {signals.map((sig) => (
+          <span key={sig} className="flex items-center gap-2.5 rounded-lg border border-line bg-surface px-3 py-1.5">
+            <span className="size-1.5 shrink-0 rounded-full bg-indigo" />
+            <span className="truncate text-[11.5px] text-ink">{sig}</span>
+          </span>
+        ))}
+      </div>
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none" aria-hidden className="hidden justify-self-center sm:block">
+        <path d="M0 6h16m0 0-4-4M16 6l-4 4" stroke="var(--color-indigo)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <span className="grid gap-1 rounded-xl border border-indigo/30 bg-lilac/40 px-4 py-3 text-center">
+        <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-indigo">AI representation</span>
+        <span className="text-[10.5px] leading-snug text-graphite">Assessed, not guaranteed</span>
+      </span>
+    </div>
+  );
+}
+
+/* Maps a service's diagram key to its visual. */
+function ServiceDiagram({ kind }: { kind: string }) {
+  const map: Record<string, React.ReactNode> = {
+    intent: <IntentDiagram />,
+    coverage: <CoverageDiagram />,
+    crawl: <CrawlDiagram />,
+    serp: <SerpDiagram />,
+    markets: <MarketsDiagram />,
+    attribution: <AttributionDiagram />,
+    entity: <EntityDiagram />,
+  };
+  const body = map[kind];
+  if (!body) return null;
+  return <DiagramFrame>{body}</DiagramFrame>;
 }
 
 export function CryptoServices() {
@@ -136,7 +359,7 @@ export function CryptoServices() {
                   {current.limit}
                 </p>
               )}
-              {current.diagram && <ArchitectureDiagram />}
+              {current.diagram && <ServiceDiagram kind={current.diagram} />}
 
               <div className="mt-5 flex flex-wrap gap-4">
                 {current.link && (
@@ -183,6 +406,7 @@ export function CryptoServices() {
                           </p>
                         )}
                         {s.limit && <p className="mt-3 text-[12.5px] leading-relaxed text-graphite">{s.limit}</p>}
+                        {s.diagram && <ServiceDiagram kind={s.diagram} />}
                       </div>
                     </div>
                   </div>
