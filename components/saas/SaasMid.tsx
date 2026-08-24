@@ -510,7 +510,7 @@ export function SaasServices() {
    Different shape from the Crypto row-ledger and the Healthcare timeline. */
 export function SaasProcess() {
   return (
-    <section id="saas-process" className="relative overflow-x-clip border-t border-line bg-ivory/40 py-20 lg:py-28">
+    <section id="saas-process" className="relative overflow-x-clip wash-lilac-full border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
           <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
@@ -635,7 +635,7 @@ export function SaasJourney() {
    copy's own point is that these pages work as one system. */
 export function SaasProductLed() {
   return (
-    <section className="relative overflow-x-clip border-t border-line bg-ivory/40 py-20 lg:py-28">
+    <section className="relative overflow-x-clip wash-lilac-full border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
           <Reveal variant="left">

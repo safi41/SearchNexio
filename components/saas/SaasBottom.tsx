@@ -165,7 +165,7 @@ export function SaasMidCta() {
    gap at five items, and the lead reason carries the most weight. */
 export function SaasWhy() {
   return (
-    <section className="relative overflow-x-clip border-t border-line bg-ivory/40 py-20 lg:py-28">
+    <section className="relative overflow-x-clip wash-lilac-full border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
           <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">

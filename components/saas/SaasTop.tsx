@@ -259,7 +259,7 @@ function splitAccent(title: string, accent: string): [string, string, string] {
    and none may be invented. */
 export function SaasResults() {
   return (
-    <section id="saas-results" className="relative overflow-x-clip border-t border-line bg-ivory/40 py-20 lg:py-28">
+    <section id="saas-results" className="relative overflow-x-clip wash-lilac-full border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
           <Reveal variant="left">
@@ -375,7 +375,7 @@ export function SaasBuiltFor() {
    hover, so the section reads as diagnosis rather than a card grid. */
 export function SaasFails() {
   return (
-    <section className="relative overflow-x-clip border-t border-line bg-ivory/40 py-20 lg:py-28">
+    <section className="relative overflow-x-clip bg-ivory border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
           <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
