@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 import Reveal from "@/components/motion/Reveal";
+import {
+  GoogleBusinessMark,
+  AppleMapsMark,
+  YelpMark,
+  TripAdvisorMark,
+} from "@/components/brand-icons";
 import { Badge, CtaLink } from "@/components/ui";
 import { MapsPin, GoogleG } from "@/components/brand-icons";
 import { LOCAL_HERO, LOCAL_JOURNEY, LOCAL_PROBLEMS, LOCAL_SERVICES, WHO_WE_HELP } from "@/lib/local-seo-content";
@@ -46,46 +52,10 @@ const TRUST_ICONS = [
 const ORBIT_SPEED = "48s";
 
 const ORBIT_BUBBLES = [
-  {
-    label: "Calls",
-    left: "50%",
-    top: "12%",
-    icon: (
-      <path d="M7.5 4.5 9.7 4a1 1 0 0 1 1.1.6l1.1 2.6a1 1 0 0 1-.3 1.2l-1.4 1a11 11 0 0 0 4.4 4.4l1-1.4a1 1 0 0 1 1.2-.3l2.6 1.1a1 1 0 0 1 .6 1.1l-.5 2.2a1.6 1.6 0 0 1-1.6 1.2C11.3 18 6 12.7 6.3 6.1a1.6 1.6 0 0 1 1.2-1.6Z" fill="var(--color-indigo)" stroke="none" />
-    ),
-  },
-  {
-    label: "Business profile",
-    left: "12%",
-    top: "50%",
-    icon: (
-      <g fill="var(--color-indigo)" stroke="none">
-        <path d="M5 5h14v3.2c0 1.2-.8 2.1-2 2.1s-1.9-.9-1.9-2.1c0 1.2-.9 2.1-2.1 2.1s-2.1-.9-2.1-2.1c0 1.2-.7 2.1-1.9 2.1s-2-.9-2-2.1Z" />
-        <path d="M6 11.8V19h12v-7.2c-.6.3-1.3.5-2 .5-.8 0-1.5-.2-2.1-.7-.5.5-1.2.7-1.9.7s-1.4-.2-1.9-.7c-.6.5-1.3.7-2.1.7-.7 0-1.4-.2-2-.5Zm7 6.2v-3.5h3V18Z" />
-      </g>
-    ),
-  },
-  {
-    label: "Reviews",
-    left: "88%",
-    top: "50%",
-    icon: (
-      <path d="m12 4 2.3 4.7 5.2.8-3.8 3.7.9 5.2L12 15.9l-4.6 2.5.9-5.2-3.8-3.7 5.2-.8Z" fill="var(--color-indigo)" stroke="none" />
-    ),
-  },
-  {
-    label: "Growth",
-    left: "50%",
-    top: "88%",
-    icon: (
-      <g fill="var(--color-indigo)" stroke="none">
-        <rect x="5" y="13" width="2.8" height="6" rx="0.9" />
-        <rect x="10.6" y="10" width="2.8" height="9" rx="0.9" />
-        <rect x="16.2" y="6.5" width="2.8" height="12.5" rx="0.9" />
-        <path d="m5.5 9.5 4.6-3.4 3 1.8L18 4.5l.9 1.2-5.6 3.9-3-1.8-4 3Z" />
-      </g>
-    ),
-  },
+  { label: "Google Business Profile", left: "50%", top: "12%", mark: <GoogleBusinessMark size={44} /> },
+  { label: "Apple Maps", left: "12%", top: "50%", mark: <AppleMapsMark size={44} /> },
+  { label: "Yelp", left: "88%", top: "50%", mark: <YelpMark size={44} /> },
+  { label: "Tripadvisor", left: "50%", top: "88%", mark: <TripAdvisorMark size={44} /> },
 ];
 
 function PinOrbitVisual() {
@@ -109,26 +79,13 @@ function PinOrbitVisual() {
 
       {/* layered ripple base + the 3D pin */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <svg width="196" height="204" viewBox="0 0 240 250" fill="none" aria-hidden>
-          <defs>
-            <radialGradient id="pin-body" cx="0.35" cy="0.25" r="0.9">
-              <stop offset="0%" stopColor="#8F84FF" />
-              <stop offset="55%" stopColor="#635BFF" />
-              <stop offset="100%" stopColor="#4A43D9" />
-            </radialGradient>
-          </defs>
-          {/* ripple layers */}
-          <ellipse cx="120" cy="200" rx="100" ry="30" fill="var(--c-lilac)" opacity="0.55" />
-          <ellipse cx="120" cy="198" rx="72" ry="21" fill="#C9C2FF" opacity="0.5" />
-          <ellipse cx="120" cy="196" rx="46" ry="13" fill="#A99EFF" opacity="0.55" />
-          <ellipse cx="120" cy="195" rx="24" ry="7" fill="#635BFF" opacity="0.5" />
-          {/* pin */}
-          <path
-            d="M120 30c-31 0-56 24.5-56 55 0 41 56 110 56 110s56-69 56-110c0-30.5-25-55-56-55Z"
-            fill="url(#pin-body)"
-          />
-          <circle cx="120" cy="84" r="22" fill="#ffffff" />
-        </svg>
+        <span
+          title="Google Maps"
+          aria-label="Google Maps"
+          className="grid size-[186px] place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(234,67,53,0.2)]"
+        >
+          <MapsPin size={104} />
+        </span>
       </div>
 
       {/* icon bubbles revolving on the ring, icons kept upright */}
@@ -144,9 +101,7 @@ function PinOrbitVisual() {
               className="animate-orbit grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(99,91,255,0.18)]"
               style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
             >
-              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden>
-                {b.icon}
-              </svg>
+              {b.mark}
             </span>
           </div>
         ))}

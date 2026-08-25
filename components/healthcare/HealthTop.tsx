@@ -8,6 +8,22 @@ import {
   HC_SEARCH_STAGES,
   HC_DIFFERENT,
 } from "@/lib/healthcare-seo-content";
+import {
+  GoogleG,
+  MapsPin,
+  HealthgradesMark,
+  ZocdocMark,
+  WebMDMark,
+} from "@/components/brand-icons";
+
+/* Platform marks for the hero orbit. The client asked for the real brands
+   patients recognise, so each node carries that service's own mark. */
+const HEALTH_MARKS: Record<string, React.ReactNode> = {
+  google: <GoogleG size={44} />,
+  healthgrades: <HealthgradesMark size={44} />,
+  zocdoc: <ZocdocMark size={44} />,
+  webmd: <WebMDMark size={44} />,
+};
 
 /* ---- Hero: copy and trust chips left, the patient-acquisition loop right.
    A search-interface diagram rather than stock photography. The nodes are
@@ -92,31 +108,19 @@ function PatientLoop() {
       {/* solid orbit ring the nodes travel on */}
       <div aria-hidden className="absolute inset-[16%] rounded-full border border-indigo/45" />
 
-      {/* heart core on a soft white disc */}
+      {/* core: the Google Maps pin, the surface a local patient search
+          actually lands on. The orbiting marks are where they research
+          before booking. */}
       <div className="absolute left-1/2 top-1/2 grid size-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center">
-        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-indigo/10 blur-2xl" />
-        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(99,91,255,0.18)]">
-          <svg width="58%" height="58%" viewBox="0 0 24 24" fill="none" aria-hidden>
-            <defs>
-              <linearGradient id="hc-heart" x1="4" y1="3" x2="20" y2="21" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#8F84FF" />
-                <stop offset="55%" stopColor="#635BFF" />
-                <stop offset="100%" stopColor="#4A43D9" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M12 20.8C6.7 17 3.4 13.6 3.4 9.7a4.9 4.9 0 0 1 8.6-3.1 4.9 4.9 0 0 1 8.6 3.1c0 3.9-3.3 7.3-8.6 11.1Z"
-              fill="url(#hc-heart)"
-            />
-            <path
-              d="M6.4 11.4h2.8l1.3-2.6 1.9 5 1.3-2.4h3.1"
-              stroke="#ffffff"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
-            />
-          </svg>
+        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-[#EA4335]/12 blur-2xl" />
+        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(234,67,53,0.2)]">
+          <span
+            title="Google Maps"
+            aria-label="Google Maps"
+            className="grid size-[62%] place-items-center"
+          >
+            <MapsPin size={132} />
+          </span>
         </span>
       </div>
 
@@ -134,9 +138,7 @@ function PatientLoop() {
               className="animate-orbit grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
               style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
             >
-              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                {HERO_ICONS[n.icon]}
-              </svg>
+              {HEALTH_MARKS[n.icon]}
             </span>
           </div>
         ))}

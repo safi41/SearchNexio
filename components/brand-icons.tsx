@@ -418,3 +418,112 @@ export function ZoomMark({ size = 18 }: { size?: number }) {
     </svg>
   );
 }
+
+/* ---- Local search platform marks ----
+   The surfaces a local business is actually found on. Google's own G and
+   the Maps pin are reused from above. */
+
+export function GoogleBusinessMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#fff" />
+      <circle cx="16" cy="16" r="15.4" fill="none" stroke="#E6E4DE" strokeWidth="1.2" />
+      <path fill="#4285F4" d="M8.4 8.6h5.1l-.9 4.5H7.1z" />
+      <path fill="#34A853" d="M13.5 8.6h5.1l.4 4.5h-6.4z" />
+      <path fill="#FBBC05" d="M18.6 8.6h5.1l1.2 4.5h-5.9z" />
+      <path fill="#EA4335" d="M7.1 13.1h17.8a4 4 0 0 1-7.4 2.1 4 4 0 0 1-6.9 0 4 4 0 0 1-3.5-2.1z" opacity="0.9" />
+      <path fill="#4285F4" d="M9.4 16.9h13.2v6.5H9.4z" opacity="0.16" />
+      <path fill="#1A73E8" d="M9.4 16.6h13.2v6.8H9.4z" fillOpacity="0" stroke="#1A73E8" strokeWidth="1.5" />
+      <path fill="#1A73E8" d="M13.6 18.6h4.8v4.8h-4.8z" />
+    </svg>
+  );
+}
+
+export function AppleMapsMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <defs>
+        <linearGradient id="am-g" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#4DD07C" />
+          <stop offset="55%" stopColor="#2FB1E8" />
+          <stop offset="100%" stopColor="#2A6FE8" />
+        </linearGradient>
+      </defs>
+      <rect x="1" y="1" width="30" height="30" rx="7.5" fill="url(#am-g)" />
+      <path fill="#fff" d="M16 7.6a5.4 5.4 0 0 0-5.4 5.4c0 4 5.4 11 5.4 11s5.4-7 5.4-11A5.4 5.4 0 0 0 16 7.6zm0 7.5a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2z" />
+    </svg>
+  );
+}
+
+export function YelpMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#FF1A1A" />
+      <path
+        fill="#fff"
+        d="M14.6 6.6v8.9c0 .8-.9 1.2-1.5.7L8.9 13c-.5-.4-.5-1.2 0-1.7a11 11 0 0 1 4.2-2.6c.7-.2 1.5.2 1.5 1zM13.4 17.9c.6-.3 1.3.2 1.3.9v4.4c0 .8-.8 1.3-1.5 1a10 10 0 0 1-3.4-2.4c-.5-.6-.3-1.5.4-1.8zM17.7 17.7l3.9 1.9c.7.3.8 1.2.3 1.7a10.6 10.6 0 0 1-3.1 2.3c-.7.3-1.5-.2-1.5-1v-4.1c0-.7.8-1.1 1.4-.8zM17.5 15.1l3.6-2.2c.7-.4 1.5.1 1.5.9v3.5c0 .8-.8 1.3-1.5 1l-3.6-1.4c-.7-.3-.7-1.3 0-1.8z"
+      />
+    </svg>
+  );
+}
+
+export function TripAdvisorMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#34E0A1" />
+      <circle cx="11" cy="16.4" r="4.6" fill="none" stroke="#0B0D12" strokeWidth="1.9" />
+      <circle cx="21" cy="16.4" r="4.6" fill="none" stroke="#0B0D12" strokeWidth="1.9" />
+      <circle cx="11" cy="16.4" r="1.7" fill="#0B0D12" />
+      <circle cx="21" cy="16.4" r="1.7" fill="#0B0D12" />
+      <path d="M11.6 11.4A9.6 9.6 0 0 1 16 10.4c1.6 0 3.1.36 4.4 1" stroke="#0B0D12" strokeWidth="1.7" fill="none" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/* ---- Healthcare platform marks ----
+   The surfaces patients actually use to find and evaluate a provider. */
+
+export function HealthgradesMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#0B5CAB" />
+      <path fill="#fff" d="M10.4 8.6h3.3v5.7h4.6V8.6h3.3v14.8h-3.3v-6h-4.6v6h-3.3z" />
+    </svg>
+  );
+}
+
+export function ZocdocMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#FFB000" />
+      <path
+        fill="#0B0D12"
+        d="M9.4 9.4h13.2v2.9l-8.1 7.4h8.3v2.9H9.2v-2.9l8.1-7.4H9.4z"
+      />
+    </svg>
+  );
+}
+
+export function WebMDMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#0077C8" />
+      <path
+        fill="#fff"
+        d="M4.6 12.4h2.5l1.3 5.1 1.4-5.1h2.2l1.4 5.1 1.3-5.1h2.5l-2.5 8.2h-2.4l-1.4-4.9-1.4 4.9H7.1zM18.8 12.4h2.6l1.9 4.6 1.9-4.6h2.6v8.2h-2.2v-5l-1.7 4.1h-1.2l-1.7-4.1v5h-2.2z"
+      />
+    </svg>
+  );
+}
+
+export function NhsMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#005EB8" />
+      <path
+        fill="#fff"
+        d="M5.4 11.6h3.3l1.9 5.3h.05l1.05-5.3h2.5l-1.8 8.8H9.2l-2-5.3h-.05l-1.05 5.3H3.6zM15.4 11.6h2.6l-.6 3.1h2.9l.6-3.1h2.6l-1.8 8.8h-2.6l.65-3.4h-2.9l-.65 3.4h-2.6zM28.3 13.9a4.9 4.9 0 0 0-1.9-.4c-.7 0-1.3.1-1.3.6 0 .95 2.7.6 2.7 2.7 0 1.9-1.8 2.4-3.4 2.4a8 8 0 0 1-2.2-.35l.6-1.95c.35.25 1.1.4 1.7.4.55 0 1.4-.1 1.4-.75 0-1.05-2.7-.65-2.7-2.6 0-1.8 1.6-2.35 3.1-2.35.85 0 1.65.1 2.15.35z"
+      />
+    </svg>
+  );
+}

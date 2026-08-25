@@ -38,12 +38,15 @@ export const HC_HERO = {
   ],
   /* The four orbit nodes of the patient-acquisition loop, clockwise from
      the top. Labels sit outside the ring on the node's own side. */
+  /* Four orbit nodes: the platforms patients actually use to find and
+     evaluate a provider. Brand marks in each service's own colour. */
   orbit: [
-    { title: "Patients search", sub: "for treatments, specialists and locations", icon: "search", side: "top" },
-    { title: "They find you", sub: "and request appointments", icon: "calendar", side: "right" },
-    { title: "Your practice grows", sub: "with real calls, bookings and new patients", icon: "trend", side: "bottom" },
-    { title: "Stronger visibility", sub: "across search and maps", icon: "people", side: "left" },
+    { title: "Google", sub: "treatment, specialist and location searches", icon: "google", side: "top" },
+    { title: "Healthgrades", sub: "provider profiles and ratings", icon: "healthgrades", side: "right" },
+    { title: "Zocdoc", sub: "appointment booking searches", icon: "zocdoc", side: "bottom" },
+    { title: "WebMD", sub: "symptom and condition research", icon: "webmd", side: "left" },
   ],
+
 };
 
 /* Search should bring patients. */
