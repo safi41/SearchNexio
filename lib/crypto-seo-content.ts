@@ -40,8 +40,8 @@ export const CRYPTO_HERO = {
   /* Six orbit nodes: the crypto platforms and assets this page's buyers
      actually research. Brand marks in each project's own colour. */
   orbit: [
-    { title: "Bitcoin", sub: "price, wallet and exchange searches", icon: "bitcoin" },
     { title: "Ethereum", sub: "staking, gas and protocol searches", icon: "ethereum" },
+    { title: "Coinbase", sub: "exchange and fiat on-ramp searches", icon: "coinbase" },
     { title: "Binance", sub: "exchange comparison and fee searches", icon: "binance" },
     { title: "Tether", sub: "stablecoin and on-ramp searches", icon: "tether" },
     { title: "Solana", sub: "chain, DEX and ecosystem searches", icon: "solana" },

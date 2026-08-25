@@ -15,6 +15,7 @@ import {
 import {
   BitcoinMark,
   EthereumMark,
+  CoinbaseMark,
   BinanceMark,
   TetherMark,
   SolanaMark,
@@ -25,7 +26,7 @@ import {
    brands buyers recognise, so each node carries that project's own mark in
    its own colour rather than a generic glyph. */
 const CRYPTO_MARKS: Record<string, React.ReactNode> = {
-  bitcoin: <BitcoinMark size={44} />,
+  coinbase: <CoinbaseMark size={44} />,
   ethereum: <EthereumMark size={44} />,
   binance: <BinanceMark size={44} />,
   tether: <TetherMark size={44} />,
@@ -144,35 +145,19 @@ function CryptoLoop() {
       {/* solid orbit ring the nodes travel on */}
       <div aria-hidden className="absolute inset-[12%] rounded-full border border-indigo/40" />
 
-      {/* core: a verified-trust shield, the argument this page is built on */}
+      {/* core: the Bitcoin mark, the most recognisable asset in the market
+          this page sells into. The orbiting platforms are the surfaces
+          buyers research around it. */}
       <div className="absolute left-1/2 top-1/2 grid size-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center">
-        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-indigo/10 blur-2xl" />
-        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(99,91,255,0.18)]">
-          <svg width="46%" height="46%" viewBox="0 0 48 44" fill="none" aria-hidden>
-            {/* outlined monitor: the reporting surface the loop feeds */}
-            <rect
-              x="2" y="2" width="44" height="32" rx="4"
-              stroke="var(--color-indigo)" strokeWidth="2.6" fill="none"
-            />
-            <path
-              d="M18 41.4h12M24 34v7.4"
-              stroke="var(--color-indigo)" strokeWidth="2.6" strokeLinecap="round"
-            />
-            {/* trend line climbing across the screen */}
-            <path
-              d="m9 24.6 7.4-7.6 5 4.8 9.4-9.6"
-              stroke="var(--color-indigo)" strokeWidth="2.6"
-              strokeLinecap="round" strokeLinejoin="round" fill="none"
-            />
-            <path
-              d="M25.4 12.2h5.8V18"
-              stroke="var(--color-indigo)" strokeWidth="2.6"
-              strokeLinecap="round" strokeLinejoin="round" fill="none"
-            />
-            {/* magnifier reading the trend */}
-            <circle cx="30.6" cy="24.4" r="5.6" stroke="var(--color-indigo)" strokeWidth="2.6" fill="var(--color-surface)" />
-            <path d="m34.8 28.6 4.4 4.4" stroke="var(--color-indigo)" strokeWidth="2.6" strokeLinecap="round" />
-          </svg>
+        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-[#F7931A]/15 blur-2xl" />
+        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(247,147,26,0.22)]">
+          <span
+            title="Bitcoin"
+            aria-label="Bitcoin"
+            className="grid size-[64%] place-items-center"
+          >
+            <BitcoinMark size={148} />
+          </span>
         </span>
       </div>
 

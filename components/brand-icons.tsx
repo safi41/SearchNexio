@@ -328,3 +328,15 @@ export function TetherMark({ size = 18 }: { size?: number }) {
     </svg>
   );
 }
+
+export function CoinbaseMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#0052FF" />
+      <path
+        fill="#fff"
+        d="M16 6a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-2.4 7.2c0-.66.54-1.2 1.2-1.2h2.4c.66 0 1.2.54 1.2 1.2v5.6c0 .66-.54 1.2-1.2 1.2h-2.4c-.66 0-1.2-.54-1.2-1.2z"
+      />
+    </svg>
+  );
+}
