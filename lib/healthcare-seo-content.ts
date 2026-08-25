@@ -121,6 +121,7 @@ export const HC_DIFFERENT = {
 export const HC_SERVICES = [
   {
     key: "strategy",
+    diagram: "intent",
     title: "Patient search strategy",
     desc: "We research the searches patients are actually conducting in your service categories, not just the keywords your competitors are targeting. This covers treatment-specific searches, specialty queries, provider searches, symptom and condition research, location-based intent, and the booking-ready queries that sit at the bottom of the patient search journey. Every keyword is mapped to a page, an intent stage, and an estimated value to the practice.",
     deliverable:
@@ -128,6 +129,7 @@ export const HC_SERVICES = [
   },
   {
     key: "content",
+    diagram: "review",
     title: "Medical content SEO",
     desc: "Treatment pages, condition pages, and specialty pages are the commercial core of a healthcare website. We review existing content against the searches patients are using, the quality of the information provided, the clarity of the call to action, and the standards appropriate for the medical nature of the content. For new content, we develop detailed briefs that define the target patient query, the intended search intent, the clinical accuracy requirements, and the recommended page structure.",
     limit:
@@ -135,39 +137,45 @@ export const HC_SERVICES = [
   },
   {
     key: "local",
+    diagram: "proximity",
     title: "Local patient discovery",
     desc: "Patients search for care the way they search for everything else: with a location in mind, often on a mobile device, frequently using near me language or implicit geographic intent. We improve the local search presence of healthcare organizations through Google Business Profile management, location page optimization, local keyword strategy, citation accuracy, review workflows, and the technical setup that connects the website's location information with Google's local signals. For healthcare organizations managing several locations or practitioners with their own eligible profiles, we also review where profile conflicts or cannibalization may be limiting local visibility.",
     link: { label: "Local SEO services", href: H_ROUTES.localSeo },
   },
   {
     key: "provider",
+    diagram: "architecture",
     title: "Provider and practice SEO",
     desc: "Provider pages can become some of the highest-intent pages on a healthcare website when they are built and indexed correctly. We audit provider pages for search visibility, content quality, and conversion effectiveness. We map how individual practitioners connect to locations, specialties, and treatment pages, and identify where provider pages may be competing against each other or against the parent organization's pages for the same searches. Where providers change locations or leave a practice, we advise on how to handle those changes in a way that protects the search equity in existing pages and avoids creating orphaned or misleading content.",
-    diagram: true,
   },
   {
     key: "treatment",
+    diagram: "treatment",
     title: "Treatment page optimization",
     desc: "A treatment page that ranks without converting is a visibility success and an acquisition failure. We evaluate treatment pages against the patient questions that search behavior reveals: what does the procedure involve, who performs it, what should I expect, how do I book. We review appointment CTAs, phone number visibility, online booking integration, provider availability signals, and location information.",
   },
   {
     key: "multilocation",
+    diagram: "locations",
     title: "Multi-location healthcare SEO",
     desc: "Healthcare groups with several clinics, hospital systems with multiple campuses, and specialty practices with several locations face challenges that single-location practices do not encounter. Individual locations may rank strongly for nearby searches while distant locations are invisible. Location pages may be duplicated across the website with only the address changed. Provider pages may not correctly indicate which location a physician operates from. We manage multi-location healthcare SEO at the location level: separate keyword research for each clinic's market, location-specific content that reflects the services actually available there, individual GBP management, and location-level reporting that shows how each branch performs rather than averaging results.",
   },
   {
     key: "technical",
+    diagram: "crawl",
     title: "Technical healthcare SEO",
     desc: "Healthcare websites often carry technical complexity that affects how well their content is discovered and indexed. Provider directories built on JavaScript frameworks that search engines cannot fully crawl. Booking widgets that create duplicate URLs or prevent proper indexation of appointment pages. Location pages that share content across branches with only an address changed. We audit the technical foundation with attention to the structural issues specific to healthcare.",
     link: { label: "Technical SEO services", href: H_ROUTES.technicalSeo },
   },
   {
     key: "authority",
+    diagram: "authority",
     title: "Healthcare authority building",
     desc: "We identify the healthcare publications, professional associations, local health organizations, specialty directories, and digital PR opportunities most relevant to the client's specialty and geography. Where providers have clinical expertise that could be communicated through expert commentary, research contributions, or professional organization participation, we map those opportunities as part of the authority-building plan. This is not a backlink-count exercise.",
   },
   {
     key: "reviews",
+    diagram: "reputation",
     title: "Patient reviews and reputation",
     desc: "Reviews of healthcare organizations can attach to a practice, to an individual practitioner, or to a specific location, and managing them consistently across all three requires more coordination than most practices invest in. We build review request workflows that are appropriate, consistent, and policy-compliant: systems that make it easy for satisfied patients to share their experience without pressure, gating, or incentive. We monitor review performance by location and by provider, advise on response practices that protect patient privacy, and help organizations manage their reputation across the platforms most relevant to patient research.",
     limit:
@@ -175,11 +183,13 @@ export const HC_SERVICES = [
   },
   {
     key: "booking",
+    diagram: "booking",
     title: "Booking conversion optimization",
     desc: "An increase in organic traffic that produces no increase in patient calls usually points to a conversion problem, not an SEO problem. We review the experience a patient has after they arrive from a search: how visible the phone number is, whether the booking path requires too many steps, whether mobile patients can navigate easily to an appointment, whether provider pages make it clear how to book a specific physician. Small friction reductions in the booking path can produce measurable increases in contact rate without any additional SEO investment.",
   },
   {
     key: "tracking",
+    diagram: "attribution",
     title: "Patient acquisition tracking",
     desc: "We implement call tracking, form tracking, and online booking attribution that connects patient contacts to the search sources that produced them. Reporting covers call volume by source, appointment requests by page and service line, location-level organic performance, and revenue where reliable attribution exists through the client's CRM or practice management system.",
     limit:
@@ -187,6 +197,7 @@ export const HC_SERVICES = [
   },
   {
     key: "ai",
+    diagram: "entity",
     title: "AI assisted patient discovery",
     desc: "Patients are increasingly using AI tools at some point in their health research. For AI systems to represent a healthcare organization accurately, the organization's entity signals need to be clear: what the practice does, who the providers are, what their credentials are, what specialties and treatments are offered, and which locations serve which service areas. Fragmented information, conflicting descriptions across the web, and missing entity data all reduce the likelihood that AI systems retrieve and represent the organization accurately. We assess how AI systems currently represent healthcare clients and address the structural issues that affect accurate AI representation.",
     limit:

@@ -477,20 +477,51 @@ export function CryptoDifferent() {
           ))}
         </div>
 
-        {/* founder insight: editorial commentary, not a testimonial */}
+        {/* founder insight. Editorial commentary, so it is set as a quote
+            with a typographic mark and an author rule rather than a plain
+            coloured bar. */}
         <Reveal delay={80}>
-          <figure className="mt-10 rounded-3xl border-l-[3px] border-indigo bg-ivory/60 px-8 py-8 md:px-10">
-            <figcaption className="text-[11px] font-bold uppercase tracking-[0.14em] text-indigo">
-              {FOUNDER_INSIGHT.eyebrow}
-            </figcaption>
-            <blockquote className="mt-4 max-w-3xl font-heading text-[clamp(1.05rem,1.9vw,1.3rem)] font-bold leading-snug tracking-[-0.01em]">
-              &ldquo;{FOUNDER_INSIGHT.quote}&rdquo;
-            </blockquote>
-            <p className="mt-5 text-[13px] font-semibold text-graphite">
-              {FOUNDER_INSIGHT.name}
-              <span className="mx-2 text-line">|</span>
-              {FOUNDER_INSIGHT.role}
-            </p>
+          <figure className="relative mt-12 overflow-hidden rounded-3xl bg-ink-solid px-8 py-10 md:px-14 md:py-12">
+            {/* soft indigo wash so the panel is not a flat black slab */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -left-24 -top-24 size-72 rounded-full bg-indigo/25 blur-3xl"
+            />
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -bottom-28 right-0 size-72 rounded-full bg-indigo/15 blur-3xl"
+            />
+            {/* oversized quote mark, set as decoration behind the text */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute right-8 top-2 font-heading text-[140px] leading-none text-white/[0.07] md:right-14 md:text-[190px]"
+            >
+              &rdquo;
+            </span>
+
+            <div className="relative">
+              <figcaption className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.16em] text-citron">
+                <span aria-hidden className="h-px w-7 bg-citron/60" />
+                {FOUNDER_INSIGHT.eyebrow}
+              </figcaption>
+
+              <blockquote className="mt-6 max-w-3xl font-heading text-[clamp(1.15rem,2.2vw,1.6rem)] font-bold leading-[1.4] tracking-[-0.015em] text-white">
+                {FOUNDER_INSIGHT.quote}
+              </blockquote>
+
+              <div className="mt-8 flex items-center gap-4">
+                <span
+                  aria-hidden
+                  className="grid size-11 shrink-0 place-items-center rounded-full bg-white/10 font-heading text-[15px] font-bold text-white ring-1 ring-white/15"
+                >
+                  HL
+                </span>
+                <p className="text-[13.5px] leading-tight">
+                  <span className="block font-bold text-white">{FOUNDER_INSIGHT.name}</span>
+                  <span className="mt-0.5 block text-white/55">{FOUNDER_INSIGHT.role}</span>
+                </p>
+              </div>
+            </div>
           </figure>
         </Reveal>
       </div>

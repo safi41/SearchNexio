@@ -18,6 +18,326 @@ import {
 
 /* The one micro-example: provider architecture, showing how an organization,
    its locations, providers and treatment pages relate. */
+
+/* ---- Service diagrams ----
+   One per service. Each shows a mechanism the copy alone cannot: a
+   workflow, a structure, or a before/after. Sample values are illustrative
+   and labelled as such; nothing here reports a real patient outcome. */
+function HcFrame({ children }: { children: React.ReactNode }) {
+  return (
+    <figure className="mt-6 rounded-2xl border border-line bg-ivory/60 p-6">
+      {children}
+      <figcaption className="mt-4 text-[11.5px] text-graphite">Illustrative example.</figcaption>
+    </figure>
+  );
+}
+
+const T = { fontSize: 10.5 } as const;
+const TB = { fontSize: 11, fontWeight: 700 } as const;
+const TS = { fontSize: 9.5 } as const;
+
+/* 01 Patient search strategy: the same condition searched three ways, each
+   needing a different page. */
+function DIntent() {
+  const rows = [
+    { q: "what causes knee pain", stage: "Symptom", page: "Condition guide" },
+    { q: "knee specialist near me", stage: "Provider", page: "Location page" },
+    { q: "knee replacement cost", stage: "Decision", page: "Treatment page" },
+  ];
+  return (
+    <svg viewBox="0 0 420 176" className="w-full" fill="none" aria-hidden>
+      <text x="0" y="12" className="fill-graphite" style={TS}>Search</text>
+      <text x="196" y="12" className="fill-graphite" style={TS}>Stage</text>
+      <text x="300" y="12" className="fill-graphite" style={TS}>Page that answers it</text>
+      {rows.map((r, i) => {
+        const y = 30 + i * 44;
+        return (
+          <g key={r.q}>
+            <rect x="0" y={y} width="180" height="30" rx="7" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.2" />
+            <text x="12" y={y + 19} className="fill-ink" style={T}>{r.q}</text>
+            <text x="196" y={y + 19} className="fill-graphite" style={T}>{r.stage}</text>
+            <path d={`M282 ${y + 15} h14m0 0-5-4m5 4-5 4`} stroke="var(--color-indigo)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+            <rect x="300" y={y} width="120" height="30" rx="7" fill="var(--color-indigo)" fillOpacity={0.09 + i * 0.06} stroke="var(--color-indigo)" strokeWidth="1.2" strokeOpacity="0.4" />
+            <text x="360" y={y + 19} textAnchor="middle" className="fill-ink" style={T}>{r.page}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+/* 02 Medical content SEO: the clinical review step between draft and live. */
+function DReview() {
+  const steps = ["Draft", "Clinician review", "Cited sources", "Published"];
+  return (
+    <svg viewBox="0 0 420 150" className="w-full" fill="none" aria-hidden>
+      <path d="M10 74 H410" stroke="var(--color-line)" strokeWidth="1.2" />
+      {steps.map((t, i) => {
+        const x = 10 + i * 102;
+        const on = i === 1;
+        return (
+          <g key={t}>
+            <rect x={x} y="54" width="92" height="40" rx="8" fill={on ? "var(--color-indigo)" : "var(--color-surface)"} fillOpacity={on ? 0.14 : 1} stroke={on ? "var(--color-indigo)" : "var(--color-line)"} strokeWidth={on ? 1.5 : 1.2} />
+            <text x={x + 46} y="78" textAnchor="middle" className="fill-ink" style={TB}>{t}</text>
+            {i < 3 && <path d={`M${x + 94} 74 h6m0 0-4-3m4 3-4 3`} stroke="var(--color-indigo)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />}
+          </g>
+        );
+      })}
+      <text x="10" y="126" className="fill-graphite" style={TS}>No medical claim publishes without a named clinical reviewer.</text>
+    </svg>
+  );
+}
+
+/* 03 Local patient discovery: rank varies by where the patient stands. */
+function DProximity() {
+  const pins = [
+    { x: 140, y: 40, d: "1 km" },
+    { x: 196, y: 118, d: "5 km" },
+    { x: 84, y: 142, d: "12 km" },
+  ];
+  const rows: [string, string][] = [["1 km", "#1"], ["5 km", "#4"], ["12 km", "#9"]];
+  return (
+    <svg viewBox="0 0 420 190" className="w-full" fill="none" aria-hidden>
+      {[68, 46, 24].map((r, i) => (
+        <circle key={r} cx="140" cy="95" r={r} fill="var(--color-indigo)" fillOpacity={0.05 + i * 0.04} stroke="var(--color-indigo)" strokeWidth="1" strokeOpacity="0.25" strokeDasharray="4 5" />
+      ))}
+      <circle cx="140" cy="95" r="7" fill="var(--color-indigo)" />
+      <text x="140" y="80" textAnchor="middle" className="fill-ink" style={TB}>Clinic</text>
+      {pins.map((p) => (
+        <g key={p.d}>
+          <circle cx={p.x} cy={p.y} r="4.4" fill="var(--color-surface)" stroke="var(--color-indigo)" strokeWidth="1.6" />
+          <text x={p.x + 9} y={p.y + 4} className="fill-graphite" style={TS}>{p.d}</text>
+        </g>
+      ))}
+      <rect x="252" y="42" width="168" height="106" rx="9" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.2" />
+      <text x="266" y="62" className="fill-graphite" style={TS}>Map rank by patient distance</text>
+      {rows.map(([d, r], i) => (
+        <g key={d}>
+          <text x="266" y={86 + i * 22} className="fill-ink" style={T}>{d}</text>
+          <text x="406" y={86 + i * 22} textAnchor="end" className="fill-indigo" style={TB}>{r}</text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+/* 05 Treatment page optimization: one thin page split into the questions
+   patients actually ask. */
+function DTreatment() {
+  const parts = ["What it treats", "How it works", "Recovery", "Cost and cover", "Who performs it"];
+  return (
+    <svg viewBox="0 0 420 190" className="w-full" fill="none" aria-hidden>
+      <text x="0" y="12" className="fill-graphite" style={TS}>Before</text>
+      <rect x="0" y="22" width="130" height="46" rx="8" stroke="var(--color-line)" strokeWidth="1.2" strokeDasharray="4 4" />
+      <text x="65" y="50" textAnchor="middle" className="fill-graphite" style={T}>One thin page</text>
+      <path d="M144 45 h20m0 0-6-5m6 5-6 5" stroke="var(--color-indigo)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+      <text x="186" y="12" className="fill-graphite" style={TS}>After</text>
+      {parts.map((t, i) => (
+        <g key={t}>
+          <rect x="186" y={22 + i * 31} width="234" height="24" rx="6" fill="var(--color-indigo)" fillOpacity="0.09" stroke="var(--color-indigo)" strokeWidth="1.1" strokeOpacity="0.35" />
+          <text x="198" y={38 + i * 31} className="fill-ink" style={T}>{t}</text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+/* 06 Multi-location: one brand, many location pages, no duplicate copy. */
+function DLocations() {
+  return (
+    <svg viewBox="0 0 420 176" className="w-full" fill="none" aria-hidden>
+      <rect x="150" y="6" width="120" height="34" rx="8" fill="var(--color-indigo)" fillOpacity="0.12" stroke="var(--color-indigo)" strokeWidth="1.3" />
+      <text x="210" y="28" textAnchor="middle" className="fill-ink" style={TB}>Practice brand</text>
+      {[0, 1, 2, 3].map((i) => {
+        const x = 8 + i * 104;
+        return (
+          <g key={i}>
+            <path d={`M210 42 C210 66 ${x + 45} 66 ${x + 45} 88`} stroke="var(--color-indigo)" strokeWidth="1.2" strokeOpacity="0.45" />
+            <rect x={x} y="88" width="92" height="44" rx="8" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.2" />
+            <text x={x + 46} y="108" textAnchor="middle" className="fill-ink" style={TB}>{`Location ${i + 1}`}</text>
+            <text x={x + 46} y="122" textAnchor="middle" className="fill-graphite" style={TS}>own page</text>
+          </g>
+        );
+      })}
+      <text x="0" y="164" className="fill-graphite" style={TS}>Each location earns its own page. Shared copy is not duplicated across them.</text>
+    </svg>
+  );
+}
+
+/* 07 Technical: a booking flow the crawler cannot reach. */
+function DCrawl() {
+  return (
+    <svg viewBox="0 0 420 160" className="w-full" fill="none" aria-hidden>
+      <rect x="0" y="22" width="92" height="34" rx="7" stroke="var(--color-line)" strokeWidth="1.2" />
+      <text x="46" y="43" textAnchor="middle" className="fill-ink" style={T}>Crawler</text>
+      <path d="M96 39 H150" stroke="var(--color-indigo)" strokeWidth="1.2" strokeOpacity="0.7" />
+      <rect x="154" y="22" width="110" height="34" rx="7" fill="var(--color-indigo)" fillOpacity="0.09" stroke="var(--color-indigo)" strokeWidth="1.2" strokeOpacity="0.45" />
+      <text x="209" y="43" textAnchor="middle" className="fill-ink" style={T}>Treatment page</text>
+      <path d="M268 39 H322" stroke="var(--color-line)" strokeWidth="1.2" strokeDasharray="4 4" />
+      <path d="m332 30 12 16m0-16-12 16" stroke="var(--color-warn)" strokeWidth="2" strokeLinecap="round" />
+      <text x="356" y="36" className="fill-warn" style={TS}>booking widget</text>
+      <text x="356" y="50" className="fill-warn" style={TS}>not crawlable</text>
+
+      <rect x="0" y="96" width="92" height="34" rx="7" stroke="var(--color-line)" strokeWidth="1.2" />
+      <text x="46" y="117" textAnchor="middle" className="fill-ink" style={T}>Crawler</text>
+      <path d="M96 113 H150" stroke="var(--color-indigo)" strokeWidth="1.2" strokeOpacity="0.7" />
+      <rect x="154" y="96" width="110" height="34" rx="7" fill="var(--color-indigo)" fillOpacity="0.09" stroke="var(--color-indigo)" strokeWidth="1.2" strokeOpacity="0.45" />
+      <text x="209" y="117" textAnchor="middle" className="fill-ink" style={T}>Treatment page</text>
+      <path d="M268 113 h44m0 0-6-4m6 4-6 4" stroke="var(--color-indigo)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+      <text x="320" y="117" className="fill-ink" style={T}>server-rendered</text>
+    </svg>
+  );
+}
+
+/* 08 Authority: medical relevance decides the weight of a citation. */
+function DAuthority() {
+  const src = [
+    { t: "Medical association", w: 16 },
+    { t: "Health publication", w: 13 },
+    { t: "University research", w: 12 },
+    { t: "Local health directory", w: 9 },
+  ];
+  return (
+    <svg viewBox="0 0 420 178" className="w-full" fill="none" aria-hidden>
+      <circle cx="308" cy="88" r="36" fill="var(--color-indigo)" fillOpacity="0.11" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.45" />
+      <text x="308" y="85" textAnchor="middle" className="fill-ink" style={TB}>Practice</text>
+      <text x="308" y="99" textAnchor="middle" className="fill-graphite" style={TS}>authority</text>
+      {src.map((x, i) => {
+        const y = 26 + i * 42;
+        return (
+          <g key={x.t}>
+            <circle cx="34" cy={y} r={x.w} fill="var(--color-indigo)" fillOpacity="0.16" />
+            <text x="58" y={y + 4} className="fill-ink" style={T}>{x.t}</text>
+            <path d={`M212 ${y} C248 ${y} 248 88 270 88`} stroke="var(--color-indigo)" strokeWidth="1.2" strokeOpacity={0.6 - i * 0.1} />
+          </g>
+        );
+      })}
+      <text x="0" y="170" className="fill-graphite" style={TS}>Medical relevance decides the weight, not the number of links.</text>
+    </svg>
+  );
+}
+
+/* 09 Reviews and reputation: the loop from visit to published review. */
+function DReputation() {
+  const steps = ["Visit ends", "Review request", "Patient reviews", "Practice responds"];
+  return (
+    <svg viewBox="0 0 420 170" className="w-full" fill="none" aria-hidden>
+      <ellipse cx="210" cy="82" rx="118" ry="54" fill="none" stroke="var(--color-indigo)" strokeWidth="1.2" strokeOpacity="0.3" strokeDasharray="5 6" />
+      {steps.map((t, i) => {
+        const a = (-90 + i * 90) * (Math.PI / 180);
+        const cx = 210 + 118 * Math.cos(a);
+        const cy = 82 + 54 * Math.sin(a);
+        return (
+          <g key={t}>
+            <rect x={cx - 58} y={cy - 15} width="116" height="30" rx="8" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.2" />
+            <text x={cx} y={cy + 4} textAnchor="middle" className="fill-ink" style={T}>{t}</text>
+          </g>
+        );
+      })}
+      <text x="210" y="86" textAnchor="middle" className="fill-indigo" style={TB}>Ongoing</text>
+      <text x="0" y="164" className="fill-graphite" style={TS}>Responses are written to comply with patient privacy rules.</text>
+    </svg>
+  );
+}
+
+/* 10 Booking conversion: where patients drop out of the booking flow. */
+function DBooking() {
+  const steps = [
+    { t: "Treatment page", w: 300 },
+    { t: "Booking opened", w: 232 },
+    { t: "Details entered", w: 168 },
+    { t: "Appointment booked", w: 122 },
+  ];
+  return (
+    <svg viewBox="0 0 420 176" className="w-full" fill="none" aria-hidden>
+      {steps.map((s, i) => {
+        const y = 12 + i * 38;
+        return (
+          <g key={s.t}>
+            <rect x="0" y={y} width={s.w} height="28" rx="6" fill="var(--color-indigo)" fillOpacity={0.1 + i * 0.09} />
+            <text x="12" y={y + 18} className="fill-ink" style={T}>{s.t}</text>
+            {i === 1 && (
+              <>
+                <path d={`M${s.w + 10} ${y + 14} h16`} stroke="var(--color-warn)" strokeWidth="1.3" strokeDasharray="3 3" />
+                <text x={s.w + 32} y={y + 18} className="fill-warn" style={TS}>largest drop-off</text>
+              </>
+            )}
+          </g>
+        );
+      })}
+      <text x="0" y="170" className="fill-graphite" style={TS}>We fix the step losing the most patients first. Widths are illustrative.</text>
+    </svg>
+  );
+}
+
+/* 11 Acquisition tracking: what is measurable and what is not. */
+function DAttribution() {
+  return (
+    <svg viewBox="0 0 420 170" className="w-full" fill="none" aria-hidden>
+      <text x="0" y="12" className="fill-graphite" style={TS}>Tracked</text>
+      {["Organic session", "Form submission", "Click to call"].map((t, i) => (
+        <g key={t}>
+          <rect x="0" y={22 + i * 34} width="182" height="26" rx="6" fill="var(--color-indigo)" fillOpacity="0.11" stroke="var(--color-indigo)" strokeWidth="1.1" strokeOpacity="0.35" />
+          <text x="12" y={39 + i * 34} className="fill-ink" style={T}>{t}</text>
+        </g>
+      ))}
+      <text x="238" y="12" className="fill-graphite" style={TS}>Not attributable</text>
+      {["Walk-in visit", "Phone call off-site", "Word of mouth referral"].map((t, i) => (
+        <g key={t}>
+          <rect x="238" y={22 + i * 34} width="182" height="26" rx="6" stroke="var(--color-line)" strokeWidth="1.1" strokeDasharray="4 4" />
+          <text x="250" y={39 + i * 34} className="fill-graphite" style={T}>{t}</text>
+        </g>
+      ))}
+      <text x="0" y="162" className="fill-graphite" style={TS}>Reporting states which side of this line each number falls on.</text>
+    </svg>
+  );
+}
+
+/* 12 AI assisted discovery: the facts an AI answer needs to name you. */
+function DEntity() {
+  const facts = ["Specialties", "Locations", "Clinicians", "Accreditation"];
+  return (
+    <svg viewBox="0 0 420 170" className="w-full" fill="none" aria-hidden>
+      {facts.map((t, i) => (
+        <g key={t}>
+          <rect x="0" y={14 + i * 34} width="150" height="26" rx="6" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.1" />
+          <text x="12" y={31 + i * 34} className="fill-ink" style={T}>{t}</text>
+          <path d={`M154 ${27 + i * 34} C186 ${27 + i * 34} 188 84 210 84`} stroke="var(--color-indigo)" strokeWidth="1.2" strokeOpacity="0.5" />
+        </g>
+      ))}
+      <rect x="214" y="60" width="94" height="48" rx="9" fill="var(--color-indigo)" fillOpacity="0.11" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.45" />
+      <text x="261" y="80" textAnchor="middle" className="fill-ink" style={TB}>Entity</text>
+      <text x="261" y="95" textAnchor="middle" className="fill-graphite" style={TS}>understood</text>
+      <path d="M312 84 h20m0 0-6-4m6 4-6 4" stroke="var(--color-indigo)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="340" y="62" width="80" height="44" rx="9" stroke="var(--color-line)" strokeWidth="1.2" />
+      <text x="380" y="80" textAnchor="middle" className="fill-ink" style={T}>Named in</text>
+      <text x="380" y="94" textAnchor="middle" className="fill-ink" style={T}>AI answers</text>
+      <text x="0" y="162" className="fill-graphite" style={TS}>No platform can be made to cite a provider. These are the conditions for it.</text>
+    </svg>
+  );
+}
+
+function ServiceDiagram({ kind }: { kind: string }) {
+  const map: Record<string, React.ReactNode> = {
+    intent: <DIntent />,
+    review: <DReview />,
+    proximity: <DProximity />,
+    architecture: <ProviderArchitecture />,
+    treatment: <DTreatment />,
+    locations: <DLocations />,
+    crawl: <DCrawl />,
+    authority: <DAuthority />,
+    reputation: <DReputation />,
+    booking: <DBooking />,
+    attribution: <DAttribution />,
+    entity: <DEntity />,
+  };
+  const body = map[kind];
+  if (!body) return null;
+  if (kind === "architecture") return <>{body}</>;
+  return <HcFrame>{body}</HcFrame>;
+}
+
 function ProviderArchitecture() {
   return (
     <figure className="mt-6 rounded-2xl border border-line bg-ivory/60 p-6">
@@ -124,7 +444,7 @@ export function HealthServices() {
                   {current.limit}
                 </p>
               )}
-              {current.diagram && <ProviderArchitecture />}
+              {current.diagram && <ServiceDiagram kind={current.diagram} />}
 
               <div className="mt-5 flex flex-wrap gap-4">
                 {current.link && (
@@ -171,6 +491,7 @@ export function HealthServices() {
                           </p>
                         )}
                         {s.limit && <p className="mt-3 text-[12.5px] leading-relaxed text-graphite">{s.limit}</p>}
+                        {s.diagram && <ServiceDiagram kind={s.diagram} />}
                       </div>
                     </div>
                   </div>
