@@ -340,3 +340,81 @@ export function CoinbaseMark({ size = 18 }: { size?: number }) {
     </svg>
   );
 }
+
+/* ---- B2B SaaS platform marks ----
+   Recognisable software brands in their own colours, used in the B2B SaaS
+   hero orbit. Simplified from each official mark so they read at small
+   sizes without losing their identity. */
+
+export function SalesforceMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#00A1E0" />
+      <path
+        fill="#fff"
+        d="M14.6 10.3a3.9 3.9 0 0 1 2.8-1.2c1.44 0 2.7.8 3.37 2a4.6 4.6 0 0 1 1.9-.41c2.55 0 4.63 2.1 4.63 4.7s-2.08 4.7-4.64 4.7c-.31 0-.62-.03-.91-.09a3.4 3.4 0 0 1-3 1.76c-.5 0-.99-.11-1.42-.32a3.9 3.9 0 0 1-3.6 2.37 3.87 3.87 0 0 1-3.63-2.5c-.24.05-.5.08-.75.08a3.75 3.75 0 0 1-1.9-6.98 4.31 4.31 0 0 1 7.15-4.11z"
+      />
+    </svg>
+  );
+}
+
+export function HubSpotMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#FF7A59" />
+      <path
+        fill="#fff"
+        d="M21.3 13.4V11a1.9 1.9 0 0 0 1.1-1.7v-.06a1.9 1.9 0 0 0-1.9-1.9h-.06a1.9 1.9 0 0 0-1.9 1.9v.06a1.9 1.9 0 0 0 1.1 1.7v2.4a5.4 5.4 0 0 0-2.56 1.13l-6.78-5.28a2.16 2.16 0 1 0-1.02 1.32l6.66 5.19a5.4 5.4 0 0 0 .08 6.1l-2.03 2.03a1.75 1.75 0 1 0 1.24 1.24l2-2a5.42 5.42 0 1 0 4.07-9.73zm-1.1 8.13a2.78 2.78 0 1 1 0-5.56 2.78 2.78 0 0 1 0 5.56z"
+      />
+    </svg>
+  );
+}
+
+export function SlackMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#fff" />
+      <path fill="#E01E5A" d="M11.4 18.6a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 1.75-1.75h1.75zm.88 0a1.75 1.75 0 0 1 3.5 0v4.4a1.75 1.75 0 1 1-3.5 0z" />
+      <path fill="#36C5F0" d="M14.03 11.55a1.75 1.75 0 1 1 1.75-1.75v1.75zm0 .89a1.75 1.75 0 0 1 0 3.5H9.6a1.75 1.75 0 0 1 0-3.5z" />
+      <path fill="#2EB67D" d="M20.6 14.03a1.75 1.75 0 1 1 1.75 1.75H20.6zm-.88 0a1.75 1.75 0 0 1-3.5 0V9.6a1.75 1.75 0 1 1 3.5 0z" />
+      <path fill="#ECB22E" d="M17.97 20.6a1.75 1.75 0 1 1-1.75 1.75V20.6zm0-.88a1.75 1.75 0 0 1 0-3.5h4.4a1.75 1.75 0 1 1 0 3.5z" />
+    </svg>
+  );
+}
+
+export function StripeMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#635BFF" />
+      <path
+        fill="#fff"
+        d="M14.9 13.2c0-.63.52-.87 1.37-.87 1.23 0 2.79.37 4.02 1.04v-3.8a10.7 10.7 0 0 0-4.02-.74c-3.28 0-5.46 1.71-5.46 4.58 0 4.46 6.14 3.75 6.14 5.67 0 .74-.65 .98-1.55.98-1.34 0-3.06-.55-4.42-1.3v3.85c1.5.65 3.02.92 4.42.92 3.36 0 5.67-1.66 5.67-4.57 0-4.82-6.17-3.96-6.17-5.76z"
+      />
+    </svg>
+  );
+}
+
+export function NotionMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#fff" />
+      <circle cx="16" cy="16" r="15.4" fill="none" stroke="#E6E4DE" strokeWidth="1.2" />
+      <path
+        fill="#0B0D12"
+        d="M9.9 10.1c.5.4.69.37 1.63.31l8.83-.53c.19 0 .03-.19-.03-.22l-1.47-1.06c-.28-.22-.66-.47-1.38-.41l-8.55.62c-.31.03-.38.19-.25.31zm.53 2.06v9.29c0 .5.25.69.81.66l9.7-.56c.56-.03.63-.38.63-.79v-9.23c0-.4-.16-.62-.5-.59l-10.14.6c-.37.03-.5.22-.5.62zm9.57.5c.06.28 0 .56-.28.6l-.47.09v6.87c-.4.22-.78.34-1.1.34-.5 0-.63-.16-1-.63l-3.06-4.81v4.65l.97.22s0 .56-.78.56l-2.16.12c-.06-.13 0-.44.22-.5l.56-.16v-6.15l-.78-.06c-.06-.28.09-.69.53-.72l2.32-.16 3.19 4.9v-4.34l-.81-.09c-.06-.34.19-.6.5-.62z"
+      />
+    </svg>
+  );
+}
+
+export function ZoomMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#0B5CFF" />
+      <path
+        fill="#fff"
+        d="M8 12.7c0-.86.7-1.55 1.55-1.55h7.6c.86 0 1.55.7 1.55 1.55v6.6c0 .86-.7 1.55-1.55 1.55h-7.6A1.55 1.55 0 0 1 8 19.3zm12.1 1.9 3.2-2.34c.28-.2.7-.01.7.34v6.8c0 .35-.42.54-.7.34l-3.2-2.34z"
+      />
+    </svg>
+  );
+}

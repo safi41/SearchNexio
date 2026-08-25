@@ -40,14 +40,15 @@ export const SAAS_HERO = {
     { title: "Google and AI search", sub: "One discovery strategy", icon: "sparkle" },
     { title: "Pipeline attribution", sub: "Trials, demos, SQLs", icon: "funnel" },
   ],
-  /* Five orbit nodes: the SaaS buyer journey this page is built around,
-     clockwise from the top. */
+  /* Five orbit nodes: the B2B SaaS platforms this page's buyers evaluate
+     and compare. Brand marks in each product's own colour, with Salesforce
+     at the hub. */
   orbit: [
-    { title: "Problem aware", sub: "something is not working", icon: "search" },
-    { title: "Solution aware", sub: "researching categories", icon: "layers" },
-    { title: "Product aware", sub: "features and integrations", icon: "cube" },
-    { title: "Comparison", sub: "weighing products", icon: "scale" },
-    { title: "Decision stage", sub: "pricing and shortlists", icon: "check" },
+    { title: "HubSpot", sub: "category and comparison searches", icon: "hubspot" },
+    { title: "Slack", sub: "integration and use-case searches", icon: "slack" },
+    { title: "Stripe", sub: "pricing and implementation searches", icon: "stripe" },
+    { title: "Notion", sub: "alternative and template searches", icon: "notion" },
+    { title: "Zoom", sub: "feature and plan comparison searches", icon: "zoom" },
   ],
 };
 

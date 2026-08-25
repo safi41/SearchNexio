@@ -8,6 +8,25 @@ import {
   SAAS_BUILT_FOR,
   SAAS_FAILS,
 } from "@/lib/saas-seo-content";
+import {
+  SalesforceMark,
+  HubSpotMark,
+  SlackMark,
+  StripeMark,
+  NotionMark,
+  ZoomMark,
+} from "@/components/brand-icons";
+
+/* Platform marks for the hero orbit. The client asked for the real SaaS
+   brands buyers recognise, so each node carries that product's own mark in
+   its own colour rather than a generic glyph. */
+const SAAS_MARKS: Record<string, React.ReactNode> = {
+  hubspot: <HubSpotMark size={44} />,
+  slack: <SlackMark size={44} />,
+  stripe: <StripeMark size={44} />,
+  notion: <NotionMark size={44} />,
+  zoom: <ZoomMark size={44} />,
+};
 
 /* Site-wide orbit speed, matching every other hero diagram. */
 const ORBIT_SPEED = "48s";
@@ -86,30 +105,19 @@ function JourneyLoop() {
       {/* solid orbit ring the nodes travel on */}
       <div aria-hidden className="absolute inset-[12%] rounded-full border border-indigo/40" />
 
-      {/* core: the pipeline funnel every stage of the journey feeds */}
+      {/* core: the Salesforce mark, the platform this page's buyers most
+          often anchor their stack around. The orbiting products are the
+          surfaces they compare against it. */}
       <div className="absolute left-1/2 top-1/2 grid size-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center">
-        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-indigo/10 blur-2xl" />
-        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(99,91,255,0.18)]">
-          <svg width="46%" height="46%" viewBox="0 0 48 46" fill="none" aria-hidden>
-            {/* the funnel: broad search demand narrowing to qualified pipeline */}
-            <path
-              d="M4 5.4h40L28.2 24v13.4L19.8 42.4V24Z"
-              stroke="var(--color-indigo)"
-              strokeWidth="2.6"
-              strokeLinejoin="round"
-              fill="none"
-            />
-            {/* intake marks across the mouth: many searches enter */}
-            <path
-              d="M13 12.6h22M18 18.4h12"
-              stroke="var(--color-indigo)"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeOpacity="0.45"
-            />
-            {/* the qualified outcome leaving the stem */}
-            <circle cx="24" cy="30" r="3.4" fill="var(--color-indigo)" />
-          </svg>
+        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-[#00A1E0]/15 blur-2xl" />
+        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(0,161,224,0.22)]">
+          <span
+            title="Salesforce"
+            aria-label="Salesforce"
+            className="grid size-[64%] place-items-center"
+          >
+            <SalesforceMark size={148} />
+          </span>
         </span>
       </div>
 
@@ -127,19 +135,7 @@ function JourneyLoop() {
               className="animate-orbit grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
               style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
             >
-              <svg
-                width="34"
-                height="34"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--color-indigo)"
-                strokeWidth="1.7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden
-              >
-                {HERO_ICONS[n.icon]}
-              </svg>
+              {SAAS_MARKS[n.icon]}
             </span>
           </div>
         ))}
