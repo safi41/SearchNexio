@@ -449,6 +449,16 @@ export function CryptoServices() {
               </h3>
               <p className="mt-4 text-[15px] leading-relaxed text-graphite">{current.desc}</p>
 
+              {current.bullets && (
+                <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+                  {current.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-2.5 text-[13.5px] leading-relaxed text-ink/80">
+                      <span aria-hidden className="mt-[7px] size-1.5 shrink-0 rounded-full bg-indigo" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              )}
               {current.deliverable && (
                 <p className="mt-5 rounded-2xl border border-indigo/20 bg-lilac/40 px-5 py-4 text-[13.5px] leading-relaxed text-ink">
                   <span className="font-semibold">Deliverable.</span> {current.deliverable}
@@ -503,6 +513,16 @@ export function CryptoServices() {
                     <div className="overflow-hidden">
                       <div className="pb-5">
                         <p className="text-[13.5px] leading-relaxed text-graphite">{s.desc}</p>
+                        {s.bullets && (
+                          <ul className="mt-4 grid gap-2">
+                            {s.bullets.map((b) => (
+                              <li key={b} className="flex items-start gap-2.5 text-[13px] leading-relaxed text-ink/80">
+                                <span aria-hidden className="mt-[7px] size-1.5 shrink-0 rounded-full bg-indigo" />
+                                {b}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                         {s.deliverable && (
                           <p className="mt-3 rounded-xl border border-indigo/20 bg-lilac/40 px-4 py-3 text-[12.5px] leading-relaxed text-ink">
                             <span className="font-semibold">Deliverable.</span> {s.deliverable}

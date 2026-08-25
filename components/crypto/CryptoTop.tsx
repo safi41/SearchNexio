@@ -5,19 +5,43 @@ import { CtaLink } from "@/components/ui";
 import {
   CRYPTO_HERO,
   QUALIFIED_DEMAND,
+  AURUM_PROOF,
+  PROOF_BANNER,
   CRYPTO_SEARCH_STAGES,
   CRYPTO_DIFFERENT,
+  CRYPTO_DIFFERENT_INTRO,
+  FOUNDER_INSIGHT,
 } from "@/lib/crypto-seo-content";
+import {
+  BitcoinMark,
+  EthereumMark,
+  BinanceMark,
+  TetherMark,
+  SolanaMark,
+  LedgerMark,
+} from "@/components/brand-icons";
+
+/* Platform marks for the hero orbit. The client asked for the real crypto
+   brands buyers recognise, so each node carries that project's own mark in
+   its own colour rather than a generic glyph. */
+const CRYPTO_MARKS: Record<string, React.ReactNode> = {
+  bitcoin: <BitcoinMark size={44} />,
+  ethereum: <EthereumMark size={44} />,
+  binance: <BinanceMark size={44} />,
+  tether: <TetherMark size={44} />,
+  solana: <SolanaMark size={44} />,
+  ledger: <LedgerMark size={44} />,
+};
 
 /* ---- Hero: copy and trust chips left, the acquisition loop right ----
    Same ring construction as the healthcare hero, but the core and nodes
    carry this page's own story. The nodes are static; only the rings
    drift. */
 
-/* Chip and node glyphs. Crypto-native subject matter drawn from this page's
-   own copy: wallets, ledgers, transaction records, key custody and branded
-   verification. Deliberately no coins, token logos, blockchain cubes,
-   rockets or candlestick charts, per the client's visual brief. */
+/* Chip glyphs. Crypto-native subject matter drawn from this page's own
+   copy: wallets, ledgers, transaction records, key custody and branded
+   verification. The hero orbit carries real platform marks instead, at the
+   client's direction. */
 const ORBIT_SPEED = "48s";
 
 const HERO_ICONS: Record<string, React.ReactNode> = {
@@ -101,14 +125,15 @@ function CryptoLoop() {
   /* Nodes render immediately. The rings keep their slow drift, but the
      nodes themselves do not stagger in on load. */
 
-  /* Five nodes, 72 degrees apart on the solid ring. Positions are
+  /* Six nodes, 60 degrees apart on the solid ring. Positions are
      50% + 38% * (cos, sin) of the angle, starting at the top. */
   const spots = [
     "left-1/2 top-[12%] -translate-x-1/2 -translate-y-1/2",
-    "left-[86.1%] top-[38.3%] -translate-x-1/2 -translate-y-1/2",
-    "left-[72.3%] top-[80.7%] -translate-x-1/2 -translate-y-1/2",
-    "left-[27.7%] top-[80.7%] -translate-x-1/2 -translate-y-1/2",
-    "left-[13.9%] top-[38.3%] -translate-x-1/2 -translate-y-1/2",
+    "left-[82.9%] top-[31%] -translate-x-1/2 -translate-y-1/2",
+    "left-[82.9%] top-[69%] -translate-x-1/2 -translate-y-1/2",
+    "left-1/2 top-[88%] -translate-x-1/2 -translate-y-1/2",
+    "left-[17.1%] top-[69%] -translate-x-1/2 -translate-y-1/2",
+    "left-[17.1%] top-[31%] -translate-x-1/2 -translate-y-1/2",
   ];
 
   return (
@@ -151,7 +176,7 @@ function CryptoLoop() {
         </span>
       </div>
 
-      {/* four loop nodes; names stay as tooltips and accessible labels */}
+      {/* six platform nodes; names stay as tooltips and accessible labels */}
       <div
         className="animate-orbit absolute inset-0"
         style={{ animationDuration: ORBIT_SPEED }}
@@ -164,9 +189,7 @@ function CryptoLoop() {
               className="animate-orbit grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
               style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
             >
-              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                {HERO_ICONS[n.icon]}
-              </svg>
+              {CRYPTO_MARKS[n.icon]}
             </span>
           </div>
         ))}
@@ -193,7 +216,7 @@ export function CryptoHero() {
                   <path d="M12 2c.4 5 5 9.6 10 10-5 .4-9.6 5-10 10-.4-5-5-9.6-10-10 5-.4 9.6-5 10-10Z" fill="currentColor" />
                 </svg>
               </span>
-              Crypto SEO Services
+              {CRYPTO_HERO.eyebrow}
             </span>
           </Reveal>
           <Reveal delay={60} duration={600}>
@@ -240,14 +263,6 @@ export function CryptoHero() {
             </div>
           </Reveal>
 
-          <Reveal delay={300}>
-            <p className="mt-9 flex max-w-lg items-start gap-3 border-t border-line pt-7 text-[13px] leading-relaxed text-graphite">
-              <span aria-hidden className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-lilac text-indigo">
-                <svg width="11" height="11" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 3 4 6v5c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6l-7-3Z" /></svg>
-              </span>
-              {CRYPTO_HERO.trust}
-            </p>
-          </Reveal>
         </div>
 
         <Reveal variant="right" delay={120}>
@@ -275,37 +290,80 @@ export function CryptoTrustedBy() {
   );
 }
 
-/* ---- Search Should Drive Qualified Demand: copy left, the results
-   snapshot card right. No animation; the card is the visual anchor. ---- */
+/* ---- Crypto SEO That Drives Qualified Growth, then the AurumFSG proof.
+   The brief places a dark stat card immediately below the growth copy,
+   showing 10x, 2x and 2 months as large figures. Client has confirmed
+   permission to name AurumFSG.de and publish these verified results. ---- */
 export function CryptoQualifiedDemand() {
-  const s = QUALIFIED_DEMAND.snapshot;
   return (
     <section className="overflow-x-clip py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          <Reveal variant="left">
-            <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-              Search Should Drive <span className="text-indigo">Qualified</span> Demand
-            </h2>
-            <div className="mt-6 grid gap-4">
-              {QUALIFIED_DEMAND.paras.map((p, i) => (
-                <p key={i} className="text-[15px] leading-relaxed text-graphite">{p}</p>
-              ))}
-            </div>
-          </Reveal>
+        <Reveal>
+          <h2 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+            Crypto SEO That Drives <span className="text-indigo">Qualified</span> Growth
+          </h2>
+          <div className="mt-6 grid max-w-3xl gap-4">
+            {QUALIFIED_DEMAND.paras.map((p, i) => (
+              <p key={i} className="text-[15.5px] leading-relaxed text-graphite">{p}</p>
+            ))}
+          </div>
+        </Reveal>
 
-          <Reveal variant="right" delay={80}>
-            <article className="cta-indigo relative overflow-hidden rounded-3xl p-8 text-white">
-              <div aria-hidden className="pointer-events-none absolute -right-16 -top-16 size-48 rounded-full border border-white/10" />
-              <p className="relative text-[11px] font-bold uppercase tracking-[0.14em] text-citron">{s.label}</p>
-              <p className="relative mt-5 font-heading text-[clamp(1.35rem,2.4vw,1.7rem)] font-bold leading-snug tracking-[-0.015em]">
-                {s.heading}
+        {/* AurumFSG.de verified result */}
+        <Reveal variant="scale" delay={80}>
+          <article className="cta-indigo relative mt-12 overflow-hidden rounded-3xl p-8 text-white md:p-10">
+            <div aria-hidden className="pointer-events-none absolute -right-20 -top-20 size-56 rounded-full border border-white/10" />
+            <p className="relative text-[11px] font-bold uppercase tracking-[0.14em] text-citron">
+              {AURUM_PROOF.meta}
+            </p>
+            <h3 className="relative mt-4 max-w-2xl font-heading text-[clamp(1.35rem,2.6vw,1.9rem)] font-bold leading-snug tracking-[-0.015em]">
+              {AURUM_PROOF.title}
+            </h3>
+
+            <dl className="relative mt-8 grid gap-6 border-y border-white/15 py-7 sm:grid-cols-3">
+              {AURUM_PROOF.stats.map((st) => (
+                <div key={st.label}>
+                  <dt className="font-heading text-[clamp(2rem,4vw,2.9rem)] font-extrabold leading-none tracking-[-0.03em] text-citron">
+                    {st.value}
+                  </dt>
+                  <dd className="mt-2 text-[13px] text-white/70">{st.label}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <p className="relative mt-7 max-w-3xl text-[14px] leading-relaxed text-white/75">
+              {AURUM_PROOF.body}
+            </p>
+            <p className="relative mt-5 text-[11.5px] leading-relaxed text-white/45">
+              {AURUM_PROOF.graphPending}
+            </p>
+          </article>
+        </Reveal>
+
+        {/* proof-before-promises banner */}
+        <Reveal delay={60}>
+          <div className="mt-8 flex flex-col gap-5 rounded-3xl border border-line bg-surface px-8 py-7 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-indigo">
+                {PROOF_BANNER.eyebrow}
               </p>
-              <p className="relative mt-4 text-[13.5px] leading-relaxed text-white/70">{s.body}</p>
-              <p className="relative mt-6 border-t border-white/10 pt-4 text-[11.5px] text-white/45">{s.note}</p>
-            </article>
-          </Reveal>
-        </div>
+              <h3 className="mt-2 font-heading text-[19px] font-bold tracking-[-0.01em]">
+                {PROOF_BANNER.title}
+              </h3>
+              <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-graphite">
+                {PROOF_BANNER.body}
+              </p>
+            </div>
+            <div className="flex shrink-0 flex-wrap items-center gap-3">
+              <CtaLink href={PROOF_BANNER.primaryCta.href}>
+                {PROOF_BANNER.primaryCta.label}
+              </CtaLink>
+              <CtaLink href={PROOF_BANNER.secondaryCta.href} variant="ghost">
+                {PROOF_BANNER.secondaryCta.label}
+              </CtaLink>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -386,8 +444,11 @@ export function CryptoDifferent() {
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <h2 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Why Crypto SEO Is <span className="text-indigo">Different</span>
+            Why Crypto Companies Need <span className="text-indigo">Specialized</span> SEO
           </h2>
+          <p className="mt-5 max-w-2xl text-[15.5px] leading-relaxed text-graphite">
+            {CRYPTO_DIFFERENT_INTRO}
+          </p>
         </Reveal>
 
         {/* Crypto uses a wide 2x2 of dark-accent panels: each card carries a
@@ -408,9 +469,45 @@ export function CryptoDifferent() {
                 {c.title}
               </h3>
               <p className="relative mt-3 text-[13.5px] leading-relaxed text-graphite">{c.desc}</p>
+
+              {c.bullets && (
+                <ul className="relative mt-4 grid gap-2">
+                  {c.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-2.5 text-[13px] leading-relaxed text-ink/80">
+                      <span aria-hidden className="mt-[7px] size-1.5 shrink-0 rounded-full bg-indigo" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <p className="relative mt-4 text-[13.5px] leading-relaxed text-graphite">{c.close}</p>
+
+              {c.note && (
+                <p className="relative mt-4 border-t border-line pt-3 text-[11.5px] leading-relaxed text-graphite">
+                  <span className="font-bold text-ink">Policy note:</span> {c.note}
+                </p>
+              )}
             </article>
           ))}
         </div>
+
+        {/* founder insight: editorial commentary, not a testimonial */}
+        <Reveal delay={80}>
+          <figure className="mt-10 rounded-3xl border-l-[3px] border-indigo bg-ivory/60 px-8 py-8 md:px-10">
+            <figcaption className="text-[11px] font-bold uppercase tracking-[0.14em] text-indigo">
+              {FOUNDER_INSIGHT.eyebrow}
+            </figcaption>
+            <blockquote className="mt-4 max-w-3xl font-heading text-[clamp(1.05rem,1.9vw,1.3rem)] font-bold leading-snug tracking-[-0.01em]">
+              &ldquo;{FOUNDER_INSIGHT.quote}&rdquo;
+            </blockquote>
+            <p className="mt-5 text-[13px] font-semibold text-graphite">
+              {FOUNDER_INSIGHT.name}
+              <span className="mx-2 text-line">|</span>
+              {FOUNDER_INSIGHT.role}
+            </p>
+          </figure>
+        </Reveal>
       </div>
     </section>
   );

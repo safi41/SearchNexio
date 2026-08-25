@@ -11,55 +11,89 @@ export const C_ROUTES = {
   aiSearch: "/ai-search-optimization-services/",
   localSeo: "/services/local-seo-services/",
   contact: "/contact/",
+  results: "#crypto-results",
+  caseStudies: "/case-studies/",
+  saasSeo: "/b2b-saas-seo-agency/",
   /* not built yet */
   technicalSeo: "#",
   aeo: "#",
+  aiVisibilityAudit: "#",
   privacy: "#",
   bookCall: "#",
 };
 
 export const CRYPTO_HERO = {
-  eyebrow: "Crypto search growth",
+  eyebrow: "Crypto SEO Company",
+  /* H1 is locked by the brief: keep exactly "Crypto SEO Services". */
   title: "Crypto SEO Services",
   intro:
-    "Search Nexio helps crypto, blockchain and Web3 businesses connect their products and services with the searches their prospective users are already making, then measure what those users do after they find you.",
-  primaryCta: { label: "Request a Crypto SEO Audit", href: C_ROUTES.audit },
-  secondaryCta: { label: "See How We Work", href: C_ROUTES.process },
-  trust:
-    "Built on direct experience in crypto tax, transaction reconciliation and other high-trust crypto service businesses.",
-  /* Hero trust chips. Each states something the page can stand behind. */
+    "Turn high-intent crypto searches into users, demos and qualified demand. SearchNexio builds SEO programs for exchanges, DeFi protocols, wallets, Web3 platforms and blockchain companies across Google and AI search.",
+  primaryCta: { label: "Request a Crypto SEO Review", href: C_ROUTES.audit },
+  secondaryCta: { label: "View Crypto SEO Results", href: C_ROUTES.results },
+  /* Trust bar, verbatim from the brief. */
   chips: [
-    { title: "High trust content", sub: "Sourced and reviewed", icon: "shield" },
-    { title: "Commercial intent", sub: "Not volume alone", icon: "target" },
-    { title: "Technical depth", sub: "dApps and docs portals", icon: "code" },
-    { title: "Tracked acquisition", sub: "Events, not just traffic", icon: "chart" },
+    { title: "10+ Years", sub: "SEO Experience", icon: "chart" },
+    { title: "Crypto + Web3", sub: "Specialist Focus", icon: "target" },
+    { title: "Google + AI Search", sub: "Visibility", icon: "search" },
+    { title: "Human-Reviewed", sub: "Strategy and Delivery", icon: "shield" },
   ],
-  /* The four orbit nodes of the crypto acquisition loop, clockwise from
-     the top. Reflects this page's own journey: a user searches a problem,
-     compares options, checks the brand, then converts. */
+  /* Six orbit nodes: the crypto platforms and assets this page's buyers
+     actually research. Brand marks in each project's own colour. */
   orbit: [
-    { title: "Visibility growth", sub: "priority commercial searches", icon: "trend" },
-    { title: "Content and briefs", sub: "sourced and reviewed", icon: "doc" },
-    { title: "International markets", sub: "market-specific architecture", icon: "globe" },
-    { title: "Authority and references", sub: "third-party credibility", icon: "link" },
-    { title: "Search research", sub: "problems, products, comparisons", icon: "search" },
+    { title: "Bitcoin", sub: "price, wallet and exchange searches", icon: "bitcoin" },
+    { title: "Ethereum", sub: "staking, gas and protocol searches", icon: "ethereum" },
+    { title: "Binance", sub: "exchange comparison and fee searches", icon: "binance" },
+    { title: "Tether", sub: "stablecoin and on-ramp searches", icon: "tether" },
+    { title: "Solana", sub: "chain, DEX and ecosystem searches", icon: "solana" },
+    { title: "Ledger", sub: "wallet, custody and security searches", icon: "ledger" },
   ],
+
 };
 
 /* Search Should Drive Qualified Demand. */
 export const QUALIFIED_DEMAND = {
-  title: "Search Should Drive Qualified Demand",
+  title: "Crypto SEO That Drives Qualified Growth",
   paras: [
-    "Rankings and traffic are useful diagnostic signals. The outcome that actually matters depends on the business: a consultation request for a crypto tax firm, a product trial for a crypto SaaS company, a funded account for an exchange, a qualified B2B conversation for a blockchain infrastructure provider.",
-    "Search Nexio builds organic search strategies around the acquisition actions specific to each business model. Crypto SEO that produces traffic without producing qualified users is not a working acquisition channel.",
+    "Traffic only matters when it reaches the people your business needs.",
+    "SearchNexio builds crypto SEO strategies around commercial searches that lead to account registrations, demos, wallet connections, funded accounts and other measurable acquisition events. Rankings are a means to an end. The end is users.",
   ],
-  /* Results snapshot card. Holds until a verified result is supplied. */
-  snapshot: {
-    label: "Results snapshot",
-    heading: "Verified result available on request",
-    body: "Client type, challenge, the three actions taken, the verified result, timeframe and measurement method are shared during scoping.",
-    note: "Only confirmed figures are published.",
-  },
+};
+
+/* AurumFSG.de case study. Client confirmed permission to publish the name
+   and these figures. Every number here is the client's own verified result;
+   nothing is estimated or rounded up. */
+export const AURUM_PROOF = {
+  title: "AurumFSG.de: 10x More Leads & 2x Organic Traffic in 2 Months",
+  meta: "Crypto Financial Services | Germany",
+  stats: [
+    { value: "10x", label: "Increase in Leads" },
+    { value: "2x", label: "Organic Traffic" },
+    { value: "2 Months", label: "Timeframe" },
+  ],
+  body: "AurumFSG.de needed stronger visibility for competitive crypto service searches. SearchNexio improved the site's technical SEO, service-page targeting, internal linking, content strategy and multilingual search structure. Within two months, organic traffic doubled and lead volume increased by 10x.",
+  /* The brief asks for a verified GSC or GA4 graph here. Until the client
+     supplies one, the slot states plainly that it is pending rather than
+     showing an invented chart. */
+  graphPending:
+    "A verified Google Search Console or GA4 performance graph is added here before go-live.",
+};
+
+/* Proof-before-promises banner, verbatim. */
+export const PROOF_BANNER = {
+  eyebrow: "Proof before promises",
+  title: "See the Work Behind the Results",
+  body: "Review SearchNexio case studies and the strategies used to turn organic visibility into qualified demand.",
+  primaryCta: { label: "View Case Studies", href: C_ROUTES.caseStudies },
+  secondaryCta: { label: "Book a Strategy Call", href: C_ROUTES.bookCall },
+};
+
+/* Founder insight. Editorial commentary, not a testimonial. */
+export const FOUNDER_INSIGHT = {
+  eyebrow: "Founder insight",
+  quote:
+    "Crypto SEO often operates in YMYL territory. When content influences financial decisions, Google expects a much higher level of trust, expertise and accuracy. That is why crypto SEO has to build authority around both the topic and the brand, not just optimize keywords.",
+  name: "Hunain Lakhani",
+  role: "Founder, SearchNexio",
 };
 
 /* How Crypto Customers Search: four stages, each with an example query. */
@@ -91,108 +125,167 @@ export const CRYPTO_SEARCH_STAGES = {
 };
 
 /* Why Crypto SEO Is Different: four text-led cards. */
+export const CRYPTO_DIFFERENT_INTRO =
+  "Crypto SEO shares the same foundations as our broader SEO services. The websites, search behavior and trust requirements are different in ways that matter.";
+
+/* Four cards in a 2x2 grid. Each carries a problem statement and its own
+   supporting bullets. The brief states no decorative icons are required. */
 export const CRYPTO_DIFFERENT = [
   {
-    title: "Trust matters",
-    desc: "Crypto users arrive with more skepticism than most consumer software categories because the market has given them reasons to be skeptical. Discoverability is not enough. What users find when they search your brand, founders, and product has to be as credible as what brought them there in the first place.",
+    title: "Crypto Websites Are Technically Complex",
+    desc: "Most crypto products rely on JavaScript-heavy interfaces, documentation portals, apps, subdomains and programmatic pages that create specific crawlability and indexation problems.",
+    bullets: [
+      "Important pages hidden behind JavaScript rendering",
+      "Marketing sites separated from apps and documentation",
+      "Domain authority split across multiple subdomains",
+      "Hundreds or thousands of token and trading-pair pages without a clear SEO strategy",
+      "Weak internal linking between commercial content and documentation",
+      "Duplicate or low-value programmatic pages",
+      "Poor indexation of high-intent service pages",
+    ],
+    close:
+      "We identify which technical issues are actually limiting organic visibility and prioritize them by commercial impact, not by how many items appear on an audit spreadsheet.",
   },
   {
-    title: "Financial accuracy matters",
-    desc: "Crypto content covering tax, trading, investing, security, and yield affects real financial decisions. Content in these areas carries a higher standard for accuracy, clear authorship, credible sourcing, and freshness than general software content, and that standard is built into how we approach every financially consequential page.",
+    title: "Paid Advertising Is Restricted Across Many Crypto Categories",
+    desc: "Google Ads applies specific eligibility, certification and market requirements to cryptocurrency advertising. Certain exchanges, wallets and regulated products may be eligible in approved jurisdictions, while initial coin offerings, DeFi trading protocols and some other crypto-related offers remain prohibited or tightly restricted under Google Ads policy.",
+    close:
+      "That makes organic search especially valuable for crypto companies that cannot depend on paid acquisition at scale. SEO builds an owned acquisition channel that can continue bringing qualified demand without paying for every click.",
+    note: "Google Ads cryptocurrency policies change by product and market. Verify the current policy before publishing or updating this section.",
   },
   {
-    title: "Search intent moves quickly",
-    desc: "Crypto product categories and terminology change faster than most industries, but the evergreen commercial searches, service intent, product comparison, high-intent tax and compliance queries, are more stable. We prioritize based on what produces qualified acquisition, not what generates impressions at a point in time.",
+    title: "Trust Directly Affects Conversion",
+    desc: "A user considering an exchange, wallet or protocol does not convert on first impression. Before creating an account, depositing funds or connecting a wallet, they research your company. They search:",
+    bullets: [
+      "[brand] reviews",
+      "is [brand] safe",
+      "[brand] fees",
+      "[brand] scam",
+      "[brand] alternatives",
+    ],
+    close:
+      "Ranking for non-branded keywords gets you discovered. What users find when they research your brand helps determine whether they convert. Both surfaces need to be managed deliberately.",
   },
   {
-    title: "Reputation matters",
-    desc: "Organic search touches the acquisition funnel in two places: it drives initial discovery, and it determines what users see when they conduct due diligence afterward. A search strategy that ignores the branded research environment is missing half the conversion problem.",
+    title: "Search Demand Changes Quickly",
+    desc: "Crypto terminology moves fast. New protocols, chains, narratives, regulations and product categories can create search demand almost overnight. Pages that performed well a year ago may now rank for outdated searches or contain information that no longer reflects the product.",
+    close:
+      "We review keyword opportunities and commercially important content continuously rather than treating SEO as a one-time publishing exercise.",
   },
 ];
 
 /* What Our Crypto SEO Includes: ten services, sticky-nav list. */
-export const CRYPTO_SERVICES = [
+export const CRYPTO_SERVICES_INTRO =
+  "SearchNexio combines technical SEO, content, authority and measurement into one acquisition-focused program. Every activity connects back to a defined keyword gap or acquisition opportunity.";
+
+/* Eight services, in the brief's order. Diagram keys map to the existing
+   service diagrams in CryptoMid. */
+export const CRYPTO_SERVICES: {
+  key: string;
+  diagram: string;
+  title: string;
+  desc: string;
+  bullets?: string[];
+  deliverable?: string;
+  limit?: string;
+  link: { label: string; href: string } | null;
+  link2?: { label: string; href: string } | null;
+}[] = [
   {
-    key: "strategy",
+    key: "keyword",
     diagram: "intent",
-    title: "Crypto search strategy",
-    desc: "We research the specific searches prospective users make in your product category, problem-based queries, service intent, comparison terms, branded research, and competitor demand, then map them to pages by intent stage and commercial proximity to acquisition.",
+    title: "Crypto Keyword Strategy",
+    desc: "The searches that produce registrations, demos and wallet connections are not always the searches with the highest volume. We identify what your buyers search before they know your brand, including category searches, product comparisons, alternative searches, problem-based queries and branded evaluation searches, then evaluate each against intent, commercial value, competition and the page required to rank.",
     deliverable:
-      "A crypto search opportunity map with priority queries, page assignments, and prioritization rationale.",
+      "The goal is not a large keyword spreadsheet. The goal is a prioritized list of searches capable of producing users.",
+    link: null,
+  },
+  {
+    key: "technical",
+    diagram: "crawl",
+    title: "Technical Crypto SEO",
+    desc: "Crypto websites create technical challenges that general SEO audits often miss. A JavaScript-heavy DeFi interface behaves differently in Google's crawler than a standard content site. A documentation subdomain can fragment authority. Programmatic trading-pair pages can create thin-content problems at scale.",
+    bullets: [
+      "JavaScript crawlability and rendering",
+      "Indexation of high-intent commercial pages",
+      "Subdomain architecture and authority consolidation",
+      "App versus marketing-site structure",
+      "Documentation portal integration",
+      "Programmatic and token page strategy",
+      "Canonical tags and duplicate content",
+      "Internal linking between content and commercial pages",
+      "Structured data",
+      "International SEO",
+      "Core Web Vitals",
+    ],
+    deliverable:
+      "Recommendations are prioritized by commercial impact, not by how many issues appear on an audit list.",
     link: null,
   },
   {
     key: "content",
     diagram: "workflow",
-    title: "High trust content SEO",
-    desc: "Content covering tax treatment, financial processes, security practices, or product accuracy claims requires clear authorship, appropriate sourcing, human review before publication, and a maintenance process for pages where information changes. We build that workflow into the content strategy rather than treating publication as the endpoint.",
-    limit:
-      "We do not provide financial, tax, or legal advice. Where specialist review is appropriate, we coordinate it with the client's qualified team.",
+    title: "Crypto Content Strategy",
+    desc: "Crypto buyers research heavily before making decisions. Exchange comparisons, wallet security guides, staking explainers, DeFi protocol overviews and alternatives pages all represent acquisition opportunities, provided they are built around the actual searches buyers use rather than what the company wants to publish.",
+    bullets: [
+      "Exchange and wallet comparison pages",
+      "Protocol guides and use-case content",
+      "Staking and yield content",
+      "Token and trading-pair pages",
+      "Security resources",
+      "Integration and developer guides",
+      "Alternatives pages",
+      "Regulatory resources",
+      "Industry-specific landing pages",
+    ],
+    deliverable:
+      "Existing content is reviewed for accuracy, search intent and commercial relevance. Crypto content becomes outdated quickly. A page that still ranks but contains incorrect information can damage both visibility and trust.",
     link: null,
   },
   {
-    key: "pages",
+    key: "optimization",
     diagram: "coverage",
-    title: "Product and service pages",
-    desc: "The pages closest to conversion are usually not the high-traffic educational articles. They are the product and service pages a user lands on when evaluating specific options. We audit existing commercial pages for search visibility, content quality, and conversion effectiveness, and build new pages where gaps in coverage create acquisition risk.",
+    title: "Content Optimization",
+    desc: "Publishing more content is not always the right answer. We identify pages that already carry authority but underperform because of search-intent mismatch, weak topical coverage, poor heading structure, cannibalization, thin internal linking or outdated information.",
+    deliverable:
+      "Improving an existing page often produces results faster than publishing another article from scratch.",
     link: null,
-  },
-  {
-    key: "technical",
-    title: "Technical crypto SEO",
-    desc: "JavaScript-heavy products, dApps, documentation portals, programmatic asset pages, app subdomains, and large-scale trading-pair page architectures all create indexation and crawlability problems that generic SEO strategies do not address. We audit the technical foundation with attention to the issues specific to crypto websites.",
-    link: { label: "Technical SEO services", href: C_ROUTES.technicalSeo },
-    diagram: "crawl",
   },
   {
     key: "authority",
     diagram: "authority",
-    title: "Crypto authority building",
-    desc: "Authority in this category is earned through relevant editorial coverage, original research, founder and expert commentary, digital PR, and third-party reference sources that carry credibility in the specific sub-category.",
-    limit:
-      "We do not promise backlink volumes or guaranteed placements in named publications.",
-    link: null,
-  },
-  {
-    key: "branded",
-    diagram: "serp",
-    title: "Branded search reputation",
-    desc: "We assess what appears when users search the brand name, founder names, and product safety terms, then identify and address the gaps in owned content, third-party coverage, and business information that are within the organization's control.",
-    limit:
-      "We do not promise reputation suppression or removal of legitimate negative coverage.",
-    link: null,
-  },
-  {
-    key: "international",
-    diagram: "markets",
-    title: "International crypto SEO",
-    desc: "We research search demand by market, structure international site architecture around the search strategy, and implement hreflang, language targeting, and market-specific landing pages for businesses operating across several countries.",
-    limit:
-      "We do not provide regulatory or legal advice about where a crypto product may operate.",
-    link: null,
-  },
-  {
-    key: "conversion",
-    diagram: "friction",
-    title: "Conversion optimization",
-    desc: "We review the experience a prospective user has after arriving from a search: whether the page addresses the search intent, how visible the next action is, whether the onboarding path creates unnecessary friction, and whether the trust signals available support the conversion decision.",
-    link: null,
-  },
-  {
-    key: "tracking",
-    diagram: "attribution",
-    title: "Acquisition tracking",
-    desc: "We connect organic sessions to the conversion events that matter for the specific business model, consultations, demos, signups, registrations, funded accounts where attribution is reliable, then report on those events alongside the visibility data. We are explicit about what cannot be reliably tracked and where attribution gaps exist.",
+    title: "Authority Building",
+    desc: "Competitive crypto searches require external authority. We identify and build toward relevant opportunities across crypto publications, blockchain media, fintech and technology press, industry directories, research organizations and developer communities.",
+    deliverable:
+      "We focus on relevant mentions and citations that can strengthen organic credibility and support visibility across search surfaces. We do not sell bulk link packages or guarantee placements in publications we do not control.",
     link: null,
   },
   {
     key: "ai",
     diagram: "entity",
-    title: "AI assisted crypto discovery",
-    desc: "Crypto users increasingly research products through AI-assisted tools alongside traditional search. For AI systems to represent a crypto business accurately, entity signals need to be clear: what the company does, what the product offers, who the founders are, and how authoritative third-party sources describe the business. We assess current AI representation and address structural gaps.",
-    limit: "We do not guarantee AI recommendations.",
-    link: { label: "AI SEO services", href: C_ROUTES.aiSearch },
-    link2: { label: "GEO services", href: C_ROUTES.geo },
+    title: "AI Search Visibility",
+    desc: "Crypto research also happens outside traditional Google results. Users ask ChatGPT, Perplexity, Gemini and Google AI systems questions such as: What are the safest crypto exchanges? What are the best DeFi lending protocols? Which wallets support the most chains? What are the best alternatives to a given competitor?",
+    deliverable:
+      "We assess whether your company appears in those answers and identify the content, entity and authority gaps limiting AI visibility. For brands that need a wider AI-search program, our AI SEO services, GEO services and AEO services address those search surfaces in more depth.",
+    link: { label: "Start with an AI Visibility Audit", href: C_ROUTES.aiVisibilityAudit },
+  },
+  {
+    key: "branded",
+    diagram: "serp",
+    title: "Branded Search Management",
+    desc: "Ranking for category keywords gets you discovered. Branded search helps determine whether you convert. We review what prospective users find when they search your company name, product, founders, reviews, fees, security and trust-related queries.",
+    deliverable:
+      "Where gaps exist, we build the content and authority strategy around information your company can legitimately influence.",
+    link: null,
+  },
+  {
+    key: "tracking",
+    diagram: "attribution",
+    title: "Acquisition Tracking",
+    desc: "Organic traffic should connect to business outcomes. We configure analytics to track account registrations, demo bookings, contact requests, wallet connections, depositing accounts, product sign-ups and other conversion events relevant to your product.",
+    deliverable:
+      "Reporting focuses on what organic search is producing for the business, not impressions and session counts.",
+    link: null,
   },
 ];
 
@@ -264,27 +357,29 @@ export const CRYPTO_TRUST = [
 ];
 
 /* What You Receive: twelve deliverables, documented scope of work. */
+export const CRYPTO_DELIVERABLES_INTRO = [
+  "Every SearchNexio crypto SEO engagement includes a defined set of outputs. Scope is confirmed before any work begins.",
+  "You leave every month knowing what was done, what changed, what produced results and what happens next.",
+];
+
 export const CRYPTO_DELIVERABLES = [
-  { title: "Crypto search opportunity map", desc: "Priority queries by intent stage, product area, and market, with page assignments and prioritization rationale." },
-  { title: "Competitor visibility analysis", desc: "Where competitors appear for your priority product and service searches, and the signals that support their positions." },
-  { title: "Technical SEO audit", desc: "Rendering, indexation, architecture, canonical structure, and the issues specific to crypto websites." },
-  { title: "Commercial page roadmap", desc: "Which product and service pages have search demand without effective coverage, and the prioritized build and improvement plan." },
-  { title: "Content opportunity map", desc: "Prioritized briefs with target intent, sourcing requirements, and authorship recommendations where applicable." },
-  { title: "Authority roadmap", desc: "Specific publications, PR opportunities, and third-party reference sources relevant to your product category." },
-  { title: "Branded search assessment", desc: "What appears for your brand and key associated searches, and the gaps within your control to address." },
-  { title: "Conversion recommendations", desc: "Identified friction points in the signup, consultation, or onboarding path with specific changes." },
-  { title: "Acquisition tracking plan", desc: "Analytics and event configuration for your business model, with explicit statement of attribution limitations." },
-  { title: "International SEO recommendations", desc: "Market-specific search architecture and implementation plan for each priority geography where included." },
-  { title: "Monthly performance report", desc: "Organic visibility for priority searches, acquisition events by source, branded search monitoring, and trend data." },
-  { title: "AI discovery assessment", desc: "Where included, how AI systems currently represent the business and what structural improvements would support accurate representation." },
+  { title: "Keyword Map", desc: "Priority searches grouped by buyer intent, commercial value, competition and page requirement." },
+  { title: "Technical SEO Audit", desc: "Prioritized review of crawlability, indexation, architecture, JavaScript rendering, internal linking, structured data and technical issues specific to your site's structure." },
+  { title: "Content Roadmap", desc: "Existing pages to improve, new pages to build and the commercial opportunity behind each recommendation." },
+  { title: "Content Briefs", desc: "SEO briefs covering intent, entities, topical requirements, internal links and conversion goals." },
+  { title: "Authority Plan", desc: "Relevant publications, directories, partnerships and third-party citation opportunities." },
+  { title: "Branded Search Assessment", desc: "A review of what prospective users find when they research your brand." },
+  { title: "AI Visibility Assessment", desc: "Where included, analysis of how your company currently appears across ChatGPT, Perplexity, Gemini and Google AI results." },
+  { title: "Acquisition Tracking", desc: "Analytics configuration connecting SEO activity to the conversion events that matter to your business." },
+  { title: "Monthly Reporting", desc: "Rankings, qualified organic traffic, conversions, completed work and next priorities." },
 ];
 
 /* Our Crypto SEO Process. */
 export const CRYPTO_PROCESS = [
-  { index: "01", name: "Discover", body: "We begin by understanding the business model before reviewing a single keyword: how the product makes money, which user actions constitute meaningful acquisition, how the website architecture relates to the product structure, and where the most significant gaps exist between what prospective users search and what the website currently offers." },
-  { index: "02", name: "Prioritize", body: "Technical problems that prevent content from being indexed come first. High-intent product and service pages with no search presence come next. Branded search improvements, authority building, and content creation follow in a sequence based on commercial impact and implementation practicality." },
-  { index: "03", name: "Implement", body: "We execute agreed work in collaboration with whoever needs to be involved: developers for technical implementation, product leads for accuracy review, legal and compliance teams for regulated content. All account credentials remain with the client. Changes are documented as they are made." },
-  { index: "04", name: "Measure", body: "Monthly reporting covers organic visibility for priority searches, acquisition events from organic sources, branded search performance, and authority development. When something is not producing expected results, we identify why and adjust before asking the client to continue." },
+  { index: "01", name: "Map", body: "We establish your current organic position: rankings, traffic, technical condition, competitor visibility, commercial keyword gaps, content gaps, authority gaps and AI visibility where relevant. We identify where competitors are capturing demand your company could realistically compete for." },
+  { index: "02", name: "Fix", body: "We address the technical and content problems that are limiting organic visibility. High-impact issues are resolved before low-value housekeeping tasks. A page that cannot be crawled and indexed cannot rank regardless of how well the content is written." },
+  { index: "03", name: "Amplify", body: "We build the pages, content and authority required to expand visibility for the high-value commercial searches your buyers use. Every activity connects back to a defined keyword or acquisition opportunity." },
+  { index: "04", name: "Prove", body: "We track whether improved visibility translates into qualified traffic, registrations, leads, wallet connections, deposits and revenue. If rankings improve but acquisition does not, we investigate why before asking you to continue." },
 ];
 
 export const CRYPTO_PROCESS_CTA = {
@@ -295,73 +390,78 @@ export const CRYPTO_PROCESS_CTA = {
 
 /* How We Measure Growth: eight metrics in two groups. */
 export const CRYPTO_METRICS = {
-  intro:
-    "The right acquisition metrics depend on the business model. We do not apply a uniform measurement framework to every engagement.",
+  intro: "Rankings matter, but they are not the final metric. We track:",
   items: [
-    { name: "Qualified enquiries", desc: "Consultation and contact requests from organic sessions, mapped to the page that generated them.", group: "acquisition" },
-    { name: "Demo and trial requests", desc: "For crypto SaaS and infrastructure, completed demo bookings and trial signups attributed to organic search.", group: "acquisition" },
-    { name: "Product signups and registrations", desc: "Account creation events from organic sessions where architecture allows reliable attribution.", group: "acquisition" },
-    { name: "Funded accounts", desc: "Where client analytics track deposit events, attributed funding actions from organic acquisition cohorts.", group: "acquisition" },
-    { name: "Branded demand", desc: "Changes in branded search volume over time as an indicator of overall organic marketing effectiveness.", group: "visibility" },
-    { name: "Priority search visibility", desc: "Ranking movement for the specific commercial queries most important to the business, tracked individually.", group: "visibility" },
-    { name: "International market performance", desc: "Visibility and conversion metrics by country for multi-market businesses, reported separately.", group: "visibility" },
-    { name: "Organic revenue", desc: "Where reliable CRM integration exists, revenue attributable to organic acquisition over the reporting period.", group: "visibility" },
+    { name: "Priority keyword visibility", desc: "Are you gaining positions for searches directly connected to your product and acquisition goals?", group: "visibility" },
+    { name: "Qualified organic traffic", desc: "Is organic search sending visitors who match your target customer profile?", group: "visibility" },
+    { name: "Organic conversions", desc: "Registrations, leads, demo requests, wallet connections, depositing accounts and transactions where attribution is available.", group: "acquisition" },
+    { name: "Branded search growth", desc: "Are more people actively researching your company after discovering it through organic channels?", group: "visibility" },
+    { name: "Revenue impact", desc: "Where reliable attribution exists, we connect organic acquisition to downstream revenue figures.", group: "acquisition" },
+    { name: "AI visibility", desc: "When AI search is included in the engagement, we monitor whether the brand appears for relevant category and recommendation prompts across tracked platforms.", group: "visibility" },
   ],
-  note: "We are transparent about what cannot be measured. On-chain conversions, wallet connections, and actions within authenticated product experiences often create attribution gaps that honest reporting needs to acknowledge.",
+  note: "We are transparent about what cannot be measured. On-chain conversions, wallet connections and actions within authenticated product experiences often create attribution gaps that honest reporting needs to acknowledge.",
 };
 
 /* Why Choose Search Nexio: six proof points. */
 export const CRYPTO_WHY = [
   {
-    title: "Crypto SEO experience",
-    desc: "Our strongest crypto experience is in the part of the market where standards are highest, crypto tax documentation and transaction reconciliation, where the buyer is entrusting a company with financial records or tax obligations. This required understanding how high-intent financially motivated searches behave, how YMYL content standards apply in crypto, and how trust signals affect conversion when users are cautious before committing.",
+    title: "Proven Crypto SEO Results",
+    desc: "For AurumFSG.de, focused SEO work delivered 10x more leads and 2x organic traffic within two months. We focus on measurable acquisition outcomes, not SEO activity for its own sake.",
+    links: [{ label: "View Case Studies", href: C_ROUTES.caseStudies }],
   },
   {
-    title: "Commercial search strategy",
-    desc: "Keyword decisions are built around the acquisition actions specific to each client's business model, not around search volume as a primary filter. The highest-volume crypto queries are often not the highest-value acquisition queries for most crypto businesses.",
+    title: "10+ Years of SEO Experience",
+    desc: "SearchNexio combines long-term SEO experience with an understanding of how crypto products, websites and buyers behave differently from traditional businesses. That means our recommendations account for how crypto websites are actually built and how crypto buyers actually search.",
   },
   {
-    title: "High trust experience",
-    desc: "Working with crypto tax and reconciliation clients means understanding what the branded search environment looks like for a high-trust financial service, what content standards apply to financially consequential pages, and how to build a search presence that supports the trust evaluation users conduct before committing financial data.",
+    title: "Technical Crypto Knowledge",
+    desc: "We understand structures specific to crypto products: JavaScript applications, documentation subdomains, trading-pair pages, token pages, programmatic SEO at scale, multilingual crypto sites and the separation between app and marketing site. Recommendations reflect how the product actually works, not how a standard website would behave.",
   },
   {
-    title: "Human reviewed execution",
-    desc: "Research tools and AI-assisted analysis support opportunity identification and monitoring. Every recommendation and client deliverable is reviewed by an experienced member of the team before it is delivered. We do not publish unreviewed output on behalf of clients in financially sensitive categories.",
+    title: "Commercial Search Focus",
+    desc: "We prioritize the searches that lead to users, demos, registrations and revenue. Traffic without commercial relevance is not the goal.",
   },
   {
-    title: "Cross team collaboration",
-    desc: "Crypto SEO engagements regularly involve compliance teams reviewing content, legal advisers approving specific claims, product teams validating technical accuracy, and developers implementing structural changes. We work within those coordination requirements, producing documentation and specifications that each team can act on in their own workflow.",
+    title: "Google and AI Search",
+    desc: "Traditional SEO remains the foundation. We also account for how crypto brands are discovered and evaluated through ChatGPT, Perplexity, Gemini and Google AI Overviews.",
   },
   {
-    title: "Search beyond Google",
-    desc: "Our dedicated AI search, GEO and AEO services address the full methodology for businesses where AI-assisted discovery is a strategic priority. The crypto SEO work on this page builds the entity clarity, content quality, and authoritative web presence that supports both traditional and AI-assisted discovery.",
-    links: [
-      { label: "AI SEO services", href: C_ROUTES.aiSearch },
-      { label: "GEO services", href: C_ROUTES.geo },
-    ],
+    title: "Human-Reviewed Work",
+    desc: "Strategy, audits, briefs and recommendations are reviewed by an experienced member of the SearchNexio team before delivery. We use technology to improve efficiency. We do not use it to replace judgment.",
+    links: [{ label: "View our case studies", href: C_ROUTES.caseStudies }],
   },
 ];
 
 /* Engagement options. */
+export const CRYPTO_PRICING_INTRO = [
+  "Crypto SEO scope varies significantly. A focused Web3 protocol does not require the same program as a global exchange operating across multiple markets and languages.",
+  "Pricing depends on website size, product type, target countries, number of languages, competition, technical complexity, content requirements, authority requirements, reporting infrastructure and internal team capabilities.",
+];
+
 export const CRYPTO_ENGAGEMENTS = [
   {
-    title: "Crypto growth",
-    forWho: "Crypto service businesses",
-    desc: "For crypto tax firms, reconciliation services, crypto SaaS businesses, and specialist crypto service providers. Covers commercial search strategy, product and service page optimization, branded search assessment, authority building, acquisition tracking, and monthly reporting tied to qualified acquisition events.",
+    title: "Crypto Growth",
+    forWho: "Early-stage and growth-stage projects",
+    desc: "For crypto products focused on one primary product category and market. Covers keyword strategy, technical SEO, content roadmap, content optimization, authority strategy and monthly reporting.",
+    price: "$2,000 to $4,000 per month",
+    priceNote: "Most single-market programs, depending on scope and competition.",
     highlight: false,
   },
   {
-    title: "Multi-market growth",
-    forWho: "Several countries or languages",
-    desc: "For businesses operating across several countries or language markets. Covers international search architecture, market-specific research, language targeting, and market-level performance tracking.",
+    title: "Multi-Market Crypto SEO",
+    forWho: "Established products expanding into new geographies",
+    desc: "For companies operating across several countries or languages. Adds international site architecture, hreflang implementation, market-specific keyword research, localized content strategy and country-level competitor analysis.",
+    price: "Scoped by market",
+    priceNote: "Pricing reflects the number of markets and languages in scope.",
     highlight: true,
   },
   {
-    title: "Enterprise crypto SEO",
-    forWho: "Internal marketing teams",
-    desc: "For larger crypto businesses and fintech organizations with internal marketing teams that need a specialist SEO partner. We work within existing workflows, produce technical specifications and content briefs, and provide the specialist layer most in-house teams cannot maintain.",
+    title: "Enterprise Crypto SEO",
+    forWho: "Exchanges, major protocols and infrastructure companies",
+    desc: "For exchanges, major protocols, infrastructure companies and crypto organizations with internal marketing teams. We work alongside developers, content teams, product marketers, PR teams and growth teams.",
+    price: "Contact us",
+    priceNote: "Scope and pricing are confirmed before any work begins.",
     highlight: false,
-    link: { label: "Contact us", href: C_ROUTES.contact },
   },
 ];
 
@@ -378,31 +478,54 @@ export const CRYPTO_LIMITATIONS = [
 
 /* FAQs. */
 export const CRYPTO_FAQS = [
-  { q: "What are crypto SEO services", a: "Crypto SEO services are search optimization programs for cryptocurrency, blockchain, and Web3 businesses. They address the acquisition challenges specific to crypto: commercially oriented search strategy, high-trust financial content, branded due diligence management, technical SEO for complex crypto architectures, authority building in a category prone to low-quality link schemes, and acquisition tracking tied to signups, leads, or product actions rather than traffic alone." },
-  { q: "Why is crypto SEO different", a: "Four things distinguish crypto SEO from standard commercial SEO. Trust affects conversion at a higher level than most software categories because users investigate carefully before connecting wallets or sharing financial data. Financial accuracy is required for content covering tax, trading, security, and investment. Branded search is a meaningful part of the acquisition funnel. And technical architecture in crypto, JavaScript products, dApps, programmatic pages, documentation portals, creates indexation challenges that generic strategies do not address." },
-  { q: "How does crypto SEO drive users", a: "Organic search drives users by connecting the searches prospective users make, researching a problem, comparing products, conducting due diligence, with the pages that answer those searches well and make the next step clear. The chain from search to acquisition depends on visibility, content quality, trust signals, and a friction-free conversion path. SEO improves each of those without guaranteeing the outcome." },
-  { q: "Do you work with crypto companies", a: "Yes. Our strongest current experience is in crypto tax documentation and transaction reconciliation. We work with specialist crypto service businesses where accuracy, YMYL content standards, and qualified lead acquisition are the primary requirements. We are transparent about where our experience is deepest." },
-  { q: "Do you have crypto SEO experience", a: "Yes. Direct experience in crypto tax documentation and transaction reconciliation, the part of the market where search intent is most commercially specific and content standards are most demanding. This is the experience that informs how we approach every crypto SEO engagement." },
-  { q: "Can you handle crypto tax SEO", a: "Yes, and it is the area of our strongest current crypto proof. We have built search visibility programs for crypto tax documentation and transaction reconciliation businesses, requiring understanding of high-intent service searches, YMYL content standards, and the trust signals that affect conversion for users sharing financial records. We do not provide tax advice." },
-  { q: "Do you work with exchanges", a: "Our current proof is in service businesses rather than consumer exchanges. Exchange SEO involves programmatic page management at scale, financial content trust across large page sets, and branded trust management at a different complexity level. We are happy to discuss how the methodology applies to exchange-specific challenges and are transparent about where we are building from research rather than direct experience." },
-  { q: "Can you manage international SEO", a: "Yes. We research search demand by market, structure international architecture to support market-specific visibility, and implement hreflang, language targeting, and localized commercial pages. We do not advise on where a crypto product may legally operate. Those determinations remain with the client and their legal advisers." },
-  { q: "How do you handle crypto content", a: "Through a structured process: search research defines the intent, content briefs specify the audience and accuracy requirements, writers produce drafts, and content is reviewed by an experienced team member before publication. For financially consequential content, specialist review from the client's team is coordinated where appropriate. We do not produce AI-generated crypto content at scale." },
-  { q: "How do you build crypto authority", a: "Through relevant editorial placements, original research, founder and expert commentary, digital PR, and third-party references that carry credibility in the specific sub-category. We do not promise backlink volumes, guaranteed placements in named publications, or DR improvements on a schedule." },
-  { q: "Can SEO improve brand trust", a: "SEO can improve what is found when users search the brand name, founder names, or product safety terms: optimizing owned pages, earning relevant third-party coverage, and ensuring accurate business information across external references. We do not suppress legitimate negative coverage or guarantee reputation outcomes." },
-  { q: "How do you measure acquisition", a: "Based on the specific conversion actions relevant to the business model: consultation requests, demo bookings, trial signups, registrations, or funded account attribution where the analytics infrastructure supports it. We are explicit about attribution gaps and what cannot be reliably tracked." },
-  { q: "How long does crypto SEO take", a: "Depends on the starting visibility, competitiveness of the search category, technical state of the website, content and authority gap relative to ranking competitors, and implementation speed. Technical corrections can produce early indexation improvements within weeks. Competitive commercial searches in active crypto markets take three to six months of structured work. We set timelines based on the specific starting position." },
-  { q: "How much does crypto SEO cost", a: "Pricing reflects scope: number of products and markets, technical state, content requirements, competitive intensity, and reporting infrastructure. We confirm scope and price after the initial audit. If the expected acquisition return does not justify the investment at the required scope, we say so." },
-  { q: "Can you guarantee rankings", a: "No. We commit to improving the signals that affect rankings: content quality, technical health, authoritative external references, and commercial page relevance, and to measuring whether those improvements translate into qualified acquisition events." },
-  { q: "Can crypto SEO support AI discovery", a: "SEO work that improves entity clarity, content accuracy, and authoritative web presence also supports how AI systems represent a crypto business in AI-assisted research contexts. Our dedicated AI SEO services and GEO services address the full methodology for businesses where AI visibility is a strategic priority. We do not guarantee AI-generated mentions." },
+  {
+    q: "What are crypto SEO services?",
+    a: "Crypto SEO services help cryptocurrency, blockchain and Web3 companies improve visibility in organic search. The work covers keyword strategy, technical SEO, content, authority building, branded search management, conversion tracking and AI search visibility, built around the commercial searches that produce users and revenue rather than traffic alone.",
+  },
+  {
+    q: "Why is crypto SEO different from regular SEO?",
+    a: "The fundamentals are the same. The execution differs because crypto websites often involve JavaScript-heavy products, documentation portals, programmatic pages and subdomain structures that create specific crawlability challenges. Crypto search behavior also evolves quickly, and trust signals can have a direct effect on conversion.",
+  },
+  {
+    q: "Can you do SEO for crypto exchanges?",
+    a: "Yes. Exchange SEO covers trading-pair pages, category searches, comparison keywords, fee-related searches, country-specific searches and branded trust queries. The objective is to connect SEO visibility with registrations and funded accounts.",
+  },
+  {
+    q: "Can you do SEO for DeFi protocols?",
+    a: "Yes. DeFi SEO targets category, comparison, educational and protocol-related searches across lending, staking, liquidity, DEXs, bridges and other DeFi use cases. The focus is on reaching buyers before they have already chosen a competitor.",
+  },
+  {
+    q: "Do you provide Web3 SEO?",
+    a: "Yes. SearchNexio works across crypto, blockchain and Web3 search strategies including consumer-facing products, infrastructure platforms and B2B crypto software.",
+  },
+  {
+    q: "Do you optimize for ChatGPT and AI search?",
+    a: "Yes. Where relevant, we assess and improve visibility across ChatGPT, Perplexity, Gemini and Google AI Overviews alongside traditional Google SEO. AI visibility is an additional discovery surface, not a replacement for strong organic foundations.",
+  },
+  {
+    q: "How long does crypto SEO take?",
+    a: "Timelines depend on current authority, technical condition, competition and target keywords. Technical improvements can produce early movement. Competitive commercial keywords require sustained content, technical and authority work. We establish realistic expectations after reviewing the site and search landscape, not before.",
+  },
+  {
+    q: "How much do crypto SEO services cost?",
+    a: "Single-market crypto SEO programs start from $2,000 per month. Final pricing depends on the product, website complexity, target markets, competition and required scope. We provide a defined scope and price after the initial review. If the expected outcome does not justify the investment, we say so.",
+  },
+  {
+    q: "Can you guarantee Google rankings?",
+    a: "No credible SEO company can guarantee a specific Google ranking. We improve the technical, content and authority signals that influence organic performance and measure whether those improvements translate into qualified acquisition.",
+  },
 ];
 
 /* Final review section. */
 export const CRYPTO_FINAL = {
   title: "Start Your Crypto SEO Review",
-  body: "The initial crypto SEO review assesses where the business currently appears across the searches that matter for qualified acquisition, where competitors own the commercial demand, and which technical, content, authority, and branded search gaps should be prioritized first.",
-  primaryCta: { label: "Request a Crypto SEO Audit", href: C_ROUTES.audit },
+  paras: [
+    "Your buyers are already searching for exchanges, protocols, wallets and crypto products like yours. The question is whether they find you or your competitors.",
+    "We review where your company appears today, which commercial searches you are missing and what we would prioritize first.",
+  ],
+  primaryCta: { label: "Request a Crypto SEO Review", href: C_ROUTES.audit },
   secondaryCta: { label: "Book a Call", href: C_ROUTES.bookCall },
-  submit: "Request My Crypto SEO Audit",
+  submit: "Request a Crypto SEO Review",
   privacy:
-    "By submitting this form you agree that Search Nexio may use the information provided in accordance with the Privacy Policy.",
+    "We use your details only to prepare and discuss your crypto SEO review.",
 };

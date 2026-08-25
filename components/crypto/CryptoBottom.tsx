@@ -9,7 +9,7 @@ import {
   CRYPTO_METRICS,
   CRYPTO_WHY,
   CRYPTO_ENGAGEMENTS,
-  CRYPTO_ENGAGEMENT_NOTE,
+  CRYPTO_PRICING_INTRO,
   CRYPTO_LIMITATIONS,
   CRYPTO_FAQS,
   CRYPTO_FINAL,
@@ -284,14 +284,14 @@ export function CryptoEngagements() {
 
                 <div>
                   <p className="text-[13.5px] leading-relaxed text-graphite">{e.desc}</p>
-                  {e.link && (
-                    <a href={e.link.href} className="mt-4 inline-flex items-center gap-2 text-[13px] font-semibold text-indigo">
-                      {e.link.label}
-                      <span aria-hidden className="grid size-5 place-items-center rounded-full bg-indigo/10 transition-all duration-200 group-hover:bg-indigo group-hover:text-white">
-                        <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                      </span>
-                    </a>
-                  )}
+                  <div className="mt-5 border-t border-line pt-4">
+                    <p className="font-heading text-[17px] font-bold tracking-[-0.01em] text-indigo">
+                      {e.price}
+                    </p>
+                    <p className="mt-1.5 text-[12.5px] leading-relaxed text-graphite">
+                      {e.priceNote}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -303,7 +303,7 @@ export function CryptoEngagements() {
             <CtaLink href={C_ROUTES.contact} variant="ghost">Discuss Your Crypto SEO Strategy</CtaLink>
           </div>
           <p className="mx-auto mt-6 max-w-3xl text-center text-[13px] leading-relaxed text-graphite">
-            {CRYPTO_ENGAGEMENT_NOTE}
+            {CRYPTO_PRICING_INTRO[1]}
           </p>
         </Reveal>
       </div>
@@ -435,7 +435,11 @@ export function CryptoForm() {
               <h2 className="mt-6 font-heading text-[clamp(1.9rem,3.6vw,2.7rem)] font-bold leading-[1.1] tracking-[-0.02em] text-white">
                 {CRYPTO_FINAL.title}
               </h2>
-              <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-white/70">{CRYPTO_FINAL.body}</p>
+              <div className="mt-5 grid max-w-lg gap-3">
+                {CRYPTO_FINAL.paras.map((t) => (
+                  <p key={t.slice(0, 24)} className="text-[15px] leading-relaxed text-white/70">{t}</p>
+                ))}
+              </div>
               <p className="mt-7 text-[14px] text-white/70">
                 Prefer to speak directly?{" "}
                 <a href={CRYPTO_FINAL.secondaryCta.href} className="font-semibold text-white underline decoration-white/40 underline-offset-2">

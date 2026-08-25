@@ -24,9 +24,9 @@ import {
 } from "@/components/crypto/CryptoBottom";
 
 export const metadata: Metadata = {
-  title: "Crypto SEO Services for Qualified Growth | Search Nexio",
+  title: "Crypto SEO Services | SEO for Web3 & Blockchain | SearchNexio",
   description:
-    "Search Nexio provides crypto SEO services designed to connect cryptocurrency, blockchain and Web3 businesses with qualified users through organic search, and to measure what happens after they find you.",
+    "Crypto SEO services for exchanges, DeFi, wallets, Web3 and blockchain companies. Build qualified demand across Google and AI search.",
 };
 
 export default function CryptoSeoPage() {

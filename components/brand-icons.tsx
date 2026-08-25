@@ -243,3 +243,88 @@ export function CopilotMark({ size = 18 }: { size?: number }) {
     </svg>
   );
 }
+
+/* ---- Crypto platform marks ----
+   Recognisable brand marks in each project's own colour, used in the crypto
+   hero orbit. Drawn from the official geometry so each reads correctly at
+   small sizes. */
+
+export function BitcoinMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#F7931A" />
+      <path
+        fill="#fff"
+        d="M23.19 14.02c.31-2.09-1.28-3.21-3.46-3.96l.71-2.84-1.73-.43-.69 2.76c-.45-.11-.92-.22-1.39-.32l.7-2.78-1.73-.43-.71 2.84c-.38-.09-.75-.17-1.11-.26v-.01l-2.39-.6-.46 1.85s1.28.29 1.26.31c.7.17.83.64.81 1.01l-.81 3.24c.05.01.11.03.18.06l-.18-.05-1.13 4.54c-.09.21-.3.53-.79.41.02.03-1.26-.31-1.26-.31l-.86 1.98 2.25.56c.42.11.83.22 1.24.32l-.72 2.87 1.73.43.71-2.84c.47.13.93.25 1.38.36l-.71 2.83 1.73.43.72-2.87c2.95.56 5.17.33 6.11-2.34.75-2.15-.04-3.39-1.59-4.2 1.13-.26 1.98-1 2.21-2.54zm-3.96 5.55c-.53 2.15-4.16.99-5.34.69l.95-3.81c1.17.29 4.96.87 4.39 3.12zm.54-5.58c-.49 1.96-3.51.96-4.49.72l.86-3.45c.98.25 4.14.7 3.63 2.73z"
+      />
+    </svg>
+  );
+}
+
+export function EthereumMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#627EEA" />
+      <path fill="#fff" fillOpacity="0.6" d="M16.5 4v8.87l7.5 3.35z" />
+      <path fill="#fff" d="M16.5 4 9 16.22l7.5-3.35z" />
+      <path fill="#fff" fillOpacity="0.6" d="M16.5 21.97V28l7.5-10.38z" />
+      <path fill="#fff" d="M16.5 28v-6.03L9 17.62z" />
+      <path fill="#fff" fillOpacity="0.2" d="m16.5 20.57 7.5-4.35-7.5-3.35z" />
+      <path fill="#fff" fillOpacity="0.6" d="m9 16.22 7.5 4.35v-7.7z" />
+    </svg>
+  );
+}
+
+export function BinanceMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#F3BA2F" />
+      <path
+        fill="#fff"
+        d="m12.12 14.35 3.88-3.88 3.88 3.88 2.26-2.26L16 5.95l-6.14 6.14zM6.4 16l2.26-2.26L10.92 16l-2.26 2.26zm5.72 1.65L16 21.53l3.88-3.88 2.26 2.25L16 26.05l-6.14-6.14-.01-.01zM21.08 16l2.26-2.26L25.6 16l-2.26 2.26zm-2.79-.01L16 13.7l-1.69 1.7-.2.19-.4.4 2.29 2.29 2.29-2.29z"
+      />
+    </svg>
+  );
+}
+
+export function SolanaMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#000" />
+      <defs>
+        <linearGradient id="sol-g" x1="8" y1="22" x2="24" y2="10" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#9945FF" />
+          <stop offset="100%" stopColor="#14F195" />
+        </linearGradient>
+      </defs>
+      <path
+        fill="url(#sol-g)"
+        d="M10.2 20.2a.6.6 0 0 1 .43-.18h13.1c.27 0 .4.32.21.51l-2.14 2.14a.6.6 0 0 1-.43.18H8.27a.3.3 0 0 1-.21-.51zM10.2 9.15a.62.62 0 0 1 .43-.18h13.1c.27 0 .4.33.21.52l-2.14 2.14a.6.6 0 0 1-.43.18H8.27a.3.3 0 0 1-.21-.52zM21.8 14.64a.6.6 0 0 0-.43-.18H8.27a.3.3 0 0 0-.21.52l2.14 2.14a.6.6 0 0 0 .43.18h13.1c.27 0 .4-.33.21-.52z"
+      />
+    </svg>
+  );
+}
+
+export function LedgerMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#0B0D12" />
+      <path
+        fill="#fff"
+        d="M8 8h7.2v2.3H10.3V17H8zm16 0v9h-2.3v-6.7h-4.9V8zM8 19.3h2.3V22h4.9v2.3H8zm13.7 0H24V24h-7.2v-2.3h4.9z"
+      />
+    </svg>
+  );
+}
+
+export function TetherMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+      <circle cx="16" cy="16" r="16" fill="#26A17B" />
+      <path
+        fill="#fff"
+        d="M17.94 15.9v-2.2h5.03V10.4H9.05v3.3h5.03v2.2c-4.09.19-7.16.99-7.16 1.96s3.07 1.78 7.16 1.97v6.27h3.86v-6.28c4.08-.19 7.15-1 7.15-1.96s-3.07-1.77-7.15-1.96zm0 3.28v-.01c-.1.01-.63.04-1.8.04-.94 0-1.6-.03-1.83-.04v.01c-3.62-.16-6.32-.79-6.32-1.54s2.7-1.38 6.32-1.54v2.45c.24.02.92.06 1.85.06 1.12 0 1.68-.05 1.78-.06v-2.45c3.61.16 6.31.79 6.31 1.54s-2.7 1.38-6.31 1.54z"
+      />
+    </svg>
+  );
+}
