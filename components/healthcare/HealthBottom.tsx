@@ -361,7 +361,13 @@ export function HealthFaq() {
         </Reveal>
         <div className="mt-10">
           {HC_FAQS.map((f, i) => (
-            <FaqRow key={f.q} q={f.q} a={f.a} open={open === i} onToggle={() => setOpen(open === i ? -1 : i)} />
+            <Reveal
+              key={f.q}
+              variant={i % 2 === 0 ? "left" : "right"}
+              delay={Math.min(i * 50, 240)}
+            >
+              <FaqRow q={f.q} a={f.a} open={open === i} onToggle={() => setOpen(open === i ? -1 : i)} />
+            </Reveal>
           ))}
         </div>
       </div>

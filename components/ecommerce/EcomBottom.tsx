@@ -267,13 +267,18 @@ export function EcomFaq() {
         </Reveal>
         <div className="mt-10">
           {ECOM_FAQS.map((f, i) => (
-            <FaqRow
+            <Reveal
               key={f.q}
-              q={f.q}
-              a={f.a}
-              open={open === i}
-              onToggle={() => setOpen(open === i ? -1 : i)}
-            />
+              variant={i % 2 === 0 ? "left" : "right"}
+              delay={Math.min(i * 50, 240)}
+            >
+              <FaqRow
+                q={f.q}
+                a={f.a}
+                open={open === i}
+                onToggle={() => setOpen(open === i ? -1 : i)}
+              />
+            </Reveal>
           ))}
         </div>
       </div>
