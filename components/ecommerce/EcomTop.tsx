@@ -1,7 +1,7 @@
-"use client";
-
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink, ORBIT_SPEED, splitAccent, SectionBadge } from "@/components/ui";
+import OrbitStage, { OrbitHub } from "@/components/OrbitStage";
+import { CtaLink, SectionBadge } from "@/components/ui";
+import { splitAccent } from "@/components/shared";
 import {
   ShopifyMark,
   WooCommerceMark,
@@ -26,7 +26,7 @@ const ECOM_MARKS: Record<string, React.ReactNode> = {
   magento: <MagentoMark size={44} />,
   bigcommerce: <BigCommerceMark size={44} />,
   headless: <HeadlessMark size={44} />,
-  merchant: <GoogleG size={40} />,
+  merchant: <GoogleG size={44} />,
 };
 
 /* Glyphs for the hero trust chips. Line icons on the house 1.7 stroke. */
@@ -59,62 +59,27 @@ const CHIP_ICONS: Record<string, React.ReactNode> = {
   ),
 };
 
-/* ---- Hero orbit: the platforms a store actually runs on ----
-   Five nodes, 72 degrees apart on the solid ring, with Shopify at the hub.
-   Same construction as every other hero: the node layer revolves and each
-   chip counter-spins so its mark stays upright. */
+/* The platform diagram: the shared orbit stage with Shopify at the hub and
+   the five platforms store owners run on around it. */
+const ECOM_NODES = ECOM_HERO.orbit.map((n) => ({
+  label: `${n.title} ${n.sub}`,
+  mark: ECOM_MARKS[n.icon],
+}));
+
 function PlatformLoop() {
-  const spots = [
-    "left-1/2 top-[12%] -translate-x-1/2 -translate-y-1/2",
-    "left-[86.1%] top-[38.3%] -translate-x-1/2 -translate-y-1/2",
-    "left-[72.3%] top-[80.7%] -translate-x-1/2 -translate-y-1/2",
-    "left-[27.7%] top-[80.7%] -translate-x-1/2 -translate-y-1/2",
-    "left-[13.9%] top-[38.3%] -translate-x-1/2 -translate-y-1/2",
-  ];
-
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[540px]">
-      {/* dashed outer ring */}
-      <div aria-hidden className="absolute inset-[2%] rounded-full border border-dashed border-indigo/25" />
-
-      {/* solid orbit ring the nodes travel on */}
-      <div aria-hidden className="absolute inset-[12%] rounded-full border border-indigo/40" />
-
-      {/* core: Shopify, the platform most of these stores run on */}
-      <div className="absolute left-1/2 top-1/2 grid size-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center">
-        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-[#95BF47]/18 blur-2xl" />
-        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(149,191,71,0.24)]">
-          <span
-            title="Shopify"
-            aria-label="Shopify"
-            className="grid size-[64%] place-items-center"
-          >
-            <span aria-hidden className="block w-full [&>svg]:h-auto [&>svg]:w-full">
-              <ShopifyMark size={148} />
-            </span>
-          </span>
-        </span>
-      </div>
-
-      {/* five platform nodes; names stay as tooltips and accessible labels */}
-      <div
-        className="animate-orbit absolute inset-0"
-        style={{ animationDuration: ORBIT_SPEED }}
-      >
-        {ECOM_HERO.orbit.map((n, i) => (
-          <div key={n.title} className={`absolute ${spots[i]}`}>
-            <span
-              title={`${n.title} ${n.sub}`}
-              aria-label={`${n.title} ${n.sub}`}
-              className="animate-orbit grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
-              style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
-            >
-              {ECOM_MARKS[n.icon]}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
+    <OrbitStage
+      nodes={ECOM_NODES}
+      hub={
+        <OrbitHub
+          label="Shopify"
+          glowClass="bg-[#95BF47]/18"
+          shadowClass="shadow-[0_24px_60px_rgba(149,191,71,0.24)]"
+        >
+          <ShopifyMark size={148} />
+        </OrbitHub>
+      }
+    />
   );
 }
 

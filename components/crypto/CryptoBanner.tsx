@@ -1,5 +1,3 @@
-"use client";
-
 import Reveal from "@/components/motion/Reveal";
 import { CtaLink } from "@/components/ui";
 import { CRYPTO_BANNERS } from "@/lib/crypto-seo-content";

@@ -32,3 +32,18 @@ export function Ring({
     </span>
   );
 }
+
+/* The faint white dot-grid overlay used on the dark indigo panels. */
+export function DotGrid({ className = "opacity-25" }: { className?: string }) {
+  return (
+    <div
+      aria-hidden
+      className={`absolute inset-0 ${className}`}
+      style={{
+        backgroundImage:
+          "radial-gradient(rgba(255,255,255,0.25) 1.5px, transparent 1.5px)",
+        backgroundSize: "14px 14px",
+      }}
+    />
+  );
+}

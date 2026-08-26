@@ -5,6 +5,7 @@ import SiteNav from "@/components/SiteNav";
 import Footer from "@/components/Footer";
 import ThemeToggle from "@/components/ThemeToggle";
 import BackToTop from "@/components/BackToTop";
+import { BrandDefs } from "@/components/brand-icons";
 
 /* The Sasico pairing: Plus Jakarta Sans carries every heading at 700,
    Inter carries body and UI. */
@@ -56,6 +57,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
+        <BrandDefs />
         <SiteNav />
         {children}
         <Footer />

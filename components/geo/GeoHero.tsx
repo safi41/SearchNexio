@@ -1,5 +1,6 @@
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink, ORBIT_SPEED } from "@/components/ui";
+import OrbitStage from "@/components/OrbitStage";
+import { CtaLink } from "@/components/ui";
 import { GEO_HERO } from "@/lib/geo-content";
 import {
   ChatGPTKnot,
@@ -46,159 +47,65 @@ const PLATFORM_CHIPS = [
   { icon: <CopilotMark size={20} />, label: "Microsoft Copilot" },
 ];
 
-/* Logo bubbles riding the orbit. The whole group revolves around the sphere
-   while each bubble counter-rotates at the same rate, so the logos stay
-   upright as they travel.
-
-   All five share one radius and sit exactly 72 degrees apart, so the gaps
-   between them are equal. Positions are 50% + 45% * (cos, sin) of the angle
-   noted, starting at -125deg to keep the reference composition. */
-
+/* Five platforms, 72 degrees apart starting at -125deg to keep the
+   reference composition. Marks at the uniform 44px glyph size; tinted
+   bubbles keep their brand-adjacent fills. */
 const ORBIT_BUBBLES = [
-  {
-    label: "ChatGPT", // -125deg
-    icon: <ChatGPTKnot size={44} />,
-    left: "24.2%",
-    top: "13.1%",
-    size: 84,
-    bg: "#EAF7F0",
-  },
-  {
-    label: "Gemini", // -53deg
-    icon: <GeminiMark size={36} />,
-    left: "77.1%",
-    top: "14.1%",
-    size: 84,
-    bg: "#ffffff",
-  },
-  {
-    label: "Perplexity", // 19deg
-    icon: <PerplexityKnot size={40} />,
-    left: "92.5%",
-    top: "64.7%",
-    size: 84,
-    bg: "#F2FAF8",
-  },
-  {
-    label: "Claude", // 91deg
-    icon: <AnthropicLogotype width={44} />,
-    left: "49.2%",
-    top: "95.0%",
-    size: 84,
-    bg: "#ffffff",
-  },
-  {
-    label: "Microsoft Copilot", // 163deg
-    icon: <CopilotMark size={38} />,
-    left: "7.0%",
-    top: "63.2%",
-    size: 84,
-    bg: "#ffffff",
-  },
+  { label: "ChatGPT", icon: <ChatGPTKnot size={44} />, bg: "#EAF7F0" },
+  { label: "Gemini", icon: <GeminiMark size={44} />, bg: "#ffffff" },
+  { label: "Perplexity", icon: <PerplexityKnot size={44} />, bg: "#F2FAF8" },
+  { label: "Claude", icon: <AnthropicLogotype width={44} />, bg: "#ffffff" },
+  { label: "Microsoft Copilot", icon: <CopilotMark size={44} />, bg: "#ffffff" },
 ];
+
 
 function OrbitVisual() {
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[540px]">
-      {/* soft halo behind everything */}
-      <div
-        aria-hidden
-        className="absolute inset-[14%] rounded-full bg-indigo/15 blur-3xl"
-      />
-
-      {/* outer dashed orbit — rotates slowly, carrying its small dots */}
-      <div
-        aria-hidden
-        className="animate-orbit-slow absolute inset-[5%] rounded-full border border-dashed border-indigo/30"
-        style={{ animationDuration: "56s" }}
-      >
-        <span className="absolute left-1/2 top-0 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-400" />
-        <span className="absolute right-[7%] top-[80%] size-1.5 rounded-full bg-indigo/70" />
-        <span className="absolute left-[4%] top-[30%] size-1.5 rounded-full bg-indigo/40" />
-      </div>
-
-      {/* inner solid orbit hugging the sphere */}
-      <div
-        aria-hidden
-        className="absolute inset-[15%] rounded-full border border-indigo/20"
-      />
-
-      {/* glowing brand sphere with the white spark outline */}
-      <div className="absolute inset-[24%]">
-        <div
-          className="absolute inset-0 rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle at 36% 30%, #E7E1FF 0%, #C9BAFF 34%, #A794FE 64%, #9583F8 100%)",
-            boxShadow:
-              "inset 0 -20px 48px rgba(99,91,255,0.28), inset 0 14px 34px rgba(255,255,255,0.45), 0 30px 90px rgba(99,91,255,0.35)",
-            filter: "blur(7px)",
-          }}
-        />
-        <svg
-          className="absolute left-1/2 top-1/2 w-[46%] -translate-x-1/2 -translate-y-1/2"
-          viewBox="0 0 64 64"
-          fill="none"
-          aria-hidden
+    <OrbitStage
+      nodes={ORBIT_BUBBLES.map((b) => ({ label: b.label, mark: b.icon, bg: b.bg }))}
+      startAngle={-125}
+      hub={
+        <span
+          title="Generative engines"
+          aria-label="Generative engines"
+          className="relative block size-full"
         >
-          <path
-            d="M32 3 C34.5 19 45 29.5 61 32 C45 34.5 34.5 45 32 61 C29.5 45 19 34.5 3 32 C19 29.5 29.5 19 32 3 Z"
-            stroke="#ffffff"
-            strokeWidth="2.3"
-            strokeLinejoin="round"
+          <span
+            aria-hidden
+            className="absolute inset-0 rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle at 36% 30%, #E7E1FF 0%, #C9BAFF 34%, #A794FE 64%, #9583F8 100%)",
+              boxShadow:
+                "inset 0 -20px 48px rgba(99,91,255,0.28), inset 0 14px 34px rgba(255,255,255,0.45), 0 30px 90px rgba(99,91,255,0.35)",
+              filter: "blur(7px)",
+            }}
           />
-        </svg>
-      </div>
-
-      {/* platform logo bubbles — the group revolves around the sphere; each
-          bubble spins in reverse at the same rate so its logo stays upright */}
-      <div
-        className="animate-orbit absolute inset-0"
-        style={{ animationDuration: ORBIT_SPEED }}
-      >
-        {ORBIT_BUBBLES.map((b) => (
-          <div
-            key={b.label}
-            className="absolute -translate-x-1/2 -translate-y-1/2"
-            style={{ left: b.left, top: b.top }}
+          <svg
+            className="absolute left-1/2 top-1/2 w-[46%] -translate-x-1/2 -translate-y-1/2"
+            viewBox="0 0 64 64"
+            fill="none"
+            aria-hidden
           >
-            <span
-              title={b.label}
-              className="animate-orbit grid place-items-center rounded-full shadow-[0_18px_44px_rgba(99,91,255,0.2)]"
-              style={{
-                width: b.size,
-                height: b.size,
-                background: b.bg,
-                animationDuration: ORBIT_SPEED,
-                animationDirection: "reverse",
-              }}
-            >
-              {b.icon}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {/* scattered decor sparks and dots */}
-      <MiniSpark
-        size={16}
-        className="absolute left-[-4%] top-[38%] text-indigo/60"
-      />
-      <MiniSpark
-        size={11}
-        className="absolute left-[8%] top-[88%] text-indigo/45"
-      />
-      <MiniSpark
-        size={13}
-        className="absolute right-[-2%] top-[8%] text-indigo/50"
-      />
-      <MiniSpark
-        size={10}
-        className="absolute right-[16%] top-[76%] text-indigo/40"
-      />
+            <path
+              d="M32 3 C34.5 19 45 29.5 61 32 C45 34.5 34.5 45 32 61 C29.5 45 19 34.5 3 32 C19 29.5 29.5 19 32 3 Z"
+              stroke="#ffffff"
+              strokeWidth="2.3"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      }
+    >
+      {/* page decor: soft halo, scattered sparks and dots */}
+      <div aria-hidden className="absolute inset-[14%] rounded-full bg-indigo/15 blur-3xl" />
+      <MiniSpark size={16} className="absolute left-[-4%] top-[38%] text-indigo/60" />
+      <MiniSpark size={11} className="absolute left-[8%] top-[88%] text-indigo/45" />
+      <MiniSpark size={13} className="absolute right-[-2%] top-[8%] text-indigo/50" />
+      <MiniSpark size={10} className="absolute right-[16%] top-[76%] text-indigo/40" />
       <span className="absolute right-[2%] top-[36%] size-2 rounded-full bg-indigo/30" />
       <span className="absolute left-[30%] top-[2%] size-1.5 rounded-full bg-sky-400/70" />
-    </div>
+    </OrbitStage>
   );
 }
 

@@ -1,7 +1,6 @@
-"use client";
-
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink, ORBIT_SPEED } from "@/components/ui";
+import OrbitStage, { OrbitHub } from "@/components/OrbitStage";
+import { CtaLink } from "@/components/ui";
 import {
   CRYPTO_HERO,
   QUALIFIED_DEMAND,
@@ -80,66 +79,27 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
   ),
 };
 
+/* The acquisition-loop diagram: the shared orbit stage with the Bitcoin
+   mark at the hub and the six platform nodes around it. */
+const CRYPTO_NODES = CRYPTO_HERO.orbit.map((n) => ({
+  label: `${n.title} ${n.sub}`,
+  mark: CRYPTO_MARKS[n.icon],
+}));
+
 function CryptoLoop() {
-  /* Nodes render immediately; the node layer revolves at the shared
-     orbit speed and each chip counter-spins to stay upright. */
-
-  /* Six nodes, 60 degrees apart on the solid ring. Positions are
-     50% + 38% * (cos, sin) of the angle, starting at the top. */
-  const spots = [
-    "left-1/2 top-[12%] -translate-x-1/2 -translate-y-1/2",
-    "left-[82.9%] top-[31%] -translate-x-1/2 -translate-y-1/2",
-    "left-[82.9%] top-[69%] -translate-x-1/2 -translate-y-1/2",
-    "left-1/2 top-[88%] -translate-x-1/2 -translate-y-1/2",
-    "left-[17.1%] top-[69%] -translate-x-1/2 -translate-y-1/2",
-    "left-[17.1%] top-[31%] -translate-x-1/2 -translate-y-1/2",
-  ];
-
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[540px]">
-      {/* dashed outer ring */}
-      <div aria-hidden className="absolute inset-[2%] rounded-full border border-dashed border-indigo/25" />
-
-      {/* solid orbit ring the nodes travel on */}
-      <div aria-hidden className="absolute inset-[12%] rounded-full border border-indigo/40" />
-
-      {/* core: the Bitcoin mark, the most recognisable asset in the market
-          this page sells into. The orbiting platforms are the surfaces
-          buyers research around it. */}
-      <div className="absolute left-1/2 top-1/2 grid size-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center">
-        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-[#F7931A]/15 blur-2xl" />
-        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(247,147,26,0.22)]">
-          <span
-            title="Bitcoin"
-            aria-label="Bitcoin"
-            className="grid size-[64%] place-items-center"
-          >
-            <span aria-hidden className="block w-full [&>svg]:h-auto [&>svg]:w-full">
-              <BitcoinMark size={148} />
-            </span>
-          </span>
-        </span>
-      </div>
-
-      {/* six platform nodes; names stay as tooltips and accessible labels */}
-      <div
-        className="animate-orbit absolute inset-0"
-        style={{ animationDuration: ORBIT_SPEED }}
-      >
-        {CRYPTO_HERO.orbit.map((n, i) => (
-          <div key={n.title} className={`absolute ${spots[i]}`}>
-            <span
-              title={`${n.title} ${n.sub}`}
-              aria-label={`${n.title} ${n.sub}`}
-              className="animate-orbit grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
-              style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
-            >
-              {CRYPTO_MARKS[n.icon]}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
+    <OrbitStage
+      nodes={CRYPTO_NODES}
+      hub={
+        <OrbitHub
+          label="Bitcoin"
+          glowClass="bg-[#F7931A]/15"
+          shadowClass="shadow-[0_24px_60px_rgba(247,147,26,0.22)]"
+        >
+          <BitcoinMark size={148} />
+        </OrbitHub>
+      }
+    />
   );
 }
 

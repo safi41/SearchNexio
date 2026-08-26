@@ -27,7 +27,7 @@ export function Eyebrow({
 }
 
 /* The circle-arrow chip inside every Sasico button. */
-function ArrowChip({
+export function ArrowChip({
   tone = "ink",
 }: {
   tone?: "ink" | "citron" | "indigo" | "white";
@@ -142,16 +142,6 @@ export function IconTile({ children }: { children: ReactNode }) {
   );
 }
 
-/* Site-wide revolve speed for the hero orbit diagrams. */
-export const ORBIT_SPEED = "48s";
-
-/* Splits a title so one phrase can carry the indigo accent, matching the
-   heading treatment used across the site. */
-export function splitAccent(title: string, accent: string): [string, string, string] {
-  const i = title.indexOf(accent);
-  if (i < 0) return [title, "", ""];
-  return [title.slice(0, i), accent, title.slice(i + accent.length)];
-}
 
 /* The bordered uppercase section badge used by the service-page section
    openers. The lilac Badge above is the hero/eyebrow variant. */
@@ -160,5 +150,45 @@ export function SectionBadge({ children }: { children: ReactNode }) {
     <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
       {children}
     </span>
+  );
+}
+
+/* The four-point star used in eyebrows and glass badges. */
+export function Sparkle({ size = 13, className }: { size?: number; className?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden className={className}>
+      <path
+        d="M12 2c.4 5 5 9.6 10 10-5 .4-9.6 5-10 10-.4-5-5-9.6-10-10 5-.4 9.6-5 10-10Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+/* Text input for the closing forms, shared so the field styling cannot
+   drift between pages. */
+export function Field({
+  label,
+  type = "text",
+  required = false,
+  full = false,
+}: {
+  label: string;
+  type?: string;
+  required?: boolean;
+  full?: boolean;
+}) {
+  return (
+    <label className={`block ${full ? "sm:col-span-2" : ""}`}>
+      <span className="text-[12.5px] font-semibold text-ink">
+        {label}
+        {required && <span className="text-indigo"> *</span>}
+      </span>
+      <input
+        type={type}
+        required={required}
+        className="mt-1.5 w-full rounded-xl border border-line bg-ivory/50 px-4 py-3 text-[14px] outline-none transition-colors duration-200 focus:border-indigo/50 focus:bg-surface"
+      />
+    </label>
   );
 }

@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/motion/Reveal";
 import FaqSection from "@/components/FaqSection";
-import { CtaLink } from "@/components/ui";
+import ClosingForm from "@/components/ClosingForm";
+import { CtaLink, Field } from "@/components/ui";
 import {
   HC_PROCESS,
   HC_PROCESS_CTA,
@@ -331,85 +332,30 @@ export function HealthFaq() {
   );
 }
 
-/* ---- Start your healthcare SEO review: copy left, form right, no
-   decorative animation around the form. ---- */
-function Field({ label, type = "text", required = false, full = false }: { label: string; type?: string; required?: boolean; full?: boolean }) {
-  return (
-    <label className={`block ${full ? "sm:col-span-2" : ""}`}>
-      <span className="text-[12.5px] font-semibold text-ink">
-        {label}
-        {required && <span className="text-indigo"> *</span>}
-      </span>
-      <input
-        type={type}
-        required={required}
-        className="mt-1.5 w-full rounded-xl border border-line bg-ivory/60 px-3.5 py-2.5 text-[14px] text-ink outline-none transition-colors focus:border-indigo/50 focus:bg-surface"
-      />
-    </label>
-  );
-}
 
 export function HealthForm() {
-  const [sent, setSent] = useState(false);
-
   return (
-    <section id="healthcare-review" className="scroll-mt-24 overflow-x-clip py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="cta-indigo relative overflow-hidden rounded-[2rem] p-7 md:p-12">
-          <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute -right-28 -top-28 size-96 rounded-full border border-white/10" />
-            <div className="absolute -right-10 -top-10 size-56 rounded-full border border-white/10" />
-            <div
-              className="absolute bottom-6 left-6 h-28 w-40 opacity-60"
-              style={{
-                backgroundImage: "radial-gradient(rgba(255,255,255,0.25) 1.5px, transparent 1.5px)",
-                backgroundSize: "14px 14px",
-              }}
-            />
-          </div>
-
-          <div className="relative grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
-            <Reveal variant="left">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-[12px] font-semibold text-white backdrop-blur-sm">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden className="text-citron">
-                  <path d="M12 6.5v11M6.5 12h11" />
-                </svg>
-                Healthcare SEO Review
-              </span>
-              <h2 className="mt-6 font-heading text-[clamp(1.9rem,3.6vw,2.7rem)] font-bold leading-[1.1] tracking-[-0.02em] text-white">
-                {HC_FINAL.title}
-              </h2>
-              <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-white/70">{HC_FINAL.body}</p>
+    <ClosingForm
+      id="healthcare-review"
+      scrollMt
+      badge="Healthcare SEO Review"
+      title={HC_FINAL.title}
+      intro={
+        <>
+          <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-white/70">{HC_FINAL.body}</p>
               <p className="mt-7 text-[14px] text-white/70">
                 Prefer to speak directly?{" "}
                 <a href={HC_FINAL.secondaryCta.href} className="font-semibold text-white underline decoration-white/40 underline-offset-2">
                   {HC_FINAL.secondaryCta.label}
                 </a>
               </p>
-            </Reveal>
-
-            <Reveal variant="right" delay={80}>
-              <div className="rounded-3xl bg-surface p-7 shadow-[0_30px_80px_rgba(11,13,18,0.35)] md:p-8">
-                {sent ? (
-                  <div className="grid min-h-[400px] place-items-center text-center">
-                    <div>
-                      <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-citron">
-                        <svg width="24" height="24" viewBox="0 0 12 12" fill="none" aria-hidden><path d="m2.5 6.5 2.5 2.5 4.5-5" stroke="#0B0D12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                      </span>
-                      <h3 className="mt-5 font-heading text-[20px] font-bold tracking-[-0.01em]">Request received</h3>
-                      <p className="mx-auto mt-2 max-w-sm text-[14px] leading-relaxed text-graphite">
-                        Thank you. Search Nexio will review your details and follow up about your healthcare SEO audit.
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      setSent(true);
-                    }}
-                  >
-                    <div className="grid gap-4 sm:grid-cols-2">
+        </>
+      }
+      submitLabel={HC_FINAL.submit}
+      sentMessage="Thank you. Search Nexio will review your details and follow up about your healthcare SEO audit."
+      privacy={HC_FINAL.privacy}
+    >
+      <div className="grid gap-4 sm:grid-cols-2">
                       <Field label="Name" required />
                       <Field label="Work email" type="email" required />
                       <Field label="Company or practice" />
@@ -426,25 +372,6 @@ export function HealthForm() {
                       </label>
                       <Field label="Phone number (optional)" type="tel" full />
                     </div>
-
-                    <button
-                      type="submit"
-                      className="group mt-6 flex w-full items-center justify-center gap-2.5 rounded-full bg-citron py-3 text-[14.5px] font-semibold text-ink-solid transition-colors duration-200 hover:bg-citron-deep"
-                    >
-                      {HC_FINAL.submit}
-                      <span aria-hidden className="grid size-6 place-items-center rounded-full bg-ink-solid text-citron transition-transform duration-200 group-hover:translate-x-0.5">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                      </span>
-                    </button>
-
-                    <p className="mt-4 text-[11.5px] leading-relaxed text-graphite">{HC_FINAL.privacy}</p>
-                  </form>
-                )}
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </div>
-    </section>
+    </ClosingForm>
   );
 }

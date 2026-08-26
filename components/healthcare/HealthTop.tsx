@@ -1,7 +1,6 @@
-"use client";
-
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink, ORBIT_SPEED } from "@/components/ui";
+import OrbitStage, { OrbitHub } from "@/components/OrbitStage";
+import { CtaLink } from "@/components/ui";
 import {
   HC_HERO,
   HC_BRING_PATIENTS,
@@ -57,66 +56,27 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
   ),
 };
 
-/* The patient-acquisition loop: a heart core at the centre of a solid
-   orbit ring, with four white icon nodes at the cardinal points. */
+/* The patient-acquisition diagram: the shared orbit stage with the Google
+   Maps pin at the hub and the four research surfaces around it. */
+const HEALTH_NODES = HC_HERO.orbit.map((n) => ({
+  label: `${n.title} ${n.sub}`,
+  mark: HEALTH_MARKS[n.icon],
+}));
+
 function PatientLoop() {
-  /* Nodes render immediately; the node layer revolves at the shared
-     orbit speed and each chip counter-spins to stay upright. */
-
-  /* Node centres sit on the solid ring at the four cardinal points. */
-  const spots = [
-    "left-1/2 top-[16%] -translate-x-1/2 -translate-y-1/2",
-    "left-[84%] top-1/2 -translate-x-1/2 -translate-y-1/2",
-    "left-1/2 top-[84%] -translate-x-1/2 -translate-y-1/2",
-    "left-[16%] top-1/2 -translate-x-1/2 -translate-y-1/2",
-  ];
-
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[540px]">
-      {/* dashed outer ring */}
-      <div aria-hidden className="absolute inset-0 rounded-full border border-dashed border-indigo/25" />
-
-      {/* solid orbit ring the nodes travel on */}
-      <div aria-hidden className="absolute inset-[16%] rounded-full border border-indigo/45" />
-
-      {/* core: the Google Maps pin, the surface a local patient search
-          actually lands on. The orbiting marks are where they research
-          before booking. */}
-      <div className="absolute left-1/2 top-1/2 grid size-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center">
-        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-[#EA4335]/12 blur-2xl" />
-        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(234,67,53,0.2)]">
-          <span
-            title="Google Maps"
-            aria-label="Google Maps"
-            className="grid size-[62%] place-items-center"
-          >
-            <span aria-hidden className="block w-full [&>svg]:h-auto [&>svg]:w-full">
-              <MapsPin size={132} />
-            </span>
-          </span>
-        </span>
-      </div>
-
-      {/* four journey nodes; each keeps its stage name as a tooltip and an
-          accessible label, so the meaning survives without visible text */}
-      <div
-        className="animate-orbit absolute inset-0"
-        style={{ animationDuration: ORBIT_SPEED }}
-      >
-        {HC_HERO.orbit.map((n, i) => (
-          <div key={n.title} className={`absolute ${spots[i]}`}>
-            <span
-              title={`${n.title} ${n.sub}`}
-              aria-label={`${n.title} ${n.sub}`}
-              className="animate-orbit grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
-              style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
-            >
-              {HEALTH_MARKS[n.icon]}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
+    <OrbitStage
+      nodes={HEALTH_NODES}
+      hub={
+        <OrbitHub
+          label="Google Maps"
+          glowClass="bg-[#EA4335]/12"
+          shadowClass="shadow-[0_24px_60px_rgba(234,67,53,0.2)]"
+        >
+          <MapsPin size={132} />
+        </OrbitHub>
+      }
+    />
   );
 }
 

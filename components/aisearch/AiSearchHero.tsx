@@ -1,5 +1,7 @@
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink, ORBIT_SPEED } from "@/components/ui";
+import OrbitStage from "@/components/OrbitStage";
+import { CtaLink } from "@/components/ui";
+import { ORBIT_SPEED } from "@/components/shared";
 import { AISEARCH_HERO } from "@/lib/ai-search-content";
 import { GoogleG, GeminiMark, PerplexityKnot } from "@/components/brand-icons";
 
@@ -24,28 +26,24 @@ function ChatGPTInk({ size = 40 }: { size?: number }) {
    counter-rotates so its logo stays upright. */
 
 const NODES = [
-  { name: "Google AI", icon: <GoogleG size={42} />, node: { left: "50%", top: "12%" } },
-  { name: "ChatGPT", icon: <ChatGPTInk size={44} />, node: { left: "12%", top: "50%" } },
-  { name: "Gemini", icon: <GeminiMark size={42} />, node: { left: "88%", top: "50%" } },
-  { name: "Perplexity", icon: <PerplexityKnot size={44} />, node: { left: "50%", top: "88%" } },
+  { name: "Google AI", icon: <GoogleG size={44} /> },
+  { name: "ChatGPT", icon: <ChatGPTInk size={44} /> },
+  { name: "Gemini", icon: <GeminiMark size={44} /> },
+  { name: "Perplexity", icon: <PerplexityKnot size={44} /> },
 ];
+
 
 function HubDiagram() {
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[540px]">
-      {/* dashed orbit rings, slowly rotating in opposite directions */}
-      <div aria-hidden className="animate-orbit absolute inset-[12%] rounded-full border border-dashed border-indigo/25" style={{ animationDuration: "52s" }} />
-      <div aria-hidden className="animate-orbit-slow absolute inset-[27%] rounded-full border border-dashed border-indigo/15" style={{ animationDuration: "38s" }} />
-
-      {/* connectors + nodes revolve together around the hub */}
-      <div className="animate-orbit absolute inset-0" style={{ animationDuration: ORBIT_SPEED }}>
-        {/* axis connectors with endpoint dots */}
+    <OrbitStage
+      nodes={NODES.map((n) => ({ label: n.name, mark: n.icon }))}
+      orbitChildren={
         <svg aria-hidden className="absolute inset-0 size-full" viewBox="0 0 100 100">
           {[
-            [50, 23, 50, 34.5],
-            [23, 50, 34.5, 50],
-            [77, 50, 65.5, 50],
-            [50, 77, 50, 65.5],
+            [50, 23, 50, 27.5],
+            [23, 50, 27.5, 50],
+            [77, 50, 72.5, 50],
+            [50, 77, 50, 72.5],
           ].map(([x1, y1, x2, y2], i) => (
             <g key={i} stroke="var(--color-indigo)" opacity="0.55">
               <line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth="0.5" />
@@ -54,43 +52,34 @@ function HubDiagram() {
             </g>
           ))}
         </svg>
-
-        {/* platform nodes, counter-rotating to stay upright */}
-        {NODES.map((n) => (
-          <div
-            key={n.name}
-            className="absolute -translate-x-1/2 -translate-y-1/2"
-            style={n.node}
+      }
+      hub={
+        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(99,91,255,0.22)]">
+          <span
+            className="grid size-[74%] place-items-center rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle at 35% 30%, #8F84FF 0%, #635BFF 60%, #5049E0 100%)",
+              boxShadow:
+                "inset 0 10px 22px rgba(255,255,255,0.35), inset 0 -12px 26px rgba(40,34,150,0.35)",
+            }}
           >
-            <span
-              title={n.name}
-              className="animate-orbit grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(11,13,18,0.1)]"
-              style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
-            >
-              {n.icon}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {/* center: brand scope on a white disc */}
-      <div className="absolute left-1/2 top-1/2 grid size-[30%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(99,91,255,0.22)]">
-        <div
-          className="grid size-[74%] place-items-center rounded-full"
-          style={{
-            background: "radial-gradient(circle at 35% 30%, #8F84FF 0%, #635BFF 60%, #5049E0 100%)",
-            boxShadow: "inset 0 10px 22px rgba(255,255,255,0.35), inset 0 -12px 26px rgba(40,34,150,0.35)",
-          }}
-        >
-          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-            <circle cx="10.5" cy="10.5" r="6.2" />
-            <path d="M15.3 15.3 20 20" />
-            <path d="M10.5 7.6c.2 1.6 1.5 2.9 3.1 3.1-1.6.2-2.9 1.5-3.1 3.1-.2-1.6-1.5-2.9-3.1-3.1 1.6-.2 2.9-1.5 3.1-3.1Z" fill="#ffffff" stroke="none" />
-          </svg>
-        </div>
-      </div>
-
-    </div>
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <circle cx="10.5" cy="10.5" r="6.2" />
+              <path d="M15.3 15.3 20 20" />
+              <path d="M10.5 7.6c.2 1.6 1.5 2.9 3.1 3.1-1.6.2-2.9 1.5-3.1 3.1-.2-1.6-1.5-2.9-3.1-3.1 1.6-.2 2.9-1.5 3.1-3.1Z" fill="#ffffff" stroke="none" />
+            </svg>
+          </span>
+        </span>
+      }
+    >
+      {/* page decor: the slow counter-rotating inner ring */}
+      <div
+        aria-hidden
+        className="animate-orbit-slow absolute inset-[27%] rounded-full border border-dashed border-indigo/15"
+        style={{ animationDuration: "38s" }}
+      />
+    </OrbitStage>
   );
 }
 

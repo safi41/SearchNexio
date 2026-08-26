@@ -1,6 +1,53 @@
 /* Small platform marks for the journey diagram pills. The four surfaces are
    named in the locked copy; the marks make the pills read at a glance. */
 
+/* One hidden sprite holding every gradient the marks reference. Rendered
+   once in the root layout, so a mark appearing several times on a page no
+   longer duplicates DOM ids — duplicate ids are invalid HTML and gradients
+   defined inside hidden duplicates can fail to paint in some browsers. */
+export function BrandDefs() {
+  return (
+    <svg width="0" height="0" aria-hidden className="absolute">
+      <defs>
+        <linearGradient id="sparkle-grad" x1="0" y1="0" x2="24" y2="24">
+          <stop offset="0%" stopColor="#4285F4" />
+          <stop offset="100%" stopColor="#9B72CB" />
+        </linearGradient>
+        <linearGradient id="gemini-grad" x1="2" y1="4" x2="22" y2="20">
+          <stop offset="0%" stopColor="#4285F4" />
+          <stop offset="55%" stopColor="#9B72CB" />
+          <stop offset="100%" stopColor="#D96570" />
+        </linearGradient>
+        <linearGradient id="cop-a" x1="6" y1="3" x2="18" y2="10">
+          <stop offset="0%" stopColor="#12B3F8" />
+          <stop offset="100%" stopColor="#1D4FD7" />
+        </linearGradient>
+        <linearGradient id="cop-b" x1="6" y1="14" x2="18" y2="21">
+          <stop offset="0%" stopColor="#7B5CF0" />
+          <stop offset="100%" stopColor="#E5488F" />
+        </linearGradient>
+        <linearGradient id="cop-c" x1="4" y1="12" x2="20" y2="12">
+          <stop offset="0%" stopColor="#2E8DEE" />
+          <stop offset="100%" stopColor="#6A64F1" />
+        </linearGradient>
+        <linearGradient id="sol-g" x1="8" y1="22" x2="24" y2="10" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#9945FF" />
+          <stop offset="100%" stopColor="#14F195" />
+        </linearGradient>
+        <linearGradient id="am-g" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#4DD07C" />
+          <stop offset="55%" stopColor="#2FB1E8" />
+          <stop offset="100%" stopColor="#2A6FE8" />
+        </linearGradient>
+        <linearGradient id="amp-fill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#635BFF" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="#635BFF" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
 export function GoogleG({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden>
@@ -39,12 +86,6 @@ export function MapsPin({ size = 18 }: { size?: number }) {
 export function SparkleAI({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
-      <defs>
-        <linearGradient id="sparkle-grad" x1="0" y1="0" x2="24" y2="24">
-          <stop offset="0%" stopColor="#4285F4" />
-          <stop offset="100%" stopColor="#9B72CB" />
-        </linearGradient>
-      </defs>
       <path
         d="M12 2.5 14.3 9 21 12l-6.7 2.4L12 21.5 9.7 14.4 3 12l6.7-3Z"
         fill="url(#sparkle-grad)"
@@ -84,13 +125,6 @@ export function BingMark({ size = 18 }: { size?: number }) {
 export function GeminiMark({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
-      <defs>
-        <linearGradient id="gemini-grad" x1="2" y1="4" x2="22" y2="20">
-          <stop offset="0%" stopColor="#4285F4" />
-          <stop offset="55%" stopColor="#9B72CB" />
-          <stop offset="100%" stopColor="#D96570" />
-        </linearGradient>
-      </defs>
       <path
         d="M12 2c.4 5 5 9.6 10 10-5 .4-9.6 5-10 10-.4-5-5-9.6-10-10 5-.4 9.6-5 10-10Z"
         fill="url(#gemini-grad)"
@@ -223,20 +257,6 @@ export function AnthropicLogotype({ width = 40 }: { width?: number }) {
 export function CopilotMark({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
-      <defs>
-        <linearGradient id="cop-a" x1="6" y1="3" x2="18" y2="10">
-          <stop offset="0%" stopColor="#12B3F8" />
-          <stop offset="100%" stopColor="#1D4FD7" />
-        </linearGradient>
-        <linearGradient id="cop-b" x1="6" y1="14" x2="18" y2="21">
-          <stop offset="0%" stopColor="#7B5CF0" />
-          <stop offset="100%" stopColor="#E5488F" />
-        </linearGradient>
-        <linearGradient id="cop-c" x1="4" y1="12" x2="20" y2="12">
-          <stop offset="0%" stopColor="#2E8DEE" />
-          <stop offset="100%" stopColor="#6A64F1" />
-        </linearGradient>
-      </defs>
       <path d="M8.7 5.1C9.1 3.9 10.3 3 11.6 3h5.8c1 0 1.7 1 1.4 1.9l-1.4 4.4H7.3Z" fill="url(#cop-a)" />
       <path d="M15.3 18.9c-.4 1.2-1.6 2.1-2.9 2.1H6.6c-1 0-1.7-1-1.4-1.9l1.4-4.4h10.1Z" fill="url(#cop-b)" />
       <path d="M7.3 9.3h10.1l-1 5.4H6.3Z" fill="url(#cop-c)" />
@@ -291,12 +311,6 @@ export function SolanaMark({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
       <circle cx="16" cy="16" r="16" fill="#000" />
-      <defs>
-        <linearGradient id="sol-g" x1="8" y1="22" x2="24" y2="10" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#9945FF" />
-          <stop offset="100%" stopColor="#14F195" />
-        </linearGradient>
-      </defs>
       <path
         fill="url(#sol-g)"
         d="M10.2 20.2a.6.6 0 0 1 .43-.18h13.1c.27 0 .4.32.21.51l-2.14 2.14a.6.6 0 0 1-.43.18H8.27a.3.3 0 0 1-.21-.51zM10.2 9.15a.62.62 0 0 1 .43-.18h13.1c.27 0 .4.33.21.52l-2.14 2.14a.6.6 0 0 1-.43.18H8.27a.3.3 0 0 1-.21-.52zM21.8 14.64a.6.6 0 0 0-.43-.18H8.27a.3.3 0 0 0-.21.52l2.14 2.14a.6.6 0 0 0 .43.18h13.1c.27 0 .4-.33.21-.52z"
@@ -442,13 +456,6 @@ export function GoogleBusinessMark({ size = 18 }: { size?: number }) {
 export function AppleMapsMark({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
-      <defs>
-        <linearGradient id="am-g" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#4DD07C" />
-          <stop offset="55%" stopColor="#2FB1E8" />
-          <stop offset="100%" stopColor="#2A6FE8" />
-        </linearGradient>
-      </defs>
       <rect x="1" y="1" width="30" height="30" rx="7.5" fill="url(#am-g)" />
       <path fill="#fff" d="M16 7.6a5.4 5.4 0 0 0-5.4 5.4c0 4 5.4 11 5.4 11s5.4-7 5.4-11A5.4 5.4 0 0 0 16 7.6zm0 7.5a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2z" />
     </svg>

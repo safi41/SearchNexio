@@ -1,7 +1,7 @@
-"use client";
-
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink, ORBIT_SPEED, splitAccent, SectionBadge } from "@/components/ui";
+import OrbitStage, { OrbitHub } from "@/components/OrbitStage";
+import { CtaLink, SectionBadge } from "@/components/ui";
+import { splitAccent } from "@/components/shared";
 import {
   SAAS_HERO,
   SAAS_RESULTS,
@@ -56,66 +56,27 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
   ),
 };
 
-/* ---- Hero orbit: the SaaS buyer journey ----
-   Five nodes, 72 degrees apart on the solid ring. Positions are
-   50% + 38% * (cos, sin) of the angle, starting at the top. The whole
-   node layer revolves; each chip counter-spins so its icon stays upright,
-   which is the same construction used on every other hero. */
+/* The SaaS platform diagram: the shared orbit stage with Salesforce at the
+   hub and the five platforms buyers compare around it. */
+const SAAS_NODES = SAAS_HERO.orbit.map((n) => ({
+  label: `${n.title} ${n.sub}`,
+  mark: SAAS_MARKS[n.icon],
+}));
+
 function JourneyLoop() {
-  const spots = [
-    "left-1/2 top-[12%] -translate-x-1/2 -translate-y-1/2",
-    "left-[86.1%] top-[38.3%] -translate-x-1/2 -translate-y-1/2",
-    "left-[72.3%] top-[80.7%] -translate-x-1/2 -translate-y-1/2",
-    "left-[27.7%] top-[80.7%] -translate-x-1/2 -translate-y-1/2",
-    "left-[13.9%] top-[38.3%] -translate-x-1/2 -translate-y-1/2",
-  ];
-
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[420px] lg:max-w-[540px]">
-      {/* dashed outer ring */}
-      <div aria-hidden className="absolute inset-[2%] rounded-full border border-dashed border-indigo/25" />
-
-      {/* solid orbit ring the nodes travel on */}
-      <div aria-hidden className="absolute inset-[12%] rounded-full border border-indigo/40" />
-
-      {/* core: the Salesforce mark, the platform this page's buyers most
-          often anchor their stack around. The orbiting products are the
-          surfaces they compare against it. */}
-      <div className="absolute left-1/2 top-1/2 grid size-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center">
-        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-[#00A1E0]/15 blur-2xl" />
-        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(0,161,224,0.22)]">
-          <span
-            title="Salesforce"
-            aria-label="Salesforce"
-            className="grid size-[64%] place-items-center"
-          >
-            <span aria-hidden className="block w-full [&>svg]:h-auto [&>svg]:w-full">
-              <SalesforceMark size={148} />
-            </span>
-          </span>
-        </span>
-      </div>
-
-      {/* five journey nodes; the layer revolves, each chip counter-spins so
-          its icon stays upright. Names stay as tooltips and labels. */}
-      <div
-        className="animate-orbit absolute inset-0"
-        style={{ animationDuration: ORBIT_SPEED }}
-      >
-        {SAAS_HERO.orbit.map((n, i) => (
-          <div key={n.title} className={`absolute ${spots[i]}`}>
-            <span
-              title={`${n.title} ${n.sub}`}
-              aria-label={`${n.title} ${n.sub}`}
-              className="animate-orbit grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
-              style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
-            >
-              {SAAS_MARKS[n.icon]}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
+    <OrbitStage
+      nodes={SAAS_NODES}
+      hub={
+        <OrbitHub
+          label="Salesforce"
+          glowClass="bg-[#00A1E0]/15"
+          shadowClass="shadow-[0_24px_60px_rgba(0,161,224,0.22)]"
+        >
+          <SalesforceMark size={148} />
+        </OrbitHub>
+      }
+    />
   );
 }
 

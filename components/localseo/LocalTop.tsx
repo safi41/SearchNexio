@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Reveal from "@/components/motion/Reveal";
+import OrbitStage, { OrbitHub } from "@/components/OrbitStage";
 import {
   GoogleBusinessMark,
   AppleMapsMark,
@@ -9,7 +10,7 @@ import {
   TripAdvisorMark,
   MapsPin,
 } from "@/components/brand-icons";
-import { CtaLink, ORBIT_SPEED } from "@/components/ui";
+import { CtaLink } from "@/components/ui";
 import { LOCAL_HERO, LOCAL_JOURNEY, LOCAL_PROBLEMS, LOCAL_SERVICES, WHO_WE_HELP } from "@/lib/local-seo-content";
 
 /* ---- Hero: copy left, an orbiting map-pin illustration right, and an
@@ -57,16 +58,28 @@ const ORBIT_BUBBLES = [
   { label: "Tripadvisor", left: "50%", top: "88%", mark: <TripAdvisorMark size={44} /> },
 ];
 
+/* The local-discovery diagram: the shared orbit stage with the Maps pin at
+   the hub, plus this page's own crosshair and dot-grid decor. */
+const LOCAL_NODES = ORBIT_BUBBLES.map((b) => ({ label: b.label, mark: b.mark }));
+
 function PinOrbitVisual() {
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[540px]">
-      {/* dashed orbit rings + crosshair axes */}
-      <div aria-hidden className="absolute inset-[12%] rounded-full border border-dashed border-indigo/25" />
+    <OrbitStage
+      nodes={LOCAL_NODES}
+      hub={
+        <OrbitHub
+          label="Google Maps"
+          glowClass="bg-[#EA4335]/12"
+          shadowClass="shadow-[0_24px_60px_rgba(234,67,53,0.2)]"
+        >
+          <MapsPin size={104} />
+        </OrbitHub>
+      }
+    >
+      {/* page decor: inner dotted ring, crosshair axes and a dot grid */}
       <div aria-hidden className="absolute inset-[27%] rounded-full border border-dotted border-indigo/20" />
       <span aria-hidden className="absolute inset-x-0 top-1/2 border-t border-dashed border-indigo/15" />
       <span aria-hidden className="absolute inset-y-0 left-1/2 border-l border-dashed border-indigo/15" />
-
-      {/* dot grid accent */}
       <div
         aria-hidden
         className="absolute right-[-4%] top-[16%] h-16 w-28"
@@ -75,44 +88,7 @@ function PinOrbitVisual() {
           backgroundSize: "13px 13px",
         }}
       />
-
-      {/* core: the Google Maps pin. Sized as a percentage of the stage, the
-          same construction the other heroes use, so the disc shrinks with
-          the ring on mobile instead of crowding the orbiting nodes. */}
-      <div className="absolute left-1/2 top-1/2 grid size-[36%] -translate-x-1/2 -translate-y-1/2 place-items-center">
-        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-[#EA4335]/12 blur-2xl" />
-        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(234,67,53,0.2)]">
-          <span
-            title="Google Maps"
-            aria-label="Google Maps"
-            className="grid size-[62%] place-items-center"
-          >
-            <span aria-hidden className="block w-full [&>svg]:h-auto [&>svg]:w-full">
-              <MapsPin size={104} />
-            </span>
-          </span>
-        </span>
-      </div>
-
-      {/* icon bubbles revolving on the ring, icons kept upright */}
-      <div className="animate-orbit absolute inset-0" style={{ animationDuration: ORBIT_SPEED }}>
-        {ORBIT_BUBBLES.map((b) => (
-          <div
-            key={b.label}
-            className="absolute -translate-x-1/2 -translate-y-1/2"
-            style={{ left: b.left, top: b.top }}
-          >
-            <span
-              title={b.label}
-              className="animate-orbit grid size-[84px] place-items-center rounded-full bg-surface shadow-[0_16px_40px_rgba(99,91,255,0.18)]"
-              style={{ animationDuration: ORBIT_SPEED, animationDirection: "reverse" }}
-            >
-              {b.mark}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
+    </OrbitStage>
   );
 }
 

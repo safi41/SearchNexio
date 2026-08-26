@@ -138,12 +138,6 @@ function AmplifyPanel({ on }: { on: boolean }) {
       {/* rising trend line */}
       <div className="relative h-24 overflow-hidden rounded-xl border border-line bg-ivory/60 p-2">
         <svg viewBox="0 0 260 88" preserveAspectRatio="none" className="size-full" aria-hidden>
-          <defs>
-            <linearGradient id="amp-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#635BFF" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#635BFF" stopOpacity="0" />
-            </linearGradient>
-          </defs>
           <path d="M4,74 C60,68 110,54 160,34 C190,22 220,16 256,8 L256,88 L4,88 Z" fill="url(#amp-fill)" />
           <path
             d="M4,74 C60,68 110,54 160,34 C190,22 220,16 256,8"
