@@ -1,5 +1,5 @@
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink } from "@/components/ui";
+import { CtaLink, ORBIT_SPEED } from "@/components/ui";
 import { AISEARCH_HERO } from "@/lib/ai-search-content";
 import { GoogleG, GeminiMark, PerplexityKnot } from "@/components/brand-icons";
 
@@ -22,7 +22,6 @@ function ChatGPTInk({ size = 40 }: { size?: number }) {
 
 /* Nodes orbit as a group (one revolution per ORBIT_SPEED); each node
    counter-rotates so its logo stays upright. */
-const ORBIT_SPEED = "48s";
 
 const NODES = [
   { name: "Google AI", icon: <GoogleG size={42} />, node: { left: "50%", top: "12%" } },

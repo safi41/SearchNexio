@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/motion/Reveal";
+import FaqSection from "@/components/FaqSection";
 import { CtaLink } from "@/components/ui";
 import {
   HC_PROCESS,
@@ -140,20 +141,20 @@ export function HealthMeasure() {
             row a metric with its own definition. Deliberately plain, since
             the section's argument is measurement honesty. */}
         <div className="mt-12 grid gap-10">
-          {groups.map((g, gi) => (
+          {groups.map((g, gi) => {
+            const items = HC_METRICS.items.filter((m) => m.group === g.key);
+            return (
             <Reveal key={g.key} delay={gi * 80}>
               <div>
                 <div className="flex items-center gap-3 border-b-2 border-ink/10 pb-3">
                   <span className={`size-2.5 rounded-full ${gi === 0 ? "bg-citron-deep" : "bg-indigo"}`} />
                   <h3 className="font-heading text-[15px] font-bold uppercase tracking-[0.08em]">{g.label}</h3>
                   <span className="ml-auto text-[12px] font-medium text-graphite">
-                    {HC_METRICS.items.filter((m) => m.group === g.key).length} reported monthly
+                    {items.length} reported monthly
                   </span>
                 </div>
                 <div className="grid md:grid-cols-2">
-                  {HC_METRICS.items
-                    .filter((m) => m.group === g.key)
-                    .map((m, i) => (
+                  {items.map((m, i) => (
                       <div
                         key={m.name}
                         className={`group flex gap-4 border-b border-line py-5 transition-colors duration-300 hover:bg-surface md:px-5 ${i % 2 === 0 ? "md:border-r" : ""}`}
@@ -170,7 +171,8 @@ export function HealthMeasure() {
                 </div>
               </div>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
 
         <Reveal delay={120}>
@@ -319,59 +321,13 @@ export function HealthLimitations() {
   );
 }
 
-/* ---- FAQ accordion with FAQPage schema. Full copy stays in the HTML. ---- */
-function FaqRow({ q, a, open, onToggle }: { q: string; a: string; open: boolean; onToggle: () => void }) {
-  return (
-    <div className="border-b border-line last:border-b-0">
-      <button type="button" onClick={onToggle} aria-expanded={open} className="flex w-full items-center justify-between gap-4 py-5 text-left">
-        <span className="font-heading text-[16px] font-bold tracking-[-0.01em]">{q}</span>
-        <span className={`grid size-7 shrink-0 place-items-center rounded-full border border-line transition-all duration-300 ${open ? "rotate-45 border-indigo/40 bg-indigo text-white" : "text-graphite"}`}>
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden><path d="M7 2v10M2 7h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
-        </span>
-      </button>
-      <div className={`grid transition-all duration-300 ease-soft ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
-        <div className="overflow-hidden">
-          <p className="pb-5 pr-10 text-[14px] leading-relaxed text-graphite">{a}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
+/* ---- FAQ: shared accordion + schema (components/FaqSection). ---- */
 export function HealthFaq() {
-  const [open, setOpen] = useState(0);
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: HC_FAQS.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
-
   return (
-    <section className="overflow-x-clip py-16 md:py-24">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <div className="mx-auto max-w-[800px] px-6">
-        <Reveal>
-          <h2 className="text-center font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Frequently Asked <span className="text-indigo">Questions</span>
-          </h2>
-        </Reveal>
-        <div className="mt-10">
-          {HC_FAQS.map((f, i) => (
-            <Reveal
-              key={f.q}
-              variant={i % 2 === 0 ? "left" : "right"}
-              delay={Math.min(i * 50, 240)}
-            >
-              <FaqRow q={f.q} a={f.a} open={open === i} onToggle={() => setOpen(open === i ? -1 : i)} />
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
+    <FaqSection
+      title={<>Frequently Asked <span className="text-indigo">Questions</span></>}
+      faqs={HC_FAQS}
+    />
   );
 }
 

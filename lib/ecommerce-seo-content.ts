@@ -11,7 +11,6 @@ export const E_ROUTES = {
   review: "#ecommerce-review",
   process: "#ecommerce-process",
   aiSeo: "/ai-search-optimization-services/",
-  contact: "/contact/",
 };
 
 export const ECOM_HERO = {
@@ -279,14 +278,8 @@ export const ECOM_MEASURE = {
   accent: "Measure",
   intro:
     "Rankings still matter, but only alongside the metrics that show whether SEO is contributing to the business.",
-  items: [
-    "Organic revenue",
-    "Organic transactions",
-    "Non-brand organic visibility",
-    "Category and product page performance",
-    "Organic conversion rate",
-    "Qualified organic traffic",
-  ],
+  /* the same six store metrics the results section names */
+  items: ECOM_RESULTS.measures,
   close:
     "We report on these against your priority pages, so it's clear which categories and products are contributing to revenue and which still need work.",
 };
@@ -386,10 +379,8 @@ export const ECOM_FAQS = [
 
 /* Closing CTA. */
 export const ECOM_FINAL = {
-  title: "Grow Your Ecommerce Store Through Organic Search",
   accent: "Organic Search",
   body: "Category pages, product pages and technical performance all affect how much of your revenue comes from organic search rather than paid channels. We identify where the opportunity is, prioritize it by commercial value, and do the work to capture it.",
-  cta: { label: "Request an Ecommerce SEO Review", href: E_ROUTES.review },
   submit: "Request an Ecommerce SEO Review",
   privacy:
     "We use your details only to prepare and discuss your ecommerce SEO review.",

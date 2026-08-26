@@ -179,40 +179,6 @@ function SerpDiagram() {
   );
 }
 
-/* 07 International crypto SEO: one architecture, per-market branches. */
-function MarketsDiagram() {
-  return (
-    <svg viewBox="0 0 460 176" className="w-full" fill="none" aria-hidden>
-      <path d="M136 88 C176 88 176 40 200 40" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.75" />
-      <path d="M136 88 H200" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.75" />
-      <path d="M136 88 C176 88 176 136 200 136" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.75" />
-
-      <rect x="20" y="66" width="116" height="44" rx="9" fill="var(--color-surface)" stroke="var(--color-indigo)" strokeWidth="1.5" />
-      <text x="78" y="85" textAnchor="middle" className="fill-ink" style={{ fontSize: 11.5, fontWeight: 700 }}>Site architecture</text>
-      <text x="78" y="99" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>hreflang set</text>
-
-      <rect x="200" y="18" width="116" height="44" rx="9" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.5" />
-      <text x="258" y="37" textAnchor="middle" className="fill-ink" style={{ fontSize: 11.5, fontWeight: 700 }}>Market A</text>
-      <text x="258" y="51" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>localized pages</text>
-
-      <rect x="200" y="66" width="116" height="44" rx="9" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.5" />
-      <text x="258" y="85" textAnchor="middle" className="fill-ink" style={{ fontSize: 11.5, fontWeight: 700 }}>Market B</text>
-      <text x="258" y="99" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>localized pages</text>
-
-      <rect x="200" y="114" width="116" height="44" rx="9" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="1.5" />
-      <text x="258" y="133" textAnchor="middle" className="fill-ink" style={{ fontSize: 11.5, fontWeight: 700 }}>Market C</text>
-      <text x="258" y="147" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>localized pages</text>
-
-      <path d="M316 40 C340 40 340 88 360 88" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.5" />
-      <path d="M316 88 H360" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.5" />
-      <path d="M316 136 C340 136 340 88 360 88" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.5" />
-      <rect x="360" y="66" width="84" height="44" rx="9" fill="var(--color-lilac)" stroke="var(--color-indigo)" strokeWidth="1.3" strokeOpacity="0.5" />
-      <text x="402" y="85" textAnchor="middle" className="fill-ink" style={{ fontSize: 11, fontWeight: 700 }}>Reported</text>
-      <text x="402" y="99" textAnchor="middle" className="fill-graphite" style={{ fontSize: 9.5 }}>per market</text>
-    </svg>
-  );
-}
-
 /* 09 Acquisition tracking: session to event, with the attribution gap named. */
 function AttributionDiagram() {
   const steps = ["Organic session", "Product or service page", "Conversion event"];
@@ -344,55 +310,22 @@ function AuthorityDiagram() {
   );
 }
 
-/* 08 Conversion optimization: the four checks run on a page a user lands
-   on from search. */
-function FrictionDiagram() {
-  const checks = [
-    "Page addresses the search intent",
-    "Next action is visible",
-    "Onboarding path is not longer than it needs to be",
-    "Trust signals support the decision",
-  ];
-  return (
-    <div>
-      <div className="mb-3 flex items-center gap-2.5 rounded-lg border border-indigo/30 bg-surface px-3 py-2">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="2" strokeLinecap="round" aria-hidden className="shrink-0">
-          <circle cx="11" cy="11" r="6.5" />
-          <path d="M15.8 15.8 20 20" />
-        </svg>
-        <span className="text-[11.5px] font-semibold text-ink">User arrives from search</span>
-      </div>
-      <div className="grid gap-2">
-        {checks.map((c) => (
-          <div key={c} className="flex items-center gap-3 rounded-lg border border-line bg-surface px-3 py-2">
-            <span className="grid size-4 shrink-0 place-items-center rounded-full bg-citron">
-              <svg width="8" height="8" viewBox="0 0 12 12" fill="none" aria-hidden>
-                <path d="m2.5 6.5 2.5 2.5 4.5-5" stroke="#0B0D12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-            <span className="text-[11.5px] text-ink">{c}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 /* Maps a service's diagram key to its visual. */
-function ServiceDiagram({ kind }: { kind: string }) {
-  const map: Record<string, React.ReactNode> = {
+/* Built once at module load so element identity stays stable across
+   re-renders; React can then skip reconciling unchanged diagram subtrees. */
+const DIAGRAMS: Record<string, React.ReactNode> = {
     intent: <IntentDiagram />,
     workflow: <WorkflowDiagram />,
     coverage: <CoverageDiagram />,
     crawl: <CrawlDiagram />,
     authority: <AuthorityDiagram />,
-    friction: <FrictionDiagram />,
     serp: <SerpDiagram />,
-    markets: <MarketsDiagram />,
     attribution: <AttributionDiagram />,
     entity: <EntityDiagram />,
-  };
-  const body = map[kind];
+};
+
+function ServiceDiagram({ kind }: { kind: string }) {
+  const body = DIAGRAMS[kind];
   if (!body) return null;
   return <DiagramFrame>{body}</DiagramFrame>;
 }
@@ -470,25 +403,12 @@ export function CryptoServices() {
                   <span className="font-semibold">Deliverable.</span> {current.deliverable}
                 </p>
               )}
-              {current.limit && (
-                <p className="mt-4 flex gap-3 text-[13px] leading-relaxed text-graphite">
-                  <span aria-hidden className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-warn/10 text-warn">
-                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 1.5v5M6 9v.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
-                  </span>
-                  {current.limit}
-                </p>
-              )}
               {current.diagram && <ServiceDiagram kind={current.diagram} />}
 
               <div className="mt-5 flex flex-wrap gap-4">
                 {current.link && (
                   <a href={current.link.href} className="text-[13.5px] font-semibold text-indigo underline decoration-indigo/30 underline-offset-2">
                     {current.link.label}
-                  </a>
-                )}
-                {current.link2 && (
-                  <a href={current.link2.href} className="text-[13.5px] font-semibold text-indigo underline decoration-indigo/30 underline-offset-2">
-                    {current.link2.label}
                   </a>
                 )}
               </div>
@@ -534,7 +454,6 @@ export function CryptoServices() {
                             <span className="font-semibold">Deliverable.</span> {s.deliverable}
                           </p>
                         )}
-                        {s.limit && <p className="mt-3 text-[12.5px] leading-relaxed text-graphite">{s.limit}</p>}
                         {s.diagram && <ServiceDiagram kind={s.diagram} />}
                       </div>
                     </div>

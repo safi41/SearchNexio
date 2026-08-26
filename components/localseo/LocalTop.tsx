@@ -7,9 +7,9 @@ import {
   AppleMapsMark,
   YelpMark,
   TripAdvisorMark,
+  MapsPin,
 } from "@/components/brand-icons";
-import { Badge, CtaLink } from "@/components/ui";
-import { MapsPin, GoogleG } from "@/components/brand-icons";
+import { CtaLink, ORBIT_SPEED } from "@/components/ui";
 import { LOCAL_HERO, LOCAL_JOURNEY, LOCAL_PROBLEMS, LOCAL_SERVICES, WHO_WE_HELP } from "@/lib/local-seo-content";
 
 /* ---- Hero: copy left, an orbiting map-pin illustration right, and an
@@ -49,7 +49,6 @@ const TRUST_ICONS = [
 /* Bubbles pinned on the orbit ring around the pin, at the exact cardinal
    points (top, right, bottom, left of the dashed ring). The whole group
    revolves slowly; each bubble counter-rotates so its icon stays upright. */
-const ORBIT_SPEED = "48s";
 
 const ORBIT_BUBBLES = [
   { label: "Google Business Profile", left: "50%", top: "12%", mark: <GoogleBusinessMark size={44} /> },

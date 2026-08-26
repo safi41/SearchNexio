@@ -69,7 +69,7 @@ function PlatformTile({
       type="button"
       onClick={onSelect}
       aria-pressed={active}
-      className={`animate-bob group flex flex-col items-center gap-2.5 ${bob ? "" : ""}`}
+      className={`animate-bob group flex flex-col items-center gap-2.5 `}
       style={bob ? { animationDelay: bob } : undefined}
     >
       <span

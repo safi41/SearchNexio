@@ -1,7 +1,7 @@
 "use client";
 
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink } from "@/components/ui";
+import { CtaLink, ORBIT_SPEED } from "@/components/ui";
 import {
   CRYPTO_HERO,
   QUALIFIED_DEMAND,
@@ -36,14 +36,12 @@ const CRYPTO_MARKS: Record<string, React.ReactNode> = {
 
 /* ---- Hero: copy and trust chips left, the acquisition loop right ----
    Same ring construction as the healthcare hero, but the core and nodes
-   carry this page's own story. The nodes are static; only the rings
-   drift. */
+   carry this page's own story. */
 
 /* Chip glyphs. Crypto-native subject matter drawn from this page's own
    copy: wallets, ledgers, transaction records, key custody and branded
    verification. The hero orbit carries real platform marks instead, at the
    client's direction. */
-const ORBIT_SPEED = "48s";
 
 const HERO_ICONS: Record<string, React.ReactNode> = {
   /* --- chip glyphs --- */
@@ -63,13 +61,6 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
       <circle cx="12" cy="12" r="0.6" />
     </g>
   ),
-  /* magnifier: technical depth across dApps and docs portals */
-  code: (
-    <g>
-      <circle cx="10.8" cy="10.8" r="6.4" />
-      <path d="m15.6 15.6 4.4 4.4" />
-    </g>
-  ),
   /* bar chart with arrow: acquisition tracked as events */
   chart: (
     <g>
@@ -80,39 +71,6 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
     </g>
   ),
 
-  /* --- orbit node glyphs --- */
-  /* rising bar chart: visibility growth on priority searches */
-  trend: (
-    <g>
-      <path d="M4 19.5h16" />
-      <path d="M7 19.5v-5.5M11.4 19.5v-9M15.8 19.5v-6.5M20 19.5V8" />
-      <path d="m6.5 10.5 5-4 3.4 3 4.6-4.8" />
-      <path d="M15.4 4.4h4.2v4.2" />
-    </g>
-  ),
-  /* document with pen: content briefs, sourced and reviewed */
-  doc: (
-    <g>
-      <path d="M13.4 3.2H7a2.3 2.3 0 0 0-2.3 2.3v13a2.3 2.3 0 0 0 2.3 2.3h7.2" />
-      <path d="M8.3 8h5.6M8.3 11.6h4" />
-      <path d="m14.8 16.6 5.1-5.1 2.1 2.1-5.1 5.1-2.7.6Z" />
-    </g>
-  ),
-  /* globe: international markets */
-  globe: (
-    <g>
-      <circle cx="12" cy="12" r="8.4" />
-      <path d="M3.6 12h16.8" />
-      <path d="M12 3.6c2.6 2.4 4 5.3 4 8.4s-1.4 6-4 8.4c-2.6-2.4-4-5.3-4-8.4s1.4-6 4-8.4Z" />
-    </g>
-  ),
-  /* chain link: authority and third-party references */
-  link: (
-    <g>
-      <path d="M10.2 13.8a3.9 3.9 0 0 0 5.7.3l2.6-2.6a3.9 3.9 0 1 0-5.5-5.5l-1.5 1.5" />
-      <path d="M13.8 10.2a3.9 3.9 0 0 0-5.7-.3l-2.6 2.6a3.9 3.9 0 1 0 5.5 5.5l1.5-1.5" />
-    </g>
-  ),
   /* magnifier: search research */
   search: (
     <g>
@@ -123,8 +81,8 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
 };
 
 function CryptoLoop() {
-  /* Nodes render immediately. The rings keep their slow drift, but the
-     nodes themselves do not stagger in on load. */
+  /* Nodes render immediately; the node layer revolves at the shared
+     orbit speed and each chip counter-spins to stay upright. */
 
   /* Six nodes, 60 degrees apart on the solid ring. Positions are
      50% + 38% * (cos, sin) of the angle, starting at the top. */

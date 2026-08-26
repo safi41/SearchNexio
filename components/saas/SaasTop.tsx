@@ -1,7 +1,7 @@
 "use client";
 
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink } from "@/components/ui";
+import { CtaLink, ORBIT_SPEED, splitAccent, SectionBadge } from "@/components/ui";
 import {
   SAAS_HERO,
   SAAS_RESULTS,
@@ -28,8 +28,6 @@ const SAAS_MARKS: Record<string, React.ReactNode> = {
   zoom: <ZoomMark size={44} />,
 };
 
-/* Site-wide orbit speed, matching every other hero diagram. */
-const ORBIT_SPEED = "48s";
 
 /* Glyphs for the hero chips and the orbit nodes. Line icons on the house
    1.7 stroke, so they read the same weight as the other industry pages. */
@@ -54,31 +52,6 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
   funnel: (
     <>
       <path d="M3.8 4.6h16.4l-6.4 7.6v6.2l-3.6 2.2v-8.4Z" />
-    </>
-  ),
-  search: (
-    <>
-      <circle cx="10.8" cy="10.8" r="6.4" />
-      <path d="m15.6 15.6 4 4" />
-    </>
-  ),
-  cube: (
-    <>
-      <path d="M12 3.4 20 7.6v8.8L12 20.6 4 16.4V7.6Z" />
-      <path d="M4 7.6l8 4.2 8-4.2M12 11.8v8.8" />
-    </>
-  ),
-  scale: (
-    <>
-      <path d="M12 4.2v15.6M6 7.2h12" />
-      <path d="M6 7.2 3.4 13h5.2Z" />
-      <path d="M18 7.2 15.4 13h5.2Z" />
-    </>
-  ),
-  check: (
-    <>
-      <circle cx="12" cy="12" r="8.4" />
-      <path d="m8.4 12.2 2.6 2.6 4.8-5" />
     </>
   ),
 };
@@ -241,14 +214,6 @@ export function SaasHero() {
       </div>
     </section>
   );
-}
-
-/* Splits a title so one phrase can carry the indigo accent, matching the
-   heading treatment used across the site. */
-function splitAccent(title: string, accent: string): [string, string, string] {
-  const i = title.indexOf(accent);
-  if (i < 0) return [title, "", ""];
-  return [title.slice(0, i), accent, title.slice(i + accent.length)];
 }
 
 /* The six commercial measures the copy names, arranged around the reporting
@@ -546,9 +511,7 @@ export function SaasBuiltFor() {
     <section className="relative overflow-x-clip border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-            {SAAS_BUILT_FOR.badge}
-          </span>
+          <SectionBadge>{SAAS_BUILT_FOR.badge}</SectionBadge>
           <h2 className="mt-5 max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             SEO Built for B2B{" "}
             <span className="text-indigo">{SAAS_BUILT_FOR.accent}</span>
@@ -583,9 +546,7 @@ export function SaasFails() {
     <section className="relative overflow-x-clip bg-ivory border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-            {SAAS_FAILS.badge}
-          </span>
+          <SectionBadge>{SAAS_FAILS.badge}</SectionBadge>
           <h2 className="mt-5 max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Why SaaS SEO{" "}
             <span className="text-indigo">{SAAS_FAILS.accent}</span> to Generate

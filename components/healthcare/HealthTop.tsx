@@ -1,7 +1,7 @@
 "use client";
 
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink } from "@/components/ui";
+import { CtaLink, ORBIT_SPEED } from "@/components/ui";
 import {
   HC_HERO,
   HC_BRING_PATIENTS,
@@ -26,11 +26,9 @@ const HEALTH_MARKS: Record<string, React.ReactNode> = {
 };
 
 /* ---- Hero: copy and trust chips left, the patient-acquisition loop right.
-   A search-interface diagram rather than stock photography. The nodes are
-   static; only the rings drift. ---- */
+   A search-interface diagram rather than stock photography. ---- */
 
-/* Chip and node glyphs. */
-const ORBIT_SPEED = "48s";
+/* Chip glyphs. */
 
 const HERO_ICONS: Record<string, React.ReactNode> = {
   shield: (
@@ -57,40 +55,13 @@ const HERO_ICONS: Record<string, React.ReactNode> = {
       <path d="m8.5 12.2 2.4 2.4 4.6-5" />
     </g>
   ),
-  search: (
-    <g>
-      <circle cx="11" cy="11" r="6.2" />
-      <path d="M15.6 15.6 20 20" />
-    </g>
-  ),
-  people: (
-    <g>
-      <circle cx="9.5" cy="8.4" r="2.9" />
-      <circle cx="16" cy="9.2" r="2.3" />
-      <path d="M4 18.5c.5-3.3 2.6-5.2 5.5-5.2s5 1.9 5.5 5.2" />
-      <path d="M15.5 13.6c2.2.2 3.7 1.8 4.1 4.4" />
-    </g>
-  ),
-  calendar: (
-    <g>
-      <rect x="4" y="5.5" width="16" height="14" rx="2.5" />
-      <path d="M4 9.5h16M8.5 3.5v3.5M15.5 3.5v3.5" />
-      <path d="m9.5 14.5 2 2 3.5-3.8" />
-    </g>
-  ),
-  trend: (
-    <g>
-      <path d="M4 17 9.5 11l3.5 3.5L20 7.5" />
-      <path d="M15 7.5h5V12" />
-    </g>
-  ),
 };
 
 /* The patient-acquisition loop: a heart core at the centre of a solid
    orbit ring, with four white icon nodes at the cardinal points. */
 function PatientLoop() {
-  /* Nodes render immediately. The rings keep their slow drift, but the
-     nodes themselves do not stagger in on load. */
+  /* Nodes render immediately; the node layer revolves at the shared
+     orbit speed and each chip counter-spins to stay upright. */
 
   /* Node centres sit on the solid ring at the four cardinal points. */
   const spots = [

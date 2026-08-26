@@ -1,5 +1,5 @@
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink } from "@/components/ui";
+import { CtaLink, ORBIT_SPEED } from "@/components/ui";
 import { GEO_HERO } from "@/lib/geo-content";
 import {
   ChatGPTKnot,
@@ -53,7 +53,6 @@ const PLATFORM_CHIPS = [
    All five share one radius and sit exactly 72 degrees apart, so the gaps
    between them are equal. Positions are 50% + 45% * (cos, sin) of the angle
    noted, starting at -125deg to keep the reference composition. */
-const ORBIT_SPEED = "48s";
 
 const ORBIT_BUBBLES = [
   {

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
+import { SectionBadge } from "@/components/ui";
 import {
   SAAS_SERVICES,
   SAAS_PROCESS,
@@ -373,16 +374,19 @@ function SurfacesDiagram() {
   );
 }
 
-function ServiceDiagram({ kind }: { kind: string }) {
-  const map: Record<string, React.ReactNode> = {
+/* Built once at module load so element identity stays stable across
+   re-renders; React can then skip reconciling unchanged diagram subtrees. */
+const DIAGRAMS: Record<string, React.ReactNode> = {
     intent: <IntentDiagram />,
     pages: <PagesDiagram />,
     render: <RenderDiagram />,
     sequence: <SequenceDiagram />,
     authority: <AuthorityDiagram />,
     surfaces: <SurfacesDiagram />,
-  };
-  const body = map[kind];
+};
+
+function ServiceDiagram({ kind }: { kind: string }) {
+  const body = DIAGRAMS[kind];
   if (!body) return null;
   return <DiagramFrame>{body}</DiagramFrame>;
 }
@@ -399,9 +403,7 @@ export function SaasServices() {
     <section id="saas-services" className="relative overflow-x-clip border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-            {SAAS_SERVICES.badge}
-          </span>
+          <SectionBadge>{SAAS_SERVICES.badge}</SectionBadge>
           <h2 className="mt-5 max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Our B2B SaaS SEO{" "}
             <span className="text-indigo">{SAAS_SERVICES.accent}</span>
@@ -513,9 +515,7 @@ export function SaasProcess() {
     <section id="saas-process" className="relative overflow-x-clip wash-lilac-full border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-            {SAAS_PROCESS.badge}
-          </span>
+          <SectionBadge>{SAAS_PROCESS.badge}</SectionBadge>
           <h2 className="mt-5 max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Our B2B SaaS SEO{" "}
             <span className="text-indigo">{SAAS_PROCESS.accent}</span>
@@ -536,7 +536,7 @@ export function SaasProcess() {
                   <div className="relative lg:grid lg:grid-cols-2 lg:gap-16">
                     <div
                       className={`${
-                        right ? "lg:col-start-2" : "lg:col-start-1"
+                        right ? "lg:col-start-2" : ""
                       } ${i > 0 ? "lg:-mt-16" : ""}`}
                     >
                       <div className="group rounded-3xl bg-surface p-7 shadow-[0_10px_30px_rgba(11,13,18,0.05)] transition-all duration-300 ease-soft hover:-translate-y-1.5 hover:scale-[1.015] hover:shadow-[0_24px_56px_rgba(99,91,255,0.14)]">
@@ -576,9 +576,7 @@ export function SaasJourney() {
     <section className="relative overflow-x-clip border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-            {SAAS_JOURNEY.badge}
-          </span>
+          <SectionBadge>{SAAS_JOURNEY.badge}</SectionBadge>
           <h2 className="mt-5 max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             SEO Across the SaaS{" "}
             <span className="text-indigo">{SAAS_JOURNEY.accent}</span>
@@ -713,9 +711,7 @@ export function SaasProductLed() {
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
           <Reveal variant="left">
             <div>
-              <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-                {SAAS_PRODUCT_LED.badge}
-              </span>
+              <SectionBadge>{SAAS_PRODUCT_LED.badge}</SectionBadge>
               <h2 className="mt-5 font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
                 <span className="text-indigo">{SAAS_PRODUCT_LED.accent}</span> SEO
                 for SaaS

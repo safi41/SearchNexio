@@ -141,3 +141,24 @@ export function IconTile({ children }: { children: ReactNode }) {
     </span>
   );
 }
+
+/* Site-wide revolve speed for the hero orbit diagrams. */
+export const ORBIT_SPEED = "48s";
+
+/* Splits a title so one phrase can carry the indigo accent, matching the
+   heading treatment used across the site. */
+export function splitAccent(title: string, accent: string): [string, string, string] {
+  const i = title.indexOf(accent);
+  if (i < 0) return [title, "", ""];
+  return [title.slice(0, i), accent, title.slice(i + accent.length)];
+}
+
+/* The bordered uppercase section badge used by the service-page section
+   openers. The lilac Badge above is the hero/eyebrow variant. */
+export function SectionBadge({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
+      {children}
+    </span>
+  );
+}

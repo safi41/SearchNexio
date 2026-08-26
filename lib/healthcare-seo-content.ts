@@ -41,10 +41,10 @@ export const HC_HERO = {
   /* Four orbit nodes: the platforms patients actually use to find and
      evaluate a provider. Brand marks in each service's own colour. */
   orbit: [
-    { title: "Google", sub: "treatment, specialist and location searches", icon: "google", side: "top" },
-    { title: "Healthgrades", sub: "provider profiles and ratings", icon: "healthgrades", side: "right" },
-    { title: "Zocdoc", sub: "appointment booking searches", icon: "zocdoc", side: "bottom" },
-    { title: "WebMD", sub: "symptom and condition research", icon: "webmd", side: "left" },
+    { title: "Google", sub: "treatment, specialist and location searches", icon: "google" },
+    { title: "Healthgrades", sub: "provider profiles and ratings", icon: "healthgrades" },
+    { title: "Zocdoc", sub: "appointment booking searches", icon: "zocdoc" },
+    { title: "WebMD", sub: "symptom and condition research", icon: "webmd" },
   ],
 
 };

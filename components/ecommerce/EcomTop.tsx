@@ -1,7 +1,7 @@
 "use client";
 
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink } from "@/components/ui";
+import { CtaLink, ORBIT_SPEED, splitAccent, SectionBadge } from "@/components/ui";
 import {
   ShopifyMark,
   WooCommerceMark,
@@ -17,8 +17,6 @@ import {
   ECOM_DIFFERENT,
 } from "@/lib/ecommerce-seo-content";
 
-/* Site-wide orbit speed, matching every other hero diagram. */
-const ORBIT_SPEED = "48s";
 
 /* Platform marks for the hero orbit. The client asked for the real
    platforms store owners recognise, so each node carries that product's own
@@ -118,13 +116,6 @@ function PlatformLoop() {
       </div>
     </div>
   );
-}
-
-/* Splits a title so one phrase carries the indigo accent. */
-function splitAccent(title: string, accent: string): [string, string, string] {
-  const i = title.indexOf(accent);
-  if (i < 0) return [title, "", ""];
-  return [title.slice(0, i), accent, title.slice(i + accent.length)];
 }
 
 export function EcomHero() {
@@ -240,9 +231,7 @@ export function EcomRevenue() {
         <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
           <Reveal variant="left">
             <div>
-              <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-                {ECOM_REVENUE.badge}
-              </span>
+              <SectionBadge>{ECOM_REVENUE.badge}</SectionBadge>
               <h2 className="mt-5 font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
                 Ecommerce SEO Built Around{" "}
                 <span className="text-indigo">{ECOM_REVENUE.accent}</span>, Not
@@ -284,7 +273,7 @@ export function EcomRevenue() {
                         width={row.w}
                         height="14"
                         rx="4"
-                        fill={row.on ? "var(--color-indigo)" : "var(--color-indigo)"}
+                        fill="var(--color-indigo)"
                         fillOpacity={row.on ? 0.85 : 0.2}
                       />
                     </g>
@@ -312,9 +301,7 @@ export function EcomResults() {
         <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
           <Reveal variant="left">
             <div>
-              <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-                {ECOM_RESULTS.badge}
-              </span>
+              <SectionBadge>{ECOM_RESULTS.badge}</SectionBadge>
               <h2 className="mt-5 font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
                 Ecommerce SEO{" "}
                 <span className="text-indigo">{ECOM_RESULTS.accent}</span>
@@ -390,9 +377,7 @@ export function EcomDifferent() {
     <section className="relative overflow-x-clip bg-ivory border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-            {ECOM_DIFFERENT.badge}
-          </span>
+          <SectionBadge>{ECOM_DIFFERENT.badge}</SectionBadge>
           <h2 className="mt-5 max-w-3xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Why Ecommerce Stores Need a{" "}
             <span className="text-indigo">{ECOM_DIFFERENT.accent}</span> SEO

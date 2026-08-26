@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Reveal from "@/components/motion/Reveal";
+import { SectionBadge } from "@/components/ui";
+import FaqSection from "@/components/FaqSection";
 import {
   ECOM_MEASURE,
   ECOM_WHY,
@@ -56,9 +58,7 @@ export function EcomMeasure() {
         <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
           <Reveal variant="left">
             <div>
-              <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-                {ECOM_MEASURE.badge}
-              </span>
+              <SectionBadge>{ECOM_MEASURE.badge}</SectionBadge>
               <h2 className="mt-5 font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
                 What We <span className="text-indigo">{ECOM_MEASURE.accent}</span>{" "}
                 in Ecommerce SEO
@@ -103,9 +103,7 @@ export function EcomWhy() {
     <section className="relative overflow-x-clip wash-lilac-full border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-            {ECOM_WHY.badge}
-          </span>
+          <SectionBadge>{ECOM_WHY.badge}</SectionBadge>
           <h2 className="mt-5 max-w-3xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Why <span className="text-indigo">{ECOM_WHY.accent}</span> Search
             Nexio as Your Ecommerce SEO Agency?
@@ -154,9 +152,7 @@ export function EcomWhen() {
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <Reveal variant="left">
             <div>
-              <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-                {ECOM_WHEN.badge}
-              </span>
+              <SectionBadge>{ECOM_WHEN.badge}</SectionBadge>
               <h2 className="mt-5 font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
                 When Should You{" "}
                 <span className="text-indigo">{ECOM_WHEN.accent}</span> an
@@ -197,92 +193,14 @@ export function EcomWhen() {
   );
 }
 
-/* ---- FAQ accordion with FAQPage schema. Full copy stays in the HTML. ---- */
-function FaqRow({
-  q,
-  a,
-  open,
-  onToggle,
-}: {
-  q: string;
-  a: string;
-  open: boolean;
-  onToggle: () => void;
-}) {
-  return (
-    <div className="border-b border-line last:border-b-0">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={open}
-        className="flex w-full items-center justify-between gap-4 py-5 text-left"
-      >
-        <span className="font-heading text-[16px] font-bold tracking-[-0.01em]">{q}</span>
-        <span
-          className={`grid size-7 shrink-0 place-items-center rounded-full border border-line transition-all duration-300 ${
-            open ? "rotate-45 border-indigo/40 bg-indigo text-white" : "text-graphite"
-          }`}
-        >
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden>
-            <path d="M7 2v10M2 7h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-          </svg>
-        </span>
-      </button>
-      <div
-        className={`grid transition-all duration-300 ease-soft ${
-          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
-      >
-        <div className="overflow-hidden">
-          <p className="pb-5 pr-10 text-[14px] leading-relaxed text-graphite">{a}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
+/* ---- FAQ: shared accordion + schema (components/FaqSection). ---- */
 export function EcomFaq() {
-  const [open, setOpen] = useState(0);
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: ECOM_FAQS.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
-
   return (
-    <section className="overflow-x-clip border-t border-line py-16 md:py-24">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
-      <div className="mx-auto max-w-[800px] px-6">
-        <Reveal>
-          <h2 className="text-center font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Ecommerce SEO <span className="text-indigo">FAQs</span>
-          </h2>
-        </Reveal>
-        <div className="mt-10">
-          {ECOM_FAQS.map((f, i) => (
-            <Reveal
-              key={f.q}
-              variant={i % 2 === 0 ? "left" : "right"}
-              delay={Math.min(i * 50, 240)}
-            >
-              <FaqRow
-                q={f.q}
-                a={f.a}
-                open={open === i}
-                onToggle={() => setOpen(open === i ? -1 : i)}
-              />
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
+    <FaqSection
+      bordered
+      title={<>Ecommerce SEO <span className="text-indigo">FAQs</span></>}
+      faqs={ECOM_FAQS}
+    />
   );
 }
 

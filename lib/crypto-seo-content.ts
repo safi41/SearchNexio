@@ -6,26 +6,18 @@
    export produces no broken links. */
 export const C_ROUTES = {
   audit: "#visibility-review",
-  process: "#crypto-process",
-  geo: "/generative-engine-optimization/",
-  aiSearch: "/ai-search-optimization-services/",
   localSeo: "/services/local-seo-services/",
   contact: "/contact/",
   results: "#crypto-results",
   caseStudies: "/case-studies/",
   saasSeo: "/b2b-saas-seo-agency/",
   /* not built yet */
-  technicalSeo: "#",
-  aeo: "#",
   aiVisibilityAudit: "#",
-  privacy: "#",
   bookCall: "#",
 };
 
 export const CRYPTO_HERO = {
   eyebrow: "Crypto SEO Company",
-  /* H1 is locked by the brief: keep exactly "Crypto SEO Services". */
-  title: "Crypto SEO Services",
   intro:
     "Turn high-intent crypto searches into users, demos and qualified demand. SearchNexio builds SEO programs for exchanges, DeFi protocols, wallets, Web3 platforms and blockchain companies across Google and AI search.",
   primaryCta: { label: "Request a Crypto SEO Review", href: C_ROUTES.audit },
@@ -52,7 +44,6 @@ export const CRYPTO_HERO = {
 
 /* Search Should Drive Qualified Demand. */
 export const QUALIFIED_DEMAND = {
-  title: "Crypto SEO That Drives Qualified Growth",
   paras: [
     "Traffic only matters when it reaches the people your business needs.",
     "SearchNexio builds crypto SEO strategies around commercial searches that lead to account registrations, demos, wallet connections, funded accounts and other measurable acquisition events. Rankings are a means to an end. The end is users.",
@@ -213,9 +204,7 @@ export const CRYPTO_SERVICES: {
   desc: string;
   bullets?: string[];
   deliverable?: string;
-  limit?: string;
   link: { label: string; href: string } | null;
-  link2?: { label: string; href: string } | null;
 }[] = [
   {
     key: "keyword",
@@ -317,7 +306,6 @@ export const CRYPTO_SERVICES: {
 
 /* Crypto SEO Results. Both cards hold until verified data exists. */
 export const CRYPTO_RESULTS = {
-  title: "Crypto SEO Results",
   cards: [
     {
       label: "Crypto tax growth",
@@ -341,7 +329,6 @@ export const CRYPTO_AUDIENCES_INTRO =
 export const CRYPTO_AUDIENCES: {
   name: string;
   desc: string;
-  query?: string;
   link?: { label: string; href: string };
 }[] = [
   {
@@ -509,9 +496,6 @@ export const CRYPTO_ENGAGEMENTS = [
   },
 ];
 
-export const CRYPTO_ENGAGEMENT_NOTE =
-  "Scope and pricing depend on: website architecture, number of products and markets, technical state, content requirements, competition, authority position, and reporting infrastructure. Scope and price are confirmed before any work begins.";
-
 /* What SEO Cannot Guarantee. */
 export const CRYPTO_LIMITATIONS = [
   "Search Nexio cannot guarantee a specific ranking position. Rankings are determined by Google and influenced by competition, algorithm changes, and many factors outside an agency's control.",
@@ -567,7 +551,6 @@ export const CRYPTO_FINAL = {
     "Your buyers are already searching for exchanges, protocols, wallets and crypto products like yours. The question is whether they find you or your competitors.",
     "We review where your company appears today, which commercial searches you are missing and what we would prioritize first.",
   ],
-  primaryCta: { label: "Request a Crypto SEO Review", href: C_ROUTES.audit },
   secondaryCta: { label: "Book a Call", href: C_ROUTES.bookCall },
   submit: "Request a Crypto SEO Review",
   privacy:

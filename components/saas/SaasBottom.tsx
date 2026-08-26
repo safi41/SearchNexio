@@ -3,7 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
-import { CtaLink } from "@/components/ui";
+import FaqSection from "@/components/FaqSection";
+import CtaBanner from "@/components/CtaBanner";
+import { SectionBadge } from "@/components/ui";
 import {
   SAAS_AI,
   SAAS_MID_CTA,
@@ -52,9 +54,7 @@ export function SaasAiSearch() {
     <section className="relative overflow-x-clip border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-            {SAAS_AI.badge}
-          </span>
+          <SectionBadge>{SAAS_AI.badge}</SectionBadge>
           <h2 className="mt-5 max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             SaaS SEO for Google and{" "}
             <span className="text-indigo">{SAAS_AI.accent}</span>
@@ -126,38 +126,7 @@ export function SaasAiSearch() {
 
 /* ---- Mid-page CTA banner on the indigo ground. ---- */
 export function SaasMidCta() {
-  return (
-    <section className="relative overflow-x-clip py-6">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal variant="scale">
-          <div className="cta-indigo relative overflow-hidden rounded-[2rem] px-8 py-12 text-center md:px-12">
-            <div
-              aria-hidden
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.25) 1.5px, transparent 1.5px)",
-                backgroundSize: "14px 14px",
-              }}
-            />
-            <div className="relative">
-              <h2 className="mx-auto max-w-3xl font-heading text-[clamp(1.7rem,3.2vw,2.4rem)] font-bold leading-[1.14] tracking-[-0.02em] text-white">
-                {SAAS_MID_CTA.title}
-              </h2>
-              <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-white/75">
-                {SAAS_MID_CTA.body}
-              </p>
-              <div className="mt-8 flex justify-center">
-                <CtaLink href={SAAS_MID_CTA.cta.href} variant="glass">
-                  {SAAS_MID_CTA.cta.label}
-                </CtaLink>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
+  return <CtaBanner title={SAAS_MID_CTA.title} body={SAAS_MID_CTA.body} cta={SAAS_MID_CTA.cta} />;
 }
 
 /* ---- Why SaaS Companies Choose Search Nexio ----
@@ -168,9 +137,7 @@ export function SaasWhy() {
     <section className="relative overflow-x-clip wash-lilac-full border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-            {SAAS_WHY.badge}
-          </span>
+          <SectionBadge>{SAAS_WHY.badge}</SectionBadge>
           <h2 className="mt-5 max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Why SaaS Companies{" "}
             <span className="text-indigo">{SAAS_WHY.accent}</span> Search Nexio
@@ -212,94 +179,14 @@ export function SaasWhy() {
   );
 }
 
-/* ---- FAQ accordion with FAQPage schema. Full copy stays in the HTML. ---- */
-function FaqRow({
-  q,
-  a,
-  open,
-  onToggle,
-}: {
-  q: string;
-  a: string;
-  open: boolean;
-  onToggle: () => void;
-}) {
-  return (
-    <div className="border-b border-line last:border-b-0">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={open}
-        className="flex w-full items-center justify-between gap-4 py-5 text-left"
-      >
-        <span className="font-heading text-[16px] font-bold tracking-[-0.01em]">
-          {q}
-        </span>
-        <span
-          className={`grid size-7 shrink-0 place-items-center rounded-full border border-line transition-all duration-300 ${
-            open ? "rotate-45 border-indigo/40 bg-indigo text-white" : "text-graphite"
-          }`}
-        >
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden>
-            <path d="M7 2v10M2 7h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-          </svg>
-        </span>
-      </button>
-      <div
-        className={`grid transition-all duration-300 ease-soft ${
-          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
-      >
-        <div className="overflow-hidden">
-          <p className="pb-5 pr-10 text-[14px] leading-relaxed text-graphite">{a}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
+/* ---- FAQ: shared accordion + schema (components/FaqSection). ---- */
 export function SaasFaq() {
-  const [open, setOpen] = useState(0);
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: SAAS_FAQS.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
-
   return (
-    <section className="overflow-x-clip border-t border-line py-16 md:py-24">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
-      <div className="mx-auto max-w-[800px] px-6">
-        <Reveal>
-          <h2 className="text-center font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            B2B SaaS SEO <span className="text-indigo">FAQs</span>
-          </h2>
-        </Reveal>
-        <div className="mt-10">
-          {SAAS_FAQS.map((f, i) => (
-            <Reveal
-              key={f.q}
-              variant={i % 2 === 0 ? "left" : "right"}
-              delay={Math.min(i * 50, 240)}
-            >
-              <FaqRow
-                q={f.q}
-                a={f.a}
-                open={open === i}
-                onToggle={() => setOpen(open === i ? -1 : i)}
-              />
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
+    <FaqSection
+      bordered
+      title={<>B2B SaaS SEO <span className="text-indigo">FAQs</span></>}
+      faqs={SAAS_FAQS}
+    />
   );
 }
 

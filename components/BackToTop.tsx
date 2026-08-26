@@ -54,11 +54,9 @@ export default function BackToTop() {
          available, so it is never a focus trap at the top of the page */
       aria-hidden={!shown}
       tabIndex={shown ? 0 : -1}
-      /* Colours come straight from the theme tokens: --c-ink is near-black
-         in light mode and near-white in dark, so the button always contrasts
-         against the page without needing a dark: variant. */
-      style={{ backgroundColor: "var(--c-ink)", color: "var(--c-page)" }}
-      className={`group fixed right-4 top-1/2 z-50 mt-16 grid size-11 place-items-center rounded-full shadow-[0_8px_24px_rgba(11,13,18,0.35)] transition-all duration-300 ease-soft ${
+      /* bg-ink / text-ivory map to the flipping theme tokens, so the button
+         inverts with the page without a dark: variant */
+      className={`group fixed right-4 top-1/2 z-50 mt-16 grid size-11 place-items-center rounded-full bg-ink text-ivory shadow-[0_8px_24px_rgba(11,13,18,0.35)] transition-all duration-300 ease-soft ${
         shown
           ? "pointer-events-auto translate-y-0 opacity-100 hover:scale-110"
           : "pointer-events-none translate-y-2 opacity-0"

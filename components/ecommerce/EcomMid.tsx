@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
+import CtaBanner from "@/components/CtaBanner";
 import {
   ShopifyMark,
   WooCommerceMark,
@@ -17,7 +18,7 @@ import {
   ECOM_PLATFORMS,
   ECOM_PROCESS,
 } from "@/lib/ecommerce-seo-content";
-import { CtaLink } from "@/components/ui";
+import { SectionBadge } from "@/components/ui";
 
 /* Shared frame so every service diagram sits in the same container. */
 function Frame({ children }: { children: React.ReactNode }) {
@@ -133,7 +134,6 @@ function DCrawl() {
       <text x="0" y="130" className="fill-graphite" style={TS}>After indexation rules</text>
       <rect x="0" y="142" width="70" height="26" rx="6" fill="var(--color-warn)" fillOpacity="0.16" />
       <text x="82" y="159" className="fill-graphite" style={T}>facets excluded</text>
-      <rect x="0" y="142" width="0" height="0" />
       <rect x="196" y="142" width="244" height="26" rx="6" fill="var(--color-indigo)" fillOpacity="0.5" />
       <text x="208" y="159" className="fill-white" style={T}>Priority categories and products</text>
       <text x="0" y="190" className="fill-graphite" style={TS}>Bar widths are illustrative, not measured crawl data.</text>
@@ -268,8 +268,9 @@ function DAiSearch() {
   );
 }
 
-function ServiceDiagram({ kind }: { kind: string }) {
-  const map: Record<string, React.ReactNode> = {
+/* Built once at module load so element identity stays stable across
+   re-renders; React can then skip reconciling unchanged diagram subtrees. */
+const DIAGRAMS: Record<string, React.ReactNode> = {
     pagetype: <DPageType />,
     cannibalization: <DCannibalization />,
     product: <DProduct />,
@@ -279,8 +280,10 @@ function ServiceDiagram({ kind }: { kind: string }) {
     authority: <DAuthority />,
     schema: <DSchema />,
     aisearch: <DAiSearch />,
-  };
-  const body = map[kind];
+};
+
+function ServiceDiagram({ kind }: { kind: string }) {
+  const body = DIAGRAMS[kind];
   if (!body) return null;
   return <Frame>{body}</Frame>;
 }
@@ -296,9 +299,7 @@ export function EcomServices() {
     <section id="ecommerce-services" className="relative overflow-x-clip border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-            {ECOM_SERVICES.badge}
-          </span>
+          <SectionBadge>{ECOM_SERVICES.badge}</SectionBadge>
           <h2 className="mt-5 max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Our Ecommerce SEO{" "}
             <span className="text-indigo">{ECOM_SERVICES.accent}</span>
@@ -413,9 +414,7 @@ export function EcomProblems() {
     <section className="relative overflow-x-clip wash-lilac-full border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-            {ECOM_PROBLEMS.badge}
-          </span>
+          <SectionBadge>{ECOM_PROBLEMS.badge}</SectionBadge>
           <h2 className="mt-5 max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Ecommerce SEO{" "}
             <span className="text-indigo">{ECOM_PROBLEMS.accent}</span> We Solve
@@ -444,38 +443,7 @@ export function EcomProblems() {
 
 /* ---- Mid-page CTA banner on the indigo ground. ---- */
 export function EcomMidCta() {
-  return (
-    <section className="relative overflow-x-clip py-6">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal variant="scale">
-          <div className="cta-indigo relative overflow-hidden rounded-[2rem] px-8 py-12 text-center md:px-12">
-            <div
-              aria-hidden
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(255,255,255,0.25) 1.5px, transparent 1.5px)",
-                backgroundSize: "14px 14px",
-              }}
-            />
-            <div className="relative">
-              <h2 className="mx-auto max-w-3xl font-heading text-[clamp(1.7rem,3.2vw,2.4rem)] font-bold leading-[1.14] tracking-[-0.02em] text-white">
-                {ECOM_MID_CTA.title}
-              </h2>
-              <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-white/75">
-                {ECOM_MID_CTA.body}
-              </p>
-              <div className="mt-8 flex justify-center">
-                <CtaLink href={ECOM_MID_CTA.cta.href} variant="glass">
-                  {ECOM_MID_CTA.cta.label}
-                </CtaLink>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
+  return <CtaBanner title={ECOM_MID_CTA.title} body={ECOM_MID_CTA.body} cta={ECOM_MID_CTA.cta} bodyWide />;
 }
 
 /* ---- Ecommerce SEO for Your Platform ----
@@ -493,9 +461,7 @@ export function EcomPlatforms() {
     <section className="relative overflow-x-clip border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-            {ECOM_PLATFORMS.badge}
-          </span>
+          <SectionBadge>{ECOM_PLATFORMS.badge}</SectionBadge>
           <h2 className="mt-5 max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Ecommerce SEO for Your{" "}
             <span className="text-indigo">{ECOM_PLATFORMS.accent}</span>
@@ -537,9 +503,7 @@ export function EcomProcess() {
     <section id="ecommerce-process" className="relative overflow-x-clip bg-ivory border-t border-line py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <span className="inline-flex rounded-full border border-line bg-surface px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-indigo">
-            {ECOM_PROCESS.badge}
-          </span>
+          <SectionBadge>{ECOM_PROCESS.badge}</SectionBadge>
           <h2 className="mt-5 max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             How Our Ecommerce SEO{" "}
             <span className="text-indigo">{ECOM_PROCESS.accent}</span> Works

@@ -10,18 +10,14 @@
 export const S_ROUTES = {
   strategy: "#saas-strategy",
   results: "#saas-results",
-  process: "#saas-process",
   geo: "/generative-engine-optimization/",
   aiSearch: "/ai-search-optimization-services/",
-  contact: "/contact/",
   /* not built yet */
-  seoServices: "#",
   keywordResearch: "#",
   productLedSeo: "#",
   technicalSeoSaas: "#",
   saasStrategy: "#",
   aeo: "#",
-  aiVisibilityAudit: "#",
 };
 
 export const SAAS_HERO = {
@@ -378,7 +374,6 @@ export const SAAS_FAQS = [
 
 /* Closing CTA. */
 export const SAAS_FINAL = {
-  title: "Build a Predictable SaaS Growth Channel",
   accent: "Predictable",
   body: "Organic traffic only matters if it helps the right buyers discover, evaluate and choose your product. Let us look at where you are visible today, where competitors are winning high-intent demand, and which opportunities are worth prioritizing first.",
   cta: { label: "Get Your SaaS SEO Strategy", href: S_ROUTES.strategy },

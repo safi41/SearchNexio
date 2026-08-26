@@ -317,8 +317,9 @@ function DEntity() {
   );
 }
 
-function ServiceDiagram({ kind }: { kind: string }) {
-  const map: Record<string, React.ReactNode> = {
+/* Built once at module load so element identity stays stable across
+   re-renders; React can then skip reconciling unchanged diagram subtrees. */
+const DIAGRAMS: Record<string, React.ReactNode> = {
     intent: <DIntent />,
     review: <DReview />,
     proximity: <DProximity />,
@@ -331,8 +332,10 @@ function ServiceDiagram({ kind }: { kind: string }) {
     booking: <DBooking />,
     attribution: <DAttribution />,
     entity: <DEntity />,
-  };
-  const body = map[kind];
+};
+
+function ServiceDiagram({ kind }: { kind: string }) {
+  const body = DIAGRAMS[kind];
   if (!body) return null;
   if (kind === "architecture") return <>{body}</>;
   return <HcFrame>{body}</HcFrame>;

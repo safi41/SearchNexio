@@ -516,17 +516,6 @@ export function WebMDMark({ size = 18 }: { size?: number }) {
   );
 }
 
-export function NhsMark({ size = 18 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
-      <circle cx="16" cy="16" r="16" fill="#005EB8" />
-      <path
-        fill="#fff"
-        d="M5.4 11.6h3.3l1.9 5.3h.05l1.05-5.3h2.5l-1.8 8.8H9.2l-2-5.3h-.05l-1.05 5.3H3.6zM15.4 11.6h2.6l-.6 3.1h2.9l.6-3.1h2.6l-1.8 8.8h-2.6l.65-3.4h-2.9l-.65 3.4h-2.6zM28.3 13.9a4.9 4.9 0 0 0-1.9-.4c-.7 0-1.3.1-1.3.6 0 .95 2.7.6 2.7 2.7 0 1.9-1.8 2.4-3.4 2.4a8 8 0 0 1-2.2-.35l.6-1.95c.35.25 1.1.4 1.7.4.55 0 1.4-.1 1.4-.75 0-1.05-2.7-.65-2.7-2.6 0-1.8 1.6-2.35 3.1-2.35.85 0 1.65.1 2.15.35z"
-      />
-    </svg>
-  );
-}
 
 /* ---- Ecommerce platform marks ----
    The platforms named in the ecommerce copy, each in its own brand colour.
