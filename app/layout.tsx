@@ -4,6 +4,7 @@ import "./globals.css";
 import SiteNav from "@/components/SiteNav";
 import Footer from "@/components/Footer";
 import ThemeToggle from "@/components/ThemeToggle";
+import BackToTop from "@/components/BackToTop";
 
 /* The Sasico pairing: Plus Jakarta Sans carries every heading at 700,
    Inter carries body and UI. */
@@ -59,6 +60,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <ThemeToggle />
+        <BackToTop />
       </body>
     </html>
   );
