@@ -505,9 +505,13 @@ export function EcomPlatforms() {
           </p>
         </Reveal>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-6">
           {ECOM_PLATFORMS.items.map((it, i) => (
-            <Reveal key={it.title} delay={i * 60} className={i === 4 ? "lg:col-span-1 md:col-span-2 lg:col-start-3" : ""}>
+            <Reveal
+              key={it.title}
+              delay={i * 60}
+              className={i < 3 ? "lg:col-span-2" : "md:col-span-1 lg:col-span-3"}
+            >
               <div className="group flex h-full flex-col rounded-3xl bg-surface p-7 shadow-[0_10px_30px_rgba(11,13,18,0.05)] transition-all duration-300 ease-soft hover:-translate-y-1.5 hover:scale-[1.015] hover:shadow-[0_24px_56px_rgba(99,91,255,0.14)]">
                 <span className="grid size-12 place-items-center rounded-2xl bg-ivory transition-transform duration-300 ease-soft group-hover:scale-110">
                   {PLATFORM_MARKS[it.icon]}

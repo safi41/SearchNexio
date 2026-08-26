@@ -77,14 +77,21 @@ function PinOrbitVisual() {
         }}
       />
 
-      {/* layered ripple base + the 3D pin */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <span
-          title="Google Maps"
-          aria-label="Google Maps"
-          className="grid size-[186px] place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(234,67,53,0.2)]"
-        >
-          <MapsPin size={104} />
+      {/* core: the Google Maps pin. Sized as a percentage of the stage, the
+          same construction the other heroes use, so the disc shrinks with
+          the ring on mobile instead of crowding the orbiting nodes. */}
+      <div className="absolute left-1/2 top-1/2 grid size-[36%] -translate-x-1/2 -translate-y-1/2 place-items-center">
+        <span aria-hidden className="absolute inset-[-14%] rounded-full bg-[#EA4335]/12 blur-2xl" />
+        <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_24px_60px_rgba(234,67,53,0.2)]">
+          <span
+            title="Google Maps"
+            aria-label="Google Maps"
+            className="grid size-[62%] place-items-center"
+          >
+            <span aria-hidden className="block w-full [&>svg]:h-auto [&>svg]:w-full">
+              <MapsPin size={104} />
+            </span>
+          </span>
         </span>
       </div>
 
