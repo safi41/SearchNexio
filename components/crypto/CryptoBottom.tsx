@@ -133,7 +133,7 @@ export function CryptoMeasure() {
         <Reveal>
           <div className="max-w-3xl">
             <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-              How We <span className="text-indigo">Measure</span> Growth
+              How We <span className="text-indigo">Measure</span> Crypto SEO Growth
             </h2>
             <p className="mt-6 text-[15px] leading-relaxed text-graphite">{CRYPTO_METRICS.intro}</p>
           </div>
@@ -249,7 +249,7 @@ export function CryptoEngagements() {
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <h2 className="text-center font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Crypto SEO <span className="text-indigo">Engagement</span> Options
+            Crypto SEO <span className="text-indigo">Pricing</span>
           </h2>
         </Reveal>
 

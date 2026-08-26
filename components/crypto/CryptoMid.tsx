@@ -4,6 +4,8 @@ import { useState } from "react";
 import Reveal from "@/components/motion/Reveal";
 import {
   CRYPTO_SERVICES,
+  CRYPTO_SERVICES_INTRO,
+  CRYPTO_AUDIENCES_INTRO,
   CRYPTO_RESULTS,
   CRYPTO_AUDIENCES,
   CRYPTO_TRUST,
@@ -403,8 +405,11 @@ export function CryptoServices() {
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <h2 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            What Our Crypto SEO <span className="text-indigo">Includes</span>
+            Our Crypto SEO <span className="text-indigo">Services</span>
           </h2>
+          <p className="mt-5 max-w-2xl text-[15.5px] leading-relaxed text-graphite">
+            {CRYPTO_SERVICES_INTRO}
+          </p>
         </Reveal>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
@@ -591,18 +596,21 @@ export function CryptoAudiences() {
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Who We <span className="text-indigo">Help</span>
+            Crypto &amp; Web3 <span className="text-indigo">Industries</span> We Work With
           </h2>
+          <p className="mt-5 max-w-2xl text-[15.5px] leading-relaxed text-graphite">
+            {CRYPTO_AUDIENCES_INTRO}
+          </p>
         </Reveal>
 
-        {/* Crypto audiences read as an index: hairline-divided rows with the
-            audience name held left and its detail right, so the section
-            scans differently from the healthcare card grid. */}
-        <div className="mt-10 grid border-t border-line">
+        {/* Eight markets in a 2x4 grid on desktop, as the visual brief
+            specifies. Each card carries its market name, the search
+            landscape for it, and any relevant cross-link. */}
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
           {CRYPTO_AUDIENCES.map((a, i) => (
             <article
               key={a.name}
-              className="group grid gap-3 border-b border-line py-7 transition-colors duration-300 ease-soft hover:bg-surface lg:grid-cols-[56px_0.8fr_1.2fr] lg:items-start lg:gap-8 lg:px-5"
+              className="group flex h-full flex-col rounded-3xl bg-surface p-7 shadow-[0_10px_30px_rgba(11,13,18,0.05)] transition-all duration-300 ease-soft hover:-translate-y-1.5 hover:scale-[1.015] hover:shadow-[0_24px_56px_rgba(99,91,255,0.14)]"
             >
               <span
                 aria-hidden
@@ -610,21 +618,19 @@ export function CryptoAudiences() {
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="font-heading text-[17px] font-bold leading-snug tracking-[-0.01em] transition-colors duration-300 group-hover:text-indigo">
+              <h3 className="mt-2 font-heading text-[17px] font-bold leading-snug tracking-[-0.01em] transition-colors duration-300 group-hover:text-indigo">
                 {a.name}
               </h3>
-              <div>
-                <p className="text-[13.5px] leading-relaxed text-graphite">{a.desc}</p>
-                {a.query && (
-                  <p className="mt-3 inline-flex w-fit items-center gap-2 rounded-lg bg-ink-solid px-3 py-1.5 text-[11.5px] font-medium text-white/90">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--color-citron)" strokeWidth="2" strokeLinecap="round" aria-hidden>
-                      <circle cx="11" cy="11" r="6.5" />
-                      <path d="M15.8 15.8 20 20" />
-                    </svg>
-                    {a.query}
-                  </p>
-                )}
-              </div>
+              <span className="mt-3 block h-0.5 w-7 rounded-full bg-indigo transition-all duration-300 ease-soft group-hover:w-12" />
+              <p className="mt-4 text-[13.5px] leading-relaxed text-graphite">{a.desc}</p>
+              {a.link && a.link.href !== "#" && (
+                <a
+                  href={a.link.href}
+                  className="mt-4 inline-flex w-fit items-center gap-1.5 text-[13.5px] font-bold text-indigo underline decoration-indigo/30 underline-offset-2"
+                >
+                  {a.link.label}
+                </a>
+              )}
             </article>
           ))}
         </div>

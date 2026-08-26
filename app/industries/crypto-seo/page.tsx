@@ -22,6 +22,7 @@ import {
   CryptoFaq,
   CryptoForm,
 } from "@/components/crypto/CryptoBottom";
+import { CryptoBanner } from "@/components/crypto/CryptoBanner";
 
 export const metadata: Metadata = {
   title: "Crypto SEO Services | SEO for Web3 & Blockchain | SearchNexio",
@@ -40,12 +41,15 @@ export default function CryptoSeoPage() {
       <CryptoServices />
       <CryptoResults />
       <CryptoAudiences />
+      <CryptoBanner which="opportunity" />
       <CryptoTrust />
       <CryptoDeliverables />
       <CryptoProcess />
+      <CryptoBanner which="visibility" />
       <CryptoMeasure />
       <CryptoWhy />
       <CryptoEngagements />
+      <CryptoBanner which="pricing" />
       <CryptoLimitations />
       <CryptoFaq />
       <CryptoForm />

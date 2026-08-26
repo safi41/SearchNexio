@@ -78,6 +78,32 @@ export const AURUM_PROOF = {
     "A verified Google Search Console or GA4 performance graph is added here before go-live.",
 };
 
+/* The three CTA banners the brief places after the industry section, the
+   four-step process and pricing. Copy verbatim. */
+export const CRYPTO_BANNERS = {
+  opportunity: {
+    eyebrow: "Crypto search opportunity",
+    title: "Not Sure Which Search Market Is Worth Prioritizing?",
+    body: "We will map the commercial queries, technical gaps and competitors that matter for your product before recommending a full SEO program.",
+    primaryCta: { label: "Request a Crypto SEO Review", href: C_ROUTES.audit },
+    secondaryCta: { label: "Book a Strategy Call", href: C_ROUTES.bookCall },
+  },
+  visibility: {
+    eyebrow: "Visibility review",
+    title: "Find the Search Demand Your Competitors Are Capturing",
+    body: "We review where your company appears today, which commercial searches you are missing and what we would prioritize first.",
+    primaryCta: { label: "Request a Crypto SEO Review", href: C_ROUTES.audit },
+    secondaryCta: { label: "Contact Us", href: C_ROUTES.contact },
+  },
+  pricing: {
+    eyebrow: "Pricing & scope",
+    title: "Need a Multi-Market or Enterprise SEO Plan?",
+    body: "Tell us your product, markets and growth targets. We will recommend the scope that makes commercial sense before work begins.",
+    primaryCta: { label: "Book a Strategy Call", href: C_ROUTES.bookCall },
+    secondaryCta: { label: "Request a Crypto SEO Review", href: C_ROUTES.audit },
+  },
+};
+
 /* Proof-before-promises banner, verbatim. */
 export const PROOF_BANNER = {
   eyebrow: "Proof before promises",
@@ -307,32 +333,50 @@ export const CRYPTO_RESULTS = {
 };
 
 /* Who We Help: six audience cards. */
-export const CRYPTO_AUDIENCES = [
+export const CRYPTO_AUDIENCES_INTRO =
+  "SearchNexio works across crypto, Web3, blockchain, fintech and related financial technology markets. Each category has a different search landscape, buyer journey and trust requirement, so the SEO strategy has to match how that market is actually researched.";
+
+/* Eight markets, in the brief's order. The visual brief calls for a 2x4
+   grid on desktop. */
+export const CRYPTO_AUDIENCES: {
+  name: string;
+  desc: string;
+  query?: string;
+  link?: { label: string; href: string };
+}[] = [
   {
-    name: "Crypto tax firms",
-    desc: "Crypto tax service businesses compete for high-intent service searches where a user is actively looking to hire. The pages that convert are the ones that address the specific problem, complex transaction histories, multi-exchange reporting, DeFi tax treatment, with clear expertise and a straightforward path to a consultation. That is where Search Nexio's direct experience in this category is most relevant.",
+    name: "Crypto Exchanges",
+    desc: "Exchange SEO focuses on the searches that lead to funded accounts: trading-pair pages, cryptocurrency price pages, exchange comparison searches, fee-related queries, fiat on-ramp searches, country-specific searches and branded trust queries. We build visibility for the searches most closely connected to registration and deposit activity.",
   },
   {
-    name: "Reconciliation and accounting",
-    desc: "Transaction reconciliation and data repair services are found through problem-based searches: fix Koinly transactions, missing crypto cost basis, reconcile DeFi transactions. Building service pages and supporting content around those user-language queries, not around the technical description of the work, determines whether the business is found when those problems are being actively searched.",
-    query: "fix Koinly transactions",
+    name: "DeFi and Web3 Protocols",
+    desc: "DeFi users often discover products while researching a problem or category before they have selected a specific protocol. Search opportunities span lending, borrowing, staking, yield, DEXs, liquidity, bridges and Layer 2 comparisons. We build visibility before the user has already chosen a competitor.",
   },
   {
-    name: "Exchanges and trading platforms",
-    desc: "Exchange SEO involves programmatic page management at scale, financial content trust across high volumes of asset and trading-pair pages, and branded trust management for a product where users are considering entrusting significant funds. We are transparent that our strongest current proof is in crypto service businesses rather than consumer exchanges, and happy to discuss how the methodology applies to exchange challenges.",
+    name: "Crypto Wallets and Custody",
+    desc: "Wallet buyers compare products heavily before making a decision. Search strategy covers wallet comparisons, security resources, supported assets, hardware versus software comparisons, staking support, network compatibility, fees and competitor alternatives. The objective is to appear in the consideration stage, not only for brand-aware searches.",
   },
   {
-    name: "Wallet and payment products",
-    desc: "Wallet and crypto payment products compete in comparison-heavy environments. Visibility for comparison searches, use-case queries, and alternative searches is often more commercially valuable than ranking for the category name alone. Product pages built around what the user wants to accomplish, send USDC internationally, accept crypto payments on Shopify, convert better than pages built around technical specifications.",
-    query: "accept crypto payments on Shopify",
+    name: "Blockchain Infrastructure and Developer Tools",
+    desc: "Developer-focused products require a different SEO strategy. The acquisition surface is different: API documentation, integration guides, technical tutorials, infrastructure comparisons and chain-specific developer content. Your documentation is part of your acquisition strategy. We treat it that way.",
   },
   {
-    name: "DeFi and Web3 platforms",
-    desc: "DeFi and Web3 businesses often write for the blockchain-native audience while missing the larger population of mainstream investors, compliance professionals, and enterprise buyers researching the product category through general search. Building organic visibility in this space requires understanding who actually searches for the product, not just who already uses it.",
+    name: "Crypto SaaS and Compliance Platforms",
+    desc: "Crypto software companies often sell to sophisticated B2B buyers who conduct systematic vendor evaluation. We build visibility around use cases, product categories, software comparisons, competitor alternatives, integrations and problem-based searches, with the objective of appearing before buyers finalize their shortlist.",
+    link: { label: "SaaS SEO services", href: C_ROUTES.saasSeo },
   },
   {
-    name: "Crypto SaaS and infrastructure",
-    desc: "Blockchain analytics, developer tooling, compliance infrastructure, and API-based crypto services are evaluated by buyers who conduct systematic B2B research. Developer-intent queries, integration-specific terms, and comparison searches matter, and documentation that is internally linked to commercial pages and indexed correctly is often a significant untapped acquisition asset.",
+    name: "Fintech and Crypto Payment Platforms",
+    desc: "Fintech and crypto payment products compete around high-intent searches for payments, on-ramps, off-ramps, cards, cross-border transfers, custody and business use cases. We map the searches that sit closest to adoption and build the technical, content and authority signals needed to compete in high-trust financial SERPs.",
+  },
+  {
+    name: "Crypto Tax, Accounting and Financial Services",
+    desc: "Crypto tax firms, reconciliation providers and specialist financial services compete on high-trust searches where expertise and credibility matter as much as keyword relevance. Our AurumFSG.de work is one example of this market. For firms that also depend on city or regional demand, our local SEO services can support the location layer without mixing local intent into national crypto service pages.",
+    link: { label: "local SEO services", href: C_ROUTES.localSeo },
+  },
+  {
+    name: "NFT and Digital Asset Platforms",
+    desc: "Search demand for NFT products varies heavily by market cycle and product type. We evaluate whether meaningful commercial search demand exists before recommending a large content investment. If the demand is not there, we say so.",
   },
 ];
 
