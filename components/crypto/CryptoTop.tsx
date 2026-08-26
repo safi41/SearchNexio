@@ -156,7 +156,9 @@ function CryptoLoop() {
             aria-label="Bitcoin"
             className="grid size-[64%] place-items-center"
           >
-            <BitcoinMark size={148} />
+            <span aria-hidden className="block w-full [&>svg]:h-auto [&>svg]:w-full">
+              <BitcoinMark size={148} />
+            </span>
           </span>
         </span>
       </div>

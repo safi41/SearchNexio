@@ -119,7 +119,9 @@ function PatientLoop() {
             aria-label="Google Maps"
             className="grid size-[62%] place-items-center"
           >
-            <MapsPin size={132} />
+            <span aria-hidden className="block w-full [&>svg]:h-auto [&>svg]:w-full">
+              <MapsPin size={132} />
+            </span>
           </span>
         </span>
       </div>
@@ -290,7 +292,7 @@ export function HealthBringPatients() {
 export function HealthSearchStages() {
   return (
     <section className="overflow-x-clip wash-lilac-full py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <div className="max-w-3xl">
             <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
@@ -306,16 +308,16 @@ export function HealthSearchStages() {
             stage sits to a booking. */}
         <Reveal delay={80}>
           <div className="relative mt-12">
-            <span aria-hidden className="journey-line absolute bottom-8 left-[27px] top-8 w-px bg-indigo/25" />
+            <span aria-hidden className="journey-line absolute bottom-8 left-[20px] top-8 w-px bg-indigo/25 sm:left-[27px]" />
 
             <ol className="grid gap-2">
               {HC_SEARCH_STAGES.stages.map((s, i) => (
                 <li
                   key={s.name}
-                  className="reveal-item group relative rounded-2xl pl-[76px] pr-6 py-6 transition-colors duration-300 ease-soft hover:bg-surface"
+                  className="reveal-item group relative rounded-2xl py-6 pl-[58px] pr-4 transition-colors duration-300 ease-soft hover:bg-surface sm:pl-[76px] sm:pr-6"
                   style={{ transitionDelay: `${150 + i * 110}ms` }}
                 >
-                  <span className="absolute left-[6px] top-6 z-10 grid size-11 place-items-center rounded-full border border-indigo/25 bg-surface font-heading text-[14px] font-bold text-indigo transition-all duration-300 ease-soft group-hover:border-indigo group-hover:bg-indigo group-hover:text-white">
+                  <span className="absolute left-0 top-6 z-10 grid size-10 place-items-center rounded-full border border-indigo/25 bg-surface font-heading text-[13.5px] font-bold text-indigo transition-all duration-300 ease-soft group-hover:border-indigo group-hover:bg-indigo group-hover:text-white sm:left-[6px] sm:size-11 sm:text-[14px]">
                     {i + 1}
                   </span>
 
@@ -338,7 +340,7 @@ export function HealthSearchStages() {
                   </div>
 
                   <div className="mt-3 grid gap-4 lg:grid-cols-[minmax(0,300px)_1fr] lg:items-start lg:gap-8">
-                    <div className="flex items-center gap-2.5 rounded-xl border border-line bg-ivory/70 px-3 py-2.5">
+                    <div className="flex min-w-0 items-center gap-2.5 rounded-xl border border-line bg-ivory/70 px-3 py-2.5">
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" strokeWidth="1.9" strokeLinecap="round" aria-hidden className="shrink-0">
                         <circle cx="11" cy="11" r="6.5" />
                         <path d="M15.8 15.8 20 20" />

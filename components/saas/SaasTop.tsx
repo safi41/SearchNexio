@@ -116,7 +116,9 @@ function JourneyLoop() {
             aria-label="Salesforce"
             className="grid size-[64%] place-items-center"
           >
-            <SalesforceMark size={148} />
+            <span aria-hidden className="block w-full [&>svg]:h-auto [&>svg]:w-full">
+              <SalesforceMark size={148} />
+            </span>
           </span>
         </span>
       </div>

@@ -91,7 +91,9 @@ function PlatformLoop() {
             aria-label="Shopify"
             className="grid size-[64%] place-items-center"
           >
-            <ShopifyMark size={148} />
+            <span aria-hidden className="block w-full [&>svg]:h-auto [&>svg]:w-full">
+              <ShopifyMark size={148} />
+            </span>
           </span>
         </span>
       </div>
