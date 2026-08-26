@@ -10,6 +10,7 @@ import {
   CRYPTO_AUDIENCES,
   CRYPTO_TRUST,
   CRYPTO_DELIVERABLES,
+  CRYPTO_DELIVERABLES_INTRO,
 } from "@/lib/crypto-seo-content";
 
 /* ---- What Our Crypto SEO Includes ----
@@ -682,6 +683,13 @@ export function CryptoDeliverables() {
           <h2 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             What You <span className="text-indigo">Receive</span>
           </h2>
+          <div className="mt-5 grid max-w-2xl gap-3">
+            {CRYPTO_DELIVERABLES_INTRO.map((t) => (
+              <p key={t.slice(0, 24)} className="text-[15.5px] leading-relaxed text-graphite">
+                {t}
+              </p>
+            ))}
+          </div>
         </Reveal>
 
         <div className="mt-10 grid border-t border-line md:grid-cols-2 lg:grid-cols-3">

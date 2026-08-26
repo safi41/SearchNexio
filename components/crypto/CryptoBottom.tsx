@@ -251,6 +251,13 @@ export function CryptoEngagements() {
           <h2 className="text-center font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Crypto SEO <span className="text-indigo">Pricing</span>
           </h2>
+          <div className="mx-auto mt-5 grid max-w-3xl gap-3 text-center">
+            {CRYPTO_PRICING_INTRO.map((t) => (
+              <p key={t.slice(0, 24)} className="text-[15.5px] leading-relaxed text-graphite">
+                {t}
+              </p>
+            ))}
+          </div>
         </Reveal>
 
         {/* Crypto lists its tiers as full-width rows rather than columns:
@@ -303,7 +310,8 @@ export function CryptoEngagements() {
             <CtaLink href={C_ROUTES.contact} variant="ghost">Discuss Your Crypto SEO Strategy</CtaLink>
           </div>
           <p className="mx-auto mt-6 max-w-3xl text-center text-[13px] leading-relaxed text-graphite">
-            {CRYPTO_PRICING_INTRO[1]}
+            Scope and pricing are confirmed before any work begins. Contact us to
+            discuss enterprise scope.
           </p>
         </Reveal>
       </div>
@@ -474,7 +482,9 @@ export function CryptoForm() {
                       <Field label="Work email" type="email" required />
                       <Field label="Company" />
                       <Field label="Website" type="url" required />
-                      <Field label="Type of crypto business" required full />
+                      <Field label="Product type" required />
+                      <Field label="Target market" />
+                      <Field label="Phone (optional)" type="tel" full />
                       <label className="block sm:col-span-2">
                         <span className="text-[12.5px] font-semibold text-ink">Main SEO challenge <span className="text-indigo">*</span></span>
                         <textarea

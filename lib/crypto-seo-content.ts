@@ -290,7 +290,7 @@ export const CRYPTO_SERVICES: {
     key: "ai",
     diagram: "entity",
     title: "AI Search Visibility",
-    desc: "Crypto research also happens outside traditional Google results. Users ask ChatGPT, Perplexity, Gemini and Google AI systems questions such as: What are the safest crypto exchanges? What are the best DeFi lending protocols? Which wallets support the most chains? What are the best alternatives to a given competitor?",
+    desc: "Crypto research also happens outside traditional Google results. Users ask ChatGPT, Perplexity, Gemini and Google AI systems questions such as: What are the safest crypto exchanges? What are the best DeFi lending protocols? Which wallets support the most chains? What are the best alternatives to [competitor]?",
     deliverable:
       "We assess whether your company appears in those answers and identify the content, entity and authority gaps limiting AI visibility. For brands that need a wider AI-search program, our AI SEO services, GEO services and AEO services address those search surfaces in more depth.",
     link: { label: "Start with an AI Visibility Audit", href: C_ROUTES.aiVisibilityAudit },
