@@ -1,11 +1,16 @@
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 
+/* Mirrors the site nav so the footer offers the same routes. Trailing
+   slashes match the static export, so these resolve without a redirect. */
 const LINKS = [
-  { href: "/services", label: "Services" },
-  { href: "/case-studies", label: "Case Studies" },
-  { href: "/industries", label: "Industries" },
-  { href: "/about", label: "About" },
+  { href: "/ai-search-optimization-services/", label: "AI Search" },
+  { href: "/generative-engine-optimization/", label: "GEO" },
+  { href: "/services/local-seo-services/", label: "Local SEO" },
+  { href: "/b2b-saas-seo-agency/", label: "B2B SaaS" },
+  { href: "/ecommerce-seo-services/", label: "Ecommerce" },
+  { href: "/industries/crypto-seo/", label: "Crypto" },
+  { href: "/industries/healthcare/", label: "Healthcare" },
 ];
 
 /* Sasico footer: light ground, link row, then the giant outlined wordmark
@@ -13,7 +18,7 @@ const LINKS = [
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-line bg-ivory">
-      <div className="relative mx-auto max-w-6xl px-6 pt-14">
+      <div className="relative mx-auto max-w-6xl px-6 pt-14 [container-type:inline-size]">
         <div className="flex flex-wrap items-start justify-between gap-x-10 gap-y-8 pb-10">
           <Reveal variant="left" className="max-w-xs">
             <Link
@@ -30,18 +35,20 @@ export default function Footer() {
               Wherever buyers search, be found.
             </p>
           </Reveal>
-          {/* client-review mode: footer nav renders inert, no routing */}
           <Reveal variant="right">
-            <nav className="flex flex-wrap gap-x-8 gap-y-3">
+            <nav
+              aria-label="Footer"
+              className="grid grid-cols-2 gap-x-8 gap-y-3 sm:flex sm:flex-wrap"
+            >
               {LINKS.map((link, i) => (
-                <span
+                <Link
                   key={link.href}
-                  aria-disabled="true"
-                  className="reveal-item cursor-default text-[13.5px] font-medium text-graphite"
+                  href={link.href}
+                  className="reveal-item text-[13.5px] font-medium text-graphite transition-colors duration-200 hover:text-indigo"
                   style={{ transitionDelay: `${120 + i * 70}ms` }}
                 >
                   {link.label}
-                </span>
+                </Link>
               ))}
             </nav>
           </Reveal>
@@ -51,7 +58,10 @@ export default function Footer() {
         <Reveal delay={120} variant="scale">
           <p
             aria-hidden
-            className="pointer-events-none select-none text-center font-heading text-[clamp(4rem,12vw,10.5rem)] font-bold leading-[0.9] tracking-[-0.03em] text-transparent"
+            /* sized in cqw so it tracks the padded container rather than the
+               raw viewport: the wordmark scales down instead of clipping on
+               narrow screens */
+            className="pointer-events-none select-none text-center font-heading text-[min(13cqw,10.5rem)] font-bold leading-[0.9] tracking-[-0.03em] text-transparent"
             style={{ WebkitTextStroke: "1.5px var(--wm-stroke)" }}
           >
             SearchNexio
