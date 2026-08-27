@@ -132,8 +132,10 @@ export default function AiSearchHero() {
           <Reveal delay={60} duration={600}>
             <h1 className="mt-6 font-heading text-[clamp(2.6rem,5.2vw,4.2rem)] font-bold leading-[1.05] tracking-[-0.03em]">
               AI Search
+              {" "}
               <br />
               <span className="text-indigo">Optimization</span>
+              {" "}
               <br />
               Services
             </h1>

@@ -6,7 +6,6 @@ import {
   QUALIFIED_DEMAND,
   AURUM_PROOF,
   PROOF_BANNER,
-  CRYPTO_SEARCH_STAGES,
   CRYPTO_DIFFERENT,
   CRYPTO_DIFFERENT_INTRO,
   FOUNDER_INSIGHT,
@@ -127,6 +126,7 @@ export function CryptoHero() {
           <Reveal delay={60} duration={600}>
             <h1 className="mt-6 font-heading text-[clamp(2.5rem,5.2vw,4.1rem)] font-bold leading-[1.04] tracking-[-0.03em]">
               Crypto SEO
+              {" "}
               <br />
               <span className="relative inline-block text-indigo">
                 Services
@@ -267,73 +267,6 @@ export function CryptoQualifiedDemand() {
                 {PROOF_BANNER.secondaryCta.label}
               </CtaLink>
             </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ---- How Crypto Customers Search: four-stage journey. Columns appear
-   left to right on scroll with an 80ms stagger, the connecting line draws
-   once, and each search bar blinks once as if typed. ---- */
-export function CryptoSearchStages() {
-  return (
-    <section className="overflow-x-clip wash-lilac-full py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <Reveal>
-          <div className="max-w-3xl">
-            <h2 className="font-heading text-[clamp(1.9rem,3.6vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-              How Crypto Customers <span className="text-indigo">Search</span>
-            </h2>
-            <p className="mt-6 text-[15px] leading-relaxed text-graphite">{CRYPTO_SEARCH_STAGES.intro}</p>
-          </div>
-        </Reveal>
-
-        {/* Crypto reads as a query board: each stage is a card whose header
-            is the real user query in a terminal-style bar, with the stage
-            name as a label above it. Cards step down progressively to show
-            movement toward the buying decision. */}
-        <Reveal delay={80}>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-            {CRYPTO_SEARCH_STAGES.stages.map((s, i) => (
-              <article
-                key={s.name}
-                className="reveal-item group flex h-full flex-col rounded-3xl bg-surface p-6 shadow-[0_10px_30px_rgba(11,13,18,0.05)] transition-all duration-300 ease-soft hover:-translate-y-1.5 hover:shadow-[0_24px_56px_rgba(99,91,255,0.14)] lg:mt-[var(--step)]"
-                style={
-                  {
-                    transitionDelay: `${150 + i * 80}ms`,
-                    "--step": `${i * 18}px`,
-                  } as React.CSSProperties
-                }
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-indigo">
-                    Stage {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span aria-hidden className="flex gap-1">
-                    {[0, 1, 2, 3].map((b) => (
-                      <span key={b} className={`size-1.5 rounded-full ${b <= i ? "bg-indigo" : "bg-indigo/15"}`} />
-                    ))}
-                  </span>
-                </div>
-
-                {/* the real user query, in a dark query bar */}
-                <div className="mt-4 flex items-center gap-2.5 rounded-xl bg-ink-solid px-3 py-2.5 transition-shadow duration-300 group-hover:shadow-[0_0_0_3px_rgba(99,91,255,0.25)]">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-citron)" strokeWidth="2" strokeLinecap="round" aria-hidden className="shrink-0">
-                    <circle cx="11" cy="11" r="6.5" />
-                    <path d="M15.8 15.8 20 20" />
-                  </svg>
-                  <span className="min-w-0 flex-1 truncate text-[12px] font-medium text-white/90">{s.query}</span>
-                  <span aria-hidden className="animate-pulse h-3 w-px shrink-0 bg-white/60" />
-                </div>
-
-                <h3 className="mt-4 font-heading text-[15.5px] font-bold leading-snug tracking-[-0.01em] transition-colors duration-300 group-hover:text-indigo">
-                  {s.name}
-                </h3>
-                <p className="mt-2 text-[13px] leading-relaxed text-graphite">{s.desc}</p>
-              </article>
-            ))}
           </div>
         </Reveal>
       </div>

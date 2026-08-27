@@ -113,33 +113,6 @@ export const FOUNDER_INSIGHT = {
   role: "Founder, SearchNexio",
 };
 
-/* How Crypto Customers Search: four stages, each with an example query. */
-export const CRYPTO_SEARCH_STAGES = {
-  intro:
-    "The most common keyword mistake in crypto is building a search strategy around how the team describes the product rather than how prospective users describe the problem they need to solve. Blockchain terminology, internal project names, and tokenomics language can fill a keyword list without a single term a real user is actually typing.",
-  stages: [
-    {
-      name: "Problems and use cases",
-      query: "fix Koinly transactions",
-      desc: "Users search for what they want to accomplish, not for what the product is called. Fix Koinly transactions. Crypto tax help. Stablecoin payment API. Blockchain analytics for compliance. The gap between product vocabulary and user intent language is often where the most valuable organic acquisition sits.",
-    },
-    {
-      name: "Products and services",
-      query: "crypto tax accountant",
-      desc: "Product-selection searches sit close to conversion. Crypto tax accountant. Crypto reconciliation service. Best hardware wallet for long-term storage. A user typing these has already decided they need something and is now evaluating options.",
-    },
-    {
-      name: "Comparisons and alternatives",
-      query: "best crypto tax software",
-      desc: "Best crypto tax software. Koinly alternatives. Crypto exchange with lowest fees. These searches happen when a user is actively comparing options. Appearing in them means being in the consideration set at the moment the decision is made.",
-    },
-    {
-      name: "Brand and trust searches",
-      query: "[brand] reviews",
-      desc: "After discovering a crypto product, many users search the brand before committing, whether that means connecting a wallet, depositing funds, or sharing financial data. Brand reviews, brand safe, brand scam, founder name. These branded research searches are part of the acquisition funnel, not a vanity metric. What appears in those results affects conversion.",
-    },
-  ],
-};
 
 /* Why Crypto SEO Is Different: four text-led cards. */
 export const CRYPTO_DIFFERENT_INTRO =
@@ -304,18 +277,21 @@ export const CRYPTO_SERVICES: {
   },
 ];
 
-/* Crypto SEO Results. Both cards hold until verified data exists. */
+/* Crypto SEO Results. The anchor target for the hero's "View Crypto SEO
+   Results" CTA. The PDF's only published proof is AurumFSG, so the first
+   card carries that verified result and the second holds for further
+   case studies rather than inventing one. */
 export const CRYPTO_RESULTS = {
   cards: [
     {
-      label: "Crypto tax growth",
-      heading: "Case study available on request",
-      body: "Challenge, strategy, verified result, timeframe and measurement method are shared during scoping.",
+      label: "Crypto financial services | Germany",
+      heading: "10x more leads and 2x organic traffic in 2 months",
+      body: "For AurumFSG.de, focused SEO work delivered 10x more leads and 2x organic traffic within two months. We focus on measurable acquisition outcomes, not SEO activity for its own sake.",
     },
     {
-      label: "Crypto reconciliation growth",
+      label: "Further case studies",
       heading: "Case study available on request",
-      body: "One strong verified case study is more credible than two vague ones. This section is held until real proof exists.",
+      body: "One strong verified case study is more credible than two vague ones. Challenge, strategy, verified result, timeframe and measurement method are shared during scoping.",
     },
   ],
 };

@@ -169,10 +169,12 @@ export default function GeoHero() {
           <Reveal delay={60} duration={600}>
             <h1 className="mt-6 font-heading text-[clamp(2.7rem,5.4vw,4.35rem)] font-bold leading-[1.05] tracking-[-0.03em]">
               Generative Engine
+              {" "}
               <br />
               <span className="bg-gradient-to-r from-indigo via-[#7C6BFF] to-[#A292FF] bg-clip-text text-transparent">
                 Optimization
               </span>
+              {" "}
               <br />
               Agency
             </h1>

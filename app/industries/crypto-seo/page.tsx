@@ -3,7 +3,6 @@ import {
   CryptoHero,
   CryptoTrustedBy,
   CryptoQualifiedDemand,
-  CryptoSearchStages,
   CryptoDifferent,
 } from "@/components/crypto/CryptoTop";
 import {
@@ -36,7 +35,6 @@ export default function CryptoSeoPage() {
       <CryptoHero />
       <CryptoTrustedBy />
       <CryptoQualifiedDemand />
-      <CryptoSearchStages />
       <CryptoDifferent />
       <CryptoServices />
       <CryptoResults />

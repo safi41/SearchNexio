@@ -105,6 +105,7 @@ export function HealthHero() {
           <Reveal delay={60} duration={600}>
             <h1 className="mt-6 font-heading text-[clamp(2.5rem,5.2vw,4.1rem)] font-bold leading-[1.04] tracking-[-0.03em]">
               Healthcare SEO
+              {" "}
               <br />
               <span className="relative inline-block text-indigo">
                 Services

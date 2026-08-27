@@ -112,6 +112,7 @@ export function LocalHero() {
           <Reveal delay={60} duration={600}>
             <h1 className="mt-6 font-heading text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[1.06] tracking-[-0.03em]">
               Local SEO
+              {" "}
               <br />
               <span className="text-indigo">Services</span>
             </h1>
