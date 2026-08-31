@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 /* Primary nav links point at the live pages. */
 const LINKS = [
   { href: "/", label: "Home" },
+  { href: "/seo-services/", label: "SEO Services" },
   { href: "/ai-search-optimization-services/", label: "AI Search" },
   { href: "/generative-engine-optimization/", label: "GEO" },
   { href: "/services/local-seo-services/", label: "Local SEO" },
@@ -55,7 +56,7 @@ export default function SiteNav() {
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-full px-3 py-2 text-[14px] font-medium transition-colors duration-200 xl:px-4 ${
+                className={`rounded-full px-2.5 py-2 text-[13.5px] font-medium transition-colors duration-200 xl:px-3.5 xl:text-[14px] ${
                   active ? "bg-ink/5 text-indigo" : "text-ink/80 hover:bg-ink/5"
                 }`}
               >
