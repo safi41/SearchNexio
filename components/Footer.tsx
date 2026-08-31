@@ -4,6 +4,7 @@ import Reveal from "@/components/motion/Reveal";
 /* Mirrors the site nav so the footer offers the same routes. Trailing
    slashes match the static export, so these resolve without a redirect. */
 const LINKS = [
+  { href: "/seo-services/", label: "SEO Services" },
   { href: "/ai-search-optimization-services/", label: "AI Search" },
   { href: "/generative-engine-optimization/", label: "GEO" },
   { href: "/services/local-seo-services/", label: "Local SEO" },

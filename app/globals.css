@@ -230,6 +230,32 @@ body {
     transform: scaleY(0);
   }
 
+  /* Horizontal twin of the journey line: the SEO-services process path
+     draws left-to-right once its Reveal wrapper enters view. */
+  .flow-line {
+    transform-origin: left;
+    transform: scaleX(1);
+    transition: transform 1.1s var(--ease-soft) 0.2s;
+  }
+  [data-reveal="hidden"] .flow-line {
+    transform: scaleX(0);
+  }
+
+  /* The SEO-services hero: one pulse travels the demand-to-revenue spine
+     on a slow loop, per the client's 6-10s guideline. */
+  .flow-pulse {
+    position: absolute;
+    top: 0;
+    animation: flow-pulse 8s var(--ease-soft) infinite;
+    will-change: top, opacity;
+  }
+  @keyframes flow-pulse {
+    0% { top: 0%; opacity: 0; }
+    6% { opacity: 1; }
+    88% { opacity: 1; }
+    96%, 100% { top: 100%; opacity: 0; }
+  }
+
   /* Crossfade when the GEO services analysis panel swaps to a new service
      (the element is remounted via a changing React key). */
   .geo-panel-fade {
@@ -295,6 +321,15 @@ body {
   /* reduced motion: the journey line stays fully drawn */
   .journey-line {
     transform: scaleY(1) !important;
+  }
+  /* reduced motion: the process path stays fully drawn, the hero pulse
+     holds still */
+  .flow-line {
+    transform: scaleX(1) !important;
+  }
+  .flow-pulse {
+    animation: none !important;
+    opacity: 0 !important;
   }
   /* reduced motion: trends bars sit at their final value */
   .trend-bar {

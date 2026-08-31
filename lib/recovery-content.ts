@@ -6,7 +6,7 @@
 export const R_ROUTES = {
   assessment: "#recovery-assessment",
   aiSeo: "/ai-search-optimization-services/",
-  seoServices: "/services/",
+  seoServices: "/seo-services/",
 };
 
 export const RECOVERY_CTA = "Request an SEO Recovery Assessment";
