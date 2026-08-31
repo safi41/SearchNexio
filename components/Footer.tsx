@@ -7,6 +7,7 @@ const LINKS = [
   { href: "/ai-search-optimization-services/", label: "AI Search" },
   { href: "/generative-engine-optimization/", label: "GEO" },
   { href: "/services/local-seo-services/", label: "Local SEO" },
+  { href: "/seo-recovery-services/", label: "Recovery" },
   { href: "/b2b-saas-seo-agency/", label: "B2B SaaS" },
   { href: "/ecommerce-seo-services/", label: "Ecommerce" },
   { href: "/industries/crypto-seo/", label: "Crypto" },

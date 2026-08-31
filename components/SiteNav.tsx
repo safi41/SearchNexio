@@ -10,6 +10,7 @@ const LINKS = [
   { href: "/ai-search-optimization-services/", label: "AI Search" },
   { href: "/generative-engine-optimization/", label: "GEO" },
   { href: "/services/local-seo-services/", label: "Local SEO" },
+  { href: "/seo-recovery-services/", label: "Recovery" },
   { href: "/b2b-saas-seo-agency/", label: "B2B SaaS" },
   { href: "/ecommerce-seo-services/", label: "Ecommerce" },
   { href: "/industries/crypto-seo/", label: "Crypto" },
@@ -54,7 +55,7 @@ export default function SiteNav() {
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-full px-4 py-2 text-[14px] font-medium transition-colors duration-200 ${
+                className={`rounded-full px-3 py-2 text-[14px] font-medium transition-colors duration-200 xl:px-4 ${
                   active ? "bg-ink/5 text-indigo" : "text-ink/80 hover:bg-ink/5"
                 }`}
               >
