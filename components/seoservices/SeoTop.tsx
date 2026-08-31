@@ -58,7 +58,12 @@ function FlowStage() {
               />
             )}
 
-            <span className="relative z-10 grid size-[62px] shrink-0 place-items-center rounded-2xl bg-surface text-indigo shadow-[0_14px_36px_rgba(99,91,255,0.18)]">
+            {/* each station lifts as the pulse reaches it; delays follow the
+                pulse's linear travel down the spine */}
+            <span
+              className="flow-station relative z-10 grid size-[62px] shrink-0 place-items-center rounded-2xl bg-surface text-indigo shadow-[0_14px_36px_rgba(99,91,255,0.18)]"
+              style={{ animationDelay: `${[0.1, 2.7, 5.3, 7.5][i]}s` }}
+            >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 {FLOW_ICONS[f.icon]}
               </svg>
