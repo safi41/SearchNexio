@@ -36,7 +36,7 @@ export default function SiteNav() {
 
   return (
     <header id="top" className="absolute inset-x-0 top-0 z-40">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
+      <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-4 px-6 py-4">
         <Link
           href="/"
           className="flex items-center gap-2 font-heading text-[19px] font-bold tracking-[-0.02em]"
@@ -48,7 +48,7 @@ export default function SiteNav() {
           SearchNexio
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-1 xl:flex">
           {LINKS.map((link) => {
             const active = pathname === link.href;
             return (
@@ -56,7 +56,7 @@ export default function SiteNav() {
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-full px-2.5 py-2 text-[13.5px] font-medium transition-colors duration-200 xl:px-3.5 xl:text-[14px] ${
+                className={`whitespace-nowrap rounded-full px-3 py-2 text-[13.5px] font-medium transition-colors duration-200 2xl:px-4 2xl:text-[14px] ${
                   active ? "bg-ink/5 text-indigo" : "text-ink/80 hover:bg-ink/5"
                 }`}
               >
@@ -69,7 +69,7 @@ export default function SiteNav() {
         <div className="flex items-center gap-2.5">
         <Link
           href="/ai-search-optimization-services/#visibility-review"
-          className="group hidden items-center gap-2 rounded-full bg-citron py-2 pl-5 pr-2 text-[14px] font-semibold text-ink-solid transition-colors duration-200 hover:bg-citron-deep sm:inline-flex"
+          className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-citron py-2 pl-5 pr-2 text-[14px] font-semibold text-ink-solid transition-colors duration-200 hover:bg-citron-deep sm:inline-flex"
         >
           Request a review
           <span
@@ -95,7 +95,7 @@ export default function SiteNav() {
             aria-expanded={open}
             aria-controls="site-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="grid size-10 place-items-center rounded-full border border-line bg-surface/80 text-ink backdrop-blur-sm transition-colors duration-200 hover:bg-surface lg:hidden"
+            className="grid size-10 place-items-center rounded-full border border-line bg-surface/80 text-ink backdrop-blur-sm transition-colors duration-200 hover:bg-surface xl:hidden"
           >
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
               {open ? <path d="M6 6l12 12M18 6 6 18" /> : <path d="M3.5 7h17M3.5 12h17M3.5 17h17" />}
@@ -107,7 +107,7 @@ export default function SiteNav() {
       {/* mobile and tablet menu panel */}
       <div
         id="site-menu"
-        className={`origin-top overflow-hidden transition-all duration-300 ease-soft lg:hidden ${
+        className={`origin-top overflow-hidden transition-all duration-300 ease-soft xl:hidden ${
           open ? "max-h-[32rem] opacity-100" : "pointer-events-none max-h-0 opacity-0"
         }`}
       >
